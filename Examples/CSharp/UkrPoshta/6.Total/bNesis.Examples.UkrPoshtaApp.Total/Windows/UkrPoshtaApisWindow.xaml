@@ -1,0 +1,35 @@
+﻿<Window x:Class="bNesis.Examples.UkrPoshtaApp.Total.UkrPoshtaApisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bNesis.Examples.UkrPoshtaApp.Total"
+        mc:Ignorable="d"
+        Title="UkrPoshta Apis" Height="538" Width="871" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="413*"/>
+            <RowDefinition Height="44*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Name="propertiesPanel" Background="#FFF6F6F6" />
+        </ScrollViewer>
+        <DockPanel Grid.Row="0">
+            <Button Height="30" Width="100" Click="AddAddress_Click" Content="Add Address"/>
+            <StackPanel Width="10" />
+            <Button Height="30" Width="100" Click="GetAddress_Click" Content="Get Address"/>
+            <StackPanel Width="10" />
+            <Button Height="30" Width="100" Click="AddClient_Click" Content="Add Client"/>
+            <StackPanel Width="10" />
+            <Button Height="30" Width="100" Click="GetClient_Click" Content="Get Client"/>
+            <StackPanel Width="10" />
+            <Button Height="30" Width="100" Click="AddShipment_Click" Content="Add Shipment"/>
+            <StackPanel Width="10" />
+            <Button Height="30" Width="100" Click="GetShipment_Click" Content="Get Shipment"/>
+            <StackPanel Width="10" />
+            <Button Height="30" Width="100" Click="PostalInvoice_Click" Content="Postal Invoice" HorizontalAlignment="Right" Margin="10,0" Background="#FFCCCDFD"/>
+        </DockPanel>
+    </Grid>
+</Window>
+

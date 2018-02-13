@@ -1,0 +1,9 @@
+﻿<Application x:Class="bNesis.Examples.UkrPoshtaApp.SimpleUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:bNesis.Examples.UkrPoshtaApp.SimpleUI"
+             StartupUri="LoginWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
