@@ -50,9 +50,19 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// Checks the token in the service. 
 		/// </summary>
 		/// <returns>if token valid return true, if token not valid return false</returns>
-		public Boolean ValidationTokenUnified()
+		public Boolean ValidateToken()
 		{
-			return bNesisApi.Call<Boolean>("UkrPoshta", bNesisToken, "ValidationTokenUnified");
+			return bNesisApi.Call<Boolean>("UkrPoshta", bNesisToken, "ValidateToken");
+		}
+
+		///<summary>
+		/// Disables the access token used to authenticate the call. 
+		/// </summary>
+		/// <returns>if token revoked method returns true 
+		/// if token doesn't support token revocation or token is revoked method returns false</returns>
+		public Boolean Logoff()
+		{
+			return bNesisApi.Call<Boolean>("UkrPoshta", bNesisToken, "Logoff");
 		}
 
 		///<summary>
@@ -1368,7 +1378,11 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		public string externalId { get; set; }
 
 		/// <summary>
-		/// Delivery type(for international shippment). 
+		/// Delivery type(for international shippment).
+		///  Have mostly 4 types:W2D warehouse-door 
+		///  W2W warehouse-warehouse 
+		///  D2W door-warehouse
+		///  D2D door-door 
 		/// </summary>
 		public string deliveryType { get; set; }
 

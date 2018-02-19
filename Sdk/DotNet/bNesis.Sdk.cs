@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net.Http;
-using System.Threading.Tasks;
 using bNesis.Common;
 using bNesis.Api.Desktop;
-using bNesis.Sdk.Other.GoogleAnalytics;
+using bNesis.Sdk.Analytics.GoogleAnalytics;
 using bNesis.Sdk.Other.IISSEO;
 using bNesis.Sdk.Delivery.UkrPoshta;
 using bNesis.Sdk.eCommerce.Amazon;
 using bNesis.Sdk.eCommerce.BigCommerce;
+using bNesis.Sdk.eCommerce.OpenCart;
 using bNesis.Sdk.eCommerce.PrestaShop;
 using bNesis.Sdk.eCommerce.Shopify;
 using bNesis.Sdk.FileStorages.BaiduBCS;
@@ -19,6 +18,7 @@ using bNesis.Sdk.FileStorages.Dropbox;
 using bNesis.Sdk.FileStorages.GoogleDrive;
 using bNesis.Sdk.FileStorages.Mega;
 using bNesis.Sdk.FileStorages.SugarSync;
+using bNesis.Sdk.GovRegistry.Prozzoro;
 using bNesis.Sdk.Payment.LiqPay;
 using bNesis.Sdk.Payment.PayPal;
 using bNesis.Sdk.Payment.Stripe;
@@ -316,36 +316,64 @@ namespace bNesis.Sdk
         /// for make analysis and handling Core level errors. 
         /// This implementation of the method allows you to analyze exception - check  the bNesis exception class, or system
         /// exception. If bNesis - get error code and information
-        /// </summary>
-        /// <param name="providerId">Id of used service provider</param>
+        /// </summary>        
         /// <param name="exception">exception object (from catch(Exception))</param>
-        /// <returns>bNesis ErrorInfo if is bNesis typed exception, like - service not available</returns>
-        public ErrorInfo GetLastError(string providerId, Exception exception)
+        /// <returns>if is bNesis exception type - return string with exception message, like - service not available.
+        /// Return empty string if not bNesis exception</returns>
+        public string GetLastError(Exception exception)
         {
-            return bNesisApi.GetLastError(providerId, exception);
+            return bNesisApi.GetLastError(exception);
         }
 
         /// <summary>
-        /// Get LastError from service 
-        /// </summary>
-        /// <param name="providerId">Id of used service provider</param>
-        /// <param name="bNesisToken">bNesis access token</param>
-        /// <returns>bNesis ErrorInfo with error code and message</returns>
-        public ErrorInfo GetLastError(string providerId, string bNesisToken)
+        /// Core level get last error code method, see GetLastError for more information
+        /// </summary>        
+        /// <param name="exception">exception object (from catch(Exception))</param>
+        /// <returns>if is bNesis exception type - return bNesis core error code. Else return 0 (bNesisNoError)</returns>
+        public string GetLastErrorCode(Exception exception)
         {
-            return bNesisApi.GetLastError(providerId, bNesisToken);
+            return bNesisApi.GetLastError(exception);
         }
 
         /// <summary>
-        /// Get errors log from selected service 
+        /// Get value from configuration file with name "key"
+        /// We strongly don't recommend using this method in your software products
+        /// Use this method only for testing and demonstration applications
+        /// The use of this method does not protect your data
         /// </summary>
-        /// <param name="providerId">select service provider Id</param>
-        /// <param name="bNesisToken">bNesis access token</param>
-        /// <returns>array with service errorLog history</returns>
-        public ErrorInfo[] GetErrorLog(string providerId, string bNesisToken)
+        /// <param name="key">name of file and key</param>
+        /// <returns>String value.</returns>
+        public string GetKey(string key)
         {
-            return bNesisApi.GetErrorLog(providerId, bNesisToken);
-        }		
+            return Config.GetKey(key);
+        }
+
+        /// <summary>
+        /// Get value from configuration file with name "key"
+        /// We strongly don't recommend using this method in your software products
+        /// Use this method only for testing and demonstration applications
+        /// The use of this method does not protect your data
+        /// </summary>
+        /// <param name="key">name of file and key</param>
+        /// <param name="defaultValue">The value will be used if no value with the key.</param>
+        /// <returns>String value.</returns>
+        public string GetKey(string key, string defaultValue)
+        {
+            return Config.GetKey(key, defaultValue);
+        }
+
+        /// <summary>
+        /// Create file with name of the key and store key value to the file 
+        /// We strongly don't recommend using this method in your software products
+        /// Use this method only for testing and demonstration applications
+        /// The use of this method does not protect your data        
+        /// </summary>
+        /// <param name="key">file and key name</param>
+        /// <param name="value">value to store to the "key" file</param>
+        public void SetKey(string key, string value)
+        {
+            Config.SetKey(key, value);
+        }
 		
 	    ///<summary>
 		///  Create new instance of GoogleAnalytics
@@ -490,6 +518,35 @@ namespace bNesis.Sdk
 		{
 			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("BigCommerce")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
 			return new BigCommerce(bNesisApi);
+		}
+
+	    ///<summary>
+		///  Create new instance of OpenCart
+		/// </summary>
+		/// <returns>Return new OpenCart instance</returns>
+		public OpenCart CreateInstanceOpenCart(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		{
+		    lastSystemErrorMessage = string.Empty;
+			OpenCart resultService = CreateInstanceOpenCart();
+			try
+              {
+			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			  } 
+            catch (Exception e)
+              {
+                lastSystemErrorMessage = e.Message;
+             }
+			return resultService;
+		}
+
+		///<summary>
+		///  Create new instance of OpenCart
+		/// </summary>
+		/// <returns>Return new OpenCart instance</returns>
+		public OpenCart CreateInstanceOpenCart()
+		{
+			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("OpenCart")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
+			return new OpenCart(bNesisApi);
 		}
 
 	    ///<summary>
@@ -722,6 +779,35 @@ namespace bNesis.Sdk
 		{
 			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("SugarSync")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
 			return new SugarSync(bNesisApi);
+		}
+
+	    ///<summary>
+		///  Create new instance of Prozzoro
+		/// </summary>
+		/// <returns>Return new Prozzoro instance</returns>
+		public Prozzoro CreateInstanceProzzoro(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		{
+		    lastSystemErrorMessage = string.Empty;
+			Prozzoro resultService = CreateInstanceProzzoro();
+			try
+              {
+			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			  } 
+            catch (Exception e)
+              {
+                lastSystemErrorMessage = e.Message;
+             }
+			return resultService;
+		}
+
+		///<summary>
+		///  Create new instance of Prozzoro
+		/// </summary>
+		/// <returns>Return new Prozzoro instance</returns>
+		public Prozzoro CreateInstanceProzzoro()
+		{
+			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("Prozzoro")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
+			return new Prozzoro(bNesisApi);
 		}
 
 	    ///<summary>

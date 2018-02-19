@@ -51,9 +51,19 @@ namespace bNesis.Sdk.FileStorages.Mega
 		/// Checks the token in the service. 
 		/// </summary>
 		/// <returns>if token valid return true, if token not valid return false</returns>
-		public Boolean ValidationTokenUnified()
+		public Boolean ValidateToken()
 		{
-			return bNesisApi.Call<Boolean>("Mega", bNesisToken, "ValidationTokenUnified");
+			return bNesisApi.Call<Boolean>("Mega", bNesisToken, "ValidateToken");
+		}
+
+		///<summary>
+		/// Disables the access token used to authenticate the call. 
+		/// </summary>
+		/// <returns>if token revoked method returns true 
+		/// if token doesn't support token revocation or token is revoked method returns false</returns>
+		public Boolean Logoff()
+		{
+			return bNesisApi.Call<Boolean>("Mega", bNesisToken, "Logoff");
 		}
 
 		///<summary>

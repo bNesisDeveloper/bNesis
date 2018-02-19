@@ -29,8 +29,18 @@ SugarSync = function (bNesisApi) {
 	 *  Checks the token in the service. 	
 	 * @return {Boolean} if token valid return true, if token not valid return false
 	 */
-    this.ValidationTokenUnified = function () {
-        var result = _bNesisApi.Call("SugarSync", this.bNesisToken, "ValidationTokenUnified");
+    this.ValidateToken = function () {
+        var result = _bNesisApi.Call("SugarSync", this.bNesisToken, "ValidateToken");
+        return result;
+    }
+
+	/**
+	 *  Disables the access token used to authenticate the call. 	
+	 * @return {Boolean} if token revoked method returns true 
+	 * if token doesn't support token revocation or token is revoked method returns false
+	 */
+    this.Logoff = function () {
+        var result = _bNesisApi.Call("SugarSync", this.bNesisToken, "Logoff");
         return result;
     }
 
@@ -103,6 +113,15 @@ SugarSync = function (bNesisApi) {
 	 */
     this.UploadFile = function (destinationStream, name) {
         var result = _bNesisApi.Call("SugarSync", this.bNesisToken, "UploadFile", destinationStream, name);
+        return result;
+    }
+
+	/**
+	 *  Retrieve information about a SugarSync user 	
+	 * @return {Response} information about a SugarSync user
+	 */
+    this.GetUserRaw = function () {
+        var result = _bNesisApi.Call("SugarSync", this.bNesisToken, "GetUserRaw");
         return result;
     }
 }

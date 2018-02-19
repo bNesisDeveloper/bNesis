@@ -1,41 +1,4 @@
 /**
- * Information about error 
- * @typedef {Object} ErrorInfo
- */
- ErrorInfo = function () { 
-	/**
-	 * Error code
-	 * @type {Int32}
-	 */
-	this.Code = 0;
-
-	/**
-	 * When ErrorInfo was created
-	 * @type {string}
-	 */
-	this.DateTime = "";
-
-	/**
-	 * Service name
-	 * @type {string}
-	 */
-	this.Service = "";
-
-	/**
-	 * Describes important error information
-	 * @type {string}
-	 */
-	this.Description = "";
-
-	/**
-	 * All information about error
-	 * @type {string}
-	 */
-	this.BasicDescription = "";
-
-}
-
-/**
  * A generic class that defines the HTTP result of the API call in bNesse
  *     Each bNesis services RAW API must return this class (used as data structure) to Client 
  * @typedef {Object} Response
@@ -113,6 +76,43 @@
 	 * @type {string}
 	 */
 	this.Server = "";
+
+}
+
+/**
+ * Information about error 
+ * @typedef {Object} ErrorInfo
+ */
+ ErrorInfo = function () { 
+	/**
+	 * Error code
+	 * @type {Int32}
+	 */
+	this.Code = 0;
+
+	/**
+	 * When ErrorInfo was created
+	 * @type {string}
+	 */
+	this.DateTime = "";
+
+	/**
+	 * Service name
+	 * @type {string}
+	 */
+	this.Service = "";
+
+	/**
+	 * Describes important error information
+	 * @type {string}
+	 */
+	this.Description = "";
+
+	/**
+	 * All information about error
+	 * @type {string}
+	 */
+	this.BasicDescription = "";
 
 }
 

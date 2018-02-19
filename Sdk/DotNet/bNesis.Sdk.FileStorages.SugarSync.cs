@@ -51,9 +51,19 @@ namespace bNesis.Sdk.FileStorages.SugarSync
 		/// Checks the token in the service. 
 		/// </summary>
 		/// <returns>if token valid return true, if token not valid return false</returns>
-		public Boolean ValidationTokenUnified()
+		public Boolean ValidateToken()
 		{
-			return bNesisApi.Call<Boolean>("SugarSync", bNesisToken, "ValidationTokenUnified");
+			return bNesisApi.Call<Boolean>("SugarSync", bNesisToken, "ValidateToken");
+		}
+
+		///<summary>
+		/// Disables the access token used to authenticate the call. 
+		/// </summary>
+		/// <returns>if token revoked method returns true 
+		/// if token doesn't support token revocation or token is revoked method returns false</returns>
+		public Boolean Logoff()
+		{
+			return bNesisApi.Call<Boolean>("SugarSync", bNesisToken, "Logoff");
 		}
 
 		///<summary>
@@ -126,6 +136,15 @@ namespace bNesis.Sdk.FileStorages.SugarSync
 		public string UploadFile(Stream destinationStream, string name)
 		{
 			return bNesisApi.Call<string>("SugarSync", bNesisToken, "UploadFile", destinationStream, name);
+		}
+
+		///<summary>
+		/// Retrieve information about a SugarSync user 
+		/// </summary>
+		/// <returns>information about a SugarSync user</returns>
+		public Response GetUserRaw()
+		{
+			return bNesisApi.Call<Response>("SugarSync", bNesisToken, "GetUserRaw");
 		}
 	}
 }

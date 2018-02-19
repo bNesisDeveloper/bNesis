@@ -29,8 +29,18 @@ UkrPoshta = function (bNesisApi) {
 	 *  Checks the token in the service. 	
 	 * @return {Boolean} if token valid return true, if token not valid return false
 	 */
-    this.ValidationTokenUnified = function () {
-        var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "ValidationTokenUnified");
+    this.ValidateToken = function () {
+        var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "ValidateToken");
+        return result;
+    }
+
+	/**
+	 *  Disables the access token used to authenticate the call. 	
+	 * @return {Boolean} if token revoked method returns true 
+	 * if token doesn't support token revocation or token is revoked method returns false
+	 */
+    this.Logoff = function () {
+        var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "Logoff");
         return result;
     }
 
@@ -1486,6 +1496,10 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * Delivery type(for international shippment).
+	 *  Have mostly 4 types:W2D warehouse-door 
+	 *  W2W warehouse-warehouse 
+	 *  D2W door-warehouse
+	 *  D2D door-door
 	 * @type {string}
 	 */
 	this.deliveryType = "";

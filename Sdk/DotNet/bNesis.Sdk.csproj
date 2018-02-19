@@ -45,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bNesis.Sdk.Analytics.GoogleAnalytics.cs" />
     <Compile Include="bNesis.Sdk.Common.cs" />
     <Compile Include="bNesis.Sdk.cs" />
     <Compile Include="bNesis.Sdk.Delivery.UkrPoshta.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.Amazon.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.BigCommerce.cs" />
+    <Compile Include="bNesis.Sdk.eCommerce.OpenCart.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.PrestaShop.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.Shopify.cs" />
     <Compile Include="bNesis.Sdk.FileStorages.BaiduBCS.cs" />
@@ -59,8 +61,10 @@
     <Compile Include="bNesis.Sdk.FileStorages.GoogleDrive.cs" />
     <Compile Include="bNesis.Sdk.FileStorages.Mega.cs" />
     <Compile Include="bNesis.Sdk.FileStorages.SugarSync.cs" />
+    <Compile Include="bNesis.Sdk.GovRegistry.Prozzoro.cs" />
     <Compile Include="bNesis.Sdk.Other.GoogleAnalytics.cs" />
     <Compile Include="bNesis.Sdk.Other.IISSEO.cs" />
+    <Compile Include="bNesis.Sdk.Other.LinkedIn.cs" />
     <Compile Include="bNesis.Sdk.Payment.LiqPay.cs" />
     <Compile Include="bNesis.Sdk.Payment.PayPal.cs" />
     <Compile Include="bNesis.Sdk.Payment.Stripe.cs" />

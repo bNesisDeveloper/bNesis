@@ -29,8 +29,18 @@ Dropbox = function (bNesisApi) {
 	 *  Checks the token in the service. 	
 	 * @return {Boolean} if token valid return true, if token not valid return false
 	 */
-    this.ValidationTokenUnified = function () {
-        var result = _bNesisApi.Call("Dropbox", this.bNesisToken, "ValidationTokenUnified");
+    this.ValidateToken = function () {
+        var result = _bNesisApi.Call("Dropbox", this.bNesisToken, "ValidateToken");
+        return result;
+    }
+
+	/**
+	 *  Disables the access token used to authenticate the call. 	
+	 * @return {Boolean} if token revoked method returns true 
+	 * if token doesn't support token revocation or token is revoked method returns false
+	 */
+    this.Logoff = function () {
+        var result = _bNesisApi.Call("Dropbox", this.bNesisToken, "Logoff");
         return result;
     }
 

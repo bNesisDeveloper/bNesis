@@ -8,38 +8,6 @@ using System.Net;
 namespace bNesis.Sdk.Common
 {
 	///<summary>
-	/// Information about error 
-	/// </summary>
-	public class ErrorInfo
-	{
-		/// <summary>
-		/// Error code 
-		/// </summary>
-		public Int32 Code { get; set; }
-
-		/// <summary>
-		/// When ErrorInfo was created 
-		/// </summary>
-		public string DateTime { get; set; }
-
-		/// <summary>
-		/// Service name 
-		/// </summary>
-		public string Service { get; set; }
-
-		/// <summary>
-		/// Describes important error information 
-		/// </summary>
-		public string Description { get; set; }
-
-		/// <summary>
-		/// All information about error 
-		/// </summary>
-		public string BasicDescription { get; set; }
-
-	}
-
-	///<summary>
 	/// A generic class that defines the HTTP result of the API call in bNesse
 	///     Each bNesis services RAW API must return this class (used as data structure) to Client 
 	/// </summary>
@@ -105,6 +73,38 @@ namespace bNesis.Sdk.Common
 		/// HttpWebResponse.Server 
 		/// </summary>
 		public string Server { get; set; }
+
+	}
+
+	///<summary>
+	/// Information about error 
+	/// </summary>
+	public class ErrorInfo
+	{
+		/// <summary>
+		/// Error code 
+		/// </summary>
+		public Int32 Code { get; set; }
+
+		/// <summary>
+		/// When ErrorInfo was created 
+		/// </summary>
+		public string DateTime { get; set; }
+
+		/// <summary>
+		/// Service name 
+		/// </summary>
+		public string Service { get; set; }
+
+		/// <summary>
+		/// Describes important error information 
+		/// </summary>
+		public string Description { get; set; }
+
+		/// <summary>
+		/// All information about error 
+		/// </summary>
+		public string BasicDescription { get; set; }
 
 	}
 

@@ -1,5 +1,4 @@
-			bNesis SDK
-			 examples 
+bNesis SDK examples 
 
 About
 

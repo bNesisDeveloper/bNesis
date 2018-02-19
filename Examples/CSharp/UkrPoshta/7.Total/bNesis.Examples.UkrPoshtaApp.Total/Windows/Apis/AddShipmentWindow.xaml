@@ -1,0 +1,31 @@
+﻿<Window x:Class="bNesis.Examples.UkrPoshtaApp.Total.AddShipmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bNesis.Examples.UkrPoshtaApp.Total"
+        mc:Ignorable="d"
+        Title="AddShipment"  Height="117" MaxHeight="640"  Width="720" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" PreviewKeyDown="window_PreviewKeyDown">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="239*"/>
+            <RowDefinition Height="41"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Name="propertiesPanel" Background="#FFF6F6F6" />
+        </ScrollViewer>
+
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" Width="510">
+                <TextBlock Name="statusTextBlock" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"></TextBlock>
+            </ScrollViewer>
+            <StackPanel Width="7" />
+            <Button Name="okButton" Content="OK" Height="25" Width="79" Click="okButton_Click" />
+            <StackPanel Width="7" />
+            <Button Name="cancelButton" Content="Cancel" Height="25" Width="79" Click="cancelButton_Click" />
+        </StackPanel>
+
+    </Grid>
+</Window>

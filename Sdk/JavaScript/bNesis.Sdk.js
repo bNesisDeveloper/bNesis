@@ -204,7 +204,7 @@ function ServiceManager(client, apiLocation) {
             case ClientMode.Thin:
                 return this.InitializeThin(apiLocation);
         }
-        return errorCodeNoError;
+        return this.errorCodeNoError;
     }
 
 	/**
@@ -281,16 +281,6 @@ function ServiceManager(client, apiLocation) {
 		else 
 			return "Wrong GetLastError number of parameters";
         return "Wrong GetLastError parameter";
-    }
-
-    /**
-     * Get errors log from selected service 
-     * @param {string} providerId - select service provider Id
-     * @param {string} bNesisToken - bNesis access token
-     * @return array with service errorLog history
-	 */
-    this.GetErrorLog = function (providerId, bNesisToken) {		
-		return _bNesisApi.GetErrorLog(providerId, bNesisToken);
     }
 
 	/**
@@ -374,6 +364,24 @@ function ServiceManager(client, apiLocation) {
 			 throw this.errorCodeServiceDoesNotExistDescription;
 		lastSystemErrorMessage = "";
 		var resultService = new BigCommerce(_bNesisApi);
+		if (arguments.length > 0)
+			try {
+				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			}
+			catch (e) {
+				lastSystemErrorMessage = e.Message;
+			}
+		return resultService;
+	}
+	/**
+	 * Create new instance of OpenCart 
+	 * @return {OpenCart} Return new OpenCart instance
+	*/
+	this.CreateInstanceOpenCart = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("OpenCart"))
+			 throw this.errorCodeServiceDoesNotExistDescription;
+		lastSystemErrorMessage = "";
+		var resultService = new OpenCart(_bNesisApi);
 		if (arguments.length > 0)
 			try {
 				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
@@ -518,6 +526,24 @@ function ServiceManager(client, apiLocation) {
 			 throw this.errorCodeServiceDoesNotExistDescription;
 		lastSystemErrorMessage = "";
 		var resultService = new SugarSync(_bNesisApi);
+		if (arguments.length > 0)
+			try {
+				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			}
+			catch (e) {
+				lastSystemErrorMessage = e.Message;
+			}
+		return resultService;
+	}
+	/**
+	 * Create new instance of Prozzoro 
+	 * @return {Prozzoro} Return new Prozzoro instance
+	*/
+	this.CreateInstanceProzzoro = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("Prozzoro"))
+			 throw this.errorCodeServiceDoesNotExistDescription;
+		lastSystemErrorMessage = "";
+		var resultService = new Prozzoro(_bNesisApi);
 		if (arguments.length > 0)
 			try {
 				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
