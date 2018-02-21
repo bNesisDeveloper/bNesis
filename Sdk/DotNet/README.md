@@ -1,14 +1,14 @@
 # **bNesis SDK for C# (.NET)** 
  
-##**Introduction** 
+## **Introduction** 
  
 **bNesis SDK for C# (.NET)** allows developers easily use cloud services authorization and API in .NET applications developed in C# programing language. 
 
-###**Comfortable service programming with bNesis SDK**
+### **Comfortable service programming with bNesis SDK**
  
 The authorization is most common challenge of cloud services programing because complexity of OAuth 2.0 protocol and OpenID identity layer. Also network  programing required havening wide range of tech knowledge. The bNesis SDK represented all of it as simple well-known program elements and it makes coding process easier and more intuitive. Code examples demonstrated how to use the bNesis SDK for C# (.NET) for connection of cloud services in .NET applications and relevant guides are also provided. Any changes and updates of cloud services APIs are handled by versions of bNesis SDK for C# (.NET).  bNesis SDK for C# (.NET) significantly reduces coding time and project expenses. 
 
-###**bNesis API layers**
+### **bNesis API layers**
 
 bNesis SDK APIs provide an wrappers over the "low-level" of services APIs - also known as bNesis SDK API layers. There are three layers:
   
@@ -19,7 +19,7 @@ bNesis SDK APIs provide an wrappers over the "low-level" of services APIs - also
 
 * **Raw API**. By using this layer of bNesis SDK APIs, developer obtain full response from service including all fields and status codes which is provided by service owners. There are two reasons for supporting API of raw layer. The first is then there is code working properly with connected service and developer want to start using of bNesis SDK. In this case developer can save his code of service responses processing i.e adopting of exiting code to bNesis SDK does not need global changes.  The second is a complete correspondence of the original documentation to the service. It is not usual and not informative but there can can be and vice versa. By the way, often responses with errors contain detailed descriptions which is useful for debug mode.   
  
-###**Providing Rich and Thin clients architecture** 
+### **Providing Rich and Thin clients architecture** 
   
 Planing of using cloud services in .NET applications system designer determines optimal architecture depending on whether lengthy computations must be accomplished by the client or the server. bNesis SDK for C# (.NET) provides an opportunity to realize these two modes - Rich client mode and Thin client mode. At the API level, functional of Thin client mode is fully compatible with Rich client mode, the only difference is that in the case of Thin client, the OAUTH authorization takes place on the side and in the context of bNesis API Server.  
     
@@ -75,22 +75,26 @@ Current version of bNesis SDK for C# (.NET) is 1.7.
 1. Install selected package. (If you need install both packets repeat 6 and 7 step.)
 
 **Solution 2.** Install 'bNesis SDK for C# (.NET)' from 'Package Manager Console':
-1. Open your solution/project, choose on Visual Studio menu 'Tools > NuGet Package Manager > Package Manager Console'.
-1. In 'Package Manager Console' click on 'Default Project'.
-1. Select your project on which you want install bNesis SDK.
-1. After 'PM>' write one of command:
-        
-  Install Rich Client command: Install-Package bNesis.Sdk.RichClient 
-  
-  Install Thin Client command: Install-Package bNesis.Sdk.ThinClient                 
-   
-  **Example**: 
-   
-              PM> Install-Package bNesis.Sdk.RichClient
-              PM> Install-Package bNesis.Sdk.ThinClient
-  			  
 
-1. Run it (Press Enter). (If you need install both packets repeat 4 and 5 step.)
+1. Open your solution/project, choose on Visual Studio menu 'Tools > NuGet Package Manager > Package Manager Console'.
+
+2. In 'Package Manager Console' click on 'Default Project'.
+
+3. Select your project on which you want install bNesis SDK.
+
+4. After 'PM>' write one of command:
+
+  Install Rich Client command: Install-Package bNesis.Sdk.RichClient
+   
+  Install Thin Client command: Install-Package bNesis.Sdk.ThinClient                 
+
+  **Example**: 
+  ```
+  PM> Install-Package bNesis.Sdk.RichClient
+  PM> Install-Package bNesis.Sdk.ThinClient  			  
+  ``` 
+
+5. Run it (Press Enter). (If you need install both packets repeat 4 and 5 step.)
 
 **Solution 3.** get bNesis SDK for C# (.NET) in Source Code from GitHub:
 1. Download bNesis SDK from https://github.com/bNesisDeveloper/bNesis/tree/master/Sdk/DotNet
