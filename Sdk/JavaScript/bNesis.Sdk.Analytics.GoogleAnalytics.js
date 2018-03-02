@@ -8,11 +8,53 @@ GoogleAnalytics = function (bNesisApi) {
     }
 	
 	/**
-	 *  Displays a list of all user accounts 	
-	 * @return {Response} list of all user accounts
+	 *  Gets a list of all user accounts. 	
+	 * @return {Response} Response.
 	 */
     this.GetManagementAccounts = function () {
         var result = _bNesisApi.Call("GoogleAnalytics", this.bNesisToken, "GetManagementAccounts");
+        return result;
+    }
+
+	/**
+	 *  Gets list of webproperties to which user have access. 	
+	 * @param accountId Account identifier.
+	 * @return {Response} Response.
+	 */
+    this.GetWebProperties = function (accountId) {
+        var result = _bNesisApi.Call("GoogleAnalytics", this.bNesisToken, "GetWebProperties", accountId);
+        return result;
+    }
+
+	/**
+	 *  Gets a webproperty information. 	
+	 * @param accountId Account identifier.
+	 * @param webpropertyId Web property identifier. (Format:code-XXXXX-YY)
+	 * @return {Response} Response.
+	 */
+    this.GetWebProperty = function (accountId, webpropertyId) {
+        var result = _bNesisApi.Call("GoogleAnalytics", this.bNesisToken, "GetWebProperty", accountId, webpropertyId);
+        return result;
+    }
+
+	/**
+	 *  Gets a view profiles to which the user have access. 	
+	 * @param accountId Account identifier.
+	 * @param webpropertyId Web property identifier. (Format:code-XXXXX-YY)
+	 * @return {Response} Response.
+	 */
+    this.GetWebPropertyProfiles = function (accountId, webpropertyId) {
+        var result = _bNesisApi.Call("GoogleAnalytics", this.bNesisToken, "GetWebPropertyProfiles", accountId, webpropertyId);
+        return result;
+    }
+
+	/**
+	 *   	
+	 * @param reportRequest 
+	 * @return {Response} 
+	 */
+    this.GetReportsBatchRaw = function (reportRequest) {
+        var result = _bNesisApi.Call("GoogleAnalytics", this.bNesisToken, "GetReportsBatchRaw", reportRequest);
         return result;
     }
 

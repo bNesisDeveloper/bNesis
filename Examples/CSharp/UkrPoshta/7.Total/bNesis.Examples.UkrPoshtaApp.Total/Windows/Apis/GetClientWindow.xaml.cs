@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
         /// <summary>
         /// Customer instance.
         /// </summary>
-        public CustomerOut Customer { get; private set; }
+        public UkrPoshtaCustomerOut Customer { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -28,7 +28,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
             //Initialize new class of CustomerIn.
-            CustomerIn customerIn = new CustomerIn();        }
+            UkrPoshtaCustomerIn customerIn = new UkrPoshtaCustomerIn();        }
 
         /// <summary>
         /// If in 'ok' button triggered click, then try get client to UkrPoshta.
@@ -50,7 +50,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Set externalId
             string externalId = externalIdTextBox.Text;
             //Creating variable
-            CustomerOut[] customers = null;
+            UkrPoshtaCustomerOut[] customers = null;
             //If GetClient success return CustomerOut
             await Task.Run(() => customers = UkrPoshta.GetClients(externalId));
             //Check array of customer if not equal null and more then zero

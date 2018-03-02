@@ -39,7 +39,30 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
         private static string UkrPoshtaCounterPartyToken = string.Empty;
 
         /// <summary>
-        /// If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API server https://server2.bnesis.com
+        /// If you use Thin Client mode, you need an access to bNesis API Server. Address of the demo bNesis API server:
+        /// https://server2.bnesis.com
+        /// https://bnesisserver1.azurewebsites.net
+        /// https://bnesisserver2.azurewebsites.net
+        /// https://bnesisserver3.azurewebsites.net
+        /// 
+        /// Please don't forget to setup your Dropbox application Redirect URIs at Dropbox developers console https://www.dropbox.com/developers/
+        /// 
+        /// In Thin client mode add two redirectURIs to tab "Setting" at Dropbox developers console. The first redirectURI relates what bNesis API server you use:
+        /// https://server2.bnesis.com/api/authprovider/signin
+        /// https://bnesisserver1.azurewebsites.net/api/authprovider/signin        
+        /// https://bnesisserver2.azurewebsites.net/api/authprovider/signin
+        /// https://bnesisserver3.azurewebsites.net/api/authprovider/signin
+        ///The second redirectURI is default host and port where bNesis Thin client will be redirected to the specified address after the authentication 
+        /// operation is performed. For example  http://localhost:809/ 
+        ///
+        /// Rich client:
+        /// http://localhost:809/  
+        /// (as a default bNesis Rich client redirects host and port, see redirectUrl property)
+        /// (if you change the redirectUrl property at this example app, change the RedirectURIs at the Dropbox developers console
+        /// </summary>
+
+        /// <summary>
+        /// If you use Thin Client mode, you need access to bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
         private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
@@ -87,10 +110,10 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
                 return;
             }
 
-            //Select Rich mode or Thin mode 
+            //Select Rich client mode or Thin client mode 
             Console.Write(
-                "Please select Thin mode or Rich mode.\nPress 'R' for Rich client mode or any other key for Thin client mode: ");
-            //Waiting for pressed key. If key is not 'R', using default Thin client mode.
+                "Please select Thin client mode or Rich client mode.\nPress 'R' for Rich client mode or any other key for Thin client mode: ");
+            //Waiting for a pressed key. If key is not 'R', using default Thin client mode.
             ConsoleKeyInfo selectMode = Console.ReadKey();
             //Escape line
             Console.WriteLine();
@@ -101,14 +124,14 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
             //Initialize client mode
             if (selectMode.Key == ConsoleKey.R) //if user has pressed 'R' key for Rich client mode
             {
-                Console.WriteLine("Rich mode initialization ...");
-                //If initialization successful is, zero code (noError) will be returned 
+                Console.WriteLine("Rich client mode initialization ...");
+                //If initialization is successful, zero code (noError) will be returned 
                 SDKInitializeResult = manager.InitializeRich(string.Empty);
             }
-            else //default Thin client
+            else //default Thin client mode 
             {
-                Console.WriteLine("Thin mode Initialization...");
-                //If success, initialization returns zero code(noError)
+                Console.WriteLine("Thin client mode Initialization...");
+                //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
             }
 
@@ -132,7 +155,7 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
                     //If authorization has failed, the bNesisToken will be empty/null.
                     if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                     {
-                        //if bNesisToken empty is, use GetLastError method to get error description
+                        //if bNesisToken is empty, use GetLastError method to get error description
                         if (!string.IsNullOrEmpty(manager.GetLastError()))
                             Console.WriteLine("Authorization problem: " + manager.GetLastError());
                         else Console.WriteLine("Authorization problem, please check parameters.\n");
@@ -142,13 +165,12 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
                     }
 
                     //Authorization at UkrPoshta is successful
-                    //Now you can use UkrPoshta
+                    //Now you can use the UkrPoshta service
                     Console.WriteLine("Authorization success! UkrPoshta instance is created.\n");
 
-                    //Adding new client for UkrPoshta
-                    Console.WriteLine("Adding customer to UkrPoshta...");
-                    //Creating new customer class
-                    CustomerIn customerIn = new CustomerIn();
+                    //Adding a new client for UkrPoshta
+                    Console.WriteLine("Adding a customer to UkrPoshta...");
+                    UkrPoshtaCustomerIn customerIn = new UkrPoshtaCustomerIn();
 
                     //Next values will be used for example. Use your own values.
 
@@ -167,7 +189,7 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
                     //Set resident
                     customerIn.resident = true;
                     //Add new customer
-                    CustomerOut customer = ukrPoshta.AddClient(customerIn);
+                    UkrPoshtaCustomerOut customer = ukrPoshta.AddClient(customerIn);
                     //Getting last error
                     ErrorInfo errorInfo = ukrPoshta.GetLastError();
                     //Check if errorInfo code does not equal noError
@@ -190,7 +212,7 @@ namespace bNesis.Examples.UkrPoshtaApp.AddCustomerApi
                 }
             }
 
-            //Wating for pressed key...
+            //Wating for a pressed key...
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }

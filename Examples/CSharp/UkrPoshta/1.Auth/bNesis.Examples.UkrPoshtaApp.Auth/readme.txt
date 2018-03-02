@@ -1,8 +1,9 @@
-bNesis SDK examples 
+			bNesis SDK
+			 examples 
 
 About
 
-bNesis SDK is a unified API for working with cloud services for mobile, desktop, web and servers. With such versatility, it is better first to explain separately about bNesis SDK for mobile, desktop and web. If you are a mobile developer, it will be more interesting for you to learn about the implementation of bNesis SDK for Android, and if you are a Web developer, please read first the section about web applications and servers.
+	bNesis SDK is a unified API for working with cloud services for mobile, desktop, web and servers. With such versatility, it is better first to explain separately about bNesis SDK for mobile, desktop and web. If you are a mobile developer, it will be more interesting for you to learn about the implementation of bNesis SDK for Android, and if you are a Web developer, please read first the section about web applications and servers.
 
 bNesis SDK for Desktop
 In this case, there are two ways to use bNesis SDK – as a Rich client and as a Thin client 

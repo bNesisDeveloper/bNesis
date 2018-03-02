@@ -10,13 +10,13 @@ using bNesis.Sdk.Delivery.UkrPoshta;
 namespace bNesis.Examples.UkrPoshtaApp.Simple
 {
     /// <summary>
-    /// This console example show how to used bNesis SDK initialization, authentication and call some method from UkrPoshta:
+    /// This console example shows how to use bNesis SDK initialization, authentication and calls some method from UkrPoshta:
     /// <para/>bNesis ServiceManager class
-    /// <para/>bNesis ServiceManager methods: InitializeRich and InitializeThin methods
+    /// <para/>bNesis ServiceManager methods: InitializeRich and InitializeThin
     /// <para/>bNesis ServiceManager CreateInstanceUkrPoshta method
     /// <para/>bNesis UkrPoshta AddAddress method
     /// <para/>
-    /// <para/>Also this example demonstrate methods of getting bNesis SDK status information, error handling and service control. 
+    /// <para/>Also this example demonstrates methods of getting bNesis SDK status information, error handling and service control. 
     /// </summary>
     internal class Program
     {
@@ -37,40 +37,62 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
         /// </summary>
         private static string UkrPoshtaCounterPartyToken = string.Empty;
 
-        //------------------------------------
-        //This properties used for creating class Address wich need for UkrPoshta
+        //These properties are used for creating of a class Address. We need it for working with the UkrPoshta service
         //We cite it for example, use your own values.
         /// <summary>
         /// Country name for address. (Example: UA)
         /// </summary>
-        private static string Country = "UA";
+        private static string country = "UA";
         /// <summary>
         /// City name for address. 
         /// </summary>
-        private static string City = "Kiev";
+        private static string city = "Kyiw";
         /// <summary>
         /// Region name for address.
         /// </summary>
-        private static string Region = "Obolon";
+        private static string region = "Obolon";
         /// <summary>
         /// Street name for address.
         /// </summary>
-        private static string Street = "Obolonskiy prospekt";
+        private static string street = "Obolonskiy prospekt";
         /// <summary>
         /// House number for address.
         /// </summary>
-        private static string HouseNumber = "3";
+        private static string houseNumber = "3";
         /// <summary>
         /// Apartment number for address.
         /// </summary>
-        private static string ApartmentNumber = "36";
+        private static string apartmentNumber = "36";
         /// <summary>
         /// Post code for address.
         /// </summary>
-        private static string Postcode = "04073";
+        private static string postcode = "04073";
 
         /// <summary>
-        /// If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API server https://server2.bnesis.com
+        /// If you use Thin Client mode, you need an access to bNesis API Server. Address of the demo bNesis API server:
+        /// https://server2.bnesis.com
+        /// https://bnesisserver1.azurewebsites.net
+        /// https://bnesisserver2.azurewebsites.net
+        /// https://bnesisserver3.azurewebsites.net
+        /// 
+        /// Please don't forget to setup your Dropbox application Redirect URIs at the Dropbox developers console https://www.dropbox.com/developers/
+        /// 
+        /// In Thin client mode add two redirectURIs to tab "Setting" at Dropbox developers console. The first redirectURI relates, what bNesis API server you use:
+        /// https://server2.bnesis.com/api/authprovider/signin
+        /// https://bnesisserver1.azurewebsites.net/api/authprovider/signin        
+        /// https://bnesisserver2.azurewebsites.net/api/authprovider/signin
+        /// https://bnesisserver3.azurewebsites.net/api/authprovider/signin
+        ///The second redirectURI is default host and port where bNesis Thin client will be redirected to the specified address after the authentication 
+        /// operation is performed. For example  http://localhost:809/ 
+        ///
+        /// Rich client:
+        /// http://localhost:809/  
+        /// (as a default bNesis Rich client redirects host and port, see redirectUrl property)
+        /// (if you change the redirectUrl property at this example app, change the RedirectURIs at the Dropbox developers console
+        /// </summary>
+
+        /// <summary>
+        /// If you use Thin Client mode, you need access to bNesis API Server. Addresses of the available demo bNesis API Servers see above
         /// </summary>
         private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
@@ -98,7 +120,6 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             UkrPoshtaCounterPartyToken = manager.GetKey("exampleUkrPoshtaCounterPartyToken");
 #endif
 
-
             #region Validation Creeds
             //Check bNesisDeveloperID
             if (string.IsNullOrEmpty(bNesisDeveloperId))
@@ -114,14 +135,14 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             if (string.IsNullOrEmpty(UkrPoshtaBearer) || string.IsNullOrEmpty(UkrPoshtaCounterPartyToken))
             {
                 Console.WriteLine(
-                    "For using this example you need UkrPoshta authentication keys, please contact the UkrPoshta administration to get the keys\n");
+                    "For using this example you need UkrPoshta authentication keys, please contact the UkrPoshta administration to get these keys\n");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 return;
             }
 
             //Check Country
-            if (string.IsNullOrEmpty(Country))
+            if (string.IsNullOrEmpty(country))
             {
                 Console.WriteLine(
                     "For using this example you need set 'Country'.\n");
@@ -131,7 +152,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
 
             //Check City
-            if (string.IsNullOrEmpty(City))
+            if (string.IsNullOrEmpty(city))
             {
                 Console.WriteLine(
                     "For using this example you need set 'City'.\n");
@@ -141,7 +162,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
 
             //Check Region
-            if (string.IsNullOrEmpty(Region))
+            if (string.IsNullOrEmpty(region))
             {
                 Console.WriteLine(
                     "For using this example you need set 'Region'.\n");
@@ -151,7 +172,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
 
             //Check Street
-            if (string.IsNullOrEmpty(Street))
+            if (string.IsNullOrEmpty(street))
             {
                 Console.WriteLine(
                     "For using this example you need set 'Street'.\n");
@@ -161,7 +182,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
 
             //Check HouseNumber
-            if (string.IsNullOrEmpty(HouseNumber))
+            if (string.IsNullOrEmpty(houseNumber))
             {
                 Console.WriteLine(
                     "For using this example you need set 'HouseNumber'.\n");
@@ -171,7 +192,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
 
             //Check ApartmentNumber
-            if (string.IsNullOrEmpty(ApartmentNumber))
+            if (string.IsNullOrEmpty(apartmentNumber))
             {
                 Console.WriteLine(
                     "For using this example you need set 'ApartmentNumber'.\n");
@@ -181,7 +202,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
 
             //Check Postcode
-            if (string.IsNullOrEmpty(Postcode))
+            if (string.IsNullOrEmpty(postcode))
             {
                 Console.WriteLine(
                     "For using this example you need set 'Postcode'.\n");
@@ -192,10 +213,10 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
 
             #endregion
 
-            //Select mode Rich or Thin mode 
+            //Select Rich client mode or Thin client mode 
             Console.Write(
-                "Please select Thin or Rich mode.\nPress 'R' for Rich client mode or press any other key for Thin client mode: ");
-            //Waiting for pressed key, if key is not 'R' using default Thin client.
+                "Please select Thin client mode or Rich client mode.\nPress 'R' for Rich client mode or press any other key for Thin client mode: ");
+            //Waiting for a pressed key. If key is not 'R', using the Thin client mode as a default.
             ConsoleKeyInfo selectMode = Console.ReadKey();
             //Escape line
             Console.WriteLine();
@@ -204,20 +225,20 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             int SDKInitializeResult;
 
             //Initialize client mode
-            if (selectMode.Key == ConsoleKey.R) //if user press 'R' key for Rich client
+            if (selectMode.Key == ConsoleKey.R) //if user has pressed 'R' key for Rich client
             {
-                Console.WriteLine("Initialize Rich mode.");
-                //If success initialize return zero code(noError)
+                Console.WriteLine("Rich client mode initialization.");
+                //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeRich(string.Empty);
             }
-            else //default Thin client
+            else //default Thin client mode
             {
-                Console.WriteLine("Initialize Thin mode.");
-                //If success initialize return zero code(noError)
+                Console.WriteLine("Thin client mode initialization.");
+                //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
             }
 
-            //Check if initialize result not equal zero(noError)
+            //Check if initialization result does not equal zero(noError)
             if (SDKInitializeResult != ServiceManager.errorCodeNoError)
             {
                 //Show error message
@@ -225,22 +246,22 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
             }
             else
             {
-                //Succes Initiliaze 
+                //Initialization Succes 
                 Console.WriteLine("bNesis SDK initialization status: Success\n");
 
                 try
                 {
-                    Console.WriteLine("Authorize at UkrPoshta service, please wait...");
-                    // this method authorize at UkrPoshta, return instance.
+                    Console.WriteLine("Authorization at the UkrPoshta service, please wait...");
+                    // this method returns instance for the UkrPoshta service.
                     UkrPoshta ukrPoshta = manager.CreateInstanceUkrPoshta(bNesisDeveloperId, redirectUrl,
                         UkrPoshtaBearer, UkrPoshtaCounterPartyToken, true);
-                    //If authorization failed, the bNesisToken be empty/null.
+                    //If authorization is failed, the bNesisToken will be empty/null.
                     if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                     {
-                        //if bNesisToken empty - use GetLastError method to get error description
+                        //if bNesisToken is empty - use GetLastError method to get error description
                         if (!string.IsNullOrEmpty(manager.GetLastError()))
-                            Console.WriteLine("Authorize problem: " + manager.GetLastError());
-                        else Console.WriteLine("Authorize problem, please check parameters.\n");
+                            Console.WriteLine("Authorization problem: " + manager.GetLastError());
+                        else Console.WriteLine("Authorization problem, please check parameters.\n");
                         Console.WriteLine("Press any key to exit...");
                         Console.ReadKey();
                         return;
@@ -248,39 +269,37 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
 
                     
 
-                    //Authorization at UkrPoshta Success
+                    //Authorization at UkrPoshta is successful
                     //Now you can use UkrPoshta
-                    Console.WriteLine("Authorization success! UkrPoshta instance created.\n");
+                    Console.WriteLine("Authorization success! UkrPoshta instance is created.\n");
 
-                    //Adding new address for UkrPoshta
-                    Console.WriteLine("Add address to UkrPoshta...");
-
-                    //Creating new class AddressIn
-                    AddressIn addressIn = new AddressIn();
+                    //Adding a new address for the UkrPoshta service
+                    Console.WriteLine("Adding of a new address to the UkrPoshta service...");
+                    UkrPoshtaAddressIn addressIn = new UkrPoshtaAddressIn();  
                     //Set properties
-                    addressIn.country = Country;
-                    addressIn.city = City;
-                    addressIn.region = Region;
-                    addressIn.street = Street;
-                    addressIn.houseNumber = HouseNumber;
-                    addressIn.apartmentNumber = ApartmentNumber;
-                    addressIn.postcode = Postcode;
-                    //Add new address
-                    AddressOut address = ukrPoshta.AddAddress(addressIn);
+                    addressIn.country = country;
+                    addressIn.city = city;
+                    addressIn.region = region;
+                    addressIn.street = street;
+                    addressIn.houseNumber = houseNumber;
+                    addressIn.apartmentNumber = apartmentNumber;
+                    addressIn.postcode = postcode;
+                    //Add a new address
+                    UkrPoshtaAddressOut address = ukrPoshta.AddAddress(addressIn);   
                     //Getting last error
                     ErrorInfo errorInfo = ukrPoshta.GetLastError();
-                    //Check if errorInfo code not equal noError
+                    //Check if errorInfo code does not equal noError
                     if (errorInfo.Code != ServiceManager.errorCodeNoError)
                     {
                         //Show error message
-                        Console.WriteLine("Failed add address, error code:" + errorInfo.Code +
+                        Console.WriteLine("address adding is Failed, error code:" + errorInfo.Code +
                                           ",\nReason:" + errorInfo.Description);
                         Console.WriteLine("Press any key to exit...");
                         Console.ReadKey();
                         return;
                     }
 
-                    Console.WriteLine("Success! New address added.");
+                    Console.WriteLine("Success! New address is added.");
                     Console.WriteLine("Address ID:" + address.id);
                 }
                 catch (Exception ex)
@@ -290,7 +309,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Simple
                 }
             }
 
-            //Waiting for pressed key...
+            //Waiting for a pressed key...
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }

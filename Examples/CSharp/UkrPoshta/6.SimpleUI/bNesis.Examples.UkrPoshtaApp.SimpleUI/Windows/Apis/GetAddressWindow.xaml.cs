@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// <summary>
         /// AddressOut instance.
         /// </summary>
-        public AddressOut AddressOut { get; private set; }
+        public UkrPoshtaAddressOut AddressOut { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -34,13 +34,13 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void okButton_Click(object sender, RoutedEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             //Check if addressIdTextBox empty.
             if (string.IsNullOrEmpty(addressIdTextBox.Text))
             {
                 //Set error message in ui element statusTextBlock
-                statusTextBlock.Text = "AddressID can't be empty!";
+                statusTextBlock.Text = "AddressID can't be empty";
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             if (!int.TryParse(addressIdTextBox.Text, out addressId))
             {
                 //Set error message in ui element statusTextBlock
-                statusTextBlock.Text = "Use only numbers!";
+                statusTextBlock.Text = "Use only numbers";
                 return;
             }
             //If GetAddress success return instance of AddressOut
@@ -69,17 +69,17 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         }
 
         /// <summary>
-        /// If in 'cancel' button triggered click, then this window will closed.
+        /// If 'cancel' button click, then this window will closed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
         /// <summary>
-        /// If on this window triggered preview key down, 
+        /// If on this window preview key down, 
         /// <para/>then if key is Enter invoke okButton_Click or if key is Escape invoke cancelButton_Click.
         /// </summary>
         /// <param name="sender"></param>
@@ -91,11 +91,11 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
                 //Block other events with key
                 e.Handled = true;
 
-                okButton_Click(null, null);
+                OkButton_Click(null, null);
             }
             else if (e.Key == Key.Escape)
             {
-                cancelButton_Click(null, null);
+                CancelButton_Click(null, null);
             }
         }
 

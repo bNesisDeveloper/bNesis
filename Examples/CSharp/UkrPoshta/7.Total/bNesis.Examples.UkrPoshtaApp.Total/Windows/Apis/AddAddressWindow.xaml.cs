@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
         /// <summary>
         /// AddressOut instance.
         /// </summary>
-        public AddressOut AddressOut { get; private set; }
+        public UkrPoshtaAddressOut AddressOut { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -28,7 +28,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
             //Initialize new class of AddressIn.
-            AddressIn addressIn = new AddressIn();
+            UkrPoshtaAddressIn addressIn = new UkrPoshtaAddressIn();
             //Render class to ui
             ClassToEdit.RenderClassToUI(addressIn, propertiesPanel, false);
 
@@ -45,7 +45,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             this.IsEnabled = false;
 
             //Render ui to class
-            AddressIn addressIn = ClassToEdit.RenderUItoClass(propertiesPanel) as AddressIn;
+            UkrPoshtaAddressIn addressIn = ClassToEdit.RenderUItoClass(propertiesPanel) as UkrPoshtaAddressIn;
             //Add address to UkrPoshta if success return instance in AddressOut class.
             await Task.Run(() => AddressOut = UkrPoshta.AddAddress(addressIn));
             ErrorInfo errorInfo = UkrPoshta.GetLastError();

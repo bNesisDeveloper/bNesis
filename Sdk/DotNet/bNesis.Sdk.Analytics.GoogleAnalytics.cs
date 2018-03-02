@@ -12,7 +12,17 @@ namespace bNesis.Sdk.Analytics.GoogleAnalytics
 {
 	public class GoogleAnalytics  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public GoogleAnalytics(DesktopbNesisApi bNesisApi)
@@ -20,21 +30,77 @@ namespace bNesis.Sdk.Analytics.GoogleAnalytics
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes)
 		{
-
 			bNesisToken = bNesisApi.Auth("Google", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,string.Empty,string.Empty,false,string.Empty);
-
 			return bNesisToken;
 		}
 
-		///<summary>
-		/// Displays a list of all user accounts 
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
 		/// </summary>
-		/// <returns>list of all user accounts</returns>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("Google", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
+
+		///<summary>
+		/// Gets a list of all user accounts. 
+		/// </summary>
+		/// <returns>Response.</returns>
 		public Response GetManagementAccounts()
 		{
 			return bNesisApi.Call<Response>("GoogleAnalytics", bNesisToken, "GetManagementAccounts");
+		}
+
+		///<summary>
+		/// Gets list of webproperties to which user have access. 
+		/// </summary>
+		/// <param name="accountId">Account identifier.</param>
+		/// <returns>Response.</returns>
+		public Response GetWebProperties(string accountId)
+		{
+			return bNesisApi.Call<Response>("GoogleAnalytics", bNesisToken, "GetWebProperties", accountId);
+		}
+
+		///<summary>
+		/// Gets a webproperty information. 
+		/// </summary>
+		/// <param name="accountId">Account identifier.</param>
+		/// <param name="webpropertyId">Web property identifier. (Format:code-XXXXX-YY)</param>
+		/// <returns>Response.</returns>
+		public Response GetWebProperty(string accountId, string webpropertyId)
+		{
+			return bNesisApi.Call<Response>("GoogleAnalytics", bNesisToken, "GetWebProperty", accountId, webpropertyId);
+		}
+
+		///<summary>
+		/// Gets a view profiles to which the user have access. 
+		/// </summary>
+		/// <param name="accountId">Account identifier.</param>
+		/// <param name="webpropertyId">Web property identifier. (Format:code-XXXXX-YY)</param>
+		/// <returns>Response.</returns>
+		public Response GetWebPropertyProfiles(string accountId, string webpropertyId)
+		{
+			return bNesisApi.Call<Response>("GoogleAnalytics", bNesisToken, "GetWebPropertyProfiles", accountId, webpropertyId);
+		}
+
+		///<summary>
+		///  
+		/// </summary>
+		/// <param name="reportRequest"></param>
+		/// <returns></returns>
+		public Response GetReportsBatchRaw(string reportRequest)
+		{
+			return bNesisApi.Call<Response>("GoogleAnalytics", bNesisToken, "GetReportsBatchRaw", reportRequest);
 		}
 
 		///<summary>
@@ -73,5 +139,5 @@ namespace bNesis.Sdk.Analytics.GoogleAnalytics
 		{
 			return bNesisApi.Call<Boolean>("GoogleAnalytics", bNesisToken, "Logoff");
 		}
-	}
+}
 }

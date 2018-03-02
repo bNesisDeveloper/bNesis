@@ -6945,33 +6945,65 @@ PrestaShop = function (bNesisApi) {
 
 }
 
+/**
+ * Implementation for PrestaShop 'filter'. 
+ * @typedef {Object} PrestaShopFilter
+ */
  PrestaShopFilter = function () { 
+	/**
+	 * Gets or sets the key.
+	 * @type {string}
+	 */
 	this.Key = "";
 
+	/**
+	 * Gets or sets the value.
+	 * @type {string}
+	 */
 	this.Value = "";
 
 }
 
 /**
- * PrestaShop rendering options 
+ * Implementation for PrestaShop rendering options. 
  * @typedef {Object} PrestaShopRenderingOptions
  */
  PrestaShopRenderingOptions = function () { 
+	/**
+	 * Gets or sets the display.
+	 * @type {string}
+	 */
 	this.Display = "";
 
 	/**
-	 * Array of Filters
+	 * Gets or sets the filter.
 	 * @type {PrestaShopFilter[]}
 	 */
 	this.Filter = new Array();
 
 }
 
+/**
+ * Implementation identifier's for PrestaShop elements. 
+ * @typedef {Object} PrestaShopIdentifier
+ */
  PrestaShopIdentifier = function () { 
+	/**
+	 * The element identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
+	/**
+	 * The identifier feature value.
+	 * @type {Int32}
+	 */
 	this.id_feature_value = 0;
 
+	/**
+	 * The identifier product attribute.
+	 * @type {Int32}
+	 */
 	this.id_product_attribute = 0;
 
 }
@@ -7223,10 +7255,6 @@ PrestaShop = function (bNesisApi) {
 	this.email = "";
 
 	this.active = false;
-
-	this.date_add = "";
-
-	this.date_upd = "";
 
 }
 
@@ -7615,52 +7643,148 @@ PrestaShop = function (bNesisApi) {
 
 }
 
+/**
+ * Implementation for PrestaShop 'orderRow'. 
+ * @typedef {Object} PrestaShopOrderRow
+ */
  PrestaShopOrderRow = function () { 
+	/**
+	 * The order row identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
+	/**
+	 * The product identifier.
+	 * @type {Int32}
+	 */
 	this.product_id = 0;
 
+	/**
+	 * The product attribute identifier.
+	 * @type {Int32}
+	 */
 	this.product_attribute_id = 0;
 
+	/**
+	 * The product quantity.
+	 * @type {Int32}
+	 */
 	this.product_quantity = 0;
 
+	/**
+	 * The name of the product.
+	 * @type {string}
+	 */
 	this.product_name = "";
 
+	/**
+	 * The product reference.
+	 * @type {string}
+	 */
 	this.product_reference = "";
 
+	/**
+	 * The product ean13.
+	 * @type {string}
+	 */
 	this.product_ean13 = "";
 
+	/**
+	 * The product isbn.
+	 * @type {string}
+	 */
 	this.product_isbn = "";
 
+	/**
+	 * The product upc.
+	 * @type {string}
+	 */
 	this.product_upc = "";
 
+	/**
+	 * The product price.
+	 * @type {Single}
+	 */
 	this.product_price = new Single();
 
+	/**
+	 * The unit price tax incl.
+	 * @type {Single}
+	 */
 	this.unit_price_tax_incl = new Single();
 
+	/**
+	 * The unit price tax excl.
+	 * @type {Single}
+	 */
 	this.unit_price_tax_excl = new Single();
 
 }
 
+/**
+ * Implementation for PrestaShop 'associations'. 
+ * @typedef {Object} PrestaShopAssociations
+ */
  PrestaShopAssociations = function () { 
+	/**
+	 * The array of identifier for categories.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.categories = new Array();
 
+	/**
+	 * The array of identifier for groups.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.groups = new Array();
 
+	/**
+	 * The array of identifier for product option values.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.product_option_values = new Array();
 
+	/**
+	 * The array of identifier for images.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.images = new Array();
 
+	/**
+	 * The array of identifier for customer messages.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.customer_messages = new Array();
 
+	/**
+	 * The array of identifier for addresses.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.addresses = new Array();
 
+	/**
+	 * The array of identifier for combinations.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.combinations = new Array();
 
+	/**
+	 * The array of identifier for order rows.
+	 * @type {PrestaShopOrderRow[]}
+	 */
 	this.order_rows = new Array();
 
+	/**
+	 * The array of identifier for product features.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.product_features = new Array();
 
+	/**
+	 * The array of identifier for stock avaibles.
+	 * @type {PrestaShopIdentifier[]}
+	 */
 	this.stock_avaibles = new Array();
 
 }
@@ -8067,8 +8191,6 @@ PrestaShop = function (bNesisApi) {
 	this.id_category = 0;
 
 	this.active = false;
-
-	this.deleted = false;
 
 	this.name = "";
 
@@ -8943,8 +9065,6 @@ PrestaShop = function (bNesisApi) {
 
 	this.secure_key = "";
 
-	this.deleted = false;
-
 	this.passwd = "";
 
 	this.lastname = "";
@@ -8984,10 +9104,6 @@ PrestaShop = function (bNesisApi) {
 	this.is_guest = false;
 
 	this.id_shop = 0;
-
-	this.date_add = "";
-
-	this.date_upd = "";
 
 	this.reset_password_token = "";
 
@@ -9435,558 +9551,1522 @@ PrestaShop = function (bNesisApi) {
 
 }
 
+/**
+ * Implementation class for PrestaShop 'addresses'. Can be used when add new address. 
+ * @typedef {Object} PrestaShopAddressIn
+ */
  PrestaShopAddressIn = function () { 
+	/**
+	 * The identifier customer wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_customer = 0;
 
+	/**
+	 * The identifier manufacturer wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_manufacturer = 0;
 
-	this.in_supplier = 0;
+	/**
+	 * The identifier supplier wich belongs to.
+	 * @type {Int32}
+	 */
+	this.id_supplier = 0;
 
+	/**
+	 * The identifier warehouse wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_warehouse = 0;
 
+	/**
+	 * The identifier country wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_country = 0;
 
+	/**
+	 * The identifier state wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_state = 0;
 
+	/**
+	 * The alias. (eg. Home, Work...)
+	 * @type {string}
+	 */
 	this.alias = "";
 
+	/**
+	 * The company. (Optional)
+	 * @type {string}
+	 */
 	this.company = "";
 
+	/**
+	 * The last name.
+	 * @type {string}
+	 */
 	this.lastname = "";
 
+	/**
+	 * The first name.
+	 * @type {string}
+	 */
 	this.firstname = "";
 
+	/**
+	 * The vat number.
+	 * @type {string}
+	 */
 	this.vat_number = "";
 
+	/**
+	 * The first address.
+	 * @type {string}
+	 */
 	this.address1 = "";
 
+	/**
+	 * The second address. (Optional)
+	 * @type {string}
+	 */
 	this.address2 = "";
 
+	/**
+	 * The postal code.
+	 * @type {Int32}
+	 */
 	this.postcode = 0;
 
+	/**
+	 * The city name.
+	 * @type {string}
+	 */
 	this.city = "";
 
+	/**
+	 * Other useful information.
+	 * @type {string}
+	 */
 	this.other = "";
 
+	/**
+	 * The phone number.
+	 * @type {string}
+	 */
 	this.phone = "";
 
+	/**
+	 * The mobile phone number.
+	 * @type {string}
+	 */
 	this.phone_mobile = "";
 
+	/**
+	 * The dni number.
+	 * @type {string}
+	 */
 	this.dni = "";
-
-	this.deleted = false;
-
-	this.date_add = "";
-
-	this.date_upd = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'address'. Used when need get information about address. 
+ * @typedef {Object} PrestaShopAddress
+ */
  PrestaShopAddress = function () { 
+	/**
+	 * The address identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
-	this.id_customer = 0;
-
+	/**
+	 * The identifier manufacturer wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_manufacturer = 0;
 
-	this.in_supplier = 0;
+	/**
+	 * The identifier supplier wich belongs to.
+	 * @type {Int32}
+	 */
+	this.id_supplier = 0;
 
+	/**
+	 * The identifier warehouse wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_warehouse = 0;
 
+	/**
+	 * The identifier country wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_country = 0;
 
+	/**
+	 * The identifier state wich belongs to.
+	 * @type {Int32}
+	 */
 	this.id_state = 0;
 
+	/**
+	 * The alias. (eg. Home, Work...)
+	 * @type {string}
+	 */
 	this.alias = "";
 
+	/**
+	 * The company. (Optional)
+	 * @type {string}
+	 */
 	this.company = "";
 
+	/**
+	 * The last name.
+	 * @type {string}
+	 */
 	this.lastname = "";
 
+	/**
+	 * The first name.
+	 * @type {string}
+	 */
 	this.firstname = "";
 
+	/**
+	 * The vat number.
+	 * @type {string}
+	 */
 	this.vat_number = "";
 
+	/**
+	 * The first address.
+	 * @type {string}
+	 */
 	this.address1 = "";
 
+	/**
+	 * The second address. (Optional)
+	 * @type {string}
+	 */
 	this.address2 = "";
 
+	/**
+	 * The postal code.
+	 * @type {Int32}
+	 */
 	this.postcode = 0;
 
+	/**
+	 * The city name.
+	 * @type {string}
+	 */
 	this.city = "";
 
+	/**
+	 * Other useful information.
+	 * @type {string}
+	 */
 	this.other = "";
 
+	/**
+	 * The phone number.
+	 * @type {string}
+	 */
 	this.phone = "";
 
+	/**
+	 * The mobile phone number.
+	 * @type {string}
+	 */
 	this.phone_mobile = "";
 
+	/**
+	 * The dni number.
+	 * @type {string}
+	 */
 	this.dni = "";
 
+	/**
+	 * True if address has been deleted (staying in database as deleted).
+	 * @type {Boolean}
+	 */
 	this.deleted = false;
 
+	/**
+	 * When address was added.
+	 * @type {string}
+	 */
 	this.date_add = "";
 
+	/**
+	 * When address was updated.
+	 * @type {string}
+	 */
 	this.date_upd = "";
 
 }
 
+/**
+ * Implementation for PrestaShop 'carriers'. Can be used when add new carrier. 
+ * @typedef {Object} PrestaShopCarrierIn
+ */
  PrestaShopCarrierIn = function () { 
-	this.deleted = false;
-
-	this.is_module = false;
-
+	/**
+	 * The identifier tax rules group.
+	 * @type {Int32}
+	 */
 	this.id_tax_rules_group = 0;
 
-	this.id_reference = 0;
-
+	/**
+	 * The carrier name. (Max: 64 characters)
+	 * @type {string}
+	 */
 	this.name = "";
 
+	/**
+	 * Carrier module.
+	 * @type {Boolean}
+	 */
+	this.is_module = false;
+
+	/**
+	 * Carrier statuts.
+	 * @type {Boolean}
+	 */
 	this.active = false;
 
+	/**
+	 * Free carrier.
+	 * @type {Boolean}
+	 */
 	this.is_free = false;
 
+	/**
+	 * URL with a '@'.
+	 * @type {string}
+	 */
 	this.url = "";
 
+	/**
+	 * True active the shipping handling
+	 * @type {Int32}
+	 */
 	this.shipping_handling = 0;
 
+	/**
+	 * Shipping external.
+	 * @type {Int32}
+	 */
 	this.shipping_external = 0;
 
+	/**
+	 * Behavior taken for unknown range.
+	 * @type {Int32}
+	 */
 	this.range_behavior = 0;
 
+	/**
+	 * Shipping behavior: 0 - by weight or 1 - by price.
+	 * @type {Int32}
+	 */
 	this.shipping_method = 0;
 
+	/**
+	 * The maximum package width managed by the transporter.
+	 * @type {Int32}
+	 */
 	this.max_width = 0;
 
+	/**
+	 * The maximum package height managed by the transporter.
+	 * @type {Int32}
+	 */
 	this.max_height = 0;
 
+	/**
+	 * The maximum package deep managed by the transporter.
+	 * @type {Int32}
+	 */
 	this.max_depth = 0;
 
+	/**
+	 * The maximum package weight managed by the transporter.
+	 * @type {Single}
+	 */
 	this.max_weight = new Single();
 
+	/**
+	 * Grade of the shipping delay (0 for longest, 9 for shortest).
+	 * @type {Int32}
+	 */
 	this.grade = 0;
 
+	/**
+	 * The name of the external module.
+	 * @type {string}
+	 */
 	this.external_module_name = "";
 
+	/**
+	 * Need range.
+	 * @type {Int32}
+	 */
 	this.need_range = 0;
 
+	/**
+	 * The position.
+	 * @type {Int32}
+	 */
 	this.position = 0;
 
+	/**
+	 * Delay needed to deliver customer. (Max: 512 characters)
+	 * @type {string}
+	 */
 	this.delay = "";
 
 }
 
+/**
+ * Implementation for PrestaShop 'carriers'. Used when need get information about carrier. 
+ * @typedef {Object} PrestaShopCarrier
+ */
  PrestaShopCarrier = function () { 
+	/**
+	 * The carrier identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
+	/**
+	 * True if carrier has been deleted (staying in database as deleted)
+	 * @type {Boolean}
+	 */
 	this.deleted = false;
 
-	this.is_module = false;
-
+	/**
+	 * The identifier tax rules group.
+	 * @type {Int32}
+	 */
 	this.id_tax_rules_group = 0;
 
+	/**
+	 * Common id for carrier historization.
+	 * @type {Int32}
+	 */
 	this.id_reference = 0;
 
+	/**
+	 * The carrier name.
+	 * @type {string}
+	 */
 	this.name = "";
 
+	/**
+	 * Carrier module.
+	 * @type {Boolean}
+	 */
+	this.is_module = false;
+
+	/**
+	 * Carrier statuts.
+	 * @type {Boolean}
+	 */
 	this.active = false;
 
+	/**
+	 * Free carrier.
+	 * @type {Boolean}
+	 */
 	this.is_free = false;
 
+	/**
+	 * URL with a '@'.
+	 * @type {string}
+	 */
 	this.url = "";
 
+	/**
+	 * Active or not the shipping handling
+	 * @type {Int32}
+	 */
 	this.shipping_handling = 0;
 
+	/**
+	 * Shipping external.
+	 * @type {Int32}
+	 */
 	this.shipping_external = 0;
 
+	/**
+	 * Behavior taken for unknown range.
+	 * @type {Int32}
+	 */
 	this.range_behavior = 0;
 
+	/**
+	 * Shipping behavior: 0 - by weight or 1 - by price.
+	 * @type {Int32}
+	 */
 	this.shipping_method = 0;
 
+	/**
+	 * The maximum package width managed by the transporter.
+	 * @type {Int32}
+	 */
 	this.max_width = 0;
 
+	/**
+	 * The maximum package height managed by the transporter.
+	 * @type {Int32}
+	 */
 	this.max_height = 0;
 
+	/**
+	 * The maximum package deep managed by the transporter.
+	 * @type {Int32}
+	 */
 	this.max_depth = 0;
 
+	/**
+	 * The maximum package weight managed by the transporter.
+	 * @type {Single}
+	 */
 	this.max_weight = new Single();
 
+	/**
+	 * Grade of the shipping delay (0 for longest, 9 for shortest).
+	 * @type {Int32}
+	 */
 	this.grade = 0;
 
+	/**
+	 * The name of the external module.
+	 * @type {string}
+	 */
 	this.external_module_name = "";
 
+	/**
+	 * Need range.
+	 * @type {Int32}
+	 */
 	this.need_range = 0;
 
+	/**
+	 * The position.
+	 * @type {Int32}
+	 */
 	this.position = 0;
 
+	/**
+	 * Delay needed to deliver customer.
+	 * @type {string}
+	 */
 	this.delay = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'cart rules'. Can be used when add new cart rule (voucher). 
+ * @typedef {Object} PrestaShopCartRuleIn
+ */
  PrestaShopCartRuleIn = function () { 
+	/**
+	 * The name of cart rule.
+	 * @type {string}
+	 */
+	this.name = "";
+
+	/**
+	 * The customer identifier. (Limit for single customer, set zero if doesn't need.)
+	 * @type {Int32}
+	 */
 	this.id_customer = 0;
 
+	/**
+	 * When cart rule is valid from date. (Format: Y-m-d 00:00:00)
+	 * @type {string}
+	 */
 	this.date_from = "";
 
+	/**
+	 * When cart rule is valid to date. (Format: Y-m-d 00:00:00)
+	 * @type {string}
+	 */
 	this.date_to = "";
 
+	/**
+	 * Description about cart rule. (Max:65534 characters.)
+	 * @type {string}
+	 */
 	this.description = "";
 
+	/**
+	 * The count of avaibles voucher for customer.
+	 * @type {Int32}
+	 */
 	this.quantity = 0;
 
+	/**
+	 * The count of avaibles voucher for every customer.
+	 * @type {Int32}
+	 */
 	this.quantity_per_user = 0;
 
+	/**
+	 * If applied higher number, the voucher will applied after vouchers with lower number.
+	 * @type {Int32}
+	 */
 	this.priority = 0;
 
-	this.partial_use = 0;
+	/**
+	 * If true voucher can be used once.
+	 * @type {Boolean}
+	 */
+	this.partial_use = false;
 
+	/**
+	 * The code for applying the voucher to customers when ordering process. (Max:254 characters.)
+	 * @type {string}
+	 */
 	this.code = "";
 
+	/**
+	 * The minimum order amount(with tax included) from which voucher is applicable.
+	 * @type {Single}
+	 */
 	this.minimum_amount = new Single();
 
-	this.minimum_amount_tax = new Single();
+	/**
+	 * If true, tax will included.
+	 * @type {Boolean}
+	 */
+	this.minimum_amount_tax = false;
 
-	this.minimum_amount_currency = new Single();
+	/**
+	 * The currency identifier.
+	 * @type {Int32}
+	 */
+	this.minimum_amount_currency = 0;
 
-	this.minimum_amount_shipping = new Single();
+	/**
+	 * If true, the shipping will used.
+	 * @type {Boolean}
+	 */
+	this.minimum_amount_shipping = false;
 
+	/**
+	 * If true voucher applicable to customers from a specific country who not restricted.
+	 * @type {Boolean}
+	 */
 	this.country_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific carrier who not restricted.
+	 * @type {Boolean}
+	 */
 	this.carrier_restriction = false;
 
+	/**
+	 * If true voucher applicable to customers with a specific group who not restricted.
+	 * @type {Boolean}
+	 */
 	this.group_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific cart rule who not restricted.
+	 * @type {Boolean}
+	 */
 	this.cart_rule_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific product who not restricted.
+	 * @type {Boolean}
+	 */
 	this.product_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific shop who not restricted.
+	 * @type {Boolean}
+	 */
 	this.shop_restriction = false;
 
+	/**
+	 * If true, free shipping for benefiting customers.
+	 * @type {Boolean}
+	 */
 	this.free_shipping = false;
 
+	/**
+	 * A percentage of the order total.
+	 * @type {Single}
+	 */
 	this.reduction_percent = new Single();
 
+	/**
+	 * A monetary discount on the order total.
+	 * @type {Single}
+	 */
 	this.reduction_amount = new Single();
 
-	this.reduction_tax = 0;
+	/**
+	 * If true, will tax will included.
+	 * @type {Boolean}
+	 */
+	this.reduction_tax = false;
 
+	/**
+	 * The currency identifier.
+	 * @type {Int32}
+	 */
 	this.reduction_currency = 0;
 
+	/**
+	 * The product identifier for which apply reduction.
+	 * @type {Int32}
+	 */
 	this.reduction_product = 0;
 
-	this.reduction_exclude_special = 0;
+	/**
+	 * If true, exclude special reduction.
+	 * @type {Boolean}
+	 */
+	this.reduction_exclude_special = false;
 
+	/**
+	 * The product identifier.
+	 * @type {Int32}
+	 */
 	this.gift_product = 0;
 
+	/**
+	 * The product attribute identifier.
+	 * @type {Int32}
+	 */
 	this.gift_product_attribute = 0;
 
+	/**
+	 * If true, it will let the user know that a voucher is available.
+	 * @type {Boolean}
+	 */
 	this.highlight = false;
 
+	/**
+	 * True activate cart rule.
+	 * @type {Boolean}
+	 */
 	this.active = false;
-
-	this.date_add = "";
-
-	this.date_upd = "";
-
-	this.name = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'cart rules'. Used for get information about cart rule (voucher). 
+ * @typedef {Object} PrestaShopCartRule
+ */
  PrestaShopCartRule = function () { 
+	/**
+	 * The cart rule identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
+	/**
+	 * The name of cart rule.
+	 * @type {string}
+	 */
+	this.name = "";
+
+	/**
+	 * The customer identifier. (Limit for single customer, set zero if doesn't need.)
+	 * @type {Int32}
+	 */
 	this.id_customer = 0;
 
+	/**
+	 * When cart rule is valid from date. (Format: Y-m-d 00:00:00)
+	 * @type {string}
+	 */
 	this.date_from = "";
 
+	/**
+	 * When cart rule is valid to date. (Format: Y-m-d 00:00:00)
+	 * @type {string}
+	 */
 	this.date_to = "";
 
+	/**
+	 * Description about cart rule.
+	 * @type {string}
+	 */
 	this.description = "";
 
+	/**
+	 * The count of avaibles voucher for customer.
+	 * @type {Int32}
+	 */
 	this.quantity = 0;
 
+	/**
+	 * The count of avaibles voucher for every customer.
+	 * @type {Int32}
+	 */
 	this.quantity_per_user = 0;
 
+	/**
+	 * If applied higher number, the voucher will applied after vouchers with lower number.
+	 * @type {Int32}
+	 */
 	this.priority = 0;
 
-	this.partial_use = 0;
+	/**
+	 * If true voucher can be used once.
+	 * @type {Boolean}
+	 */
+	this.partial_use = false;
 
+	/**
+	 * The code for applying the voucher to customers when ordering process.
+	 * @type {string}
+	 */
 	this.code = "";
 
+	/**
+	 * The minimum order amount(with tax included) from which voucher is applicable.
+	 * @type {Single}
+	 */
 	this.minimum_amount = new Single();
 
-	this.minimum_amount_tax = new Single();
+	/**
+	 * If true, tax will included.
+	 * @type {Boolean}
+	 */
+	this.minimum_amount_tax = false;
 
-	this.minimum_amount_currency = new Single();
+	/**
+	 * The currency identifier.
+	 * @type {Int32}
+	 */
+	this.minimum_amount_currency = 0;
 
-	this.minimum_amount_shipping = new Single();
+	/**
+	 * If true, the shipping will used.
+	 * @type {Boolean}
+	 */
+	this.minimum_amount_shipping = false;
 
+	/**
+	 * If true voucher applicable to customers from a specific country who not restricted.
+	 * @type {Boolean}
+	 */
 	this.country_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific carrier who not restricted.
+	 * @type {Boolean}
+	 */
 	this.carrier_restriction = false;
 
+	/**
+	 * If true voucher applicable to customers with a specific group who not restricted.
+	 * @type {Boolean}
+	 */
 	this.group_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific cart rule who not restricted.
+	 * @type {Boolean}
+	 */
 	this.cart_rule_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific product who not restricted.
+	 * @type {Boolean}
+	 */
 	this.product_restriction = false;
 
+	/**
+	 * If true voucher applicable for a specific shop who not restricted.
+	 * @type {Boolean}
+	 */
 	this.shop_restriction = false;
 
+	/**
+	 * If true, free shipping for benefiting customers.
+	 * @type {Boolean}
+	 */
 	this.free_shipping = false;
 
+	/**
+	 * A percentage of the order total.
+	 * @type {Single}
+	 */
 	this.reduction_percent = new Single();
 
+	/**
+	 * A monetary discount on the order total.
+	 * @type {Single}
+	 */
 	this.reduction_amount = new Single();
 
-	this.reduction_tax = 0;
+	/**
+	 * If true, will tax will included.
+	 * @type {Boolean}
+	 */
+	this.reduction_tax = false;
 
+	/**
+	 * The currency identifier.
+	 * @type {Int32}
+	 */
 	this.reduction_currency = 0;
 
+	/**
+	 * The product identifier for which apply reduction.
+	 * @type {Int32}
+	 */
 	this.reduction_product = 0;
 
-	this.reduction_exclude_special = 0;
+	/**
+	 * If true, exclude special reduction.
+	 * @type {Boolean}
+	 */
+	this.reduction_exclude_special = false;
 
+	/**
+	 * The product identifier.
+	 * @type {Int32}
+	 */
 	this.gift_product = 0;
 
+	/**
+	 * The product attribute identifier.
+	 * @type {Int32}
+	 */
 	this.gift_product_attribute = 0;
 
+	/**
+	 * If true, it will let the user know that a voucher is available.
+	 * @type {Boolean}
+	 */
 	this.highlight = false;
 
+	/**
+	 * True activate cart rule.
+	 * @type {Boolean}
+	 */
 	this.active = false;
 
+	/**
+	 * When added.
+	 * @type {string}
+	 */
 	this.date_add = "";
 
+	/**
+	 * When updated.
+	 * @type {string}
+	 */
 	this.date_upd = "";
-
-	this.name = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'carts'.  Can be used when add new cart for customer. 
+ * @typedef {Object} PrestaShopCartIn
+ */
  PrestaShopCartIn = function () { 
+	/**
+	 * Customer delivery address identifier.
+	 * @type {Int32}
+	 */
 	this.id_address_delivery = 0;
 
+	/**
+	 * Customer invoicing address identifier.
+	 * @type {Int32}
+	 */
 	this.id_address_invoice = 0;
 
+	/**
+	 * Customer currency identifier.
+	 * @type {Int32}
+	 */
 	this.id_currency = 0;
 
+	/**
+	 * Customer identifier.
+	 * @type {Int32}
+	 */
 	this.id_customer = 0;
 
+	/**
+	 * Guest identifier.
+	 * @type {Int32}
+	 */
 	this.id_guest = 0;
 
+	/**
+	 * Language identifier.
+	 * @type {Int32}
+	 */
 	this.id_lang = 0;
 
-	this.id_shop_group = 0;
-
-	this.id_shop = 0;
-
+	/**
+	 * Carrier identifier.
+	 * @type {Int32}
+	 */
 	this.id_carrier = 0;
 
-	this.recyclable = 0;
+	/**
+	 * True if the customer wants a recycled package.
+	 * @type {Boolean}
+	 */
+	this.recyclable = false;
 
-	this.gift = 0;
+	/**
+	 * True if the customer wants a gift wrapping.
+	 * @type {Boolean}
+	 */
+	this.gift = false;
 
+	/**
+	 * Gift message if specified.
+	 * @type {string}
+	 */
 	this.gift_message = "";
 
-	this.mobile_theme = 0;
+	/**
+	 * True if use mobile theme.
+	 * @type {Boolean}
+	 */
+	this.mobile_theme = false;
 
-	this.delivery_option = "";
-
+	/**
+	 * The secure key. (Max:32 characters.)
+	 * @type {string}
+	 */
 	this.secure_key = "";
 
+	/**
+	 * True if allow seperated package.
+	 * @type {Boolean}
+	 */
 	this.allow_seperated_package = false;
-
-	this.date_add = "";
-
-	this.date_upd = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'cart'. Used when need get information about customer cart. 
+ * @typedef {Object} PrestaShopCart
+ */
  PrestaShopCart = function () { 
-	this.id = 0;
-
+	/**
+	 * Customer delivery address identifier.
+	 * @type {Int32}
+	 */
 	this.id_address_delivery = 0;
 
+	/**
+	 * Customer invoicing address identifier.
+	 * @type {Int32}
+	 */
 	this.id_address_invoice = 0;
 
+	/**
+	 * Customer currency identifier.
+	 * @type {Int32}
+	 */
 	this.id_currency = 0;
 
+	/**
+	 * Customer identifier.
+	 * @type {Int32}
+	 */
 	this.id_customer = 0;
 
+	/**
+	 * Guest identifier.
+	 * @type {Int32}
+	 */
 	this.id_guest = 0;
 
+	/**
+	 * Language identifier.
+	 * @type {Int32}
+	 */
 	this.id_lang = 0;
 
-	this.id_shop_group = 0;
-
-	this.id_shop = 0;
-
+	/**
+	 * Carrier identifier.
+	 * @type {Int32}
+	 */
 	this.id_carrier = 0;
 
-	this.recyclable = 0;
+	/**
+	 * The shop group identifier.
+	 * @type {Int32}
+	 */
+	this.id_shop_group = 0;
 
-	this.gift = 0;
+	/**
+	 * The shop identifier.
+	 * @type {Int32}
+	 */
+	this.id_shop = 0;
 
+	/**
+	 * True if the customer wants a recycled package.
+	 * @type {Boolean}
+	 */
+	this.recyclable = false;
+
+	/**
+	 * True if the customer wants a gift wrapping.
+	 * @type {Boolean}
+	 */
+	this.gift = false;
+
+	/**
+	 * Gift message if specified.
+	 * @type {string}
+	 */
 	this.gift_message = "";
 
-	this.mobile_theme = 0;
+	/**
+	 * True if use mobile theme.
+	 * @type {Boolean}
+	 */
+	this.mobile_theme = false;
 
-	this.delivery_option = "";
-
+	/**
+	 * The secure key. (Max:32 characters.)
+	 * @type {string}
+	 */
 	this.secure_key = "";
 
+	/**
+	 * True if allow seperated package.
+	 * @type {Boolean}
+	 */
 	this.allow_seperated_package = false;
 
+	/**
+	 * The delivery option.
+	 * @type {string}
+	 */
+	this.delivery_option = "";
+
+	/**
+	 * When cart added.
+	 * @type {string}
+	 */
 	this.date_add = "";
 
+	/**
+	 * When cart updated.
+	 * @type {string}
+	 */
 	this.date_upd = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'category'. Can be used when add new category. 
+ * @typedef {Object} PrestaShopCategoryIn
+ */
  PrestaShopCategoryIn = function () { 
+	/**
+	 * The category parent identfier. (Set zero if no parent)
+	 * @type {Int32}
+	 */
 	this.id_parent = 0;
 
+	/**
+	 * Parents number.
+	 * @type {Int32}
+	 */
 	this.level_depth = 0;
 
-	this.nb_products_recursive = 0;
-
+	/**
+	 * True display category.
+	 * @type {Boolean}
+	 */
 	this.active = false;
 
+	/**
+	 * The identifier default shop.
+	 * @type {Int32}
+	 */
 	this.id_shop_default = 0;
 
+	/**
+	 * True set category to root.
+	 * @type {Boolean}
+	 */
 	this.is_root_category = false;
 
+	/**
+	 * Category position.
+	 * @type {Int32}
+	 */
 	this.position = 0;
 
-	this.date_add = "";
-
-	this.date_upd = "";
-
+	/**
+	 * The name of category. (Max: 128 characters.)
+	 * @type {string}
+	 */
 	this.name = "";
 
+	/**
+	 * Used in rewrited URL. (Max: 128 characters.)
+	 * @type {string}
+	 */
 	this.link_rewrite = "";
 
+	/**
+	 * The description of category.
+	 * @type {string}
+	 */
 	this.description = "";
 
+	/**
+	 * The category meta title. (Max: 128 characters.)
+	 * @type {string}
+	 */
 	this.meta_title = "";
 
+	/**
+	 * The category meta description. (Max: 255 characters.)
+	 * @type {string}
+	 */
 	this.meta_description = "";
 
+	/**
+	 * The category meta keywords. (Max: 255 characters.)
+	 * @type {string}
+	 */
 	this.meta_keywords = "";
 
 }
 
+/**
+ * Implementation class for PrestaShop 'category'. Used when need get information about category. 
+ * @typedef {Object} PrestaShopCategory
+ */
  PrestaShopCategory = function () { 
+	/**
+	 * The category identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
+	/**
+	 * The category parent identfier. (Set zero if no parent)
+	 * @type {Int32}
+	 */
 	this.id_parent = 0;
 
+	/**
+	 * Parents number.
+	 * @type {Int32}
+	 */
 	this.level_depth = 0;
 
-	this.nb_products_recursive = 0;
-
+	/**
+	 * True display category.
+	 * @type {Boolean}
+	 */
 	this.active = false;
 
+	/**
+	 * The identifier default shop.
+	 * @type {Int32}
+	 */
 	this.id_shop_default = 0;
 
+	/**
+	 * True set category to root.
+	 * @type {Boolean}
+	 */
 	this.is_root_category = false;
 
+	/**
+	 * Category position.
+	 * @type {Int32}
+	 */
 	this.position = 0;
 
-	this.date_add = "";
-
-	this.date_upd = "";
-
+	/**
+	 * The bame of category.
+	 * @type {string}
+	 */
 	this.name = "";
 
+	/**
+	 * Used in rewrited URL.
+	 * @type {string}
+	 */
 	this.link_rewrite = "";
 
+	/**
+	 * The description of category.
+	 * @type {string}
+	 */
 	this.description = "";
 
+	/**
+	 * The category meta title.
+	 * @type {string}
+	 */
 	this.meta_title = "";
 
+	/**
+	 * The category meta description.
+	 * @type {string}
+	 */
 	this.meta_description = "";
 
+	/**
+	 * The category meta keywords.
+	 * @type {string}
+	 */
 	this.meta_keywords = "";
 
+	/**
+	 * When added.
+	 * @type {string}
+	 */
+	this.date_add = "";
+
+	/**
+	 * When updated.
+	 * @type {string}
+	 */
+	this.date_upd = "";
+
 }
 
+/**
+ * Implementation class for PrestaShop 'combination'. Can be used whe add new combination. 
+ * @typedef {Object} PrestaShopCombinationIn
+ */
  PrestaShopCombinationIn = function () { 
+	/**
+	 * The product identifier. (Required)
+	 * @type {Int32}
+	 */
 	this.id_product = 0;
 
+	/**
+	 * The location. (Max: 64 characters.)
+	 * @type {string}
+	 */
 	this.location = "";
 
+	/**
+	 * The ean13 product code. (Max: 13 characters.)
+	 * @type {string}
+	 */
 	this.ean13 = "";
 
+	/**
+	 * The isbn product code. (Max: 32 characters.)
+	 * @type {string}
+	 */
 	this.isbn = "";
 
+	/**
+	 * The upc product code. (Max: 12 characters.)
+	 * @type {string}
+	 */
 	this.upc = "";
 
-	this.quantity = 0;
-
+	/**
+	 * The reference to product. (Max: 32 characters.)
+	 * @type {string}
+	 */
 	this.reference = "";
 
+	/**
+	 * The reference to supplier. (Max: 32 characters.)
+	 * @type {string}
+	 */
 	this.supplier_reference = "";
 
+	/**
+	 * The wholesale price.(Max: 27 characters.)
+	 * @type {Single}
+	 */
 	this.wholesale_price = new Single();
 
+	/**
+	 * The product price.(Max: 20 characters.)
+	 * @type {Single}
+	 */
 	this.price = new Single();
 
+	/**
+	 * The eco-tax.(Max: 20 characters.)
+	 * @type {Single}
+	 */
 	this.ecotax = new Single();
 
+	/**
+	 * Product weight.
+	 * @type {Single}
+	 */
 	this.weight = new Single();
 
+	/**
+	 * Unit price impact. (Max: 20 characters.)
+	 * @type {Single}
+	 */
 	this.unit_price_impact = new Single();
 
+	/**
+	 * The minimal quantity. (Required)
+	 * @type {Int32}
+	 */
 	this.minimal_quantity = 0;
 
+	/**
+	 * True combination default on.
+	 * @type {Nullable<Boolean>}
+	 */
 	this.default_on = false;
 
+	/**
+	 * When product avaible. (Format: Y-m-d)
+	 * @type {string}
+	 */
 	this.available_date = "";
 
+	/**
+	 * The product which is associated with the category.
+	 * @type {PrestaShopAssociations}
+	 */
 	this.associations = new PrestaShopAssociations();
 
 }
 
+/**
+ * Implementation class for PrestaShop 'combination'. Used when get information about combination. 
+ * @typedef {Object} PrestaShopCombination
+ */
  PrestaShopCombination = function () { 
+	/**
+	 * The combination identifier.
+	 * @type {Int32}
+	 */
 	this.id = 0;
 
+	/**
+	 * The product identifier. (Required)
+	 * @type {Int32}
+	 */
 	this.id_product = 0;
 
+	/**
+	 * The location. (Max: 64 characters.)
+	 * @type {string}
+	 */
 	this.location = "";
 
+	/**
+	 * The ean13 product code. (Max: 13 characters.)
+	 * @type {string}
+	 */
 	this.ean13 = "";
 
+	/**
+	 * The isbn product code. (Max: 32 characters.)
+	 * @type {string}
+	 */
 	this.isbn = "";
 
+	/**
+	 * The upc product code. (Max: 12 characters.)
+	 * @type {string}
+	 */
 	this.upc = "";
 
-	this.quantity = 0;
-
+	/**
+	 * The reference to product. (Max: 32 characters.)
+	 * @type {string}
+	 */
 	this.reference = "";
 
+	/**
+	 * The reference to supplier. (Max: 32 characters.)
+	 * @type {string}
+	 */
 	this.supplier_reference = "";
 
+	/**
+	 * The wholesale price.(Max: 27 characters.)
+	 * @type {Single}
+	 */
 	this.wholesale_price = new Single();
 
+	/**
+	 * The product price.(Max: 20 characters.)
+	 * @type {Single}
+	 */
 	this.price = new Single();
 
+	/**
+	 * The eco-tax.(Max: 20 characters.)
+	 * @type {Single}
+	 */
 	this.ecotax = new Single();
 
+	/**
+	 * Product weight.
+	 * @type {Single}
+	 */
 	this.weight = new Single();
 
+	/**
+	 * Unit price impact. (Max: 20 characters.)
+	 * @type {Single}
+	 */
 	this.unit_price_impact = new Single();
 
+	/**
+	 * The minimal quantity. (Required)
+	 * @type {Int32}
+	 */
 	this.minimal_quantity = 0;
 
+	/**
+	 * True combination default on.
+	 * @type {Nullable<Boolean>}
+	 */
 	this.default_on = false;
 
+	/**
+	 * When product avaible. (Format: Y-m-d)
+	 * @type {string}
+	 */
 	this.available_date = "";
 
+	/**
+	 * The product which is associated with the category.
+	 * @type {PrestaShopAssociations}
+	 */
 	this.associations = new PrestaShopAssociations();
 
 }
 
+/**
+ * Implemention class for PrestaShop 'configuration'. Can be used when add new configuration. 
+ * @typedef {Object} PrestaShopConfigurationIn
+ */
  PrestaShopConfigurationIn = function () { 
 	this.value = "";
 
@@ -9995,10 +11075,6 @@ PrestaShop = function (bNesisApi) {
 	this.id_shop_group = 0;
 
 	this.id_shop = 0;
-
-	this.date_add = "";
-
-	this.date_upd = "";
 
 }
 

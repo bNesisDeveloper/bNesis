@@ -23,7 +23,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
 
         /// <summary>
         /// Initialize LoginWindow.
-        /// </summary>
+                
         public LoginWindow()
         {
             InitializeComponent();

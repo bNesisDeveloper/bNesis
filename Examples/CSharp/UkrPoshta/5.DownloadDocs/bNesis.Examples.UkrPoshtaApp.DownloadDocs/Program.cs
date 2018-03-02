@@ -48,7 +48,30 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
         private static string ShipmentUUID = string.Empty;
 
         /// <summary>
-        /// If you use Thin Client mode, you need an access to bNesis API Server. Address of the demo bNesis API server: https://server2.bnesis.com
+        /// If you use Thin Client mode, you need an access to bNesis API Server. Address of the demo bNesis API server:
+        /// https://server2.bnesis.com
+        /// https://bnesisserver1.azurewebsites.net
+        /// https://bnesisserver2.azurewebsites.net
+        /// https://bnesisserver3.azurewebsites.net
+        /// 
+        /// Please don't forget to setup your Dropbox application Redirect URIs at Dropbox developers console https://www.dropbox.com/developers/
+        /// 
+        /// In the Thin client mode add two redirectURIs to tab "Setting" at Dropbox developers console. The first redirectURI related what bNesis API server you use:
+        /// https://server2.bnesis.com/api/authprovider/signin
+        /// https://bnesisserver1.azurewebsites.net/api/authprovider/signin        
+        /// https://bnesisserver2.azurewebsites.net/api/authprovider/signin
+        /// https://bnesisserver3.azurewebsites.net/api/authprovider/signin
+        ///The second redirectURI is default host and port where bNesis Thin client will be redirected to the specified address after the authentication 
+        /// operation is performed. For example  http://localhost:809/ 
+        ///
+        /// Rich client:
+        /// http://localhost:809/  
+        /// (as a default bNesis Rich client redirects host and port, see redirectUrl property)
+        /// (if you change the redirectUrl property at this example app, change the RedirectURIs at Dropbox developers console
+        /// </summary>
+
+        /// <summary>
+        /// If you use Thin Client mode, you need access to bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
         private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
@@ -78,10 +101,10 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
 #endif
 
 
-            //Getting executionPath
+            //Getting an executionPath
             string executionPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string path = Path.Combine(executionPath, "Temp");
-            //Creating new directory, if directory does not exist.
+            //Creating a new directory, if the directory does not exist.
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -91,7 +114,7 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
             if (string.IsNullOrEmpty(bNesisDeveloperId))
             {
                 Console.WriteLine(
-                    "For using this example, you need bNesis Developer Id. You can get it from https://api.bnesis.com site - free of charge\n");
+                    "For using this example, you need the bNesis Developer Id. You can get it from https://api.bnesis.com site - free of charge\n");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 return;
@@ -101,26 +124,26 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
             if (string.IsNullOrEmpty(UkrPoshtaBearer) || string.IsNullOrEmpty(UkrPoshtaCounterPartyToken))
             {
                 Console.WriteLine(
-                    "For using this example you need UkrPoshta authentication keys, please contact with the UkrPoshta administration to get these keys\n");
+                    "For using this example you need the UkrPoshta authentication keys, please contact with the UkrPoshta administration to get these keys\n");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 return;
             }
 
-            //Check UkrPoshta shipment uuid(identifier)
+            //Check a UkrPoshta shipment uuid(identifier)
             if (string.IsNullOrEmpty(ShipmentUUID))
             {
                 Console.WriteLine(
-                    "For using this example you need UkrPoshta shipment uuid (identifier). You can get it in response after adding shipment in UkrPoshta. \n");
+                    "For using this example you need the UkrPoshta shipment uuid (identifier). You can get it in a response after adding a shipment in UkrPoshta service. \n");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 return;
             }
 
-            //Select Rich mode or Thin mode 
+            //Select Rich client mode or Thin client mode 
             Console.Write(
-                "Please select Thin mode or Rich mode.\nPress 'R' for Rich client mode or press some other key for Thin client mode: ");
-            //Waiting for pressed key. If key is not 'R', using default Thin client mode.
+                "Please select The Thin client mode or the Rich client mode.\nPress 'R' for the Rich client mode or some other key for the Thin client mode: ");
+            //Waiting for a pressed key. If the key is not 'R', using the default Thin client mode.
             ConsoleKeyInfo selectMode = Console.ReadKey();
             //Escape line
             Console.WriteLine();
@@ -129,20 +152,20 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
             int SDKInitializeResult;
 
             //Initialize client mode
-            if (selectMode.Key == ConsoleKey.R) //if user has pressed 'R' key for Rich client mode
+            if (selectMode.Key == ConsoleKey.R) //if user has pressed 'R' key for the Rich client mode
             {
-                Console.WriteLine("Rich mode initialization...");
+                Console.WriteLine("The Rich client mode initialization...");
                 //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeRich(string.Empty);
             }
             else //default Thin client mode
             {
-                Console.WriteLine("Thin Client mode Initialization...");
+                Console.WriteLine("The Thin Client mode Initialization...");
                 //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
             }
 
-            //Check if initialization result does not equal zero(noError)
+            //Check if the initialization result does not equal zero(noError)
             if (SDKInitializeResult != ServiceManager.errorCodeNoError)
             {
                 //Show error message
@@ -155,29 +178,29 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
 
                 try
                 {
-                    Console.WriteLine("Authorization at UkrPoshta service, please wait...");
-                    // this authorization method at UkrPoshta returns instance.
+                    Console.WriteLine("Authorization at the UkrPoshta service, please wait...");
+                    // this authorization method at the UkrPoshta service returns instance.
                     UkrPoshta ukrPoshta = manager.CreateInstanceUkrPoshta(bNesisDeveloperId, redirectUrl,
                         UkrPoshtaBearer, UkrPoshtaCounterPartyToken, true);
-                    //If authorization is failed, the bNesisToken will be empty/null.
+                    //If the authorization is failed, the bNesisToken will be empty/null.
                     if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                     {
-                        //if bNesisToken is empty, use GetLastError method to get error description
+                        //if the bNesisToken is empty, use the GetLastError method to get the error description
                         if (!string.IsNullOrEmpty(manager.GetLastError()))
                             Console.WriteLine("Authorization problem: " + manager.GetLastError());
-                        else Console.WriteLine("Authorization problem, please check parameters.\n");
+                        else Console.WriteLine("Authorization problem, please check the parameters.\n");
                         Console.WriteLine("Press any key to exit...");
                         Console.ReadKey();
                         return;
                     }
 
-                    //Authorization at UkrPoshta is successful
-                    //Now you can use UkrPoshta API
-                    Console.WriteLine("Authorizational success! UkrPoshta instance is created.\n");
+                    //Authorization at the UkrPoshta service is successful
+                    //Now you can use The UkrPoshta API
+                    Console.WriteLine("The Authorizational success! An UkrPoshta instance is created.\n");
 
-                    //Getting documents by shipment identifier
-                    Console.WriteLine("Select what document do you want to download: \n1. Sticker \n2. Label");
-                    Console.Write("Press 1 or 2 on keyboard to select one of type or some other key to cancel: ");
+                    //Getting documents by a shipment identifier
+                    Console.WriteLine("Select what a document do you want to download: \n1. Sticker \n2. Label");
+                    Console.Write("Press 1 or 2 on the keyboard to select one of a type or some other key to cancel: ");
                     ConsoleKey downloadDocType = Console.ReadKey().Key;
                     //Escape line
                     Console.WriteLine();
@@ -208,7 +231,7 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
                         Console.WriteLine("Document file Label downloading...");
                         try
                         {
-                            //Set name and extension for file and combine with path.
+                            //Set a name and an extension for a file and a combine with a path.
                             filePath = Path.Combine(path, "Shipment=" + ShipmentUUID + "=Label.pdf");
                             //Download 'Label' document.
                             stream = ukrPoshta.GetShipmentLabel(ShipmentUUID, 0);
@@ -218,28 +241,28 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
 
                     if (!string.IsNullOrEmpty(filePath))
                     {
-                        //Create file in destination path.
+                        //Create a file in a destination path.
                         CreateFile(stream, filePath);
 
-                        //Check if file exists on destination path.
+                        //Check if the file exists on the destination path.
                         if (File.Exists(filePath))
                         {
-                            //Show success message.
-                            Console.WriteLine("File is downloaded.");
-                            Console.WriteLine("File(s) was saved on: " + path);
-                            //Show message box, then Console application is waiting while they will be opened.
+                            //Show a success message.
+                            Console.WriteLine("The file is downloaded.");
+                            Console.WriteLine("The file(s) was saved on: " + path);
+                            //Show a message box, then a Console application is waiting while they will be opened.
                             MessageBoxResult messageBoxResult = MessageBox.Show("Show folder?", "File(s) is downloaded.", MessageBoxButton.YesNo);
-                            //Check if message box result equals 'yes'
+                            //Check if a message box result equals 'yes'
                             if (messageBoxResult == MessageBoxResult.Yes)
                             {
-                                //Open file explorer with destination path.
+                                //Open file explorer with the destination path.
                                 Process.Start(path);
                             }
 
                         }
                         else
                         {
-                            //If file does not exist, use GetLastError from instance UkrPoshta to see description.
+                            //If the file does not exist, use GetLastError from the UkrPoshta instance to see a description.
                             Console.WriteLine("File downloading problem: " + ukrPoshta.GetLastError().Description);
                             Console.WriteLine("Press any key to exit...");
                             Console.ReadKey(); //Wating for pressed key...
@@ -260,7 +283,7 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
         }
 
         /// <summary>
-        /// Custom method for creating file.
+        /// A Custom method for a creating file.
         /// </summary>
         /// <param name="stream">Input stream.</param>
         /// <param name="path">Created file path.</param>
@@ -268,17 +291,17 @@ namespace bNesis.Examples.UkrPoshtaApp.DownloadDocs
         {
             //Return, if stream is null 
             if (stream == null) { return; }
-            //Check if file exists
+            //Check if the file exists
             if (File.Exists(path))
             {
                 //Remove exist file.
                 File.Delete(path);
             }
 
-            //Creating new file on destination path.
+            //Creating a new file on a destination path.
             using (var file = File.Create(path))
             {
-                //Copy bytes to file.
+                //Copy bytes to the file.
                 stream.CopyTo(file);
             }
 

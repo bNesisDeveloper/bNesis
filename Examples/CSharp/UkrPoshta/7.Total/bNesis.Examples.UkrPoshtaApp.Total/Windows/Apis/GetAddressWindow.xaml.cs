@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
         /// <summary>
         /// AddressOut instance.
         /// </summary>
-        public AddressOut AddressOut { get; private set; }
+        public UkrPoshtaAddressOut AddressOut { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>

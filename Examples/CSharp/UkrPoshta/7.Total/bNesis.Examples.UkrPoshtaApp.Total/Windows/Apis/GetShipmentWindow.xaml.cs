@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
         /// <summary>
         /// ShipmentOut instance.
         /// </summary>
-        public ShipmentOut ShipmentOut { get; private set; }
+        public UkrPoshtaShipmentOut ShipmentOut { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>

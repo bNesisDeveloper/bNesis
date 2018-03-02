@@ -34,7 +34,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             //Show window
             addAddressWindow.ShowDialog();
             //If AddAddressWindow was closed set addressOut from AddAddressWindow.
-            AddressOut addressOut = addAddressWindow.Address;
+            UkrPoshtaAddressOut addressOut = addAddressWindow.Address;
             //Check if shipmentOut not equal null.
             if (addressOut != null)
             {
@@ -55,7 +55,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             //Show window.
             addClientWindow.ShowDialog();
             //If AddClientWindow was closed set customerOut from AddClientWindow.
-            CustomerOut customerOut = addClientWindow.Customer;
+            UkrPoshtaCustomerOut customerOut = addClientWindow.Customer;
             //Check if customerOut not equal null
             if (customerOut != null)
             {
@@ -76,7 +76,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             //Show window.
             getAddressWindow.ShowDialog();
             //If GetAddressWindow was closed set addressOut from GetAddressWindow.
-            AddressOut addressOut = getAddressWindow.AddressOut;
+            UkrPoshtaAddressOut addressOut = getAddressWindow.AddressOut;
             //Check if addressOut not equal null
             if (addressOut != null)
             {
@@ -97,7 +97,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             //Show window.
             addClientWindow.ShowDialog();
             //If GetClientWindow was closed set customerOut from GetClientWindow.
-            CustomerOut customerOut = addClientWindow.Customer;
+            UkrPoshtaCustomerOut customerOut = addClientWindow.Customer;
             //Check if customerOut not equal null
             if (customerOut != null)
             {
@@ -105,6 +105,11 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
                 ClassToEdit.RenderClassToUI(customerOut, propertiesPanel, true);
             }
 
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UkrPoshta.LogoffService();
         }
     }
 }

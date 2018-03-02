@@ -22,10 +22,10 @@ using bNesis.Sdk.GovRegistry.Prozzoro;
 using bNesis.Sdk.Payment.LiqPay;
 using bNesis.Sdk.Payment.PayPal;
 using bNesis.Sdk.Payment.Stripe;
-using bNesis.Sdk.Social.Facebook;
 using bNesis.Sdk.Social.LinkedIn;
 using bNesis.Sdk.Social.VKontakte;
 using bNesis.Sdk.Test.bNesisTestService;
+using bNesis.Sdk.Social.Facebook;
 
 namespace bNesis.Sdk
 {
@@ -333,6 +333,37 @@ namespace bNesis.Sdk
         public string GetLastErrorCode(Exception exception)
         {
             return bNesisApi.GetLastError(exception);
+        }
+
+       ///<summary>
+        /// Return error description text by error code 
+        /// </summary>        
+        /// <param name="errorCode">manager error code value</param>
+        public string GetErrorDescription(int errorCode)
+        {
+            switch (errorCode)
+            {
+                case ServiceManager.errorCodeBadUrl:
+                    return ServiceManager.errorCodeBadUrlDescription;
+                case ServiceManager.errorCodeNotConnected:
+                    return ServiceManager.errorCodeNotConnected + lastSystemErrorMessage;
+                case ServiceManager.errorCodeLibraryLocation:
+                    return ServiceManager.errorCodeLibraryLocationDesctiption;
+                case ServiceManager.errorCodeNotSlash:
+                    return ServiceManager.errorCodeNotSlashDesctiption;
+                case ServiceManager.errorCodeNotLibraryIsLoaded:
+                    return ServiceManager.errorCodeNotLibraryIsLoaded + lastSystemErrorMessage;
+                case ServiceManager.errorCodeBadServerName:
+                    return ServiceManager.errorCodeBadServerNameDescription;
+                case ServiceManager.errorCodeProviderDoesNotExist:
+                    return ServiceManager.errorCodeProviderDoesNotExistDescription;
+                case ServiceManager.errorCodeServiceDoesNotExist:
+                    return ServiceManager.errorCodeServiceDoesNotExistDescription;
+                case ServiceManager.errorCodeUnknownServerConnection:
+                    return ServiceManager.errorCodeUnknownServerConnectionDescription + lastSystemErrorMessage;
+                default:
+                    return ServiceManager.errorCodeNoErrorDesctiption;
+            }
         }
 
         /// <summary>
@@ -898,35 +929,6 @@ namespace bNesis.Sdk
 		}
 
 	    ///<summary>
-		///  Create new instance of Facebook
-		/// </summary>
-		/// <returns>Return new Facebook instance</returns>
-		public Facebook CreateInstanceFacebook(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
-		{
-		    lastSystemErrorMessage = string.Empty;
-			Facebook resultService = CreateInstanceFacebook();
-			try
-              {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-			  } 
-            catch (Exception e)
-              {
-                lastSystemErrorMessage = e.Message;
-             }
-			return resultService;
-		}
-
-		///<summary>
-		///  Create new instance of Facebook
-		/// </summary>
-		/// <returns>Return new Facebook instance</returns>
-		public Facebook CreateInstanceFacebook()
-		{
-			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("Facebook")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
-			return new Facebook(bNesisApi);
-		}
-
-	    ///<summary>
 		///  Create new instance of LinkedIn
 		/// </summary>
 		/// <returns>Return new LinkedIn instance</returns>
@@ -1011,6 +1013,35 @@ namespace bNesis.Sdk
 		{
 			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("bNesisTestService")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
 			return new bNesisTestService(bNesisApi);
+		}
+
+	    ///<summary>
+		///  Create new instance of Facebook
+		/// </summary>
+		/// <returns>Return new Facebook instance</returns>
+		public Facebook CreateInstanceFacebook(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		{
+		    lastSystemErrorMessage = string.Empty;
+			Facebook resultService = CreateInstanceFacebook();
+			try
+              {
+			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			  } 
+            catch (Exception e)
+              {
+                lastSystemErrorMessage = e.Message;
+             }
+			return resultService;
+		}
+
+		///<summary>
+		///  Create new instance of Facebook
+		/// </summary>
+		/// <returns>Return new Facebook instance</returns>
+		public Facebook CreateInstanceFacebook()
+		{
+			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("Facebook")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
+			return new Facebook(bNesisApi);
 		}
 
 	}

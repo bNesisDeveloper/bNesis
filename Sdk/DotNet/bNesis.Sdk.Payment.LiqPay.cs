@@ -12,7 +12,17 @@ namespace bNesis.Sdk.Payment.LiqPay
 {
 	public class LiqPay  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public LiqPay(DesktopbNesisApi bNesisApi)
@@ -20,13 +30,27 @@ namespace bNesis.Sdk.Payment.LiqPay
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
 		{
-
 			bNesisToken = bNesisApi.Auth("LiqPay", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-
 			return bNesisToken;
 		}
+
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("LiqPay", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
 
 		///<summary>
 		/// Getting last exception for current provider 
@@ -341,7 +365,7 @@ namespace bNesis.Sdk.Payment.LiqPay
 		{
 			return bNesisApi.Call<string>("LiqPay", bNesisToken, "InvoiceCancel", version, public_key, merchant_public_key, acton, order_id, email, phone);
 		}
-	}
+}
 	public class LiqPayPaymentsArchiveData
 	{
 		public string action { get; set; }

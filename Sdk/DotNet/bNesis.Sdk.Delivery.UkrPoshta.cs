@@ -12,7 +12,17 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 {
 	public class UkrPoshta  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public UkrPoshta(DesktopbNesisApi bNesisApi)
@@ -20,13 +30,27 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,bool isSandbox)
 		{
-
 			bNesisToken = bNesisApi.Auth("UkrPoshta", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,null,string.Empty,string.Empty,isSandbox,string.Empty);
-
 			return bNesisToken;
 		}
+
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("UkrPoshta", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
 
 		///<summary>
 		/// Getting last exception for current provider 
@@ -70,9 +94,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="id">Address identifier.</param>
 		/// <returns>Return in AddressOut.</returns>
-		public AddressOut GetAddress(Int32 id)
+		public UkrPoshtaAddressOut GetAddress(Int32 id)
 		{
-			return bNesisApi.Call<AddressOut>("UkrPoshta", bNesisToken, "GetAddress", id);
+			return bNesisApi.Call<UkrPoshtaAddressOut>("UkrPoshta", bNesisToken, "GetAddress", id);
 		}
 
 		///<summary>
@@ -80,9 +104,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="address">Body of address(required:postcode).</param>
 		/// <returns>Return in AddressOut.</returns>
-		public AddressOut AddAddress(AddressIn address)
+		public UkrPoshtaAddressOut AddAddress(UkrPoshtaAddressIn address)
 		{
-			return bNesisApi.Call<AddressOut>("UkrPoshta", bNesisToken, "AddAddress", address);
+			return bNesisApi.Call<UkrPoshtaAddressOut>("UkrPoshta", bNesisToken, "AddAddress", address);
 		}
 
 		///<summary>
@@ -91,9 +115,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <param name="client">Requirment CustomerIn.
 		///     If the client is an individual, then the value of the individual should be true.In this case, you must specify the first name, last name and patronymic of the client (firstName, lastName and middleName parameters respectively).The name parameter is generated automatically. If the client is a legal entity, the value of the individual must be false. In this case, the API accepts only the parameter name.</param>
 		/// <returns>Return in CustomerOut.</returns>
-		public CustomerOut AddClient(CustomerIn client)
+		public UkrPoshtaCustomerOut AddClient(UkrPoshtaCustomerIn client)
 		{
-			return bNesisApi.Call<CustomerOut>("UkrPoshta", bNesisToken, "AddClient", client);
+			return bNesisApi.Call<UkrPoshtaCustomerOut>("UkrPoshta", bNesisToken, "AddClient", client);
 		}
 
 		///<summary>
@@ -102,9 +126,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <param name="clients">Requirment array of CustomerIn.
 		///     If the client is an individual, then the value of the individual should be true.In this case, you must specify the first name, last name and patronymic of the client (firstName, lastName and middleName parameters respectively).The name parameter is generated automatically. If the client is a legal entity, the value of the individual must be false. In this case, the API accepts only the parameter name.</param>
 		/// <returns>Return in CustomerOut.</returns>
-		public CustomerOut[] AddClients(CustomerIn[] clients)
+		public UkrPoshtaCustomerOut[] AddClients(UkrPoshtaCustomerIn[] clients)
 		{
-			return bNesisApi.Call<CustomerOut[]>("UkrPoshta", bNesisToken, "AddClients", clients);
+			return bNesisApi.Call<UkrPoshtaCustomerOut[]>("UkrPoshta", bNesisToken, "AddClients", clients);
 		}
 
 		///<summary>
@@ -113,9 +137,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <param name="clientUuid">Client uuid</param>
 		/// <param name="client">Body of CustomerIn.</param>
 		/// <returns>Return in CustomerOut.</returns>
-		public CustomerOut EditClient(string clientUuid, CustomerIn client)
+		public UkrPoshtaCustomerOut EditClient(string clientUuid, UkrPoshtaCustomerIn client)
 		{
-			return bNesisApi.Call<CustomerOut>("UkrPoshta", bNesisToken, "EditClient", clientUuid, client);
+			return bNesisApi.Call<UkrPoshtaCustomerOut>("UkrPoshta", bNesisToken, "EditClient", clientUuid, client);
 		}
 
 		///<summary>
@@ -123,9 +147,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="externalId">External identifier</param>
 		/// <returns>Return in CustomerOut.</returns>
-		public CustomerOut[] GetClients(string externalId)
+		public UkrPoshtaCustomerOut[] GetClients(string externalId)
 		{
-			return bNesisApi.Call<CustomerOut[]>("UkrPoshta", bNesisToken, "GetClients", externalId);
+			return bNesisApi.Call<UkrPoshtaCustomerOut[]>("UkrPoshta", bNesisToken, "GetClients", externalId);
 		}
 
 		///<summary>
@@ -133,9 +157,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="clientUuid">Client uuid.</param>
 		/// <returns>Return in CustomerPhone.</returns>
-		public CustomerPhone[] GetClientPhones(string clientUuid)
+		public UkrPoshtaCustomerPhone[] GetClientPhones(string clientUuid)
 		{
-			return bNesisApi.Call<CustomerPhone[]>("UkrPoshta", bNesisToken, "GetClientPhones", clientUuid);
+			return bNesisApi.Call<UkrPoshtaCustomerPhone[]>("UkrPoshta", bNesisToken, "GetClientPhones", clientUuid);
 		}
 
 		///<summary>
@@ -153,9 +177,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="clientUuid">Client uuid.</param>
 		/// <returns>Return in CustomerAddress.</returns>
-		public CustomerAddress[] GetClientAddresses(string clientUuid)
+		public UkrPoshtaCustomerAddress[] GetClientAddresses(string clientUuid)
 		{
-			return bNesisApi.Call<CustomerAddress[]>("UkrPoshta", bNesisToken, "GetClientAddresses", clientUuid);
+			return bNesisApi.Call<UkrPoshtaCustomerAddress[]>("UkrPoshta", bNesisToken, "GetClientAddresses", clientUuid);
 		}
 
 		///<summary>
@@ -173,9 +197,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="clientUuid">Client uuid</param>
 		/// <returns>Return in CustomerEmail.</returns>
-		public CustomerEmail[] GetClientEmails(string clientUuid)
+		public UkrPoshtaCustomerEmail[] GetClientEmails(string clientUuid)
 		{
-			return bNesisApi.Call<CustomerEmail[]>("UkrPoshta", bNesisToken, "GetClientEmails", clientUuid);
+			return bNesisApi.Call<UkrPoshtaCustomerEmail[]>("UkrPoshta", bNesisToken, "GetClientEmails", clientUuid);
 		}
 
 		///<summary>
@@ -194,9 +218,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <param name="shipment">Body of ShipmentIn.
 		/// The sender and recipient when creating a postal mail are specified as an embedded JSON:if uuid client is not empty or null, then the existing client will be used, otherwise - a new one will be created.When creating a shipment, the sender may specify additional recipient information that is used in printed forms.There can be only one "parcel" in the current release in the mail.Parameters of dispatch are filled out on the basis of parcel (weight, length, declaredPrice, etc.).The delivery amount is calculated when creating a postal item and is displayed in the response body as the "deliveryPrice" parameter.</param>
 		/// <returns>Return in ShipmentOut.</returns>
-		public ShipmentOut AddShipment(ShipmentIn shipment)
+		public UkrPoshtaShipmentOut AddShipment(UkrPoshtaShipmentIn shipment)
 		{
-			return bNesisApi.Call<ShipmentOut>("UkrPoshta", bNesisToken, "AddShipment", shipment);
+			return bNesisApi.Call<UkrPoshtaShipmentOut>("UkrPoshta", bNesisToken, "AddShipment", shipment);
 		}
 
 		///<summary>
@@ -205,9 +229,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <param name="shipmentGroupUuid">Shipment group uuid</param>
 		/// <param name="shipment">Body of shipment</param>
 		/// <returns>Return in ShipmentOut.</returns>
-		public ShipmentOut EditShipment(string shipmentGroupUuid, ShipmentIn shipment)
+		public UkrPoshtaShipmentOut EditShipment(string shipmentGroupUuid, UkrPoshtaShipmentIn shipment)
 		{
-			return bNesisApi.Call<ShipmentOut>("UkrPoshta", bNesisToken, "EditShipment", shipmentGroupUuid, shipment);
+			return bNesisApi.Call<UkrPoshtaShipmentOut>("UkrPoshta", bNesisToken, "EditShipment", shipmentGroupUuid, shipment);
 		}
 
 		///<summary>
@@ -215,9 +239,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="shipmentUuid">Shipment uuid.</param>
 		/// <returns>Return in ShipmentOut.</returns>
-		public ShipmentOut GetShipment(string shipmentUuid)
+		public UkrPoshtaShipmentOut GetShipment(string shipmentUuid)
 		{
-			return bNesisApi.Call<ShipmentOut>("UkrPoshta", bNesisToken, "GetShipment", shipmentUuid);
+			return bNesisApi.Call<UkrPoshtaShipmentOut>("UkrPoshta", bNesisToken, "GetShipment", shipmentUuid);
 		}
 
 		///<summary>
@@ -235,9 +259,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="shipmentGroup">Body of shipment group.</param>
 		/// <returns>Return in ShipmentGroupOut.</returns>
-		public ShipmentGroupOut AddShipmentGroup(ShipmentGroupIn shipmentGroup)
+		public UkrPoshtaShipmentGroupOut AddShipmentGroup(UkrPoshtaShipmentGroupIn shipmentGroup)
 		{
-			return bNesisApi.Call<ShipmentGroupOut>("UkrPoshta", bNesisToken, "AddShipmentGroup", shipmentGroup);
+			return bNesisApi.Call<UkrPoshtaShipmentGroupOut>("UkrPoshta", bNesisToken, "AddShipmentGroup", shipmentGroup);
 		}
 
 		///<summary>
@@ -246,9 +270,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <param name="shipmentGroupUuid">Shipment group uuid.</param>
 		/// <param name="shipmentGroup">Body of shipment group.</param>
 		/// <returns>Return in ShipmentGroupOut.</returns>
-		public ShipmentGroupOut EditShipmentGroup(string shipmentGroupUuid, ShipmentGroupIn shipmentGroup)
+		public UkrPoshtaShipmentGroupOut EditShipmentGroup(string shipmentGroupUuid, UkrPoshtaShipmentGroupIn shipmentGroup)
 		{
-			return bNesisApi.Call<ShipmentGroupOut>("UkrPoshta", bNesisToken, "EditShipmentGroup", shipmentGroupUuid, shipmentGroup);
+			return bNesisApi.Call<UkrPoshtaShipmentGroupOut>("UkrPoshta", bNesisToken, "EditShipmentGroup", shipmentGroupUuid, shipmentGroup);
 		}
 
 		///<summary>
@@ -256,9 +280,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="clientUuid">Client uuid.</param>
 		/// <returns>Return in ShipmentGroupOut.</returns>
-		public ShipmentGroupOut GetShipmentGroupByClient(string clientUuid)
+		public UkrPoshtaShipmentGroupOut GetShipmentGroupByClient(string clientUuid)
 		{
-			return bNesisApi.Call<ShipmentGroupOut>("UkrPoshta", bNesisToken, "GetShipmentGroupByClient", clientUuid);
+			return bNesisApi.Call<UkrPoshtaShipmentGroupOut>("UkrPoshta", bNesisToken, "GetShipmentGroupByClient", clientUuid);
 		}
 
 		///<summary>
@@ -266,9 +290,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// </summary>
 		/// <param name="shipmentGroupUuid">Shipment group uuid.</param>
 		/// <returns>Return in ShipmentGroupOut.</returns>
-		public ShipmentGroupOut GetShipmentGroup(string shipmentGroupUuid)
+		public UkrPoshtaShipmentGroupOut GetShipmentGroup(string shipmentGroupUuid)
 		{
-			return bNesisApi.Call<ShipmentGroupOut>("UkrPoshta", bNesisToken, "GetShipmentGroup", shipmentGroupUuid);
+			return bNesisApi.Call<UkrPoshtaShipmentGroupOut>("UkrPoshta", bNesisToken, "GetShipmentGroup", shipmentGroupUuid);
 		}
 
 		///<summary>
@@ -587,11 +611,11 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		{
 			return bNesisApi.Call<Response>("UkrPoshta", bNesisToken, "GetShipmentGroupForm103aRaw", shipmentGroupUuid);
 		}
-	}
+}
 	///<summary>
 	/// AddressOut used when need get information about address. 
 	/// </summary>
-	public class AddressOut
+	public class UkrPoshtaAddressOut
 	{
 		/// <summary>
 		/// A unique address identifier is assigned automatically when you create it. 
@@ -658,7 +682,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// AddressIn used for add or edit address. 
 	/// </summary>
-	public class AddressIn
+	public class UkrPoshtaAddressIn
 	{
 		/// <summary>
 		/// Post index. (Only numbers 5 characters) 
@@ -720,7 +744,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// Customer address 
 	/// </summary>
-	public class CustomerAddress
+	public class UkrPoshtaCustomerAddress
 	{
 		/// <summary>
 		/// Identificator. 
@@ -747,7 +771,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// Customer phone. 
 	/// </summary>
-	public class CustomerPhone
+	public class UkrPoshtaCustomerPhone
 	{
 		/// <summary>
 		/// Identificator. 
@@ -774,7 +798,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// Customer E-mail 
 	/// </summary>
-	public class CustomerEmail
+	public class UkrPoshtaCustomerEmail
 	{
 		/// <summary>
 		/// Identificator. 
@@ -796,7 +820,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// CustomerOut used when get information about customer. 
 	/// </summary>
-	public class CustomerOut
+	public class UkrPoshtaCustomerOut
 	{
 		/// <summary>
 		/// Identificator. 
@@ -866,7 +890,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// If the customer has specified multiple addresses, it will be used only the one with 'main' setted true. 
 		/// </summary>
-		public CustomerAddress[] addresses { get; set; }
+		public UkrPoshtaCustomerAddress[] addresses { get; set; }
 
 		/// <summary>
 		/// Phone number of customer. 
@@ -876,7 +900,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// If the customer has specified multiple phones, it will be used only the one with 'main' setted true. 
 		/// </summary>
-		public CustomerPhone[] phones { get; set; }
+		public UkrPoshtaCustomerPhone[] phones { get; set; }
 
 		/// <summary>
 		/// E-mail customer. 
@@ -886,7 +910,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// If the customer has specified multiple emails, it will be used only the one with 'main' setted true. 
 		/// </summary>
-		public CustomerEmail[] emails { get; set; }
+		public UkrPoshtaCustomerEmail[] emails { get; set; }
 
 		/// <summary>
 		/// A variable that indicates whether the customer is a entity or an individual. 
@@ -929,7 +953,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	/// CustomerIn used when add or edit customer.
 	///     If the customer is an individual, the value of the individual should be true. In this case, you must specify the first name, last name and middle name (in parameters: firstName, lastName and middleName) of the customer. The 'name' parameter is generated automatically. If the customer is a entity, the value of the individual must be false. In this case, the API accepts only the 'name' parameter. 
 	/// </summary>
-	public class CustomerIn
+	public class UkrPoshtaCustomerIn
 	{
 		/// <summary>
 		/// Name of the customer. (Maximum number of characters 250, is mandatory for a entity, for an individual is formed from the parameters: firstName, middleName, lastName) 
@@ -1018,7 +1042,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	/// Parameters of the parcel. 
 	///     When creating a parcel, you need to specify the main fields: weight - the maximum weight of sending 30000 grams. Weight of departure must be greater than zero.length - largest side of the departure, indicates the length in inches, length of departure must be greater than zero.declaredPrice - The stated price is sending filled in UAH 
 	/// </summary>
-	public class Parcel
+	public class UkrPoshtaParcel
 	{
 		/// <summary>
 		/// Shipping weight. 
@@ -1050,7 +1074,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// Information about discount per customer. 
 	/// </summary>
-	public class DiscountPerCustomer
+	public class UkrPoshtaDiscountPerCustomer
 	{
 		/// <summary>
 		/// Identifier. 
@@ -1092,7 +1116,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// ShipmentOut used when get information about shipment. 
 	/// </summary>
-	public class ShipmentOut
+	public class UkrPoshtaShipmentOut
 	{
 		/// <summary>
 		/// Identificator. 
@@ -1102,12 +1126,12 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// Information about sender. 
 		/// </summary>
-		public CustomerOut sender { get; set; }
+		public UkrPoshtaCustomerOut sender { get; set; }
 
 		/// <summary>
 		/// Information about recipient. 
 		/// </summary>
-		public CustomerOut recipient { get; set; }
+		public UkrPoshtaCustomerOut recipient { get; set; }
 
 		/// <summary>
 		/// Recipient phone. 
@@ -1163,7 +1187,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// Parcels. 
 		/// </summary>
-		public Parcel[] parcels { get; set; }
+		public UkrPoshtaParcel[] parcels { get; set; }
 
 		/// <summary>
 		/// Delivery price. 
@@ -1193,7 +1217,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// Discount per customer. 
 		/// </summary>
-		public DiscountPerCustomer discountPerClient { get; set; }
+		public UkrPoshtaDiscountPerCustomer discountPerClient { get; set; }
 
 		/// <summary>
 		/// Date of making the latest changes in the shipment. Date and time in the format "2017-06- 12T12: 31: 56" 
@@ -1323,7 +1347,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// Customer Identificator. 
 	/// </summary>
-	public class CustomerUuid
+	public class UkrPoshtaCustomerUuid
 	{
 		/// <summary>
 		/// Identificator. 
@@ -1335,17 +1359,17 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// ShipmentIn used when add or edit information shipment. 
 	/// </summary>
-	public class ShipmentIn
+	public class UkrPoshtaShipmentIn
 	{
 		/// <summary>
 		/// Identificator sender customer. 
 		/// </summary>
-		public CustomerUuid sender { get; set; }
+		public UkrPoshtaCustomerUuid sender { get; set; }
 
 		/// <summary>
 		/// Identificator recipient customer. 
 		/// </summary>
-		public CustomerUuid recipient { get; set; }
+		public UkrPoshtaCustomerUuid recipient { get; set; }
 
 		/// <summary>
 		/// Repient phone. 
@@ -1395,7 +1419,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// <summary>
 		/// Parcels. 
 		/// </summary>
-		public Parcel[] parcels { get; set; }
+		public UkrPoshtaParcel[] parcels { get; set; }
 
 		/// <summary>
 		/// Postpay in UAH may not be higher than the stated price. 
@@ -1484,7 +1508,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// ShipmentGroupOut used when get information about shipment group. 
 	/// </summary>
-	public class ShipmentGroupOut
+	public class UkrPoshtaShipmentGroupOut
 	{
 		/// <summary>
 		/// Identificator shipment group. 
@@ -1521,7 +1545,7 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 	///<summary>
 	/// ShipmentGroupIn used for add or edit information about shipmentGroup. 
 	/// </summary>
-	public class ShipmentGroupIn
+	public class UkrPoshtaShipmentGroupIn
 	{
 		/// <summary>
 		/// Name of shipment group. 

@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
         /// <summary>
         /// ShipmentOut instance.
         /// </summary>
-        public ShipmentOut ShipmentOut { get; private set; }
+        public UkrPoshtaShipmentOut ShipmentOut { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -28,7 +28,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
             //Initialize new class of ShipmentIn.
-            ShipmentIn shipmentIn = new ShipmentIn();
+            UkrPoshtaShipmentIn shipmentIn = new UkrPoshtaShipmentIn();
             //Render class to ui
             ClassToEdit.RenderClassToUI(shipmentIn, propertiesPanel, false);
 
@@ -45,7 +45,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             this.IsEnabled = false;
             
             //Render ui to class
-            ShipmentIn shipmentIn = ClassToEdit.RenderUItoClass(propertiesPanel) as ShipmentIn;
+            UkrPoshtaShipmentIn shipmentIn = ClassToEdit.RenderUItoClass(propertiesPanel) as UkrPoshtaShipmentIn;
             //Add shipment to UkrPoshta if success return instance in ShipmentOut class.
             await Task.Run(() => ShipmentOut = UkrPoshta.AddShipment(shipmentIn));
             ErrorInfo errorInfo = UkrPoshta.GetLastError();

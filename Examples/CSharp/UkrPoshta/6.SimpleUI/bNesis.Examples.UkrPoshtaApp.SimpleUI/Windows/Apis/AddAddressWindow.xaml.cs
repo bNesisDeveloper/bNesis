@@ -14,7 +14,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// <summary>
         /// Address instance.
         /// </summary>
-        public AddressOut Address { get; private set; }
+        public UkrPoshtaAddressOut Address { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -27,9 +27,40 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
             //Initialize new class of ShipmentIn.
-            AddressIn addressIn = new AddressIn();
-            //Render class to ui
-            ClassToEdit.RenderClassToUI(addressIn, propertiesPanel, false);
+            UkrPoshtaAddressIn addressIn = new UkrPoshtaAddressIn();            
+            //This properties used for creating class Address wich need for UkrPoshta
+            //We cite it for example, use your own values.
+            /// <summary>
+            /// Country name for address. (Example: UA)
+            /// </summary>
+            addressIn.country = "UA";
+            /// <summary>
+            /// City name for address. 
+            /// </summary>
+            addressIn.city = "Kiev";
+            /// <summary>
+            /// Region name for address.
+            /// </summary>
+            addressIn.region = "Obolon";
+            /// <summary>
+            /// Street name for address.
+            /// </summary>
+            addressIn.street = "Obolonskiy prospekt";
+            /// <summary>
+            /// House number for address.
+            /// </summary>
+            addressIn.houseNumber = "3";
+            /// <summary>
+            /// Apartment number for address.
+            /// </summary>
+            addressIn.apartmentNumber = "36";
+            /// <summary>
+            /// Post code for address.
+            /// </summary>
+            addressIn.postcode = "04073";
+
+        //Render class to ui
+        ClassToEdit.RenderClassToUI(addressIn, propertiesPanel, false);
 
         }
 
@@ -41,7 +72,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
             //Render ui to class
-            AddressIn addressIn = ClassToEdit.RenderUItoClass(propertiesPanel) as AddressIn;
+            UkrPoshtaAddressIn addressIn = ClassToEdit.RenderUItoClass(propertiesPanel) as UkrPoshtaAddressIn;
             //Add address to UkrPoshta if success return instance in AddressOut class.
             Address = UkrPoshta.AddAddress(addressIn);
             ErrorInfo errorInfo = UkrPoshta.GetLastError();

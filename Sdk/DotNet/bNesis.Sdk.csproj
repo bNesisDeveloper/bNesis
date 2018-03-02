@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="bNesis.Api.Desktop">
-      <HintPath>C:\Repositoriy\SourceCode\Api\Clients\Ui\Desktop\Wpf\bNesis.Api.Clients.Ui.Desktop.Wpf\bin\Debug\bNesis.Api.Desktop.dll</HintPath>
+      <HintPath>C:\bNesisDeveloper\Source1\Repos\bNesisSourceCode\Api\Clients\Ui\Desktop\Wpf\bNesis.Api.Clients.Ui.Desktop.Wpf\bin\Debug\bNesis.Api.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,9 +62,7 @@
     <Compile Include="bNesis.Sdk.FileStorages.Mega.cs" />
     <Compile Include="bNesis.Sdk.FileStorages.SugarSync.cs" />
     <Compile Include="bNesis.Sdk.GovRegistry.Prozzoro.cs" />
-    <Compile Include="bNesis.Sdk.Other.GoogleAnalytics.cs" />
     <Compile Include="bNesis.Sdk.Other.IISSEO.cs" />
-    <Compile Include="bNesis.Sdk.Other.LinkedIn.cs" />
     <Compile Include="bNesis.Sdk.Payment.LiqPay.cs" />
     <Compile Include="bNesis.Sdk.Payment.PayPal.cs" />
     <Compile Include="bNesis.Sdk.Payment.Stripe.cs" />

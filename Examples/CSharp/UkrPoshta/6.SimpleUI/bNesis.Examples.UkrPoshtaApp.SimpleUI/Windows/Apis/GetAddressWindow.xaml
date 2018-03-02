@@ -5,32 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bNesis.Examples.UkrPoshtaApp.SimpleUI"
         mc:Ignorable="d"
-        Title="GetAddress"  Height="117" MaxHeight="640"  Width="720" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" PreviewKeyDown="window_PreviewKeyDown">
+        Title="GetClient"  Height="161" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" PreviewKeyDown="window_PreviewKeyDown" Background="#FFF6F6F6">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="239*"/>
-            <RowDefinition Height="41"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled">
-            <StackPanel Name="propertiesPanel" Background="#FFF6F6F6">
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock>AddressID</TextBlock>
-                    <StackPanel Width="5"/>
-                    <TextBox Name="addressIdTextBox" Width="170"></TextBox>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Height="25" Margin="0,5,0,5">
+            <TextBlock VerticalAlignment="Center">External-ID</TextBlock>
+            <StackPanel Width="5"/>
+            <TextBox Name="addressIdTextBox" Width="330"/>
+        </StackPanel>
 
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" Width="510">
-                <TextBlock Name="statusTextBlock" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"></TextBlock>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Width="220" CanContentScroll="True" >
+                <StackPanel>
+                    <TextBlock Name="statusTextBlock" TextWrapping="WrapWithOverflow" Text="result will be here..." Foreground="#FF9E9E9E"></TextBlock>
+                </StackPanel>
             </ScrollViewer>
             <StackPanel Width="7" />
-            <Button Name="okButton" Content="OK" Height="25" Width="79" Click="okButton_Click" />
-            <StackPanel Width="7" />
-            <Button Name="cancelButton" Content="Cancel" Height="25" Width="79" Click="cancelButton_Click" />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Button Name="okButton" Content="OK" Height="25" Width="79" Click="OkButton_Click" />
+                <StackPanel Width="7" />
+                <Button Name="cancelButton" Content="Cancel" Height="25" Width="79" Click="CancelButton_Click" />
+            </StackPanel>
         </StackPanel>
 
     </Grid>

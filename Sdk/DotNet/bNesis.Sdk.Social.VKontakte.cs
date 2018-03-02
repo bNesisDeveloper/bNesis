@@ -12,7 +12,17 @@ namespace bNesis.Sdk.Social.VKontakte
 {
 	public class VKontakte  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public VKontakte(DesktopbNesisApi bNesisApi)
@@ -20,13 +30,27 @@ namespace bNesis.Sdk.Social.VKontakte
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
 		{
-
 			bNesisToken = bNesisApi.Auth("VKontakte", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-
 			return bNesisToken;
 		}
+
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("VKontakte", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
 
 		///<summary>
 		/// Getting last exception for current provider 
@@ -63,6 +87,37 @@ namespace bNesis.Sdk.Social.VKontakte
 		public Boolean Logoff()
 		{
 			return bNesisApi.Call<Boolean>("VKontakte", bNesisToken, "Logoff");
+		}
+
+		///<summary>
+		///  
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public ContactItem GetFieldsUserUnified(string id)
+		{
+			return bNesisApi.Call<ContactItem>("VKontakte", bNesisToken, "GetFieldsUserUnified", id);
+		}
+
+		///<summary>
+		///  
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="field"></param>
+		/// <returns></returns>
+		public ContactItem GetFieldUserUnified(string id, string field)
+		{
+			return bNesisApi.Call<ContactItem>("VKontakte", bNesisToken, "GetFieldUserUnified", id, field);
+		}
+
+		///<summary>
+		///  
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public ContactItem GetUserAboutUnified(string id)
+		{
+			return bNesisApi.Call<ContactItem>("VKontakte", bNesisToken, "GetUserAboutUnified", id);
 		}
 
 		///<summary>
@@ -222,5 +277,5 @@ namespace bNesis.Sdk.Social.VKontakte
 		{
 			return bNesisApi.Call<Response>("VKontakte", bNesisToken, "GetServiceTokenRaw");
 		}
-	}
+}
 }

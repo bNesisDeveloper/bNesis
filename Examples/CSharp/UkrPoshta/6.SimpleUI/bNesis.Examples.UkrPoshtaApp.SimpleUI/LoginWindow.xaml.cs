@@ -81,14 +81,14 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
                 else
                 {
                     //If success initialize return zero code(noError)
-                    SDKInitializeResult = manager.InitializeThin(sdkAddrTextBox.Text);
+                    SDKInitializeResult = manager.InitializeThin((sdkAddrComboBox.SelectedItem as ComboBoxItem).Content.ToString());
                 }
 
                 //Check if result code not equal to zero code(noError) 
                 if (SDKInitializeResult != ServiceManager.errorCodeNoError)
                 {
                     //Set message in ui element statusTextBlock
-                    statusTextBlock.Text = "Connection problem code: " + SDKInitializeResult;
+                    statusTextBlock.Text = "Connection problem code: " + manager.GetErrorDescription(SDKInitializeResult);
                 }
                 else
                 {

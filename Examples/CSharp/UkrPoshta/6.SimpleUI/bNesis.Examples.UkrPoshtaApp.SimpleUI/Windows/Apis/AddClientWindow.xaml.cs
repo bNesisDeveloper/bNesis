@@ -14,7 +14,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// <summary>
         /// Customer instance.
         /// </summary>
-        public CustomerOut Customer { get; private set; }
+        public UkrPoshtaCustomerOut Customer { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -27,7 +27,22 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
             //Initialize new class of CustomerIn.
-            CustomerIn customerIn = new CustomerIn();
+            UkrPoshtaCustomerIn customerIn = new UkrPoshtaCustomerIn();
+
+            customerIn.email = "GrigoriyBoyko@mail.com";
+            //Set address identifier
+            customerIn.addressId = 19113;
+            //Set first name
+            customerIn.firstName = "Grigoriy";
+            //Set middle name
+            customerIn.middleName = "Boyko";
+            //Set last name
+            customerIn.lastName = "Bogdanovich";
+            //Set individual
+            customerIn.individual = true;
+            //Set resident
+            customerIn.resident = true;
+
             //Render class to ui
             ClassToEdit.RenderClassToUI(customerIn, propertiesPanel, false);
         }
@@ -37,10 +52,10 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void okButton_Click(object sender, RoutedEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             //Render ui to class
-            CustomerIn customerIn = ClassToEdit.RenderUItoClass(propertiesPanel) as CustomerIn;
+            UkrPoshtaCustomerIn customerIn = ClassToEdit.RenderUItoClass(propertiesPanel) as UkrPoshtaCustomerIn;
             //If AddClient success return CustomerOut
             Customer = UkrPoshta.AddClient(customerIn);
             ErrorInfo errorInfo = UkrPoshta.GetLastError();
@@ -62,7 +77,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
@@ -80,11 +95,11 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
                 //Block other events with key
                 e.Handled = true;
 
-                okButton_Click(null, null);
+                OkButton_Click(null, null);
             }
             else if (e.Key == Key.Escape)
             {
-                cancelButton_Click(null, null);
+                CancelButton_Click(null, null);
             }
         }
 

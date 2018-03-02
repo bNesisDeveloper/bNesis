@@ -36,7 +36,30 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
         private static string UkrPoshtaCounterPartyToken = string.Empty;
 
         /// <summary>
-        /// If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API server https://server2.bnesis.com
+        /// If you use Thin Client mode, you need an access to bNesis API Server. Address of the demo bNesis API server:
+        /// https://server2.bnesis.com
+        /// https://bnesisserver1.azurewebsites.net
+        /// https://bnesisserver2.azurewebsites.net
+        /// https://bnesisserver3.azurewebsites.net
+        /// 
+        /// Please don't forget to setup your Dropbox application Redirect URIs at a Dropbox developers console https://www.dropbox.com/developers/
+        /// 
+        /// In a Thin client mode add two redirectURIs to tab "Setting" at a Dropbox developers console. The first redirectURI related what a bNesis API server you use:
+        /// https://server2.bnesis.com/api/authprovider/signin
+        /// https://bnesisserver1.azurewebsites.net/api/authprovider/signin        
+        /// https://bnesisserver2.azurewebsites.net/api/authprovider/signin
+        /// https://bnesisserver3.azurewebsites.net/api/authprovider/signin
+        ///The second redirectURI is default host and port where bNesis Thin client will be redirected to the specified address after the authentication 
+        /// operation is performed. For example  http://localhost:809/ 
+        ///
+        /// Rich client:
+        /// http://localhost:809/  
+        /// (to have a default bNesis Rich client redirect host and port, see redirectUrl property)
+        /// (if you change the redirectUrl property at this example app, change the RedirectURIs at Dropbox developers console
+        /// </summary>
+
+        /// <summary>
+        /// If you use the Thin Client mode, you need an access to the bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
         private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
@@ -51,9 +74,9 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
         /// <param name="args">Input arguments when application starts. (Command line options)</param>
         static void Main(string[] args)
         {
-            Console.WriteLine("bNesis SDK - UkrPoshta authentication example\n");
+            Console.WriteLine("bNesis SDK - UkrPoshta authentication example.\n");
 
-            //bNesisSDK Initializing 
+            //bNesisSDK Initialization 
             ServiceManager manager = new ServiceManager();
 
 #if (ExampleMode)
@@ -64,10 +87,10 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
             UkrPoshtaCounterPartyToken = manager.GetKey("exampleUkrPoshtaCounterPartyToken", UkrPoshtaCounterPartyToken);
 #endif
 
-            //Check bNesisDeveloperID
+            //Check a bNesisDeveloperID
             if (string.IsNullOrEmpty(bNesisDeveloperId))
             {
-                Console.WriteLine("For using this example, you need bNesis Developer Id. You can get it from https://api.bnesis.com site - free of charge\n");
+                Console.WriteLine("For using this example, you need a bNesis Developer Id. You can get it from https://api.bnesis.com site - free of charge.\n");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 return;
@@ -76,15 +99,15 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
             //Check UkrPoshta authentication keys
             if (string.IsNullOrEmpty(UkrPoshtaBearer) || string.IsNullOrEmpty(UkrPoshtaCounterPartyToken))
             {
-                Console.WriteLine("For using this example you need UkrPoshta authentication keys, please contact with the UkrPoshta administration to get the keys\n");
+                Console.WriteLine("For using this example you need UkrPoshta authentication keys. Please contact with the UkrPoshta administration to get these keys.\n");
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
                 return;
             }
 
-            //Select Rich mode or Thin mode 
-            Console.Write("Please select Thin or Rich mode.\nPress 'R' for Rich client mode or press any other key for Thin client mode: ");
-            //Waiting for pressed key, if key is not 'R', we wioo use Thin client as a default mode.
+            //Select a Rich client mode or a Thin client mode 
+            Console.Write("Please select a Thin client mode or a Rich client mode.\nPress 'R' for the Rich client mode or any other key for the Thin client mode: ");
+            //Waiting for a pressed key. If key is not 'R', you will use the Thin client mode as a default mode.
             ConsoleKeyInfo selectMode = Console.ReadKey();
             //Escape line
             Console.WriteLine();
@@ -93,20 +116,20 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
             int SDKInitializeResult;
 
             //Initialize client mode
-            if (selectMode.Key == ConsoleKey.R) //if user presses 'R' key for Rich client
+            if (selectMode.Key == ConsoleKey.R) //if user presses 'R' key for the Rich client mode
             {
-                Console.WriteLine("Rich mode initializing ...");
-                //If success initialize return zero code(noError)
+                Console.WriteLine("Rich client mode initialization...");
+                //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeRich(string.Empty);
             }
-            else //default Thin client
+            else //default Thin client mode
             {
-                Console.WriteLine("Thin mode initializing ...");
-                //If success initialize return zero code(noError)
+                Console.WriteLine("Thin client mode initialization...");
+                //successful initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
             }
 
-            //Check, that initialize result do not equal zero(noError)
+            //Check, that initialization result does not equal zero(noError)
             if (SDKInitializeResult != ServiceManager.errorCodeNoError)
             {
                 //Show error message
@@ -115,7 +138,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
             else
             {
                 //Successful Initializing 
-                Console.WriteLine("bNesis SDK initialization status: Success\n");
+                Console.WriteLine("bNesis SDK initialization status: Success.\n");
 
                 try
                 {
@@ -126,25 +149,25 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
                     if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                     {
                         //if bNesisToken is empty. use GetLastError method to get error description
-                        if (!string.IsNullOrEmpty(manager.GetLastError())) Console.WriteLine("Authorize problem: " + manager.GetLastError());
-                        else Console.WriteLine("Authorization problem, please check parameters.\n");
+                        if (!string.IsNullOrEmpty(manager.GetLastError())) Console.WriteLine("Authorization problem: " + manager.GetLastError());
+                        else Console.WriteLine("Authorization problem. Please check parameters.\n");
                         Console.WriteLine("Press any key to exit...");
                         Console.ReadKey();
                         return;
                     }
 
-                    //Authorization at UkrPoshta is Success
+                    //Authorization at UkrPoshta is successful
                     //Now you can use UkrPoshta APIs
-                    Console.WriteLine("Authorization is success! UkrPoshta instance is created.\n");
+                    Console.WriteLine("Authorization is successful! UkrPoshta instance is created.\n");
                 }
                 catch (Exception ex)
                 {
-                    //If you have some exception you can see Console.
+                    //If you have some exception you can see a Console.
                     Console.WriteLine("Creating of instance 'UkrPoshta' has failed, reason: " + ex.Message);
                 }
             }
 
-            //Wating for pressed key...
+            //Wating for a pressed key...
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }

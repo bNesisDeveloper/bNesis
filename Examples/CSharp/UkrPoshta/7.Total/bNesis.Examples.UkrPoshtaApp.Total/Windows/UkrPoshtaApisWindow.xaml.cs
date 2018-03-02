@@ -35,7 +35,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Show window.
             addAddressWindow.ShowDialog();
             //If AddAddressWindow was closed set addressOut from AddAddressWindow.
-            AddressOut addressOut = addAddressWindow.AddressOut;
+            UkrPoshtaAddressOut addressOut = addAddressWindow.AddressOut;
             //Check if addressOut not equal null.
             if (addressOut != null)
             {
@@ -57,7 +57,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Show window.
             getAddressWindow.ShowDialog();
             //If GetAddressWindow was closed set addressOut from GetAddressWindow.
-            AddressOut addressOut = getAddressWindow.AddressOut;
+            UkrPoshtaAddressOut addressOut = getAddressWindow.AddressOut;
             //Check if addressOut not equal null
             if (addressOut != null)
             {
@@ -78,7 +78,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Show window.
             addClientWindow.ShowDialog();
             //If AddClientWindow was closed set customerOut from AddClientWindow.
-            CustomerOut customerOut = addClientWindow.Customer;
+            UkrPoshtaCustomerOut customerOut = addClientWindow.Customer;
             //Check if customerOut not equal null
             if (customerOut != null)
             {
@@ -100,7 +100,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Show window.
             addClientWindow.ShowDialog();
             //If GetClientWindow was closed set customerOut from GetClientWindow.
-            CustomerOut customerOut = addClientWindow.Customer;
+            UkrPoshtaCustomerOut customerOut = addClientWindow.Customer;
             //Check if customerOut not equal null
             if (customerOut != null)
             {
@@ -122,7 +122,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Show window
             addShipmentWindow.ShowDialog();
             //If AddShipmentWindow was closed set shipmentOut from AddShipmentWindow.
-            ShipmentOut shipmentOut = addShipmentWindow.ShipmentOut;
+            UkrPoshtaShipmentOut shipmentOut = addShipmentWindow.ShipmentOut;
             //Check if shipmentOut not equal null.
             if (shipmentOut != null)
             {
@@ -143,7 +143,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Show window.
             getShipmentWindow.ShowDialog();
             //If GetShipmentWindow was closed set shipmentOut from GetShipmentWindow.
-            ShipmentOut shipmentOut = getShipmentWindow.ShipmentOut;
+            UkrPoshtaShipmentOut shipmentOut = getShipmentWindow.ShipmentOut;
             //Check if shipmentOut not equal null
             if (shipmentOut != null)
             {

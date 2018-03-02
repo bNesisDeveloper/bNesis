@@ -11,9 +11,9 @@ using bNesis.Sdk.eCommerce.PrestaShop;
 namespace bNesis.Examples.UkrPoshtaApp.AddShipmentApi
 {
     /// <summary>
-    /// This console example shows how to use bNesis SDK initialization, authentication and calls some method from UkrPoshta:
+    /// This console example shows how to use bNesis SDK initialization, authentication and calls some method from UkrPoshta service:
     /// <para/>bNesis ServiceManager class
-    /// <para/>bNesis ServiceManager methods: InitializeRich and InitializeThin methods
+    /// <para/>bNesis ServiceManager methods: InitializeRich and InitializeThin
     /// <para/>bNesis ServiceManager CreateInstanceUkrPoshta method
     /// <para/>bNesis UkrPoshta AddShipment method
     /// <para/>
@@ -39,7 +39,30 @@ namespace bNesis.Examples.UkrPoshtaApp.AddShipmentApi
         private static string UkrPoshtaCounterPartyToken = string.Empty;
 
         /// <summary>
-        /// If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API server: https://server2.bnesis.com
+        /// If you use Thin Client mode, you need an access to bNesis API Server. Address of the demo bNesis API server:
+        /// https://server2.bnesis.com
+        /// https://bnesisserver1.azurewebsites.net
+        /// https://bnesisserver2.azurewebsites.net
+        /// https://bnesisserver3.azurewebsites.net
+        /// 
+        /// Please don't forget to setup your Dropbox application Redirect URIs at Dropbox developers console https://www.dropbox.com/developers/
+        /// 
+        /// In Thin client mode add two redirectURIs to tab "Setting" at Dropbox developers console. The first redirectURI relates what bNesis API server you use:
+        /// https://server2.bnesis.com/api/authprovider/signin
+        /// https://bnesisserver1.azurewebsites.net/api/authprovider/signin        
+        /// https://bnesisserver2.azurewebsites.net/api/authprovider/signin
+        /// https://bnesisserver3.azurewebsites.net/api/authprovider/signin
+        ///The second redirectURI is a default host and a port where bNesis Thin client will be redirected to the specified address after the authentication 
+        /// operation is performed. For example  http://localhost:809/ 
+        ///
+        /// Rich client:
+        /// http://localhost:809/  
+        /// (as a default bNesis Rich client redirects host and port, see redirectUrl property)
+        /// (if you change the redirectUrl property at this example app, change the RedirectURIs at Dropbox developers console
+        /// </summary>
+
+        /// <summary>
+        /// If you use Thin Client mode, you need access to the bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
         private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
@@ -87,28 +110,28 @@ namespace bNesis.Examples.UkrPoshtaApp.AddShipmentApi
                 return;
             }
 
-            //Select Rich mode or Thin mode 
+            //Select Rich client mode or Thin client mode 
             Console.Write(
-                "Please select Thin mode or Rich mode.\nPress 'R' for Rich client mode or press any other key for Thin client mode: ");
-            //Waiting for a pressed key, if key is not 'R', using default Thin client mode.
+                "Please select Thin client mode or Rich client mode.\nPress 'R' for Rich client mode or any other key for Thin client mode: ");
+            //Waiting for a pressed key, if key is not 'R', using the default Thin client mode.
             ConsoleKeyInfo selectMode = Console.ReadKey();
             //Escape line
             Console.WriteLine();
 
-            //Initilize result code
+            //Initialize result code
             int SDKInitializeResult;
 
             //Initialize client mode
             if (selectMode.Key == ConsoleKey.R) //if user has pressed 'R' key for Rich client mode
             {
-                Console.WriteLine("Rich mode Initialization...");
-                //If success, initialization returns zero code(noError)
+                Console.WriteLine("Rich client mode Initialization...");
+                //If success is, initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeRich(string.Empty);
             }
-            else //default Thin client
+            else //default Thin client mode
             {
-                Console.WriteLine("Thin mode Initialization...");
-                //If success, initialization returns zero code(noError)
+                Console.WriteLine("Thin client mode Initialization...");
+                //If success is, initialization returns zero code(noError)
                 SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
             }
 
@@ -142,67 +165,58 @@ namespace bNesis.Examples.UkrPoshtaApp.AddShipmentApi
                     }
 
                     //Authorization at UkrPoshta is successful
-                    //Now you can use UkrPoshta
+                    //Now you can use UkrPoshta service
                     Console.WriteLine("Authorization success! UkrPoshta instance is created.\n");
 
-                    Console.WriteLine("Adding shippment to UkrPoshta...");
-                    //Creating of shipmentIn
-                    ShipmentIn shipmentIn = new ShipmentIn();
-
-                    //Below used values for example, you must use your own values.
-
-                    //Creating customer uuid for recipient
-                    CustomerUuid recipient = new CustomerUuid();
-                    //Set uuid
+                    Console.WriteLine("Adding a shippment to the UkrPoshta service...");
+                    UkrPoshtaShipmentIn shipmentIn = new UkrPoshtaShipmentIn();
+                    UkrPoshtaCustomerUuid recipient = new UkrPoshtaCustomerUuid();
+                    //Set an uuid
                     recipient.uuid = "780e309c-3003-41a3-828f-57540005d6dd";
-                    //Set recipient
+                    //Set a recipient
                     shipmentIn.recipient = recipient;
-                    //Creating customer uuid for sender
-                    CustomerUuid sender = new CustomerUuid();
-                    //Set uuid
+                    UkrPoshtaCustomerUuid sender = new UkrPoshtaCustomerUuid();
+                    //Set an uuid
                     sender.uuid = "201d8152-d281-4464-a275-b857ab62c940";
-                    //Set sender
+                    //Set a sender
                     shipmentIn.sender = sender;
-                    //Set return address identifier
+                    //Set a return address identifier
                     shipmentIn.returnAddressId = "19113";
-                    //Set recipient address identifier
+                    //Set a recipient address identifier
                     shipmentIn.recipientAddressId = "191133";
-                    //Set recipient email
+                    //Set a recipient email
                     shipmentIn.recipientEmail = "test@mail.com";
-                    //Set recipient phone
+                    //Set a recipient phone
                     shipmentIn.recipientPhone = "+380997777777";
-                    //Creating array of parcel with length
-                    Parcel[] parcels = new Parcel[1];
-                    //Creating new class parcel
-                    Parcel parcel = new Parcel();
-                    //Set declared price
+                    UkrPoshtaParcel[] parcels = new UkrPoshtaParcel[1];
+                    UkrPoshtaParcel parcel = new UkrPoshtaParcel();
+                    //Set a declared price
                     parcel.declaredPrice = 100;
-                    //Set height
+                    //Set a height
                     parcel.height = 25;
-                    //Set length
+                    //Set a length
                     parcel.length = 25;
-                    //Set weight
+                    //Set a weight
                     parcel.weight = 500;
-                    //Set width
+                    //Set a width
                     parcel.width = 5;
-                    //Set element
+                    //Set an element
                     parcels[0] = parcel;
-                    //Set array of parcel
+                    //Set an array of parcel
                     shipmentIn.parcels = parcels;
-                    //Set post pay
+                    //Set a post pay
                     shipmentIn.postPay = 25;
-                    //Set post pay paid by recipient
+                    //Set a post pay paid by recipient
                     shipmentIn.postPayPaidByRecipient = true;
-                    //Set delivery type
+                    //Set a delivery type
                     shipmentIn.deliveryType = "W2D";
-                    //Set type
+                    //Set a type
                     shipmentIn.type = "EXPRESS";
-                    //Set on fail receive type
+                    //Set on the fail a receive type
                     shipmentIn.onFailReceiveType = "RETURN";
-                    //Set description
+                    //Set a description
                     shipmentIn.description = "For example.";
-                    //Add new shipment
-                    ShipmentOut shipment = ukrPoshta.AddShipment(shipmentIn);
+                    UkrPoshtaShipmentOut shipment = ukrPoshta.AddShipment(shipmentIn);
                     //Getting last error
                     ErrorInfo errorInfo = ukrPoshta.GetLastError();
                     //Check if errorInfo code does not equal noError
@@ -218,7 +232,7 @@ namespace bNesis.Examples.UkrPoshtaApp.AddShipmentApi
                     //Show success message
                     Console.WriteLine("Success. Shipment uuid:" + shipment.uuid);
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("                       ^^^ store this Shipment uuid for using at download document example");
+                    Console.WriteLine("                       ^^^ store this Shipment uuid for using at a download document example");
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
                 catch (Exception ex)

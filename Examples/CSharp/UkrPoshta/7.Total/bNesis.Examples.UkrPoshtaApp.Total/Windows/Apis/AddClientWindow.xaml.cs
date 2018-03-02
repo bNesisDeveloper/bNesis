@@ -15,7 +15,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
         /// <summary>
         /// Customer instance.
         /// </summary>
-        public CustomerOut Customer { get; private set; }
+        public UkrPoshtaCustomerOut Customer { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -28,7 +28,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
             //Initialize new class of CustomerIn.
-            CustomerIn customerIn = new CustomerIn();
+            UkrPoshtaCustomerIn customerIn = new UkrPoshtaCustomerIn();
             //Render class to ui
             ClassToEdit.RenderClassToUI(customerIn, propertiesPanel, false);
         }
@@ -44,7 +44,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             this.IsEnabled = false;
 
             //Render ui to class
-            CustomerIn customerIn = ClassToEdit.RenderUItoClass(propertiesPanel) as CustomerIn;
+            UkrPoshtaCustomerIn customerIn = ClassToEdit.RenderUItoClass(propertiesPanel) as UkrPoshtaCustomerIn;
             //If AddClient success return CustomerOut
             await Task.Run(() => Customer = UkrPoshta.AddClient(customerIn));
             ErrorInfo errorInfo = UkrPoshta.GetLastError();

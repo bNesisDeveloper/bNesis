@@ -38,7 +38,12 @@
             <StackPanel Name="apiServerUrlPanel" Height="49" Orientation="Horizontal" Visibility="Collapsed">
                 <TextBlock Text="bNesis SDK address" Width="206" VerticalAlignment="Center" FlowDirection="RightToLeft"/>
                 <StackPanel Width="7" />
-                <TextBox Name="sdkAddrTextBox" Width="206"  VerticalAlignment="Center" Background="White" Text="https://server2.bnesis.com"/>
+                <ComboBox Name="sdkAddrComboBox" Width="206"  VerticalAlignment="Center" Background="White" SelectedIndex="0">
+                    <ComboBoxItem Content="https://server2.bnesis.com"/>
+                    <ComboBoxItem Content="https://bnesisserver1.azurewebsites.net"/>
+                    <ComboBoxItem Content="https://bnesisserver2.azurewebsites.net"/>
+                    <ComboBoxItem Content="https://bnesisserver3.azurewebsites.net"/>
+                </ComboBox>
             </StackPanel>
 
             <StackPanel Height="49" Orientation="Horizontal" >

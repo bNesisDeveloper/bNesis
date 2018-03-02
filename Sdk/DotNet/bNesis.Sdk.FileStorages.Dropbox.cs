@@ -13,7 +13,17 @@ namespace bNesis.Sdk.FileStorages.Dropbox
 {
 	public class Dropbox  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public Dropbox(DesktopbNesisApi bNesisApi)
@@ -21,13 +31,27 @@ namespace bNesis.Sdk.FileStorages.Dropbox
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string bNesisDevId,string redirectUrl,string clientId,string clientSecret)
 		{
-
 			bNesisToken = bNesisApi.Auth("Dropbox", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,null,string.Empty,string.Empty,false,string.Empty);
-
 			return bNesisToken;
 		}
+
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("Dropbox", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
 
 		///<summary>
 		/// Getting last exception for current provider 
@@ -294,5 +318,5 @@ namespace bNesis.Sdk.FileStorages.Dropbox
 		{
 			return bNesisApi.Call<ExpandoObject>("Dropbox", bNesisToken, "search", path, query);
 		}
-	}
+}
 }

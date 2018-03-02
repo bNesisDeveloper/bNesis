@@ -12,7 +12,17 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 {
 	public class PrestaShop  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public PrestaShop(DesktopbNesisApi bNesisApi)
@@ -20,13 +30,27 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
 		{
-
 			bNesisToken = bNesisApi.Auth("PrestaShop", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-
 			return bNesisToken;
 		}
+
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("PrestaShop", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
 
 		///<summary>
 		/// Getting last exception for current provider 
@@ -6952,7 +6976,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		{
 			return bNesisApi.Call<PrestaShopCurrency>("PrestaShop", bNesisToken, "GetCurrency", id);
 		}
-	}
+}
 	public class PrestaShopTax
 	{
 		public Int32 id { get; set; }
@@ -6967,34 +6991,58 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 
 	}
 
+	///<summary>
+	/// Implementation for PrestaShop 'filter'. 
+	/// </summary>
 	public class PrestaShopFilter
 	{
+		/// <summary>
+		/// Gets or sets the key. 
+		/// </summary>
 		public string Key { get; set; }
 
+		/// <summary>
+		/// Gets or sets the value. 
+		/// </summary>
 		public string Value { get; set; }
 
 	}
 
 	///<summary>
-	/// PrestaShop rendering options 
+	/// Implementation for PrestaShop rendering options. 
 	/// </summary>
 	public class PrestaShopRenderingOptions
 	{
+		/// <summary>
+		/// Gets or sets the display. 
+		/// </summary>
 		public string Display { get; set; }
 
 		/// <summary>
-		/// Array of Filters 
+		/// Gets or sets the filter. 
 		/// </summary>
 		public PrestaShopFilter[] Filter { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation identifier's for PrestaShop elements. 
+	/// </summary>
 	public class PrestaShopIdentifier
 	{
+		/// <summary>
+		/// The element identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// The identifier feature value. 
+		/// </summary>
 		public Int32 id_feature_value { get; set; }
 
+		/// <summary>
+		/// The identifier product attribute. 
+		/// </summary>
 		public Int32 id_product_attribute { get; set; }
 
 	}
@@ -7260,10 +7308,6 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		public string email { get; set; }
 
 		public Boolean active { get; set; }
-
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
 
 	}
 
@@ -7673,54 +7717,126 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 
 	}
 
+	///<summary>
+	/// Implementation for PrestaShop 'orderRow'. 
+	/// </summary>
 	public class PrestaShopOrderRow
 	{
+		/// <summary>
+		/// The order row identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// The product identifier. 
+		/// </summary>
 		public Int32 product_id { get; set; }
 
+		/// <summary>
+		/// The product attribute identifier. 
+		/// </summary>
 		public Int32 product_attribute_id { get; set; }
 
+		/// <summary>
+		/// The product quantity. 
+		/// </summary>
 		public Int32 product_quantity { get; set; }
 
+		/// <summary>
+		/// The name of the product. 
+		/// </summary>
 		public string product_name { get; set; }
 
+		/// <summary>
+		/// The product reference. 
+		/// </summary>
 		public string product_reference { get; set; }
 
+		/// <summary>
+		/// The product ean13. 
+		/// </summary>
 		public string product_ean13 { get; set; }
 
+		/// <summary>
+		/// The product isbn. 
+		/// </summary>
 		public string product_isbn { get; set; }
 
+		/// <summary>
+		/// The product upc. 
+		/// </summary>
 		public string product_upc { get; set; }
 
+		/// <summary>
+		/// The product price. 
+		/// </summary>
 		public Single product_price { get; set; }
 
+		/// <summary>
+		/// The unit price tax incl. 
+		/// </summary>
 		public Single unit_price_tax_incl { get; set; }
 
+		/// <summary>
+		/// The unit price tax excl. 
+		/// </summary>
 		public Single unit_price_tax_excl { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation for PrestaShop 'associations'. 
+	/// </summary>
 	public class PrestaShopAssociations
 	{
+		/// <summary>
+		/// The array of identifier for categories. 
+		/// </summary>
 		public PrestaShopIdentifier[] categories { get; set; }
 
+		/// <summary>
+		/// The array of identifier for groups. 
+		/// </summary>
 		public PrestaShopIdentifier[] groups { get; set; }
 
+		/// <summary>
+		/// The array of identifier for product option values. 
+		/// </summary>
 		public PrestaShopIdentifier[] product_option_values { get; set; }
 
+		/// <summary>
+		/// The array of identifier for images. 
+		/// </summary>
 		public PrestaShopIdentifier[] images { get; set; }
 
+		/// <summary>
+		/// The array of identifier for customer messages. 
+		/// </summary>
 		public PrestaShopIdentifier[] customer_messages { get; set; }
 
+		/// <summary>
+		/// The array of identifier for addresses. 
+		/// </summary>
 		public PrestaShopIdentifier[] addresses { get; set; }
 
+		/// <summary>
+		/// The array of identifier for combinations. 
+		/// </summary>
 		public PrestaShopIdentifier[] combinations { get; set; }
 
+		/// <summary>
+		/// The array of identifier for order rows. 
+		/// </summary>
 		public PrestaShopOrderRow[] order_rows { get; set; }
 
+		/// <summary>
+		/// The array of identifier for product features. 
+		/// </summary>
 		public PrestaShopIdentifier[] product_features { get; set; }
 
+		/// <summary>
+		/// The array of identifier for stock avaibles. 
+		/// </summary>
 		public PrestaShopIdentifier[] stock_avaibles { get; set; }
 
 	}
@@ -8138,8 +8254,6 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		public Int32 id_category { get; set; }
 
 		public Boolean active { get; set; }
-
-		public Boolean deleted { get; set; }
 
 		public string name { get; set; }
 
@@ -9045,8 +9159,6 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 
 		public string secure_key { get; set; }
 
-		public Boolean deleted { get; set; }
-
 		public string passwd { get; set; }
 
 		public string lastname { get; set; }
@@ -9086,10 +9198,6 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		public Boolean is_guest { get; set; }
 
 		public Int32 id_shop { get; set; }
-
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
 
 		public string reset_password_token { get; set; }
 
@@ -9553,570 +9661,1283 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'addresses'. Can be used when add new address. 
+	/// </summary>
 	public class PrestaShopAddressIn
 	{
+		/// <summary>
+		/// The identifier customer wich belongs to. 
+		/// </summary>
 		public Int32 id_customer { get; set; }
 
+		/// <summary>
+		/// The identifier manufacturer wich belongs to. 
+		/// </summary>
 		public Int32 id_manufacturer { get; set; }
 
-		public Int32 in_supplier { get; set; }
+		/// <summary>
+		/// The identifier supplier wich belongs to. 
+		/// </summary>
+		public Int32 id_supplier { get; set; }
 
+		/// <summary>
+		/// The identifier warehouse wich belongs to. 
+		/// </summary>
 		public Int32 id_warehouse { get; set; }
 
+		/// <summary>
+		/// The identifier country wich belongs to. 
+		/// </summary>
 		public Int32 id_country { get; set; }
 
+		/// <summary>
+		/// The identifier state wich belongs to. 
+		/// </summary>
 		public Int32 id_state { get; set; }
 
+		/// <summary>
+		/// The alias. (eg. Home, Work...) 
+		/// </summary>
 		public string alias { get; set; }
 
+		/// <summary>
+		/// The company. (Optional) 
+		/// </summary>
 		public string company { get; set; }
 
+		/// <summary>
+		/// The last name. 
+		/// </summary>
 		public string lastname { get; set; }
 
+		/// <summary>
+		/// The first name. 
+		/// </summary>
 		public string firstname { get; set; }
 
+		/// <summary>
+		/// The vat number. 
+		/// </summary>
 		public string vat_number { get; set; }
 
+		/// <summary>
+		/// The first address. 
+		/// </summary>
 		public string address1 { get; set; }
 
+		/// <summary>
+		/// The second address. (Optional) 
+		/// </summary>
 		public string address2 { get; set; }
 
+		/// <summary>
+		/// The postal code. 
+		/// </summary>
 		public Int32 postcode { get; set; }
 
+		/// <summary>
+		/// The city name. 
+		/// </summary>
 		public string city { get; set; }
 
+		/// <summary>
+		/// Other useful information. 
+		/// </summary>
 		public string other { get; set; }
 
+		/// <summary>
+		/// The phone number. 
+		/// </summary>
 		public string phone { get; set; }
 
+		/// <summary>
+		/// The mobile phone number. 
+		/// </summary>
 		public string phone_mobile { get; set; }
 
+		/// <summary>
+		/// The dni number. 
+		/// </summary>
 		public string dni { get; set; }
-
-		public Boolean deleted { get; set; }
-
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'address'. Used when need get information about address. 
+	/// </summary>
 	public class PrestaShopAddress
 	{
+		/// <summary>
+		/// The address identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
-		public Int32 id_customer { get; set; }
-
+		/// <summary>
+		/// The identifier manufacturer wich belongs to. 
+		/// </summary>
 		public Int32 id_manufacturer { get; set; }
 
-		public Int32 in_supplier { get; set; }
+		/// <summary>
+		/// The identifier supplier wich belongs to. 
+		/// </summary>
+		public Int32 id_supplier { get; set; }
 
+		/// <summary>
+		/// The identifier warehouse wich belongs to. 
+		/// </summary>
 		public Int32 id_warehouse { get; set; }
 
+		/// <summary>
+		/// The identifier country wich belongs to. 
+		/// </summary>
 		public Int32 id_country { get; set; }
 
+		/// <summary>
+		/// The identifier state wich belongs to. 
+		/// </summary>
 		public Int32 id_state { get; set; }
 
+		/// <summary>
+		/// The alias. (eg. Home, Work...) 
+		/// </summary>
 		public string alias { get; set; }
 
+		/// <summary>
+		/// The company. (Optional) 
+		/// </summary>
 		public string company { get; set; }
 
+		/// <summary>
+		/// The last name. 
+		/// </summary>
 		public string lastname { get; set; }
 
+		/// <summary>
+		/// The first name. 
+		/// </summary>
 		public string firstname { get; set; }
 
+		/// <summary>
+		/// The vat number. 
+		/// </summary>
 		public string vat_number { get; set; }
 
+		/// <summary>
+		/// The first address. 
+		/// </summary>
 		public string address1 { get; set; }
 
+		/// <summary>
+		/// The second address. (Optional) 
+		/// </summary>
 		public string address2 { get; set; }
 
+		/// <summary>
+		/// The postal code. 
+		/// </summary>
 		public Int32 postcode { get; set; }
 
+		/// <summary>
+		/// The city name. 
+		/// </summary>
 		public string city { get; set; }
 
+		/// <summary>
+		/// Other useful information. 
+		/// </summary>
 		public string other { get; set; }
 
+		/// <summary>
+		/// The phone number. 
+		/// </summary>
 		public string phone { get; set; }
 
+		/// <summary>
+		/// The mobile phone number. 
+		/// </summary>
 		public string phone_mobile { get; set; }
 
+		/// <summary>
+		/// The dni number. 
+		/// </summary>
 		public string dni { get; set; }
 
+		/// <summary>
+		/// True if address has been deleted (staying in database as deleted). 
+		/// </summary>
 		public Boolean deleted { get; set; }
 
+		/// <summary>
+		/// When address was added. 
+		/// </summary>
 		public string date_add { get; set; }
 
+		/// <summary>
+		/// When address was updated. 
+		/// </summary>
 		public string date_upd { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation for PrestaShop 'carriers'. Can be used when add new carrier. 
+	/// </summary>
 	public class PrestaShopCarrierIn
 	{
-		public Boolean deleted { get; set; }
-
-		public Boolean is_module { get; set; }
-
+		/// <summary>
+		/// The identifier tax rules group. 
+		/// </summary>
 		public Int32 id_tax_rules_group { get; set; }
 
-		public Int32 id_reference { get; set; }
-
+		/// <summary>
+		/// The carrier name. (Max: 64 characters) 
+		/// </summary>
 		public string name { get; set; }
 
+		/// <summary>
+		/// Carrier module. 
+		/// </summary>
+		public Boolean is_module { get; set; }
+
+		/// <summary>
+		/// Carrier statuts. 
+		/// </summary>
 		public Boolean active { get; set; }
 
+		/// <summary>
+		/// Free carrier. 
+		/// </summary>
 		public Boolean is_free { get; set; }
 
+		/// <summary>
+		/// URL with a '@'. 
+		/// </summary>
 		public string url { get; set; }
 
+		/// <summary>
+		/// True active the shipping handling 
+		/// </summary>
 		public Int32 shipping_handling { get; set; }
 
+		/// <summary>
+		/// Shipping external. 
+		/// </summary>
 		public Int32 shipping_external { get; set; }
 
+		/// <summary>
+		/// Behavior taken for unknown range. 
+		/// </summary>
 		public Int32 range_behavior { get; set; }
 
+		/// <summary>
+		/// Shipping behavior: 0 - by weight or 1 - by price. 
+		/// </summary>
 		public Int32 shipping_method { get; set; }
 
+		/// <summary>
+		/// The maximum package width managed by the transporter. 
+		/// </summary>
 		public Int32 max_width { get; set; }
 
+		/// <summary>
+		/// The maximum package height managed by the transporter. 
+		/// </summary>
 		public Int32 max_height { get; set; }
 
+		/// <summary>
+		/// The maximum package deep managed by the transporter. 
+		/// </summary>
 		public Int32 max_depth { get; set; }
 
+		/// <summary>
+		/// The maximum package weight managed by the transporter. 
+		/// </summary>
 		public Single max_weight { get; set; }
 
+		/// <summary>
+		/// Grade of the shipping delay (0 for longest, 9 for shortest). 
+		/// </summary>
 		public Int32 grade { get; set; }
 
+		/// <summary>
+		/// The name of the external module. 
+		/// </summary>
 		public string external_module_name { get; set; }
 
+		/// <summary>
+		/// Need range. 
+		/// </summary>
 		public Int32 need_range { get; set; }
 
+		/// <summary>
+		/// The position. 
+		/// </summary>
 		public Int32 position { get; set; }
 
+		/// <summary>
+		/// Delay needed to deliver customer. (Max: 512 characters) 
+		/// </summary>
 		public string delay { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation for PrestaShop 'carriers'. Used when need get information about carrier. 
+	/// </summary>
 	public class PrestaShopCarrier
 	{
+		/// <summary>
+		/// The carrier identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// True if carrier has been deleted (staying in database as deleted) 
+		/// </summary>
 		public Boolean deleted { get; set; }
 
-		public Boolean is_module { get; set; }
-
+		/// <summary>
+		/// The identifier tax rules group. 
+		/// </summary>
 		public Int32 id_tax_rules_group { get; set; }
 
+		/// <summary>
+		/// Common id for carrier historization. 
+		/// </summary>
 		public Int32 id_reference { get; set; }
 
+		/// <summary>
+		/// The carrier name. 
+		/// </summary>
 		public string name { get; set; }
 
+		/// <summary>
+		/// Carrier module. 
+		/// </summary>
+		public Boolean is_module { get; set; }
+
+		/// <summary>
+		/// Carrier statuts. 
+		/// </summary>
 		public Boolean active { get; set; }
 
+		/// <summary>
+		/// Free carrier. 
+		/// </summary>
 		public Boolean is_free { get; set; }
 
+		/// <summary>
+		/// URL with a '@'. 
+		/// </summary>
 		public string url { get; set; }
 
+		/// <summary>
+		/// Active or not the shipping handling 
+		/// </summary>
 		public Int32 shipping_handling { get; set; }
 
+		/// <summary>
+		/// Shipping external. 
+		/// </summary>
 		public Int32 shipping_external { get; set; }
 
+		/// <summary>
+		/// Behavior taken for unknown range. 
+		/// </summary>
 		public Int32 range_behavior { get; set; }
 
+		/// <summary>
+		/// Shipping behavior: 0 - by weight or 1 - by price. 
+		/// </summary>
 		public Int32 shipping_method { get; set; }
 
+		/// <summary>
+		/// The maximum package width managed by the transporter. 
+		/// </summary>
 		public Int32 max_width { get; set; }
 
+		/// <summary>
+		/// The maximum package height managed by the transporter. 
+		/// </summary>
 		public Int32 max_height { get; set; }
 
+		/// <summary>
+		/// The maximum package deep managed by the transporter. 
+		/// </summary>
 		public Int32 max_depth { get; set; }
 
+		/// <summary>
+		/// The maximum package weight managed by the transporter. 
+		/// </summary>
 		public Single max_weight { get; set; }
 
+		/// <summary>
+		/// Grade of the shipping delay (0 for longest, 9 for shortest). 
+		/// </summary>
 		public Int32 grade { get; set; }
 
+		/// <summary>
+		/// The name of the external module. 
+		/// </summary>
 		public string external_module_name { get; set; }
 
+		/// <summary>
+		/// Need range. 
+		/// </summary>
 		public Int32 need_range { get; set; }
 
+		/// <summary>
+		/// The position. 
+		/// </summary>
 		public Int32 position { get; set; }
 
+		/// <summary>
+		/// Delay needed to deliver customer. 
+		/// </summary>
 		public string delay { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'cart rules'. Can be used when add new cart rule (voucher). 
+	/// </summary>
 	public class PrestaShopCartRuleIn
 	{
+		/// <summary>
+		/// The name of cart rule. 
+		/// </summary>
+		public string name { get; set; }
+
+		/// <summary>
+		/// The customer identifier. (Limit for single customer, set zero if doesn't need.) 
+		/// </summary>
 		public Int32 id_customer { get; set; }
 
+		/// <summary>
+		/// When cart rule is valid from date. (Format: Y-m-d 00:00:00) 
+		/// </summary>
 		public string date_from { get; set; }
 
+		/// <summary>
+		/// When cart rule is valid to date. (Format: Y-m-d 00:00:00) 
+		/// </summary>
 		public string date_to { get; set; }
 
+		/// <summary>
+		/// Description about cart rule. (Max:65534 characters.) 
+		/// </summary>
 		public string description { get; set; }
 
+		/// <summary>
+		/// The count of avaibles voucher for customer. 
+		/// </summary>
 		public Int32 quantity { get; set; }
 
+		/// <summary>
+		/// The count of avaibles voucher for every customer. 
+		/// </summary>
 		public Int32 quantity_per_user { get; set; }
 
+		/// <summary>
+		/// If applied higher number, the voucher will applied after vouchers with lower number. 
+		/// </summary>
 		public Int32 priority { get; set; }
 
-		public Int32 partial_use { get; set; }
+		/// <summary>
+		/// If true voucher can be used once. 
+		/// </summary>
+		public Boolean partial_use { get; set; }
 
+		/// <summary>
+		/// The code for applying the voucher to customers when ordering process. (Max:254 characters.) 
+		/// </summary>
 		public string code { get; set; }
 
+		/// <summary>
+		/// The minimum order amount(with tax included) from which voucher is applicable. 
+		/// </summary>
 		public Single minimum_amount { get; set; }
 
-		public Single minimum_amount_tax { get; set; }
+		/// <summary>
+		/// If true, tax will included. 
+		/// </summary>
+		public Boolean minimum_amount_tax { get; set; }
 
-		public Single minimum_amount_currency { get; set; }
+		/// <summary>
+		/// The currency identifier. 
+		/// </summary>
+		public Int32 minimum_amount_currency { get; set; }
 
-		public Single minimum_amount_shipping { get; set; }
+		/// <summary>
+		/// If true, the shipping will used. 
+		/// </summary>
+		public Boolean minimum_amount_shipping { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable to customers from a specific country who not restricted. 
+		/// </summary>
 		public Boolean country_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific carrier who not restricted. 
+		/// </summary>
 		public Boolean carrier_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable to customers with a specific group who not restricted. 
+		/// </summary>
 		public Boolean group_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific cart rule who not restricted. 
+		/// </summary>
 		public Boolean cart_rule_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific product who not restricted. 
+		/// </summary>
 		public Boolean product_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific shop who not restricted. 
+		/// </summary>
 		public Boolean shop_restriction { get; set; }
 
+		/// <summary>
+		/// If true, free shipping for benefiting customers. 
+		/// </summary>
 		public Boolean free_shipping { get; set; }
 
+		/// <summary>
+		/// A percentage of the order total. 
+		/// </summary>
 		public Single reduction_percent { get; set; }
 
+		/// <summary>
+		/// A monetary discount on the order total. 
+		/// </summary>
 		public Single reduction_amount { get; set; }
 
-		public Int32 reduction_tax { get; set; }
+		/// <summary>
+		/// If true, will tax will included. 
+		/// </summary>
+		public Boolean reduction_tax { get; set; }
 
+		/// <summary>
+		/// The currency identifier. 
+		/// </summary>
 		public Int32 reduction_currency { get; set; }
 
+		/// <summary>
+		/// The product identifier for which apply reduction. 
+		/// </summary>
 		public Int32 reduction_product { get; set; }
 
-		public Int32 reduction_exclude_special { get; set; }
+		/// <summary>
+		/// If true, exclude special reduction. 
+		/// </summary>
+		public Boolean reduction_exclude_special { get; set; }
 
+		/// <summary>
+		/// The product identifier. 
+		/// </summary>
 		public Int32 gift_product { get; set; }
 
+		/// <summary>
+		/// The product attribute identifier. 
+		/// </summary>
 		public Int32 gift_product_attribute { get; set; }
 
+		/// <summary>
+		/// If true, it will let the user know that a voucher is available. 
+		/// </summary>
 		public Boolean highlight { get; set; }
 
+		/// <summary>
+		/// True activate cart rule. 
+		/// </summary>
 		public Boolean active { get; set; }
-
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
-
-		public string name { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'cart rules'. Used for get information about cart rule (voucher). 
+	/// </summary>
 	public class PrestaShopCartRule
 	{
+		/// <summary>
+		/// The cart rule identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// The name of cart rule. 
+		/// </summary>
+		public string name { get; set; }
+
+		/// <summary>
+		/// The customer identifier. (Limit for single customer, set zero if doesn't need.) 
+		/// </summary>
 		public Int32 id_customer { get; set; }
 
+		/// <summary>
+		/// When cart rule is valid from date. (Format: Y-m-d 00:00:00) 
+		/// </summary>
 		public string date_from { get; set; }
 
+		/// <summary>
+		/// When cart rule is valid to date. (Format: Y-m-d 00:00:00) 
+		/// </summary>
 		public string date_to { get; set; }
 
+		/// <summary>
+		/// Description about cart rule. 
+		/// </summary>
 		public string description { get; set; }
 
+		/// <summary>
+		/// The count of avaibles voucher for customer. 
+		/// </summary>
 		public Int32 quantity { get; set; }
 
+		/// <summary>
+		/// The count of avaibles voucher for every customer. 
+		/// </summary>
 		public Int32 quantity_per_user { get; set; }
 
+		/// <summary>
+		/// If applied higher number, the voucher will applied after vouchers with lower number. 
+		/// </summary>
 		public Int32 priority { get; set; }
 
-		public Int32 partial_use { get; set; }
+		/// <summary>
+		/// If true voucher can be used once. 
+		/// </summary>
+		public Boolean partial_use { get; set; }
 
+		/// <summary>
+		/// The code for applying the voucher to customers when ordering process. 
+		/// </summary>
 		public string code { get; set; }
 
+		/// <summary>
+		/// The minimum order amount(with tax included) from which voucher is applicable. 
+		/// </summary>
 		public Single minimum_amount { get; set; }
 
-		public Single minimum_amount_tax { get; set; }
+		/// <summary>
+		/// If true, tax will included. 
+		/// </summary>
+		public Boolean minimum_amount_tax { get; set; }
 
-		public Single minimum_amount_currency { get; set; }
+		/// <summary>
+		/// The currency identifier. 
+		/// </summary>
+		public Int32 minimum_amount_currency { get; set; }
 
-		public Single minimum_amount_shipping { get; set; }
+		/// <summary>
+		/// If true, the shipping will used. 
+		/// </summary>
+		public Boolean minimum_amount_shipping { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable to customers from a specific country who not restricted. 
+		/// </summary>
 		public Boolean country_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific carrier who not restricted. 
+		/// </summary>
 		public Boolean carrier_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable to customers with a specific group who not restricted. 
+		/// </summary>
 		public Boolean group_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific cart rule who not restricted. 
+		/// </summary>
 		public Boolean cart_rule_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific product who not restricted. 
+		/// </summary>
 		public Boolean product_restriction { get; set; }
 
+		/// <summary>
+		/// If true voucher applicable for a specific shop who not restricted. 
+		/// </summary>
 		public Boolean shop_restriction { get; set; }
 
+		/// <summary>
+		/// If true, free shipping for benefiting customers. 
+		/// </summary>
 		public Boolean free_shipping { get; set; }
 
+		/// <summary>
+		/// A percentage of the order total. 
+		/// </summary>
 		public Single reduction_percent { get; set; }
 
+		/// <summary>
+		/// A monetary discount on the order total. 
+		/// </summary>
 		public Single reduction_amount { get; set; }
 
-		public Int32 reduction_tax { get; set; }
+		/// <summary>
+		/// If true, will tax will included. 
+		/// </summary>
+		public Boolean reduction_tax { get; set; }
 
+		/// <summary>
+		/// The currency identifier. 
+		/// </summary>
 		public Int32 reduction_currency { get; set; }
 
+		/// <summary>
+		/// The product identifier for which apply reduction. 
+		/// </summary>
 		public Int32 reduction_product { get; set; }
 
-		public Int32 reduction_exclude_special { get; set; }
+		/// <summary>
+		/// If true, exclude special reduction. 
+		/// </summary>
+		public Boolean reduction_exclude_special { get; set; }
 
+		/// <summary>
+		/// The product identifier. 
+		/// </summary>
 		public Int32 gift_product { get; set; }
 
+		/// <summary>
+		/// The product attribute identifier. 
+		/// </summary>
 		public Int32 gift_product_attribute { get; set; }
 
+		/// <summary>
+		/// If true, it will let the user know that a voucher is available. 
+		/// </summary>
 		public Boolean highlight { get; set; }
 
+		/// <summary>
+		/// True activate cart rule. 
+		/// </summary>
 		public Boolean active { get; set; }
 
+		/// <summary>
+		/// When added. 
+		/// </summary>
 		public string date_add { get; set; }
 
+		/// <summary>
+		/// When updated. 
+		/// </summary>
 		public string date_upd { get; set; }
-
-		public string name { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'carts'.  Can be used when add new cart for customer. 
+	/// </summary>
 	public class PrestaShopCartIn
 	{
+		/// <summary>
+		/// Customer delivery address identifier. 
+		/// </summary>
 		public Int32 id_address_delivery { get; set; }
 
+		/// <summary>
+		/// Customer invoicing address identifier. 
+		/// </summary>
 		public Int32 id_address_invoice { get; set; }
 
+		/// <summary>
+		/// Customer currency identifier. 
+		/// </summary>
 		public Int32 id_currency { get; set; }
 
+		/// <summary>
+		/// Customer identifier. 
+		/// </summary>
 		public Int32 id_customer { get; set; }
 
+		/// <summary>
+		/// Guest identifier. 
+		/// </summary>
 		public Int32 id_guest { get; set; }
 
+		/// <summary>
+		/// Language identifier. 
+		/// </summary>
 		public Int32 id_lang { get; set; }
 
-		public Int32 id_shop_group { get; set; }
-
-		public Int32 id_shop { get; set; }
-
+		/// <summary>
+		/// Carrier identifier. 
+		/// </summary>
 		public Int32 id_carrier { get; set; }
 
-		public Int32 recyclable { get; set; }
+		/// <summary>
+		/// True if the customer wants a recycled package. 
+		/// </summary>
+		public Boolean recyclable { get; set; }
 
-		public Int32 gift { get; set; }
+		/// <summary>
+		/// True if the customer wants a gift wrapping. 
+		/// </summary>
+		public Boolean gift { get; set; }
 
+		/// <summary>
+		/// Gift message if specified. 
+		/// </summary>
 		public string gift_message { get; set; }
 
-		public Int32 mobile_theme { get; set; }
+		/// <summary>
+		/// True if use mobile theme. 
+		/// </summary>
+		public Boolean mobile_theme { get; set; }
 
-		public string delivery_option { get; set; }
-
+		/// <summary>
+		/// The secure key. (Max:32 characters.) 
+		/// </summary>
 		public string secure_key { get; set; }
 
+		/// <summary>
+		/// True if allow seperated package. 
+		/// </summary>
 		public Boolean allow_seperated_package { get; set; }
-
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'cart'. Used when need get information about customer cart. 
+	/// </summary>
 	public class PrestaShopCart
 	{
-		public Int32 id { get; set; }
-
+		/// <summary>
+		/// Customer delivery address identifier. 
+		/// </summary>
 		public Int32 id_address_delivery { get; set; }
 
+		/// <summary>
+		/// Customer invoicing address identifier. 
+		/// </summary>
 		public Int32 id_address_invoice { get; set; }
 
+		/// <summary>
+		/// Customer currency identifier. 
+		/// </summary>
 		public Int32 id_currency { get; set; }
 
+		/// <summary>
+		/// Customer identifier. 
+		/// </summary>
 		public Int32 id_customer { get; set; }
 
+		/// <summary>
+		/// Guest identifier. 
+		/// </summary>
 		public Int32 id_guest { get; set; }
 
+		/// <summary>
+		/// Language identifier. 
+		/// </summary>
 		public Int32 id_lang { get; set; }
 
-		public Int32 id_shop_group { get; set; }
-
-		public Int32 id_shop { get; set; }
-
+		/// <summary>
+		/// Carrier identifier. 
+		/// </summary>
 		public Int32 id_carrier { get; set; }
 
-		public Int32 recyclable { get; set; }
+		/// <summary>
+		/// The shop group identifier. 
+		/// </summary>
+		public Int32 id_shop_group { get; set; }
 
-		public Int32 gift { get; set; }
+		/// <summary>
+		/// The shop identifier. 
+		/// </summary>
+		public Int32 id_shop { get; set; }
 
+		/// <summary>
+		/// True if the customer wants a recycled package. 
+		/// </summary>
+		public Boolean recyclable { get; set; }
+
+		/// <summary>
+		/// True if the customer wants a gift wrapping. 
+		/// </summary>
+		public Boolean gift { get; set; }
+
+		/// <summary>
+		/// Gift message if specified. 
+		/// </summary>
 		public string gift_message { get; set; }
 
-		public Int32 mobile_theme { get; set; }
+		/// <summary>
+		/// True if use mobile theme. 
+		/// </summary>
+		public Boolean mobile_theme { get; set; }
 
-		public string delivery_option { get; set; }
-
+		/// <summary>
+		/// The secure key. (Max:32 characters.) 
+		/// </summary>
 		public string secure_key { get; set; }
 
+		/// <summary>
+		/// True if allow seperated package. 
+		/// </summary>
 		public Boolean allow_seperated_package { get; set; }
 
+		/// <summary>
+		/// The delivery option. 
+		/// </summary>
+		public string delivery_option { get; set; }
+
+		/// <summary>
+		/// When cart added. 
+		/// </summary>
 		public string date_add { get; set; }
 
+		/// <summary>
+		/// When cart updated. 
+		/// </summary>
 		public string date_upd { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'category'. Can be used when add new category. 
+	/// </summary>
 	public class PrestaShopCategoryIn
 	{
+		/// <summary>
+		/// The category parent identfier. (Set zero if no parent) 
+		/// </summary>
 		public Int32 id_parent { get; set; }
 
+		/// <summary>
+		/// Parents number. 
+		/// </summary>
 		public Int32 level_depth { get; set; }
 
-		public Int32 nb_products_recursive { get; set; }
-
+		/// <summary>
+		/// True display category. 
+		/// </summary>
 		public Boolean active { get; set; }
 
+		/// <summary>
+		/// The identifier default shop. 
+		/// </summary>
 		public Int32 id_shop_default { get; set; }
 
+		/// <summary>
+		/// True set category to root. 
+		/// </summary>
 		public Boolean is_root_category { get; set; }
 
+		/// <summary>
+		/// Category position. 
+		/// </summary>
 		public Int32 position { get; set; }
 
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
-
+		/// <summary>
+		/// The name of category. (Max: 128 characters.) 
+		/// </summary>
 		public string name { get; set; }
 
+		/// <summary>
+		/// Used in rewrited URL. (Max: 128 characters.) 
+		/// </summary>
 		public string link_rewrite { get; set; }
 
+		/// <summary>
+		/// The description of category. 
+		/// </summary>
 		public string description { get; set; }
 
+		/// <summary>
+		/// The category meta title. (Max: 128 characters.) 
+		/// </summary>
 		public string meta_title { get; set; }
 
+		/// <summary>
+		/// The category meta description. (Max: 255 characters.) 
+		/// </summary>
 		public string meta_description { get; set; }
 
+		/// <summary>
+		/// The category meta keywords. (Max: 255 characters.) 
+		/// </summary>
 		public string meta_keywords { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'category'. Used when need get information about category. 
+	/// </summary>
 	public class PrestaShopCategory
 	{
+		/// <summary>
+		/// The category identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// The category parent identfier. (Set zero if no parent) 
+		/// </summary>
 		public Int32 id_parent { get; set; }
 
+		/// <summary>
+		/// Parents number. 
+		/// </summary>
 		public Int32 level_depth { get; set; }
 
-		public Int32 nb_products_recursive { get; set; }
-
+		/// <summary>
+		/// True display category. 
+		/// </summary>
 		public Boolean active { get; set; }
 
+		/// <summary>
+		/// The identifier default shop. 
+		/// </summary>
 		public Int32 id_shop_default { get; set; }
 
+		/// <summary>
+		/// True set category to root. 
+		/// </summary>
 		public Boolean is_root_category { get; set; }
 
+		/// <summary>
+		/// Category position. 
+		/// </summary>
 		public Int32 position { get; set; }
 
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
-
+		/// <summary>
+		/// The bame of category. 
+		/// </summary>
 		public string name { get; set; }
 
+		/// <summary>
+		/// Used in rewrited URL. 
+		/// </summary>
 		public string link_rewrite { get; set; }
 
+		/// <summary>
+		/// The description of category. 
+		/// </summary>
 		public string description { get; set; }
 
+		/// <summary>
+		/// The category meta title. 
+		/// </summary>
 		public string meta_title { get; set; }
 
+		/// <summary>
+		/// The category meta description. 
+		/// </summary>
 		public string meta_description { get; set; }
 
+		/// <summary>
+		/// The category meta keywords. 
+		/// </summary>
 		public string meta_keywords { get; set; }
 
+		/// <summary>
+		/// When added. 
+		/// </summary>
+		public string date_add { get; set; }
+
+		/// <summary>
+		/// When updated. 
+		/// </summary>
+		public string date_upd { get; set; }
+
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'combination'. Can be used whe add new combination. 
+	/// </summary>
 	public class PrestaShopCombinationIn
 	{
+		/// <summary>
+		/// The product identifier. (Required) 
+		/// </summary>
 		public Int32 id_product { get; set; }
 
+		/// <summary>
+		/// The location. (Max: 64 characters.) 
+		/// </summary>
 		public string location { get; set; }
 
+		/// <summary>
+		/// The ean13 product code. (Max: 13 characters.) 
+		/// </summary>
 		public string ean13 { get; set; }
 
+		/// <summary>
+		/// The isbn product code. (Max: 32 characters.) 
+		/// </summary>
 		public string isbn { get; set; }
 
+		/// <summary>
+		/// The upc product code. (Max: 12 characters.) 
+		/// </summary>
 		public string upc { get; set; }
 
-		public Int32 quantity { get; set; }
-
+		/// <summary>
+		/// The reference to product. (Max: 32 characters.) 
+		/// </summary>
 		public string reference { get; set; }
 
+		/// <summary>
+		/// The reference to supplier. (Max: 32 characters.) 
+		/// </summary>
 		public string supplier_reference { get; set; }
 
+		/// <summary>
+		/// The wholesale price.(Max: 27 characters.) 
+		/// </summary>
 		public Single wholesale_price { get; set; }
 
+		/// <summary>
+		/// The product price.(Max: 20 characters.) 
+		/// </summary>
 		public Single price { get; set; }
 
+		/// <summary>
+		/// The eco-tax.(Max: 20 characters.) 
+		/// </summary>
 		public Single ecotax { get; set; }
 
+		/// <summary>
+		/// Product weight. 
+		/// </summary>
 		public Single weight { get; set; }
 
+		/// <summary>
+		/// Unit price impact. (Max: 20 characters.) 
+		/// </summary>
 		public Single unit_price_impact { get; set; }
 
+		/// <summary>
+		/// The minimal quantity. (Required) 
+		/// </summary>
 		public Int32 minimal_quantity { get; set; }
 
+		/// <summary>
+		/// True combination default on. 
+		/// </summary>
 		public Nullable<Boolean> default_on { get; set; }
 
+		/// <summary>
+		/// When product avaible. (Format: Y-m-d) 
+		/// </summary>
 		public string available_date { get; set; }
 
+		/// <summary>
+		/// The product which is associated with the category. 
+		/// </summary>
 		public PrestaShopAssociations associations { get; set; }
 
 	}
 
+	///<summary>
+	/// Implementation class for PrestaShop 'combination'. Used when get information about combination. 
+	/// </summary>
 	public class PrestaShopCombination
 	{
+		/// <summary>
+		/// The combination identifier. 
+		/// </summary>
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// The product identifier. (Required) 
+		/// </summary>
 		public Int32 id_product { get; set; }
 
+		/// <summary>
+		/// The location. (Max: 64 characters.) 
+		/// </summary>
 		public string location { get; set; }
 
+		/// <summary>
+		/// The ean13 product code. (Max: 13 characters.) 
+		/// </summary>
 		public string ean13 { get; set; }
 
+		/// <summary>
+		/// The isbn product code. (Max: 32 characters.) 
+		/// </summary>
 		public string isbn { get; set; }
 
+		/// <summary>
+		/// The upc product code. (Max: 12 characters.) 
+		/// </summary>
 		public string upc { get; set; }
 
-		public Int32 quantity { get; set; }
-
+		/// <summary>
+		/// The reference to product. (Max: 32 characters.) 
+		/// </summary>
 		public string reference { get; set; }
 
+		/// <summary>
+		/// The reference to supplier. (Max: 32 characters.) 
+		/// </summary>
 		public string supplier_reference { get; set; }
 
+		/// <summary>
+		/// The wholesale price.(Max: 27 characters.) 
+		/// </summary>
 		public Single wholesale_price { get; set; }
 
+		/// <summary>
+		/// The product price.(Max: 20 characters.) 
+		/// </summary>
 		public Single price { get; set; }
 
+		/// <summary>
+		/// The eco-tax.(Max: 20 characters.) 
+		/// </summary>
 		public Single ecotax { get; set; }
 
+		/// <summary>
+		/// Product weight. 
+		/// </summary>
 		public Single weight { get; set; }
 
+		/// <summary>
+		/// Unit price impact. (Max: 20 characters.) 
+		/// </summary>
 		public Single unit_price_impact { get; set; }
 
+		/// <summary>
+		/// The minimal quantity. (Required) 
+		/// </summary>
 		public Int32 minimal_quantity { get; set; }
 
+		/// <summary>
+		/// True combination default on. 
+		/// </summary>
 		public Nullable<Boolean> default_on { get; set; }
 
+		/// <summary>
+		/// When product avaible. (Format: Y-m-d) 
+		/// </summary>
 		public string available_date { get; set; }
 
+		/// <summary>
+		/// The product which is associated with the category. 
+		/// </summary>
 		public PrestaShopAssociations associations { get; set; }
 
 	}
 
+	///<summary>
+	/// Implemention class for PrestaShop 'configuration'. Can be used when add new configuration. 
+	/// </summary>
 	public class PrestaShopConfigurationIn
 	{
 		public string value { get; set; }
@@ -10126,10 +10947,6 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		public Int32 id_shop_group { get; set; }
 
 		public Int32 id_shop { get; set; }
-
-		public string date_add { get; set; }
-
-		public string date_upd { get; set; }
 
 	}
 

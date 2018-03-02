@@ -7,13 +7,22 @@ using System.IO;
 using System.Dynamic;
 using bNesis.Api.Desktop;
 using bNesis.Sdk.Common;
-using bNesis.Sdk.Delivery.UkrPoshta;
 
 namespace bNesis.Sdk.Test.bNesisTestService
 {
 	public class bNesisTestService  
 	{
+		/// <summary>
+		/// bNesisToken is a unique identifier of the current service work session
+		/// bNesisToken is relevant only after successful authorization in the service.
+		/// The Auth() method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// The LogoffService() method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>		
 		public string bNesisToken {get; private set;}
+
+		/// <summary>
+		/// bNesis Core object
+		/// </summary>
 		private DesktopbNesisApi bNesisApi;
 
 		public bNesisTestService(DesktopbNesisApi bNesisApi)
@@ -21,13 +30,27 @@ namespace bNesis.Sdk.Test.bNesisTestService
 			this.bNesisApi = bNesisApi;
 		}
 
+		/// <summary>
+		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+		/// </summary>
+		/// <returns>bNesisToken value</returns>	
 		public string Auth(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
 		{
-
 			bNesisToken = bNesisApi.Auth("bNesisTestProvider", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-
 			return bNesisToken;
 		}
+
+		/// <summary>
+		/// The method stops the authorization session with the service and clears the value of bNesisToken.
+		/// </summary>
+		/// <returns>true - if service logoff is successful</returns>
+		public bool LogoffService()
+		{
+			bool result = bNesisApi.LogoffService("bNesisTestProvider", bNesisToken);
+			if (result) bNesisToken = string.Empty;
+			return result;             
+		}
+
 
 		///<summary>
 		/// Getting last exception for current provider 
@@ -1218,5 +1241,340 @@ namespace bNesis.Sdk.Test.bNesisTestService
 		{
 			return bNesisApi.Call<Object>("bNesisTestService", bNesisToken, "testE10", isArrayOfSimple);
 		}
+}
+	public class ShipmentIn
+	{
+		/// <summary>
+		/// Repient phone. 
+		/// </summary>
+		public string recipientPhone { get; set; }
+
+		/// <summary>
+		/// Recipient email. 
+		/// </summary>
+		public string recipientEmail { get; set; }
+
+		/// <summary>
+		/// Recipient address id. 
+		/// </summary>
+		public string recipientAddressId { get; set; }
+
+		/// <summary>
+		/// Return address id, may be specified additionally, if not specified will used main address where 'main' is true. 
+		/// </summary>
+		public string returnAddressId { get; set; }
+
+		/// <summary>
+		/// Identificator of shipment group, if sending is a group. 
+		/// </summary>
+		public string shipmentGroupUuid { get; set; }
+
+		/// <summary>
+		/// External ID of departure at the base counterparty. 
+		/// </summary>
+		public string externalId { get; set; }
+
+		/// <summary>
+		/// Delivery type(for international shippment). 
+		/// </summary>
+		public string deliveryType { get; set; }
+
+		/// <summary>
+		/// Actions with shipment in case the recipient did not take it.
+		///  RETURN - return to the sender.RETURN_AFTER_F REE_STORAGE - return after the expiration of free storage.PROCESS_AS_REF USAL - destroy the parcel.By default RETURN. 
+		/// </summary>
+		public string onFailReceiveType { get; set; }
+
+		/// <summary>
+		/// Postpay in UAH may not be higher than the stated price. 
+		/// </summary>
+		public Int64 postPay { get; set; }
+
+		/// <summary>
+		/// Description or comments (max 255 characters). 
+		/// </summary>
+		public string description { get; set; }
+
+		/// <summary>
+		/// Payment for the shipment upon receipt. 
+		///  true - payment by the recipient.false - payment sender.By default, false. 
+		/// </summary>
+		public Boolean paidByRecipient { get; set; }
+
+		/// <summary>
+		/// Payment by cashless payment.
+		///  true - non-cash.false - cash.By default, true. 
+		/// </summary>
+		public Boolean nonCashPayment { get; set; }
+
+		/// <summary>
+		/// The note is a bulky parcel.
+		///  true - cumbersomefalse - not cumbersomeBy default false 
+		/// </summary>
+		public Boolean bulky { get; set; }
+
+		/// <summary>
+		/// The note is a fragile parcel.
+		///  true - brittle.false - not fragile.By default false. 
+		/// </summary>
+		public Boolean fragile { get; set; }
+
+		/// <summary>
+		/// Bee pointing.
+		///  By default false. 
+		/// </summary>
+		public Boolean bees { get; set; }
+
+		/// <summary>
+		/// Sending from a receipt.
+		///  If true when receiving a shipment (Service for which an additional price is charged. Details on the site ukrposhta.ua), the sender receives a letter stating that the shipment has been received.By default false. 
+		/// </summary>
+		public Boolean recommended { get; set; }
+
+		/// <summary>
+		/// Sms message about the arrival of the parcel.
+		///  If the true recipient receives the message (Service for which an additional price is charged. Details on the site ukrposhta.ua).By default false. 
+		/// </summary>
+		public Boolean sms { get; set; }
+
+		/// <summary>
+		/// Return shipping documentation
+		///  By default false. 
+		/// </summary>
+		public Boolean documentBack { get; set; }
+
+		/// <summary>
+		/// Review at handed.
+		///  By default false. 
+		/// </summary>
+		public Boolean checkOnDelivery { get; set; }
+
+		/// <summary>
+		/// Display information about the sender's bank account on the address bar.
+		///  By default false. Only if there is postpay. 
+		/// </summary>
+		public Boolean transferPostPayToBankAccount { get; set; }
+
+		/// <summary>
+		/// Type shipment.
+		///  EXPRESS - Ukrposhta Express.STANDARD - Ukrposhta standard.For more detail see:http://ukrposhta.ua/ By default EXPRESS. 
+		/// </summary>
+		public string type { get; set; }
+
+		/// <summary>
+		/// The party who pays the postpay billing fee.
+		///  true - the amount is paid by the recipient.false - is paid by the sender.By default true. 
+		/// </summary>
+		public Boolean postPayPaidByRecipient { get; set; }
+
 	}
+
+	public class ShipmentOut
+	{
+		/// <summary>
+		/// Identificator. 
+		/// </summary>
+		public string uuid { get; set; }
+
+		/// <summary>
+		/// Recipient phone. 
+		/// </summary>
+		public string recipientPhone { get; set; }
+
+		/// <summary>
+		/// Recipient email. 
+		/// </summary>
+		public string recipientEmail { get; set; }
+
+		/// <summary>
+		/// Recipient address identifier. 
+		/// </summary>
+		public string recipientAddressId { get; set; }
+
+		/// <summary>
+		/// Return address identifier. 
+		/// </summary>
+		public string returnAddressId { get; set; }
+
+		/// <summary>
+		/// Shipment group identifier. 
+		/// </summary>
+		public string shipmentGroupUuid { get; set; }
+
+		/// <summary>
+		/// External identifier. 
+		/// </summary>
+		public string externalId { get; set; }
+
+		/// <summary>
+		/// Delivery type.
+		///  RETURN - return to the sender.RETURN_AFTER_F REE_STORAGE - return after the expiration of free storage.PROCESS_AS_REF USAL - destroy the parcel.By default RETURN. 
+		/// </summary>
+		public string deliveryType { get; set; }
+
+		/// <summary>
+		/// Package type. 
+		/// </summary>
+		public string packageType { get; set; }
+
+		/// <summary>
+		/// Actions with shipment in case the recipient did not take it. 
+		/// </summary>
+		public string onFailReceiveType { get; set; }
+
+		/// <summary>
+		/// Parcel barcode. 
+		/// </summary>
+		public string barcode { get; set; }
+
+		/// <summary>
+		/// Delivery price. 
+		/// </summary>
+		public Int64 deliveryPrice { get; set; }
+
+		/// <summary>
+		/// Post pay. 
+		/// </summary>
+		public Int64 postPay { get; set; }
+
+		/// <summary>
+		/// Currency code. 
+		/// </summary>
+		public string currencyCode { get; set; }
+
+		/// <summary>
+		/// Post pay currency code. 
+		/// </summary>
+		public string postPayCurrencyCode { get; set; }
+
+		/// <summary>
+		/// Currency exchange rate. 
+		/// </summary>
+		public string currencyExchangeRate { get; set; }
+
+		/// <summary>
+		/// Date of making the latest changes in the shipment. Date and time in the format "2017-06- 12T12: 31: 56" 
+		/// </summary>
+		public string lastModified { get; set; }
+
+		/// <summary>
+		/// Description or comments. 
+		/// </summary>
+		public string description { get; set; }
+
+		/// <summary>
+		/// Tracking departure. 
+		/// </summary>
+		public Object[] statusTrackings { get; set; }
+
+		/// <summary>
+		/// Payment for the shipment upon receipt. 
+		///  true - payment by the recipient.false - payment sender.By default, false. 
+		/// </summary>
+		public Boolean paidByRecipient { get; set; }
+
+		/// <summary>
+		/// Payment by cashless payment.
+		///  true - non-cash.false - cash.By default, true. 
+		/// </summary>
+		public Boolean nonCashPayment { get; set; }
+
+		/// <summary>
+		/// The note is a bulky parcel.
+		///  true - cumbersomefalse - not cumbersomeBy default false 
+		/// </summary>
+		public Boolean bulky { get; set; }
+
+		/// <summary>
+		/// The note is a fragile parcel.
+		///  true - brittle.false - not fragile.By default false. 
+		/// </summary>
+		public Boolean fragile { get; set; }
+
+		/// <summary>
+		/// Bee pointing.
+		///  By default false. 
+		/// </summary>
+		public Boolean bees { get; set; }
+
+		/// <summary>
+		/// Sending from a receipt.
+		///  If true when receiving a shipment (Service for which an additional price is charged. Details on the site ukrposhta.ua), the sender receives a letter stating that the shipment has been received.By default false. 
+		/// </summary>
+		public Boolean recommended { get; set; }
+
+		/// <summary>
+		/// Sms message about the arrival of the parcel.
+		///  If the true recipient receives the message (Service for which an additional price is charged. Details on the site ukrposhta.ua).By default false. 
+		/// </summary>
+		public Boolean sms { get; set; }
+
+		/// <summary>
+		/// International shipping
+		///  By default false. 
+		/// </summary>
+		public Boolean international { get; set; }
+
+		/// <summary>
+		/// Shipping price. 
+		/// </summary>
+		public string postPayDeliveryPrice { get; set; }
+
+		/// <summary>
+		/// The party who pays the postpay billing fee.
+		///  true - the amount is paid by the recipient.false - is paid by the sender.By default true. 
+		/// </summary>
+		public Boolean postPayPaidByRecipient { get; set; }
+
+		/// <summary>
+		/// A description of the costing that describes how the cost of mail is generated. 
+		/// </summary>
+		public string calculationDescription { get; set; }
+
+		/// <summary>
+		/// Return shipping documentation.
+		///  By default false. 
+		/// </summary>
+		public Boolean documentBack { get; set; }
+
+		/// <summary>
+		/// Review at handed.
+		///  By default false. 
+		/// </summary>
+		public Boolean checkOnDelivery { get; set; }
+
+		/// <summary>
+		/// Display information about the sender's bank account on the address bar.
+		///  By default false. Only if there is postpay. 
+		/// </summary>
+		public Boolean transferPostPayToBankAccount { get; set; }
+
+		/// <summary>
+		/// The shipping charge has been paid. 
+		/// </summary>
+		public Boolean deliveryPricePaid { get; set; }
+
+		/// <summary>
+		/// Postpay paid. 
+		/// </summary>
+		public Boolean postPayPaid { get; set; }
+
+		/// <summary>
+		/// The shipping charge has been paid. 
+		/// </summary>
+		public Boolean postPayDeliveryPricePaid { get; set; }
+
+		/// <summary>
+		/// Type shipment.
+		///  EXPRESS - Ukrposhta Express.STANDARD - Ukrposhta standard.For more detail see:http://ukrposhta.ua/ By default EXPRESS. 
+		/// </summary>
+		public string type { get; set; }
+
+		/// <summary>
+		/// After the creation of the sending status changes to CREATED, after the registration of the shipment in the communications branch status changes to REGISTERED. 
+		/// </summary>
+		public string status { get; set; }
+
+	}
+
 }

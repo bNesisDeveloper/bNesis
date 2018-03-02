@@ -20,12 +20,12 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" CanContentScroll="True" Width="510">
-                <TextBlock Name="statusTextBlock" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"></TextBlock>
+                <TextBlock Name="statusTextBlock" VerticalAlignment="Center" TextWrapping="WrapWithOverflow">the preliminary data input used - as a sample of data inputs</TextBlock>
             </ScrollViewer>
             <StackPanel Width="7" />
-            <Button Name="okButton" Content="OK" Height="25" Width="79" Click="okButton_Click" />
+            <Button Name="okButton" Content="OK" Height="25" Width="79" Click="OkButton_Click" />
             <StackPanel Width="7" />
-            <Button Name="cancelButton" Content="Cancel" Height="25" Width="79" Click="cancelButton_Click" />
+            <Button Name="cancelButton" Content="Cancel" Height="25" Width="79" Click="CancelButton_Click" />
         </StackPanel>
 
     </Grid>

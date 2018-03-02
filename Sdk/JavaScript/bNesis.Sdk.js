@@ -608,24 +608,6 @@ function ServiceManager(client, apiLocation) {
 		return resultService;
 	}
 	/**
-	 * Create new instance of Facebook 
-	 * @return {Facebook} Return new Facebook instance
-	*/
-	this.CreateInstanceFacebook = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
-		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("Facebook"))
-			 throw this.errorCodeServiceDoesNotExistDescription;
-		lastSystemErrorMessage = "";
-		var resultService = new Facebook(_bNesisApi);
-		if (arguments.length > 0)
-			try {
-				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-			}
-			catch (e) {
-				lastSystemErrorMessage = e.Message;
-			}
-		return resultService;
-	}
-	/**
 	 * Create new instance of LinkedIn 
 	 * @return {LinkedIn} Return new LinkedIn instance
 	*/
@@ -670,6 +652,24 @@ function ServiceManager(client, apiLocation) {
 			 throw this.errorCodeServiceDoesNotExistDescription;
 		lastSystemErrorMessage = "";
 		var resultService = new bNesisTestService(_bNesisApi);
+		if (arguments.length > 0)
+			try {
+				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			}
+			catch (e) {
+				lastSystemErrorMessage = e.Message;
+			}
+		return resultService;
+	}
+	/**
+	 * Create new instance of Facebook 
+	 * @return {Facebook} Return new Facebook instance
+	*/
+	this.CreateInstanceFacebook = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("Facebook"))
+			 throw this.errorCodeServiceDoesNotExistDescription;
+		lastSystemErrorMessage = "";
+		var resultService = new Facebook(_bNesisApi);
 		if (arguments.length > 0)
 			try {
 				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);

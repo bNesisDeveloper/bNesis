@@ -182,6 +182,18 @@
 	 */
 	this.Phone = "";
 
+	/**
+	 * additional information
+	 * @type {string}
+	 */
+	this.About = "";
+
+	/**
+	 * for dynamic response
+	 * @type {string}
+	 */
+	this.FieldsDynamic = "";
+
 }
 
 /**

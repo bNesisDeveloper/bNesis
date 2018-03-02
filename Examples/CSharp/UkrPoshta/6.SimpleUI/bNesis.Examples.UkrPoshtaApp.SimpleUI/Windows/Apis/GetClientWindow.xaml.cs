@@ -14,7 +14,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// <summary>
         /// Customer instance.
         /// </summary>
-        public CustomerOut Customer { get; private set; }
+        public UkrPoshtaCustomerOut Customer { get; private set; }
         /// <summary>
         /// UkrPoshta instance.
         /// </summary>
@@ -26,8 +26,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
             SizeToContent = SizeToContent.WidthAndHeight;
             //Set UkrPoshta instance.
             UkrPoshta = ukrPoshta;
-            //Initialize new class of CustomerIn.
-            CustomerIn customerIn = new CustomerIn();
+            UkrPoshtaCustomerIn customerIn = new UkrPoshtaCustomerIn();
         }
 
         /// <summary>
@@ -35,24 +34,25 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void okButton_Click(object sender, RoutedEventArgs e)
+        private async void OkButton_Click(object sender, RoutedEventArgs e)
         {
             //Check if externalIdTextBox empty.
             if (string.IsNullOrEmpty(externalIdTextBox.Text))
             {
                 //Set error message in ui element statusTextBlock
-                statusTextBlock.Text = "External-ID can't be empty!";
+                statusTextBlock.Text = "Client-UUID can't be empty!";
                 return;
             }
 
-            //If GetClient success return CustomerOut
-            CustomerOut[] customers = UkrPoshta.GetClients(externalIdTextBox.Text);
+            UkrPoshtaCustomerOut[] customers = null;            
+            customers = UkrPoshta.GetClients(externalIdTextBox.Text);                        
+            ErrorInfo errorInfo = UkrPoshta.GetLastError();
             //Check array of customer if not equal null and more then zero
             if (customers != null && customers.Length > 0)
             {
                 Customer = customers[0];
             }
-            ErrorInfo errorInfo = UkrPoshta.GetLastError();
+            
             //Check if error info code not equal zero(noError)
             if (errorInfo.Code != ServiceManager.errorCodeNoError)
             {
@@ -72,7 +72,7 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
@@ -90,11 +90,11 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
                 //Block other events with key
                 e.Handled = true;
 
-                okButton_Click(null, null);
+                OkButton_Click(null, null);
             }
             else if (e.Key == Key.Escape)
             {
-                cancelButton_Click(null, null);
+                CancelButton_Click(null, null);
             }
         }
 

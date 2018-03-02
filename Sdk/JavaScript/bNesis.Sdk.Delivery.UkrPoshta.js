@@ -47,7 +47,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting address by identifier. 	
 	 * @param id Address identifier.
-	 * @return {AddressOut} Return in AddressOut.
+	 * @return {UkrPoshtaAddressOut} Return in AddressOut.
 	 */
     this.GetAddress = function (id) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetAddress", id);
@@ -57,7 +57,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Creating new address. 	
 	 * @param address Body of address(required:postcode).
-	 * @return {AddressOut} Return in AddressOut.
+	 * @return {UkrPoshtaAddressOut} Return in AddressOut.
 	 */
     this.AddAddress = function (address) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "AddAddress", address);
@@ -68,7 +68,7 @@ UkrPoshta = function (bNesisApi) {
 	 *  Creating new clients. 	
 	 * @param client Requirment CustomerIn.
 	 *     If the client is an individual, then the value of the individual should be true.In this case, you must specify the first name, last name and patronymic of the client (firstName, lastName and middleName parameters respectively).The name parameter is generated automatically. If the client is a legal entity, the value of the individual must be false. In this case, the API accepts only the parameter name.
-	 * @return {CustomerOut} Return in CustomerOut.
+	 * @return {UkrPoshtaCustomerOut} Return in CustomerOut.
 	 */
     this.AddClient = function (client) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "AddClient", client);
@@ -79,7 +79,7 @@ UkrPoshta = function (bNesisApi) {
 	 *  Creating new clients. 	
 	 * @param clients Requirment array of CustomerIn.
 	 *     If the client is an individual, then the value of the individual should be true.In this case, you must specify the first name, last name and patronymic of the client (firstName, lastName and middleName parameters respectively).The name parameter is generated automatically. If the client is a legal entity, the value of the individual must be false. In this case, the API accepts only the parameter name.
-	 * @return {CustomerOut[]} Return in CustomerOut.
+	 * @return {UkrPoshtaCustomerOut[]} Return in CustomerOut.
 	 */
     this.AddClients = function (clients) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "AddClients", clients);
@@ -90,7 +90,7 @@ UkrPoshta = function (bNesisApi) {
 	 *  Edit client. 	
 	 * @param clientUuid Client uuid
 	 * @param client Body of CustomerIn.
-	 * @return {CustomerOut} Return in CustomerOut.
+	 * @return {UkrPoshtaCustomerOut} Return in CustomerOut.
 	 */
     this.EditClient = function (clientUuid, client) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "EditClient", clientUuid, client);
@@ -100,7 +100,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting client. 	
 	 * @param externalId External identifier
-	 * @return {CustomerOut[]} Return in CustomerOut.
+	 * @return {UkrPoshtaCustomerOut[]} Return in CustomerOut.
 	 */
     this.GetClients = function (externalId) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetClients", externalId);
@@ -110,7 +110,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting telephones numbers of client. 	
 	 * @param clientUuid Client uuid.
-	 * @return {CustomerPhone[]} Return in CustomerPhone.
+	 * @return {UkrPoshtaCustomerPhone[]} Return in CustomerPhone.
 	 */
     this.GetClientPhones = function (clientUuid) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetClientPhones", clientUuid);
@@ -130,7 +130,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting addresses of client. 	
 	 * @param clientUuid Client uuid.
-	 * @return {CustomerAddress[]} Return in CustomerAddress.
+	 * @return {UkrPoshtaCustomerAddress[]} Return in CustomerAddress.
 	 */
     this.GetClientAddresses = function (clientUuid) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetClientAddresses", clientUuid);
@@ -150,7 +150,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting emails of client. 	
 	 * @param clientUuid Client uuid
-	 * @return {CustomerEmail[]} Return in CustomerEmail.
+	 * @return {UkrPoshtaCustomerEmail[]} Return in CustomerEmail.
 	 */
     this.GetClientEmails = function (clientUuid) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetClientEmails", clientUuid);
@@ -171,7 +171,7 @@ UkrPoshta = function (bNesisApi) {
 	 *  Creating new shipment. 	
 	 * @param shipment Body of ShipmentIn.
 	 * The sender and recipient when creating a postal mail are specified as an embedded JSON:if uuid client is not empty or null, then the existing client will be used, otherwise - a new one will be created.When creating a shipment, the sender may specify additional recipient information that is used in printed forms.There can be only one "parcel" in the current release in the mail.Parameters of dispatch are filled out on the basis of parcel (weight, length, declaredPrice, etc.).The delivery amount is calculated when creating a postal item and is displayed in the response body as the "deliveryPrice" parameter.
-	 * @return {ShipmentOut} Return in ShipmentOut.
+	 * @return {UkrPoshtaShipmentOut} Return in ShipmentOut.
 	 */
     this.AddShipment = function (shipment) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "AddShipment", shipment);
@@ -182,7 +182,7 @@ UkrPoshta = function (bNesisApi) {
 	 *  Edit shipment group by uuid. 	
 	 * @param shipmentGroupUuid Shipment group uuid
 	 * @param shipment Body of shipment
-	 * @return {ShipmentOut} Return in ShipmentOut.
+	 * @return {UkrPoshtaShipmentOut} Return in ShipmentOut.
 	 */
     this.EditShipment = function (shipmentGroupUuid, shipment) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "EditShipment", shipmentGroupUuid, shipment);
@@ -192,7 +192,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting shipment by uuid. 	
 	 * @param shipmentUuid Shipment uuid.
-	 * @return {ShipmentOut} Return in ShipmentOut.
+	 * @return {UkrPoshtaShipmentOut} Return in ShipmentOut.
 	 */
     this.GetShipment = function (shipmentUuid) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetShipment", shipmentUuid);
@@ -212,7 +212,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Creating shipment group. 	
 	 * @param shipmentGroup Body of shipment group.
-	 * @return {ShipmentGroupOut} Return in ShipmentGroupOut.
+	 * @return {UkrPoshtaShipmentGroupOut} Return in ShipmentGroupOut.
 	 */
     this.AddShipmentGroup = function (shipmentGroup) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "AddShipmentGroup", shipmentGroup);
@@ -223,7 +223,7 @@ UkrPoshta = function (bNesisApi) {
 	 *  Edit shipment group by uuid. 	
 	 * @param shipmentGroupUuid Shipment group uuid.
 	 * @param shipmentGroup Body of shipment group.
-	 * @return {ShipmentGroupOut} Return in ShipmentGroupOut.
+	 * @return {UkrPoshtaShipmentGroupOut} Return in ShipmentGroupOut.
 	 */
     this.EditShipmentGroup = function (shipmentGroupUuid, shipmentGroup) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "EditShipmentGroup", shipmentGroupUuid, shipmentGroup);
@@ -233,7 +233,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting shimpent group by client uuid. 	
 	 * @param clientUuid Client uuid.
-	 * @return {ShipmentGroupOut} Return in ShipmentGroupOut.
+	 * @return {UkrPoshtaShipmentGroupOut} Return in ShipmentGroupOut.
 	 */
     this.GetShipmentGroupByClient = function (clientUuid) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetShipmentGroupByClient", clientUuid);
@@ -243,7 +243,7 @@ UkrPoshta = function (bNesisApi) {
 	/**
 	 *  Getting shipment by uuid. 	
 	 * @param shipmentGroupUuid Shipment group uuid.
-	 * @return {ShipmentGroupOut} Return in ShipmentGroupOut.
+	 * @return {UkrPoshtaShipmentGroupOut} Return in ShipmentGroupOut.
 	 */
     this.GetShipmentGroup = function (shipmentGroupUuid) {
         var result = _bNesisApi.Call("UkrPoshta", this.bNesisToken, "GetShipmentGroup", shipmentGroupUuid);
@@ -569,9 +569,9 @@ UkrPoshta = function (bNesisApi) {
 }
 /**
  * AddressOut used when need get information about address. 
- * @typedef {Object} AddressOut
+ * @typedef {Object} UkrPoshtaAddressOut
  */
- AddressOut = function () { 
+ UkrPoshtaAddressOut = function () { 
 	/**
 	 * A unique address identifier is assigned automatically when you create it.
 	 * @type {Int32}
@@ -648,9 +648,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * AddressIn used for add or edit address. 
- * @typedef {Object} AddressIn
+ * @typedef {Object} UkrPoshtaAddressIn
  */
- AddressIn = function () { 
+ UkrPoshtaAddressIn = function () { 
 	/**
 	 * Post index. (Only numbers 5 characters)
 	 * @type {string}
@@ -721,9 +721,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * Customer address 
- * @typedef {Object} CustomerAddress
+ * @typedef {Object} UkrPoshtaCustomerAddress
  */
- CustomerAddress = function () { 
+ UkrPoshtaCustomerAddress = function () { 
 	/**
 	 * Identificator.
 	 * @type {string}
@@ -752,9 +752,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * Customer phone. 
- * @typedef {Object} CustomerPhone
+ * @typedef {Object} UkrPoshtaCustomerPhone
  */
- CustomerPhone = function () { 
+ UkrPoshtaCustomerPhone = function () { 
 	/**
 	 * Identificator.
 	 * @type {string}
@@ -783,9 +783,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * Customer E-mail 
- * @typedef {Object} CustomerEmail
+ * @typedef {Object} UkrPoshtaCustomerEmail
  */
- CustomerEmail = function () { 
+ UkrPoshtaCustomerEmail = function () { 
 	/**
 	 * Identificator.
 	 * @type {string}
@@ -808,9 +808,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * CustomerOut used when get information about customer. 
- * @typedef {Object} CustomerOut
+ * @typedef {Object} UkrPoshtaCustomerOut
  */
- CustomerOut = function () { 
+ UkrPoshtaCustomerOut = function () { 
 	/**
 	 * Identificator.
 	 * @type {string}
@@ -891,7 +891,7 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * If the customer has specified multiple addresses, it will be used only the one with 'main' setted true.
-	 * @type {CustomerAddress[]}
+	 * @type {UkrPoshtaCustomerAddress[]}
 	 */
 	this.addresses = new Array();
 
@@ -903,7 +903,7 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * If the customer has specified multiple phones, it will be used only the one with 'main' setted true.
-	 * @type {CustomerPhone[]}
+	 * @type {UkrPoshtaCustomerPhone[]}
 	 */
 	this.phones = new Array();
 
@@ -915,7 +915,7 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * If the customer has specified multiple emails, it will be used only the one with 'main' setted true.
-	 * @type {CustomerEmail[]}
+	 * @type {UkrPoshtaCustomerEmail[]}
 	 */
 	this.emails = new Array();
 
@@ -966,9 +966,9 @@ UkrPoshta = function (bNesisApi) {
 /**
  * CustomerIn used when add or edit customer.
  *     If the customer is an individual, the value of the individual should be true. In this case, you must specify the first name, last name and middle name (in parameters: firstName, lastName and middleName) of the customer. The 'name' parameter is generated automatically. If the customer is a entity, the value of the individual must be false. In this case, the API accepts only the 'name' parameter. 
- * @typedef {Object} CustomerIn
+ * @typedef {Object} UkrPoshtaCustomerIn
  */
- CustomerIn = function () { 
+ UkrPoshtaCustomerIn = function () { 
 	/**
 	 * Name of the customer. (Maximum number of characters 250, is mandatory for a entity, for an individual is formed from the parameters: firstName, middleName, lastName)
 	 * @type {string}
@@ -1071,9 +1071,9 @@ UkrPoshta = function (bNesisApi) {
 /**
  * Parameters of the parcel. 
  *     When creating a parcel, you need to specify the main fields: weight - the maximum weight of sending 30000 grams. Weight of departure must be greater than zero.length - largest side of the departure, indicates the length in inches, length of departure must be greater than zero.declaredPrice - The stated price is sending filled in UAH 
- * @typedef {Object} Parcel
+ * @typedef {Object} UkrPoshtaParcel
  */
- Parcel = function () { 
+ UkrPoshtaParcel = function () { 
 	/**
 	 * Shipping weight.
 	 * @type {Int32}
@@ -1108,9 +1108,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * Information about discount per customer. 
- * @typedef {Object} DiscountPerCustomer
+ * @typedef {Object} UkrPoshtaDiscountPerCustomer
  */
- DiscountPerCustomer = function () { 
+ UkrPoshtaDiscountPerCustomer = function () { 
 	/**
 	 * Identifier.
 	 * @type {string}
@@ -1157,9 +1157,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * ShipmentOut used when get information about shipment. 
- * @typedef {Object} ShipmentOut
+ * @typedef {Object} UkrPoshtaShipmentOut
  */
- ShipmentOut = function () { 
+ UkrPoshtaShipmentOut = function () { 
 	/**
 	 * Identificator.
 	 * @type {string}
@@ -1168,15 +1168,15 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * Information about sender.
-	 * @type {CustomerOut}
+	 * @type {UkrPoshtaCustomerOut}
 	 */
-	this.sender = new CustomerOut();
+	this.sender = new UkrPoshtaCustomerOut();
 
 	/**
 	 * Information about recipient.
-	 * @type {CustomerOut}
+	 * @type {UkrPoshtaCustomerOut}
 	 */
-	this.recipient = new CustomerOut();
+	this.recipient = new UkrPoshtaCustomerOut();
 
 	/**
 	 * Recipient phone.
@@ -1241,7 +1241,7 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * Parcels.
-	 * @type {Parcel[]}
+	 * @type {UkrPoshtaParcel[]}
 	 */
 	this.parcels = new Array();
 
@@ -1277,9 +1277,9 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * Discount per customer.
-	 * @type {DiscountPerCustomer}
+	 * @type {UkrPoshtaDiscountPerCustomer}
 	 */
-	this.discountPerClient = new DiscountPerCustomer();
+	this.discountPerClient = new UkrPoshtaDiscountPerCustomer();
 
 	/**
 	 * Date of making the latest changes in the shipment. Date and time in the format "2017-06- 12T12: 31: 56"
@@ -1430,9 +1430,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * Customer Identificator. 
- * @typedef {Object} CustomerUuid
+ * @typedef {Object} UkrPoshtaCustomerUuid
  */
- CustomerUuid = function () { 
+ UkrPoshtaCustomerUuid = function () { 
 	/**
 	 * Identificator.
 	 * @type {string}
@@ -1443,20 +1443,20 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * ShipmentIn used when add or edit information shipment. 
- * @typedef {Object} ShipmentIn
+ * @typedef {Object} UkrPoshtaShipmentIn
  */
- ShipmentIn = function () { 
+ UkrPoshtaShipmentIn = function () { 
 	/**
 	 * Identificator sender customer.
-	 * @type {CustomerUuid}
+	 * @type {UkrPoshtaCustomerUuid}
 	 */
-	this.sender = new CustomerUuid();
+	this.sender = new UkrPoshtaCustomerUuid();
 
 	/**
 	 * Identificator recipient customer.
-	 * @type {CustomerUuid}
+	 * @type {UkrPoshtaCustomerUuid}
 	 */
-	this.recipient = new CustomerUuid();
+	this.recipient = new UkrPoshtaCustomerUuid();
 
 	/**
 	 * Repient phone.
@@ -1513,7 +1513,7 @@ UkrPoshta = function (bNesisApi) {
 
 	/**
 	 * Parcels.
-	 * @type {Parcel[]}
+	 * @type {UkrPoshtaParcel[]}
 	 */
 	this.parcels = new Array();
 
@@ -1617,9 +1617,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * ShipmentGroupOut used when get information about shipment group. 
- * @typedef {Object} ShipmentGroupOut
+ * @typedef {Object} UkrPoshtaShipmentGroupOut
  */
- ShipmentGroupOut = function () { 
+ UkrPoshtaShipmentGroupOut = function () { 
 	/**
 	 * Identificator shipment group.
 	 * @type {string}
@@ -1660,9 +1660,9 @@ UkrPoshta = function (bNesisApi) {
 
 /**
  * ShipmentGroupIn used for add or edit information about shipmentGroup. 
- * @typedef {Object} ShipmentGroupIn
+ * @typedef {Object} UkrPoshtaShipmentGroupIn
  */
- ShipmentGroupIn = function () { 
+ UkrPoshtaShipmentGroupIn = function () { 
 	/**
 	 * Name of shipment group.
 	 * @type {string}

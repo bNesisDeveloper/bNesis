@@ -45,6 +45,37 @@ VKontakte = function (bNesisApi) {
     }
 
 	/**
+	 *   	
+	 * @param id 
+	 * @return {ContactItem} 
+	 */
+    this.GetFieldsUserUnified = function (id) {
+        var result = _bNesisApi.Call("VKontakte", this.bNesisToken, "GetFieldsUserUnified", id);
+        return result;
+    }
+
+	/**
+	 *   	
+	 * @param id 
+	 * @param field 
+	 * @return {ContactItem} 
+	 */
+    this.GetFieldUserUnified = function (id, field) {
+        var result = _bNesisApi.Call("VKontakte", this.bNesisToken, "GetFieldUserUnified", id, field);
+        return result;
+    }
+
+	/**
+	 *   	
+	 * @param id 
+	 * @return {ContactItem} 
+	 */
+    this.GetUserAboutUnified = function (id) {
+        var result = _bNesisApi.Call("VKontakte", this.bNesisToken, "GetUserAboutUnified", id);
+        return result;
+    }
+
+	/**
 	 *  Gets the user identifier. 	
 	 * @return {Response} response with user ID
 	 */
