@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA5D98A1-1041-4ADC-BBC6-FD12DC0A663E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bNesis.Examples.FacebookApp.GetBirthdayInXML</RootNamespace>
+    <AssemblyName>bNesis.Examples.FacebookApp.GetBirthdayInXML</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;/d ExampleMode</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="bNesis.Api.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.ThinClient.1.7.10\lib\net45\bNesis.Api.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Sdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.ThinClient.1.7.10\lib\net45\bNesis.Sdk.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Amazon.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Amazon.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.BaiduBCS.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.BaiduBCS.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.BigCommerce.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.BigCommerce.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.bNesisTestProvider.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.bNesisTestProvider.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Box.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Box.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Dropbox.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Dropbox.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Facebook.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Facebook.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Google.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Google.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.IISSEO.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.IISSEO.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.LinkedIn.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.LinkedIn.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.LiqPay.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.LiqPay.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Mega.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Mega.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.OpenCart.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.OpenCart.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.PayPal.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.PayPal.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.PrestaShop.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.PrestaShop.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Shopify.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Shopify.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.Stripe.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.Stripe.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.SugarSync.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.SugarSync.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.UkrPoshta.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.UkrPoshta.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Auth.Providers.VKontakte.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Auth.Providers.VKontakte.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Analytics.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Analytics.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Analytics.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Analytics.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Analytics.GoogleAnalytics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Analytics.GoogleAnalytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Analytics.IISSEO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Analytics.IISSEO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Delivery.UkrPoshta, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Delivery.UkrPoshta.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.Amazon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.Amazon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.BigCommerce, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.BigCommerce.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.OpenCart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.OpenCart.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.PrestaShop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.PrestaShop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.eCommerce.Shopify, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.eCommerce.Shopify.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.BaiduBCS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.BaiduBCS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.Box, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.Box.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.Dropbox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.Dropbox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.GoogleDrive, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.GoogleDrive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.Mega, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.Mega.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.FileStorages.SugarSync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.FileStorages.SugarSync.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.GovRegistry.Prozzoro, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.GovRegistry.Prozzoro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Payment.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Payment.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Payment.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Payment.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Payment.LiqPay, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Payment.LiqPay.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Payment.PayPal, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Payment.PayPal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Payment.Stripe, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Payment.Stripe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Social.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Social.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Social.Common.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Social.Common.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Social.Facebook, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Social.Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Social.LinkedIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Social.LinkedIn.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Social.VKontakte, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Social.VKontakte.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="bNesis.Services.Clients.Test.bNesisTestService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\bNesis.Services.Clients.Test.bNesisTestService.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dropbox.Api, Version=0.1.6636.5111, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\bNesis.Sdk.RichClient.1.7.10\lib\net45\Dropbox.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.25.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Google.Apis.1.25.0\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.25.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Google.Apis.Auth.1.25.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.25.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Google.Apis.Auth.1.25.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.25.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Google.Apis.Core.1.25.0\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.25.0.840, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Google.Apis.Drive.v3.1.25.0.840\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.25.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Google.Apis.1.25.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Build.Framework.14.3.0\lib\net45\Microsoft.Build.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\PCLCrypto.2.0.140\lib\net45\PCLCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.BCrypt, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\PInvoke.BCrypt.0.1.501\lib\portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.BCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.Kernel32, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\PInvoke.Kernel32.0.1.501\lib\net40\PInvoke.Kernel32.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.NCrypt, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\PInvoke.NCrypt.0.1.501\lib\portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.NCrypt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PInvoke.Windows.Core, Version=0.1.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\PInvoke.Windows.Core.0.1.501\lib\portable-net40+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Validation.2.2.8\lib\dotnet\Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Zlib.Portable, Version=1.11.0.0, Culture=neutral, PublicKeyToken=431cba815f6a8b5b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\..\..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

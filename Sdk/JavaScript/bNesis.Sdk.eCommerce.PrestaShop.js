@@ -2,9 +2,30 @@ PrestaShop = function (bNesisApi) {
     this.bNesisToken = null;
     var _bNesisApi = bNesisApi;
 
+    /**
+     * The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+	 * or Attach to bNesis session with exists bNesis token
+     * @return {string} bNesisToken value | true if bNesisToken is valid
+	 */
     this.Auth = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
-        var bNesisToken = _bNesisApi.Auth("PrestaShop", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-        return bNesisToken;
+		if(arguments.length !== 1){
+			var bNesisToken = _bNesisApi.Auth("PrestaShop", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			return bNesisToken;
+		}
+		else{
+		    this.bNesisToken = arguments[0];			
+			return ValidateToken();		
+		}		
+    }
+
+    /**
+     * The method stops the authorization session with the service and clears the value of bNesisToken.
+     * @return {Boolean} true - if service logoff is successful
+	 */
+    this.LogoffService = function () {
+		var result = _bNesisApi.LogoffService("PrestaShop", this.bNesisToken);
+		if (result) this.bNesisToken = "";
+		return result;             
     }
 	
 	/**
@@ -171,7 +192,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order states by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order states use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SupplyOrderState in PrestaShopSupplyOrderState class.
 	 */
     this.GetSupplyOrderStatesByRenderingOptionsRaw = function (renderingOptions) {
@@ -200,7 +221,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply orders by rendering options. 	
-	 * @param renderingOptions For request specified information about supply orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply orders use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SupplyOrder in PrestaShopSupplyOrder class.
 	 */
     this.GetSupplyOrdersByRenderingOptionsRaw = function (renderingOptions) {
@@ -259,7 +280,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting tags by rendering options. 	
-	 * @param renderingOptions For request specified information about tags use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about tags use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Tag in PrestaShopTag class.
 	 */
     this.GetTagsByRenderingOptionsRaw = function (renderingOptions) {
@@ -318,7 +339,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting tax rule groups by rendering options. 	
-	 * @param renderingOptions For request specified information about tax rule groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about tax rule groups use: display and filter or sort.
 	 * @return {Response} Returns only certain information about TaxRuleGroup in PrestaShopTaxRuleGroup class.
 	 */
     this.GetTaxRuleGroupsByRenderingOptionsRaw = function (renderingOptions) {
@@ -377,7 +398,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting tax rules by rendering options. 	
-	 * @param renderingOptions For request specified information about tax rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about tax rules use: display and filter or sort.
 	 * @return {Response} Returns only certain information about TaxRule in PrestaShopTaxRule class.
 	 */
     this.GetTaxRulesByRenderingOptionsRaw = function (renderingOptions) {
@@ -436,7 +457,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting taxes by rendering options. 	
-	 * @param renderingOptions For request specified information about taxes use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about taxes use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Tax in PrestaShopTax class.
 	 */
     this.GetTaxesByRenderingOptionsRaw = function (renderingOptions) {
@@ -495,7 +516,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting translated configurations by rendering options. 	
-	 * @param renderingOptions For request specified information about translated configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about translated configurations use: display and filter or sort.
 	 * @return {Response} Returns only certain information about TranslatedConfiguration in PrestaShopTranslatedConfiguration class.
 	 */
     this.GetTranslatedConfigurationsByRenderingOptionsRaw = function (renderingOptions) {
@@ -524,7 +545,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting warehouse product locations by rendering options. 	
-	 * @param renderingOptions For request specified information about warehouse product locations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about warehouse product locations use: display and filter or sort.
 	 * @return {Response} Returns only certain information about WarehouseProductLocation in PrestaShopWarehouseProductLocation class.
 	 */
     this.GetWarehouseProductLocationsByRenderingOptionsRaw = function (renderingOptions) {
@@ -583,7 +604,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting weight ranges by rendering options. 	
-	 * @param renderingOptions For request specified information about weight ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about weight ranges use: display and filter or sort.
 	 * @return {Response} Returns only certain information about WeightRange in PrestaShopWeightRange class.
 	 */
     this.GetWeightRangesByRenderingOptionsRaw = function (renderingOptions) {
@@ -642,7 +663,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting zones by rendering options. 	
-	 * @param renderingOptions For request specified information about zones use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about zones use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Zone in PrestaShopZone class.
 	 */
     this.GetZonesByRenderingOptionsRaw = function (renderingOptions) {
@@ -671,7 +692,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting shop groups by rendering options. 	
-	 * @param renderingOptions For request specified information about shop groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about shop groups use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ShopGroup in PrestaShopShopGroup class.
 	 */
     this.GetShopGroupsByRenderingOptionsRaw = function (renderingOptions) {
@@ -730,7 +751,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting shop urls by rendering options. 	
-	 * @param renderingOptions For request specified information about shop urls use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about shop urls use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ShopUrl in PrestaShopShopUrl class.
 	 */
     this.GetShopUrlsByRenderingOptionsRaw = function (renderingOptions) {
@@ -789,7 +810,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting shops by rendering options. 	
-	 * @param renderingOptions For request specified information about shops use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about shops use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Shop in PrestaShopShop class.
 	 */
     this.GetShopsByRenderingOptionsRaw = function (renderingOptions) {
@@ -848,7 +869,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting specific price rules by rendering options. 	
-	 * @param renderingOptions For request specified information about specific price rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about specific price rules use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SpecificPriceRule in PrestaShopSpecificPriceRule class.
 	 */
     this.GetSpecificPriceRulesByRenderingOptionsRaw = function (renderingOptions) {
@@ -907,7 +928,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting specific prices by rendering options. 	
-	 * @param renderingOptions For request specified information about specific prices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about specific prices use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SpecificPrice in PrestaShopSpecificPrice class.
 	 */
     this.GetSpecificPricesByRenderingOptionsRaw = function (renderingOptions) {
@@ -936,7 +957,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting states by rendering options. 	
-	 * @param renderingOptions For request specified information about states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about states use: display and filter or sort.
 	 * @return {Response} Returns only certain information about State in PrestaShopState class.
 	 */
     this.GetStatesByRenderingOptionsRaw = function (renderingOptions) {
@@ -995,7 +1016,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stock movement reasons by rendering options. 	
-	 * @param renderingOptions For request specified information about stock movement reasons use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stock movement reasons use: display and filter or sort.
 	 * @return {Response} Returns only certain information about StockMovementReason in PrestaShopStockMovementReason class.
 	 */
     this.GetStockMovementReasonsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1024,7 +1045,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stock movements by rendering options. 	
-	 * @param renderingOptions For request specified information about stock movements use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stock movements use: display and filter or sort.
 	 * @return {Response} Returns only certain information about StockMovement in PrestaShopStockMovement class.
 	 */
     this.GetStockMovementsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1053,7 +1074,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stocks by rendering options. 	
-	 * @param renderingOptions For request specified information about stocks use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stocks use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Stock in PrestaShopStock class.
 	 */
     this.GetStocksByRenderingOptionsRaw = function (renderingOptions) {
@@ -1112,7 +1133,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stores by rendering options. 	
-	 * @param renderingOptions For request specified information about stores use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stores use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Store in PrestaShopStore class.
 	 */
     this.GetStoresByRenderingOptionsRaw = function (renderingOptions) {
@@ -1171,7 +1192,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting suppliers by rendering options. 	
-	 * @param renderingOptions For request specified information about suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about suppliers use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Supplier in PrestaShopSupplier class.
 	 */
     this.GetSuppliersByRenderingOptionsRaw = function (renderingOptions) {
@@ -1200,7 +1221,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order details by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order details use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SupplyOrderDetail in PrestaShopSupplyOrderDetail class.
 	 */
     this.GetSupplyOrderDetailsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1229,7 +1250,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order histories by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order histories use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SupplyOrderHistory in PrestaShopSupplyOrderHistory class.
 	 */
     this.GetSupplyOrderHistoriesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1258,7 +1279,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order receipt histories by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order receipt histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order receipt histories use: display and filter or sort.
 	 * @return {Response} Returns only certain information about SupplyOrderReceiptHistory in PrestaShopSupplyOrderReceiptHistory class.
 	 */
     this.GetSupplyOrderReceiptHistoriesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1278,7 +1299,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order payments by rendering options. 	
-	 * @param renderingOptions For request specified information about order payments use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order payments use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderPayment in PrestaShopOrderPayment class.
 	 */
     this.GetOrderPaymentsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1337,7 +1358,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order slip by rendering options. 	
-	 * @param renderingOptions For request specified information about order slip use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order slip use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderSlip in PrestaShopOrderSlip class.
 	 */
     this.GetOrderSlipByRenderingOptionsRaw = function (renderingOptions) {
@@ -1366,7 +1387,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order states by rendering options. 	
-	 * @param renderingOptions For request specified information about order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order states use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderState in PrestaShopOrderState class.
 	 */
     this.GetOrderStatesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1395,7 +1416,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting orders by rendering options. 	
-	 * @param renderingOptions For request specified information about orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about orders use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Order in PrestaShopOrder class.
 	 */
     this.GetOrdersByRenderingOptionsRaw = function (renderingOptions) {
@@ -1454,7 +1475,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting price ranges by rendering options. 	
-	 * @param renderingOptions For request specified information about price ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about price ranges use: display and filter or sort.
 	 * @return {Response} Returns only certain information about PriceRange in PrestaShopPriceRange class.
 	 */
     this.GetPriceRangesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1513,7 +1534,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product customization fields by rendering options. 	
-	 * @param renderingOptions For request specified information about product customization fields use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product customization fields use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ProductCustomizationField in PrestaShopProductCustomizationField class.
 	 */
     this.GetProductCustomizationFieldsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1572,7 +1593,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product feature values by rendering options. 	
-	 * @param renderingOptions For request specified information about product feature values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product feature values use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ProductFeatureValue in PrestaShopProductFeatureValue class.
 	 */
     this.GetProductFeatureValuesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1631,7 +1652,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product features by rendering options. 	
-	 * @param renderingOptions For request specified information about product features use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product features use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ProductFeature in PrestaShopProductFeature class.
 	 */
     this.GetProductFeaturesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1690,7 +1711,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product option values by rendering options. 	
-	 * @param renderingOptions For request specified information about product option values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product option values use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ProductOptionValue in PrestaShopProductOptionValue class.
 	 */
     this.GetProductOptionValuesByRenderingOptionsRaw = function (renderingOptions) {
@@ -1749,7 +1770,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product options by rendering options. 	
-	 * @param renderingOptions For request specified information about product options use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product options use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ProductOption in PrestaShopProductOption class.
 	 */
     this.GetProductOptionsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1808,7 +1829,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product suppliers by rendering options. 	
-	 * @param renderingOptions For request specified information about product suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product suppliers use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ProductSupplier in PrestaShopProductSupplier class.
 	 */
     this.GetProductSuppliersByRenderingOptionsRaw = function (renderingOptions) {
@@ -1867,7 +1888,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting products by rendering options. 	
-	 * @param renderingOptions For request specified information about products use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about products use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Product in PrestaShopProduct class.
 	 */
     this.GetProductsByRenderingOptionsRaw = function (renderingOptions) {
@@ -1946,7 +1967,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting groups by rendering options. 	
-	 * @param renderingOptions For request specified information about groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about groups use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Group in PrestaShopGroup class.
 	 */
     this.GetGroupsByRenderingOptionsRaw = function (renderingOptions) {
@@ -2005,7 +2026,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting guests by rendering options. 	
-	 * @param renderingOptions For request specified information about guests use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about guests use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Guest in PrestaShopGuest class.
 	 */
     this.GetGuestsByRenderingOptionsRaw = function (renderingOptions) {
@@ -2064,7 +2085,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting image types by rendering options. 	
-	 * @param renderingOptions For request specified information about image types use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about image types use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ImageType in PrestaShopImageType class.
 	 */
     this.GetImageTypesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2123,7 +2144,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting images by rendering options. 	
-	 * @param renderingOptions For request specified information about images use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about images use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Image in PrestaShopImage class.
 	 */
     this.GetImagesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2182,7 +2203,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting languages by rendering options. 	
-	 * @param renderingOptions For request specified information about languages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about languages use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Language in PrestaShopLanguage class.
 	 */
     this.GetLanguagesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2241,7 +2262,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting manufacturers by rendering options. 	
-	 * @param renderingOptions For request specified information about manufacturers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about manufacturers use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Manufacturer in PrestaShopManufacturer class.
 	 */
     this.GetManufacturersByRenderingOptionsRaw = function (renderingOptions) {
@@ -2300,7 +2321,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting messages by rendering options. 	
-	 * @param renderingOptions For request specified information about messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about messages use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Message in PrestaShopMessage class.
 	 */
     this.GetMessagesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2359,7 +2380,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order carriers by rendering options. 	
-	 * @param renderingOptions For request specified information about order carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order carriers use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderCarrier in PrestaShopOrderCarrier class.
 	 */
     this.GetOrderCarriersByRenderingOptionsRaw = function (renderingOptions) {
@@ -2388,7 +2409,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order details by rendering options. 	
-	 * @param renderingOptions For request specified information about order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order details use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderDetail in PrestaShopOrderDetail class.
 	 */
     this.GetOrderDetailsByRenderingOptionsRaw = function (renderingOptions) {
@@ -2417,7 +2438,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order histories by rendering options. 	
-	 * @param renderingOptions For request specified information about order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order histories use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderHistory in PrestaShopOrderHistory class.
 	 */
     this.GetOrderHistoriesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2476,7 +2497,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order invoices by rendering options. 	
-	 * @param renderingOptions For request specified information about order invoices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order invoices use: display and filter or sort.
 	 * @return {Response} Returns only certain information about OrderInvoice in PrestaShopOrderInvoice class.
 	 */
     this.GetOrderInvoicesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2554,7 +2575,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting configurations by rendering options. 	
-	 * @param renderingOptions For request specified information about configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about configurations use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Configuration in PrestaShopConfiguration class.
 	 */
     this.GetConfigurationsByRenderingOptionsRaw = function (renderingOptions) {
@@ -2613,7 +2634,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting contacts by rendering options. 	
-	 * @param renderingOptions For request specified information about contacts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about contacts use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Contact in PrestaShopContact class.
 	 */
     this.GetContactsByRenderingOptionsRaw = function (renderingOptions) {
@@ -2672,7 +2693,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting content management system by rendering options. 	
-	 * @param renderingOptions For request specified information about content management system use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about content management system use: display and filter or sort.
 	 * @return {Response} Returns only certain information about ContentManagementSystem in PrestaShopContentManagementSystem class.
 	 */
     this.GetContentManagementSystemByRenderingOptionsRaw = function (renderingOptions) {
@@ -2731,7 +2752,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting countries by rendering options. 	
-	 * @param renderingOptions For request specified information about countries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about countries use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Country in PrestaShopCountry class.
 	 */
     this.GetCountriesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2790,7 +2811,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting currencies by rendering options. 	
-	 * @param renderingOptions For request specified information about currencies use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about currencies use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Currency in PrestaShopCurrency class.
 	 */
     this.GetCurrenciesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2849,7 +2870,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customer messages by rendering options. 	
-	 * @param renderingOptions For request specified information about customer messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customer messages use: display and filter or sort.
 	 * @return {Response} Returns only certain information about CustomerMessage in PrestaShopCustomerMessage class.
 	 */
     this.GetCustomerMessagesByRenderingOptionsRaw = function (renderingOptions) {
@@ -2908,7 +2929,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customer threads by rendering options. 	
-	 * @param renderingOptions For request specified information about customer threads use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customer threads use: display and filter or sort.
 	 * @return {Response} Returns only certain information about CustomerThread in PrestaShopCustomerThread class.
 	 */
     this.GetCustomerThreadsByRenderingOptionsRaw = function (renderingOptions) {
@@ -2967,7 +2988,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customers by rendering options. 	
-	 * @param renderingOptions For request specified information about customers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customers use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Customer in PrestaShopCustomer class.
 	 */
     this.GetCustomersByRenderingOptionsRaw = function (renderingOptions) {
@@ -3026,7 +3047,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customizations by rendering options. 	
-	 * @param renderingOptions For request specified information about customizations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customizations use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Customization in PrestaShopCustomization class.
 	 */
     this.GetCustomizationsByRenderingOptionsRaw = function (renderingOptions) {
@@ -3085,7 +3106,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting deliveries by rendering options. 	
-	 * @param renderingOptions For request specified information about deliveries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about deliveries use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Delivery in PrestaShopDelivery class.
 	 */
     this.GetDeliveriesByRenderingOptionsRaw = function (renderingOptions) {
@@ -3144,7 +3165,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting employees by rendering options. 	
-	 * @param renderingOptions For request specified information about employees use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about employees use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Employee in PrestaShopEmployee class.
 	 */
     this.GetEmployeesByRenderingOptionsRaw = function (renderingOptions) {
@@ -3184,7 +3205,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting taxes by rendering options. 	
-	 * @param renderingOptions For request specified information about taxes use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about taxes use: display and filter or sort.
 	 * @return {PrestaShopTax[]} Returns only certain information about Tax in PrestaShopTax class.
 	 */
     this.GetTaxesByRenderingOptions = function (renderingOptions) {
@@ -3243,7 +3264,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting translated configurations by rendering options. 	
-	 * @param renderingOptions For request specified information about translated configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about translated configurations use: display and filter or sort.
 	 * @return {PrestaShopTranslatedConfiguration[]} Returns only certain information about TranslatedConfiguration in PrestaShopTranslatedConfiguration class.
 	 */
     this.GetTranslatedConfigurationsByRenderingOptions = function (renderingOptions) {
@@ -3272,7 +3293,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting warehouse product locations by rendering options. 	
-	 * @param renderingOptions For request specified information about warehouse product locations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about warehouse product locations use: display and filter or sort.
 	 * @return {PrestaShopWarehouseProductLocation[]} Returns only certain information about WarehouseProductLocation in PrestaShopWarehouseProductLocation class.
 	 */
     this.GetWarehouseProductLocationsByRenderingOptions = function (renderingOptions) {
@@ -3331,7 +3352,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting weight ranges by rendering options. 	
-	 * @param renderingOptions For request specified information about weight ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about weight ranges use: display and filter or sort.
 	 * @return {PrestaShopWeightRange[]} Returns only certain information about WeightRange in PrestaShopWeightRange class.
 	 */
     this.GetWeightRangesByRenderingOptions = function (renderingOptions) {
@@ -3390,7 +3411,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting zones by rendering options. 	
-	 * @param renderingOptions For request specified information about zones use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about zones use: display and filter or sort.
 	 * @return {PrestaShopZone[]} Returns only certain information about Zone in PrestaShopZone class.
 	 */
     this.GetZonesByRenderingOptions = function (renderingOptions) {
@@ -3458,7 +3479,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting addresses by rendering options. 	
-	 * @param renderingOptions For request specified information about addresses use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about addresses use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Address in PrestaShopAddress class.
 	 */
     this.GetAddressesByRenderingOptionsRaw = function (renderingOptions) {
@@ -3517,7 +3538,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting carriers by rendering options. 	
-	 * @param renderingOptions For request specified information about carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about carriers use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Carrier in PrestaShopCarrier class.
 	 */
     this.GetCarriersByRenderingOptionsRaw = function (renderingOptions) {
@@ -3576,7 +3597,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting cart rules by rendering options. 	
-	 * @param renderingOptions For request specified information about cart rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about cart rules use: display and filter or sort.
 	 * @return {Response} Returns only certain information about CartRule in PrestaShopCartRule class.
 	 */
     this.GetCartRulesByRenderingOptionsRaw = function (renderingOptions) {
@@ -3635,7 +3656,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting carts by rendering options. 	
-	 * @param renderingOptions For request specified information about carts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about carts use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Cart in PrestaShopCart class.
 	 */
     this.GetCartsByRenderingOptionsRaw = function (renderingOptions) {
@@ -3694,7 +3715,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting categories by rendering options. 	
-	 * @param renderingOptions For request specified information about categories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about categories use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Category in PrestaShopCategory class.
 	 */
     this.GetCategoriesByRenderingOptionsRaw = function (renderingOptions) {
@@ -3753,7 +3774,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting combinations by rendering options. 	
-	 * @param renderingOptions For request specified information about combinations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about combinations use: display and filter or sort.
 	 * @return {Response} Returns only certain information about Combination in PrestaShopCombination class.
 	 */
     this.GetCombinationsByRenderingOptionsRaw = function (renderingOptions) {
@@ -3793,7 +3814,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting specific prices by rendering options. 	
-	 * @param renderingOptions For request specified information about specific prices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about specific prices use: display and filter or sort.
 	 * @return {PrestaShopSpecificPrice[]} Returns only certain information about SpecificPrice in PrestaShopSpecificPrice class.
 	 */
     this.GetSpecificPricesByRenderingOptions = function (renderingOptions) {
@@ -3822,7 +3843,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting states by rendering options. 	
-	 * @param renderingOptions For request specified information about states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about states use: display and filter or sort.
 	 * @return {PrestaShopState[]} Returns only certain information about State in PrestaShopState class.
 	 */
     this.GetStatesByRenderingOptions = function (renderingOptions) {
@@ -3881,7 +3902,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stock movement reasons by rendering options. 	
-	 * @param renderingOptions For request specified information about stock movement reasons use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stock movement reasons use: display and filter or sort.
 	 * @return {PrestaShopStockMovementReason[]} Returns only certain information about StockMovementReason in PrestaShopStockMovementReason class.
 	 */
     this.GetStockMovementReasonsByRenderingOptions = function (renderingOptions) {
@@ -3910,7 +3931,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stock movements by rendering options. 	
-	 * @param renderingOptions For request specified information about stock movements use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stock movements use: display and filter or sort.
 	 * @return {PrestaShopStockMovement[]} Returns only certain information about StockMovement in PrestaShopStockMovement class.
 	 */
     this.GetStockMovementsByRenderingOptions = function (renderingOptions) {
@@ -3939,7 +3960,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stocks by rendering options. 	
-	 * @param renderingOptions For request specified information about stocks use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stocks use: display and filter or sort.
 	 * @return {PrestaShopStock[]} Returns only certain information about Stock in PrestaShopStock class.
 	 */
     this.GetStocksByRenderingOptions = function (renderingOptions) {
@@ -3998,7 +4019,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting stores by rendering options. 	
-	 * @param renderingOptions For request specified information about stores use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about stores use: display and filter or sort.
 	 * @return {PrestaShopStore[]} Returns only certain information about Store in PrestaShopStore class.
 	 */
     this.GetStoresByRenderingOptions = function (renderingOptions) {
@@ -4057,7 +4078,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting suppliers by rendering options. 	
-	 * @param renderingOptions For request specified information about suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about suppliers use: display and filter or sort.
 	 * @return {PrestaShopSupplier[]} Returns only certain information about Supplier in PrestaShopSupplier class.
 	 */
     this.GetSuppliersByRenderingOptions = function (renderingOptions) {
@@ -4086,7 +4107,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order details by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order details use: display and filter or sort.
 	 * @return {PrestaShopSupplyOrderDetail[]} Returns only certain information about SupplyOrderDetail in PrestaShopSupplyOrderDetail class.
 	 */
     this.GetSupplyOrderDetailsByRenderingOptions = function (renderingOptions) {
@@ -4115,7 +4136,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order histories by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order histories use: display and filter or sort.
 	 * @return {PrestaShopSupplyOrderHistory[]} Returns only certain information about SupplyOrderHistory in PrestaShopSupplyOrderHistory class.
 	 */
     this.GetSupplyOrderHistoriesByRenderingOptions = function (renderingOptions) {
@@ -4144,7 +4165,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order receipt histories by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order receipt histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order receipt histories use: display and filter or sort.
 	 * @return {PrestaShopSupplyOrderReceiptHistory[]} Returns only certain information about SupplyOrderReceiptHistory in PrestaShopSupplyOrderReceiptHistory class.
 	 */
     this.GetSupplyOrderReceiptHistoriesByRenderingOptions = function (renderingOptions) {
@@ -4173,7 +4194,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply order states by rendering options. 	
-	 * @param renderingOptions For request specified information about supply order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply order states use: display and filter or sort.
 	 * @return {PrestaShopSupplyOrderState[]} Returns only certain information about SupplyOrderState in PrestaShopSupplyOrderState class.
 	 */
     this.GetSupplyOrderStatesByRenderingOptions = function (renderingOptions) {
@@ -4202,7 +4223,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting supply orders by rendering options. 	
-	 * @param renderingOptions For request specified information about supply orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about supply orders use: display and filter or sort.
 	 * @return {PrestaShopSupplyOrder[]} Returns only certain information about SupplyOrder in PrestaShopSupplyOrder class.
 	 */
     this.GetSupplyOrdersByRenderingOptions = function (renderingOptions) {
@@ -4261,7 +4282,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting tags by rendering options. 	
-	 * @param renderingOptions For request specified information about tags use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about tags use: display and filter or sort.
 	 * @return {PrestaShopTag[]} Returns only certain information about Tag in PrestaShopTag class.
 	 */
     this.GetTagsByRenderingOptions = function (renderingOptions) {
@@ -4320,7 +4341,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting tax rule groups by rendering options. 	
-	 * @param renderingOptions For request specified information about tax rule groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about tax rule groups use: display and filter or sort.
 	 * @return {PrestaShopTaxRuleGroup[]} Returns only certain information about TaxRuleGroup in PrestaShopTaxRuleGroup class.
 	 */
     this.GetTaxRuleGroupsByRenderingOptions = function (renderingOptions) {
@@ -4379,7 +4400,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting tax rules by rendering options. 	
-	 * @param renderingOptions For request specified information about tax rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about tax rules use: display and filter or sort.
 	 * @return {PrestaShopTaxRule[]} Returns only certain information about TaxRule in PrestaShopTaxRule class.
 	 */
     this.GetTaxRulesByRenderingOptions = function (renderingOptions) {
@@ -4458,7 +4479,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product feature values by rendering options. 	
-	 * @param renderingOptions For request specified information about product feature values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product feature values use: display and filter or sort.
 	 * @return {PrestaShopProductFeatureValue[]} Returns only certain information about ProductFeatureValue in PrestaShopProductFeatureValue class.
 	 */
     this.GetProductFeatureValuesByRenderingOptions = function (renderingOptions) {
@@ -4517,7 +4538,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product features by rendering options. 	
-	 * @param renderingOptions For request specified information about product features use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product features use: display and filter or sort.
 	 * @return {PrestaShopProductFeature[]} Returns only certain information about ProductFeature in PrestaShopProductFeature class.
 	 */
     this.GetProductFeaturesByRenderingOptions = function (renderingOptions) {
@@ -4576,7 +4597,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product option values by rendering options. 	
-	 * @param renderingOptions For request specified information about product option values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product option values use: display and filter or sort.
 	 * @return {PrestaShopProductOptionValue[]} Returns only certain information about ProductOptionValue in PrestaShopProductOptionValue class.
 	 */
     this.GetProductOptionValuesByRenderingOptions = function (renderingOptions) {
@@ -4635,7 +4656,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product options by rendering options. 	
-	 * @param renderingOptions For request specified information about product options use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product options use: display and filter or sort.
 	 * @return {PrestaShopProductOption[]} Returns only certain information about ProductOption in PrestaShopProductOption class.
 	 */
     this.GetProductOptionsByRenderingOptions = function (renderingOptions) {
@@ -4694,7 +4715,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product suppliers by rendering options. 	
-	 * @param renderingOptions For request specified information about product suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product suppliers use: display and filter or sort.
 	 * @return {PrestaShopProductSupplier[]} Returns only certain information about ProductSupplier in PrestaShopProductSupplier class.
 	 */
     this.GetProductSuppliersByRenderingOptions = function (renderingOptions) {
@@ -4753,7 +4774,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting products by rendering options. 	
-	 * @param renderingOptions For request specified information about products use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about products use: display and filter or sort.
 	 * @return {PrestaShopProduct[]} Returns only certain information about Product in PrestaShopProduct class.
 	 */
     this.GetProductsByRenderingOptions = function (renderingOptions) {
@@ -4812,7 +4833,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting shop groups by rendering options. 	
-	 * @param renderingOptions For request specified information about shop groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about shop groups use: display and filter or sort.
 	 * @return {PrestaShopShopGroup[]} Returns only certain information about ShopGroup in PrestaShopShopGroup class.
 	 */
     this.GetShopGroupsByRenderingOptions = function (renderingOptions) {
@@ -4871,7 +4892,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting shop urls by rendering options. 	
-	 * @param renderingOptions For request specified information about shop urls use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about shop urls use: display and filter or sort.
 	 * @return {PrestaShopShopUrl[]} Returns only certain information about ShopUrl in PrestaShopShopUrl class.
 	 */
     this.GetShopUrlsByRenderingOptions = function (renderingOptions) {
@@ -4930,7 +4951,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting shops by rendering options. 	
-	 * @param renderingOptions For request specified information about shops use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about shops use: display and filter or sort.
 	 * @return {PrestaShopShop[]} Returns only certain information about Shop in PrestaShopShop class.
 	 */
     this.GetShopsByRenderingOptions = function (renderingOptions) {
@@ -4989,7 +5010,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting specific price rules by rendering options. 	
-	 * @param renderingOptions For request specified information about specific price rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about specific price rules use: display and filter or sort.
 	 * @return {PrestaShopSpecificPriceRule[]} Returns only certain information about SpecificPriceRule in PrestaShopSpecificPriceRule class.
 	 */
     this.GetSpecificPriceRulesByRenderingOptions = function (renderingOptions) {
@@ -5068,7 +5089,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting languages by rendering options. 	
-	 * @param renderingOptions For request specified information about languages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about languages use: display and filter or sort.
 	 * @return {PrestaShopLanguage[]} Returns only certain information about Language in PrestaShopLanguage class.
 	 */
     this.GetLanguagesByRenderingOptions = function (renderingOptions) {
@@ -5127,7 +5148,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting manufacturers by rendering options. 	
-	 * @param renderingOptions For request specified information about manufacturers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about manufacturers use: display and filter or sort.
 	 * @return {PrestaShopManufacturer[]} Returns only certain information about Manufacturer in PrestaShopManufacturer class.
 	 */
     this.GetManufacturersByRenderingOptions = function (renderingOptions) {
@@ -5186,7 +5207,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting messages by rendering options. 	
-	 * @param renderingOptions For request specified information about messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about messages use: display and filter or sort.
 	 * @return {PrestaShopMessage[]} Returns only certain information about Message in PrestaShopMessage class.
 	 */
     this.GetMessagesByRenderingOptions = function (renderingOptions) {
@@ -5245,7 +5266,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order carriers by rendering options. 	
-	 * @param renderingOptions For request specified information about order carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order carriers use: display and filter or sort.
 	 * @return {PrestaShopOrderCarrier[]} Returns only certain information about OrderCarrier in PrestaShopOrderCarrier class.
 	 */
     this.GetOrderCarriersByRenderingOptions = function (renderingOptions) {
@@ -5274,7 +5295,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order details by rendering options. 	
-	 * @param renderingOptions For request specified information about order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order details use: display and filter or sort.
 	 * @return {PrestaShopOrderDetail[]} Returns only certain information about OrderDetail in PrestaShopOrderDetail class.
 	 */
     this.GetOrderDetailsByRenderingOptions = function (renderingOptions) {
@@ -5303,7 +5324,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order histories by rendering options. 	
-	 * @param renderingOptions For request specified information about order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order histories use: display and filter or sort.
 	 * @return {PrestaShopOrderHistory[]} Returns only certain information about OrderHistory in PrestaShopOrderHistory class.
 	 */
     this.GetOrderHistoriesByRenderingOptions = function (renderingOptions) {
@@ -5362,7 +5383,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order invoices by rendering options. 	
-	 * @param renderingOptions For request specified information about order invoices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order invoices use: display and filter or sort.
 	 * @return {PrestaShopOrderInvoice[]} Returns only certain information about OrderInvoice in PrestaShopOrderInvoice class.
 	 */
     this.GetOrderInvoicesByRenderingOptions = function (renderingOptions) {
@@ -5421,7 +5442,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order payments by rendering options. 	
-	 * @param renderingOptions For request specified information about order payments use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order payments use: display and filter or sort.
 	 * @return {PrestaShopOrderPayment[]} Returns only certain information about OrderPayment in PrestaShopOrderPayment class.
 	 */
     this.GetOrderPaymentsByRenderingOptions = function (renderingOptions) {
@@ -5480,7 +5501,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order slip by rendering options. 	
-	 * @param renderingOptions For request specified information about order slip use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order slip use: display and filter or sort.
 	 * @return {PrestaShopOrderSlip[]} Returns only certain information about OrderSlip in PrestaShopOrderSlip class.
 	 */
     this.GetOrderSlipByRenderingOptions = function (renderingOptions) {
@@ -5509,7 +5530,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting order states by rendering options. 	
-	 * @param renderingOptions For request specified information about order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about order states use: display and filter or sort.
 	 * @return {PrestaShopOrderState[]} Returns only certain information about OrderState in PrestaShopOrderState class.
 	 */
     this.GetOrderStatesByRenderingOptions = function (renderingOptions) {
@@ -5538,7 +5559,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting orders by rendering options. 	
-	 * @param renderingOptions For request specified information about orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about orders use: display and filter or sort.
 	 * @return {PrestaShopOrder[]} Returns only certain information about Order in PrestaShopOrder class.
 	 */
     this.GetOrdersByRenderingOptions = function (renderingOptions) {
@@ -5597,7 +5618,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting price ranges by rendering options. 	
-	 * @param renderingOptions For request specified information about price ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about price ranges use: display and filter or sort.
 	 * @return {PrestaShopPriceRange[]} Returns only certain information about PriceRange in PrestaShopPriceRange class.
 	 */
     this.GetPriceRangesByRenderingOptions = function (renderingOptions) {
@@ -5656,7 +5677,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting product customization fields by rendering options. 	
-	 * @param renderingOptions For request specified information about product customization fields use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about product customization fields use: display and filter or sort.
 	 * @return {PrestaShopProductCustomizationField[]} Returns only certain information about ProductCustomizationField in PrestaShopProductCustomizationField class.
 	 */
     this.GetProductCustomizationFieldsByRenderingOptions = function (renderingOptions) {
@@ -5675,7 +5696,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting currencies by rendering options. 	
-	 * @param renderingOptions For request specified information about currencies use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about currencies use: display and filter or sort.
 	 * @return {PrestaShopCurrency[]} Returns only certain information about Currency in PrestaShopCurrency class.
 	 */
     this.GetCurrenciesByRenderingOptions = function (renderingOptions) {
@@ -5734,7 +5755,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customer messages by rendering options. 	
-	 * @param renderingOptions For request specified information about customer messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customer messages use: display and filter or sort.
 	 * @return {PrestaShopCustomerMessage[]} Returns only certain information about CustomerMessage in PrestaShopCustomerMessage class.
 	 */
     this.GetCustomerMessagesByRenderingOptions = function (renderingOptions) {
@@ -5793,7 +5814,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customer threads by rendering options. 	
-	 * @param renderingOptions For request specified information about customer threads use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customer threads use: display and filter or sort.
 	 * @return {PrestaShopCustomerThread[]} Returns only certain information about CustomerThread in PrestaShopCustomerThread class.
 	 */
     this.GetCustomerThreadsByRenderingOptions = function (renderingOptions) {
@@ -5852,7 +5873,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customers by rendering options. 	
-	 * @param renderingOptions For request specified information about customers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customers use: display and filter or sort.
 	 * @return {PrestaShopCustomer[]} Returns only certain information about Customer in PrestaShopCustomer class.
 	 */
     this.GetCustomersByRenderingOptions = function (renderingOptions) {
@@ -5911,7 +5932,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting customizations by rendering options. 	
-	 * @param renderingOptions For request specified information about customizations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about customizations use: display and filter or sort.
 	 * @return {PrestaShopCustomization[]} Returns only certain information about Customization in PrestaShopCustomization class.
 	 */
     this.GetCustomizationsByRenderingOptions = function (renderingOptions) {
@@ -5970,7 +5991,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting deliveries by rendering options. 	
-	 * @param renderingOptions For request specified information about deliveries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about deliveries use: display and filter or sort.
 	 * @return {PrestaShopDelivery[]} Returns only certain information about Delivery in PrestaShopDelivery class.
 	 */
     this.GetDeliveriesByRenderingOptions = function (renderingOptions) {
@@ -6029,7 +6050,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting employees by rendering options. 	
-	 * @param renderingOptions For request specified information about employees use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about employees use: display and filter or sort.
 	 * @return {PrestaShopEmployee[]} Returns only certain information about Employee in PrestaShopEmployee class.
 	 */
     this.GetEmployeesByRenderingOptions = function (renderingOptions) {
@@ -6088,7 +6109,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting groups by rendering options. 	
-	 * @param renderingOptions For request specified information about groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about groups use: display and filter or sort.
 	 * @return {PrestaShopGroup[]} Returns only certain information about Group in PrestaShopGroup class.
 	 */
     this.GetGroupsByRenderingOptions = function (renderingOptions) {
@@ -6147,7 +6168,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting guests by rendering options. 	
-	 * @param renderingOptions For request specified information about guests use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about guests use: display and filter or sort.
 	 * @return {PrestaShopGuest[]} Returns only certain information about Guest in PrestaShopGuest class.
 	 */
     this.GetGuestsByRenderingOptions = function (renderingOptions) {
@@ -6206,7 +6227,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting image types by rendering options. 	
-	 * @param renderingOptions For request specified information about image types use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about image types use: display and filter or sort.
 	 * @return {PrestaShopImageType[]} Returns only certain information about ImageType in PrestaShopImageType class.
 	 */
     this.GetImageTypesByRenderingOptions = function (renderingOptions) {
@@ -6265,7 +6286,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting images by rendering options. 	
-	 * @param renderingOptions For request specified information about images use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about images use: display and filter or sort.
 	 * @return {PrestaShopImage[]} Returns only certain information about Image in PrestaShopImage class.
 	 */
     this.GetImagesByRenderingOptions = function (renderingOptions) {
@@ -6344,7 +6365,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting addresses by rendering options. 	
-	 * @param renderingOptions For request specified information about addresses use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about addresses use: display and filter or sort.
 	 * @return {PrestaShopAddress[]} Returns only certain information about Address in PrestaShopAddress class.
 	 */
     this.GetAddressesByRenderingOptions = function (renderingOptions) {
@@ -6403,7 +6424,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting carriers by rendering options. 	
-	 * @param renderingOptions For request specified information about carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about carriers use: display and filter or sort.
 	 * @return {PrestaShopCarrier[]} Returns only certain information about Carrier in PrestaShopCarrier class.
 	 */
     this.GetCarriersByRenderingOptions = function (renderingOptions) {
@@ -6462,7 +6483,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting cart rules by rendering options. 	
-	 * @param renderingOptions For request specified information about cart rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about cart rules use: display and filter or sort.
 	 * @return {PrestaShopCartRule[]} Returns only certain information about CartRule in PrestaShopCartRule class.
 	 */
     this.GetCartRulesByRenderingOptions = function (renderingOptions) {
@@ -6521,7 +6542,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting carts by rendering options. 	
-	 * @param renderingOptions For request specified information about carts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about carts use: display and filter or sort.
 	 * @return {PrestaShopCart[]} Returns only certain information about Cart in PrestaShopCart class.
 	 */
     this.GetCartsByRenderingOptions = function (renderingOptions) {
@@ -6580,7 +6601,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting categories by rendering options. 	
-	 * @param renderingOptions For request specified information about categories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about categories use: display and filter or sort.
 	 * @return {PrestaShopCategory[]} Returns only certain information about Category in PrestaShopCategory class.
 	 */
     this.GetCategoriesByRenderingOptions = function (renderingOptions) {
@@ -6639,7 +6660,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting combinations by rendering options. 	
-	 * @param renderingOptions For request specified information about combinations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about combinations use: display and filter or sort.
 	 * @return {PrestaShopCombination[]} Returns only certain information about Combination in PrestaShopCombination class.
 	 */
     this.GetCombinationsByRenderingOptions = function (renderingOptions) {
@@ -6698,7 +6719,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting configurations by rendering options. 	
-	 * @param renderingOptions For request specified information about configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about configurations use: display and filter or sort.
 	 * @return {PrestaShopConfiguration[]} Returns only certain information about Configuration in PrestaShopConfiguration class.
 	 */
     this.GetConfigurationsByRenderingOptions = function (renderingOptions) {
@@ -6757,7 +6778,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting contacts by rendering options. 	
-	 * @param renderingOptions For request specified information about contacts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about contacts use: display and filter or sort.
 	 * @return {PrestaShopContact[]} Returns only certain information about Contact in PrestaShopContact class.
 	 */
     this.GetContactsByRenderingOptions = function (renderingOptions) {
@@ -6816,7 +6837,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting content management system by rendering options. 	
-	 * @param renderingOptions For request specified information about content management system use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about content management system use: display and filter or sort.
 	 * @return {PrestaShopContentManagementSystem[]} Returns only certain information about ContentManagementSystem in PrestaShopContentManagementSystem class.
 	 */
     this.GetContentManagementSystemByRenderingOptions = function (renderingOptions) {
@@ -6875,7 +6896,7 @@ PrestaShop = function (bNesisApi) {
 
 	/**
 	 *  Getting countries by rendering options. 	
-	 * @param renderingOptions For request specified information about countries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].
+	 * @param renderingOptions For request specified information about countries use: display and filter or sort.
 	 * @return {PrestaShopCountry[]} Returns only certain information about Country in PrestaShopCountry class.
 	 */
     this.GetCountriesByRenderingOptions = function (renderingOptions) {

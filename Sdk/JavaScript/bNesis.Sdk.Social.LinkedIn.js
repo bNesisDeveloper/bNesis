@@ -2,9 +2,30 @@ LinkedIn = function (bNesisApi) {
     this.bNesisToken = null;
     var _bNesisApi = bNesisApi;
 
+    /**
+     * The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+	 * or Attach to bNesis session with exists bNesis token
+     * @return {string} bNesisToken value | true if bNesisToken is valid
+	 */
     this.Auth = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
-        var bNesisToken = _bNesisApi.Auth("LinkedIn", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-        return bNesisToken;
+		if(arguments.length !== 1){
+			var bNesisToken = _bNesisApi.Auth("LinkedIn", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			return bNesisToken;
+		}
+		else{
+		    this.bNesisToken = arguments[0];			
+			return ValidateToken();		
+		}		
+    }
+
+    /**
+     * The method stops the authorization session with the service and clears the value of bNesisToken.
+     * @return {Boolean} true - if service logoff is successful
+	 */
+    this.LogoffService = function () {
+		var result = _bNesisApi.LogoffService("LinkedIn", this.bNesisToken);
+		if (result) this.bNesisToken = "";
+		return result;             
     }
 	
 	/**
@@ -80,8 +101,8 @@ LinkedIn = function (bNesisApi) {
 	 *  App must request from member this scope: r_basicprofile, r_emailaddress. 	
 	 * @return {LinkedInMemberBasicProfile} Return in response.
 	 */
-    this.GetCurrentMemberProfileV1 = function () {
-        var result = _bNesisApi.Call("LinkedIn", this.bNesisToken, "GetCurrentMemberProfileV1");
+    this.GetMemberProfileV1 = function () {
+        var result = _bNesisApi.Call("LinkedIn", this.bNesisToken, "GetMemberProfileV1");
         return result;
     }
 
@@ -293,16 +314,6 @@ LinkedIn = function (bNesisApi) {
 	 */
     this.GetCompanyProfileSpecificFieldsV1Raw = function (companyId, fields) {
         var result = _bNesisApi.Call("LinkedIn", this.bNesisToken, "GetCompanyProfileSpecificFieldsV1Raw", companyId, fields);
-        return result;
-    }
-
-	/**
-	 *  Gets current member basic profile based on the access token.
-	 *  App must request from member this scope: r_basicprofile, r_emailaddress. 	
-	 * @return {LinkedInMemberBasicProfile} Return in response.
-	 */
-    this.GetMemberProfileV1 = function () {
-        var result = _bNesisApi.Call("LinkedIn", this.bNesisToken, "GetMemberProfileV1");
         return result;
     }
 }

@@ -24,7 +24,7 @@ ClientMode =
  * @class 
  * @classdesc Class to manage services 
  * @param {ClientMode} client Rich mode equals 1, Thin equals 2
- * @param {string} Connection parameter:  bNesis API HTTP server internet address for thin client, bNesis  library location for rich client
+ * @param {string} apiLocation Connection parameter:  bNesis API HTTP server internet address for thin client, bNesis  library location for rich client
  * @property {number} this.errorCodeNoError - No error code constant
  * @property {string} this.errorCodeNoErrorDesctiption - No error code  description
  * @property {number} this.errorCodeBadUrl - Bad Url error constant
@@ -258,23 +258,18 @@ function ServiceManager(client, apiLocation) {
 
     /**
      * Get last manager error description | Get LastError from service
-     * @param {string} providerId select service provider Id
-     * @param {string|exception} bNesisToken|exception bNesis access token|exception object (from catch(Exception))
+     * @param {exception} exception exception object (from catch(Exception))
      * @return error description | bNesis ErrorInfo with error code and message
 	 */
-    this.GetLastError = function (providerId, errorParameter) {
+    this.GetLastError = function (errorParameter) {
 		if (arguments.length === 0)
 			return lastSystemErrorMessage;	
-		if(arguments.length === 2){
+		if(arguments.length === 1){
 			if(errorParameter !== null && errorParameter !== undefined){
-				if(typeof errorParameter === "string"){
-					var bNesisToken = errorParameter;
-					return _bNesisApi.GetLastError(providerId, bNesisToken);
-				}
 				if(errorParameter.stack && errorParameter.message 
 					&& typeof errorParameter.stack === "string" && typeof errorParameter.message === "string" ){
 					var exception = errorParameter;
-					return _bNesisApi.GetLastError(providerId, exception);
+					return _bNesisApi.GetLastError(exception);
 				}
 			}
 		}
@@ -282,6 +277,57 @@ function ServiceManager(client, apiLocation) {
 			return "Wrong GetLastError number of parameters";
         return "Wrong GetLastError parameter";
     }
+
+    /**
+     * Core level get last error code method, see GetLastError for more information
+     * @param {exception} exception exception object (from catch(Exception))
+     * @return error if is bNesis exception type - return bNesis core error code. Else return 0 (bNesisNoError)
+	 */
+    this.GetLastErrorCode = function (providerId, errorParameter) {
+		if(arguments.length === 1){
+			if(errorParameter !== null && errorParameter !== undefined){
+				if(errorParameter.stack && errorParameter.message 
+					&& typeof errorParameter.stack === "string" && typeof errorParameter.message === "string" ){
+					var exception = errorParameter;
+					return _bNesisApi.GetLastError(exception);
+				}
+			}
+		}
+		else 
+			return "Wrong GetLastError number of parameters";
+        return "Wrong GetLastError parameter";
+    }
+
+    /**
+     * Return error description text by error code 
+     * @param {number} errorCode manager error code value
+     * @return manager error code value
+	 */
+    this.GetErrorDescription = function (errorCode) {
+            switch (errorCode)
+            {
+                case ServiceManager.errorCodeBadUrl:
+                    return ServiceManager.errorCodeBadUrlDescription;
+                case ServiceManager.errorCodeNotConnected:
+                    return ServiceManager.errorCodeNotConnectedDesctiption +": " + lastSystemErrorMessage;
+                case ServiceManager.errorCodeLibraryLocation:
+                    return ServiceManager.errorCodeLibraryLocationDesctiption;
+                case ServiceManager.errorCodeNotSlash:
+                    return ServiceManager.errorCodeNotSlashDesctiption;
+                case ServiceManager.errorCodeNotLibraryIsLoaded:
+                    return ServiceManager.errorCodeNotLibraryIsLoadedDesctiption + ": " + lastSystemErrorMessage;
+                case ServiceManager.errorCodeBadServerName:
+                    return ServiceManager.errorCodeBadServerNameDescription;
+                case ServiceManager.errorCodeProviderDoesNotExist:
+                    return ServiceManager.errorCodeProviderDoesNotExistDescription;
+                case ServiceManager.errorCodeServiceDoesNotExist:
+                    return ServiceManager.errorCodeServiceDoesNotExistDescription;
+                case ServiceManager.errorCodeUnknownServerConnection:
+                    return ServiceManager.errorCodeUnknownServerConnectionDescription + ": " + lastSystemErrorMessage;
+                default:
+                    return ServiceManager.errorCodeNoErrorDesctiption;
+            }
+    }    
 
 	/**
 	 * Create new instance of GoogleAnalytics 
@@ -608,6 +654,42 @@ function ServiceManager(client, apiLocation) {
 		return resultService;
 	}
 	/**
+	 * Create new instance of Facebook 
+	 * @return {Facebook} Return new Facebook instance
+	*/
+	this.CreateInstanceFacebook = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("Facebook"))
+			 throw this.errorCodeServiceDoesNotExistDescription;
+		lastSystemErrorMessage = "";
+		var resultService = new Facebook(_bNesisApi);
+		if (arguments.length > 0)
+			try {
+				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			}
+			catch (e) {
+				lastSystemErrorMessage = e.Message;
+			}
+		return resultService;
+	}
+	/**
+	 * Create new instance of GooglePlus 
+	 * @return {GooglePlus} Return new GooglePlus instance
+	*/
+	this.CreateInstanceGooglePlus = function (bNesisDevId,redirectUrl,clientId,clientSecret,scopes) {
+		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("GooglePlus"))
+			 throw this.errorCodeServiceDoesNotExistDescription;
+		lastSystemErrorMessage = "";
+		var resultService = new GooglePlus(_bNesisApi);
+		if (arguments.length > 0)
+			try {
+				resultService.Auth(bNesisDevId,redirectUrl,clientId,clientSecret,scopes);
+			}
+			catch (e) {
+				lastSystemErrorMessage = e.Message;
+			}
+		return resultService;
+	}
+	/**
 	 * Create new instance of LinkedIn 
 	 * @return {LinkedIn} Return new LinkedIn instance
 	*/
@@ -652,24 +734,6 @@ function ServiceManager(client, apiLocation) {
 			 throw this.errorCodeServiceDoesNotExistDescription;
 		lastSystemErrorMessage = "";
 		var resultService = new bNesisTestService(_bNesisApi);
-		if (arguments.length > 0)
-			try {
-				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
-			}
-			catch (e) {
-				lastSystemErrorMessage = e.Message;
-			}
-		return resultService;
-	}
-	/**
-	 * Create new instance of Facebook 
-	 * @return {Facebook} Return new Facebook instance
-	*/
-	this.CreateInstanceFacebook = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
-		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("Facebook"))
-			 throw this.errorCodeServiceDoesNotExistDescription;
-		lastSystemErrorMessage = "";
-		var resultService = new Facebook(_bNesisApi);
 		if (arguments.length > 0)
 			try {
 				resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);

@@ -14,20 +14,25 @@ function RESTCallWithNoParameters(absoluteUrl) {
 	    {
 	    'Accept': 'application/json',
 	    'Content-Type': 'application/json'
+	    //,'X-Requested-With': 'XMLHttpRequest'
 	    },
         async: false,
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
-
-        success: function (data) {
+        dataType: "text json",
+        processData: false,
+        success: function (data, status, xhr) {
             asyncData = data;
         },
 
-        error: function (data, status, err) {
-            asyncData = err;
+        error: function (xhr, status, err) {
+            if (xhr && xhr.status === 200 && xhr.responseText) {
+                asyncData = xhr.responseText;
+            }
+            else {
+                asyncData = err;
+            }
         }
-
     });
 
     return asyncData;

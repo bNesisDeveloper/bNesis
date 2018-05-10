@@ -2,9 +2,30 @@ GoogleAnalytics = function (bNesisApi) {
     this.bNesisToken = null;
     var _bNesisApi = bNesisApi;
 
+    /**
+     * The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+	 * or Attach to bNesis session with exists bNesis token
+     * @return {string} bNesisToken value | true if bNesisToken is valid
+	 */
     this.Auth = function (bNesisDevId,redirectUrl,clientId,clientSecret,scopes) {
-        var bNesisToken = _bNesisApi.Auth("Google", "",bNesisDevId,redirectUrl,clientId,clientSecret,scopes,"","",false,"");
-        return bNesisToken;
+		if(arguments.length !== 1){
+			var bNesisToken = _bNesisApi.Auth("Google", "",bNesisDevId,redirectUrl,clientId,clientSecret,scopes,"","",false,"");
+			return bNesisToken;
+		}
+		else{
+		    this.bNesisToken = arguments[0];			
+			return ValidateToken();		
+		}		
+    }
+
+    /**
+     * The method stops the authorization session with the service and clears the value of bNesisToken.
+     * @return {Boolean} true - if service logoff is successful
+	 */
+    this.LogoffService = function () {
+		var result = _bNesisApi.LogoffService("Google", this.bNesisToken);
+		if (result) this.bNesisToken = "";
+		return result;             
     }
 	
 	/**

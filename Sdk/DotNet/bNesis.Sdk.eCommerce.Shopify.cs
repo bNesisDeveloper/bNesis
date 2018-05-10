@@ -41,6 +41,16 @@ namespace bNesis.Sdk.eCommerce.Shopify
 		}
 
 		/// <summary>
+		/// Attach to bNesis session with exists bNesis token
+		/// </summary>		
+		/// <returns>true if bNesisToken is valid</returns>	
+		public bool Auth(string bNesisToken)
+		{
+		    this.bNesisToken = bNesisToken;			
+			return ValidateToken();
+		}
+
+		/// <summary>
 		/// The method stops the authorization session with the service and clears the value of bNesisToken.
 		/// </summary>
 		/// <returns>true - if service logoff is successful</returns>

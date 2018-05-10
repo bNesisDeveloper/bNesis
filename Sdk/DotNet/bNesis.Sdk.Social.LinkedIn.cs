@@ -41,6 +41,16 @@ namespace bNesis.Sdk.Social.LinkedIn
 		}
 
 		/// <summary>
+		/// Attach to bNesis session with exists bNesis token
+		/// </summary>		
+		/// <returns>true if bNesisToken is valid</returns>	
+		public bool Auth(string bNesisToken)
+		{
+		    this.bNesisToken = bNesisToken;			
+			return ValidateToken();
+		}
+
+		/// <summary>
 		/// The method stops the authorization session with the service and clears the value of bNesisToken.
 		/// </summary>
 		/// <returns>true - if service logoff is successful</returns>
@@ -125,9 +135,9 @@ namespace bNesis.Sdk.Social.LinkedIn
 		///  App must request from member this scope: r_basicprofile, r_emailaddress. 
 		/// </summary>
 		/// <returns>Return in response.</returns>
-		public LinkedInMemberBasicProfile GetCurrentMemberProfileV1()
+		public LinkedInMemberBasicProfile GetMemberProfileV1()
 		{
-			return bNesisApi.Call<LinkedInMemberBasicProfile>("LinkedIn", bNesisToken, "GetCurrentMemberProfileV1");
+			return bNesisApi.Call<LinkedInMemberBasicProfile>("LinkedIn", bNesisToken, "GetMemberProfileV1");
 		}
 
 		///<summary>
@@ -339,16 +349,6 @@ namespace bNesis.Sdk.Social.LinkedIn
 		public Response GetCompanyProfileSpecificFieldsV1Raw(Int32 companyId, string[] fields)
 		{
 			return bNesisApi.Call<Response>("LinkedIn", bNesisToken, "GetCompanyProfileSpecificFieldsV1Raw", companyId, fields);
-		}
-
-		///<summary>
-		/// Gets current member basic profile based on the access token.
-		///  App must request from member this scope: r_basicprofile, r_emailaddress. 
-		/// </summary>
-		/// <returns>Return in response.</returns>
-		public LinkedInMemberBasicProfile GetMemberProfileV1()
-		{
-			return bNesisApi.Call<LinkedInMemberBasicProfile>("LinkedIn", bNesisToken, "GetMemberProfileV1");
 		}
 }
 	///<summary>

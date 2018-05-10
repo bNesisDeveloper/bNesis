@@ -41,6 +41,16 @@ namespace bNesis.Sdk.Social.Facebook
 		}
 
 		/// <summary>
+		/// Attach to bNesis session with exists bNesis token
+		/// </summary>		
+		/// <returns>true if bNesisToken is valid</returns>	
+		public bool Auth(string bNesisToken)
+		{
+		    this.bNesisToken = bNesisToken;			
+			return ValidateToken();
+		}
+
+		/// <summary>
 		/// The method stops the authorization session with the service and clears the value of bNesisToken.
 		/// </summary>
 		/// <returns>true - if service logoff is successful</returns>
@@ -2272,12 +2282,12 @@ namespace bNesis.Sdk.Social.Facebook
 		/// <summary>
 		/// The Facebook Page for the degree obtained 
 		/// </summary>
-		public FacebookPage[] degree { get; set; }
+		public FacebookPage degree { get; set; }
 
 		/// <summary>
 		/// The Facebook Page for this school 
 		/// </summary>
-		public FacebookPage[] school { get; set; }
+		public FacebookPage school { get; set; }
 
 		/// <summary>
 		/// The type of educational institution 
@@ -2292,7 +2302,7 @@ namespace bNesis.Sdk.Social.Facebook
 		/// <summary>
 		/// Facebook Page for the year this person graduated 
 		/// </summary>
-		public FacebookPage[] year { get; set; }
+		public FacebookPage year { get; set; }
 
 	}
 
@@ -2434,7 +2444,7 @@ namespace bNesis.Sdk.Social.Facebook
 		/// <summary>
 		/// Employer 
 		/// </summary>
-		public FacebookPage[] employer { get; set; }
+		public FacebookPage employer { get; set; }
 
 		/// <summary>
 		/// End date 
@@ -2449,12 +2459,12 @@ namespace bNesis.Sdk.Social.Facebook
 		/// <summary>
 		/// Location 
 		/// </summary>
-		public FacebookPage[] location { get; set; }
+		public FacebookPage location { get; set; }
 
 		/// <summary>
 		/// Position 
 		/// </summary>
-		public FacebookPage[] position { get; set; }
+		public FacebookPage position { get; set; }
 
 		/// <summary>
 		/// Projects 
@@ -2597,7 +2607,7 @@ namespace bNesis.Sdk.Social.Facebook
 		/// <summary>
 		/// The person's hometown 
 		/// </summary>
-		public FacebookPage[] hometown { get; set; }
+		public FacebookPage hometown { get; set; }
 
 		/// <summary>
 		/// The person's inspirational people 
@@ -2654,7 +2664,7 @@ namespace bNesis.Sdk.Social.Facebook
 		/// Location node used with other objects in the Graph API. 
 		/// </summary>
 		/// <value>The location.</value>
-		public FacebookPage[] location { get; set; }
+		public FacebookPage location { get; set; }
 
 		/// <summary>
 		/// What the person is interested in meeting for 

@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK JS -  LinkedIn Share post API example</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Social.LinkedIn.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var bNesisToken = getUrlParameter('token');
+            if (bNesisToken !== null && bNesisToken.length > 0) {
+                document.getElementById("inputelements").style.display = "none";
+            }
+            else {
+                var badAuth = getUrlParameter('badAuth');
+                if (badAuth && badAuth !== null && badAuth === 'true') {
+                    document.getElementById("inputMessage").style.display = "none";
+                }
+                else {
+                    document.getElementById("inputMessage").style.display = "none";
+                }
+            }
+        });
+
+        function onclick_submit() {
+            /**
+             * To use the bNesis SDK js in your applications, you must have the bNesis Developer ID - the key that signs your copy of the bNesis SDK. 
+             * To study bNesis SDK, tests and demonstrations, you can get the key from https://api.bnesis.com site, free of charge.
+             * Please, put your bNesis Developer ID here
+             */
+            var bNesisDeveloperId = document.getElementById("bNesisDeveloperId").value; 
+
+            /**
+             * LinkedIn service Client ID. You can receive it in the settings of the LinkedIn application from https://www.linkedin.com/developer/apps site.
+             */
+            var LinkedInClientId = document.getElementById("LinkedInClientId").value;
+
+            /**
+             * LinkedIn service Client Secret. You can receive it in the settings of the LinkedIn application from https://www.linkedin.com/developer/apps site.
+             */
+            var LinkedInClientSecret = document.getElementById("LinkedInClientSecret").value;
+
+            /**
+             * "r_basicprofile", "r_emailaddress", "rw_company_admin", "w_share"
+             * Delimited list of member permissions your application is requesting on behalf of the user.
+             */
+            var Scope = ["w_share"];
+
+            /**
+             * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+             * https://server2.bnesis.com/
+             * https://bnesisserver1.azurewebsites.net/
+             * https://bnesisserver2.azurewebsites.net/
+             * https://bnesisserver3.azurewebsites.net/
+             */
+            var bNesisAPIEndPoint = "https://server2.bnesis.com/";
+
+            /*
+             * The client will be redirected to the specified address after the authentication operation is performed.
+             */
+            var redirectUrl = window.location.origin + window.location.pathname;
+
+            //Initialize bNesisSDK
+            var manager = new ServiceManager();
+
+            //Initialize bNesisSDK
+            var bNesisToken = getUrlParameter('token');      
+
+            //If authorization failed, the badAuth will be set to 'true'.
+            var badAuth = getUrlParameter('badAuth');
+
+            if ((bNesisToken === "") || (bNesisToken === null)) {
+                if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
+                    //Check bNesisDeveloperID
+                    if (bNesisDeveloperId === null || bNesisDeveloperId.length === 0) {
+                        document.getElementById('result').innerHTML += "<br/><span>For using this example, you need bNesis Developer Id. You can get it from <a href='https://api.bnesis.com' target= '_blank'>https://api.bnesis.com</a> site - free of charge</span>";
+                        return;
+                    }
+
+                    //Check LinkedIn authentication keys
+                    if (LinkedInClientId === null || LinkedInClientId.length === 0 || LinkedInClientSecret === null || LinkedInClientSecret.length === 0) {
+                        document.getElementById('result').innerHTML += "<br/>For using this example you need LinkedIn Client ID and LinkedIn Client Secret. You can get keys from https://www.linkedin.com/developer/apps .";
+                        return;
+                    }
+                }
+            }
+
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            document.getElementById('result').innerHTML += "<br/>Initialize Thin mode.";
+            //If success initialize return zero code(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", <br/>error message:" + manager.GetLastError();
+                return;
+            }
+
+            if ((bNesisToken === "") || (bNesisToken === null)) {
+
+                //Succes Initiliaze 
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization status: Success<br/>";
+
+                var badAuth = getUrlParameter('badAuth');
+                //If authorization failed, the badAuth will be set to 'true'.
+
+                if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
+                    document.getElementById('result').innerHTML += "<br/>Authorize at LinkedIn service, please wait...";
+                    // this method authorize at LinkedIn, return instance.
+                    var linkedIn = manager.CreateInstanceLinkedIn(null, bNesisDeveloperId, redirectUrl, LinkedInClientId, LinkedInClientSecret, Scope, null, null, false, null);
+
+                }
+                else {
+                    //if badAuth is true - get additionalInfo to get auth error description
+                    var lastErrorMessage = getUrlParameter('additionalInfo');
+                    if (lastErrorMessage !== null && lastErrorMessage.length > 0)
+                        document.getElementById('result').innerHTML += "<br/>Authorize problem: " + lastErrorMessage;
+                    else
+                        document.getElementById('result').innerHTML += "<br/>Authorize problem, please check parameters.<br/>";
+                    return;
+                }
+            }
+            else 
+            {
+                //Authorization at LinkedIn Success
+                var linkedIn = manager.CreateInstanceLinkedIn();
+
+                linkedIn.bNesisToken = bNesisToken;
+
+                //Now you can use LinkedIn API
+                document.getElementById('result').innerHTML += "<br/>Authorization success! LinnkedIn instance created.";
+
+                //Getting message from input element
+                var message = document.getElementById("message").value;
+
+                //If message empty return
+                if (message === "") {
+                    document.getElementById('result').innerHTML += "<br/>message is empty and will not share";
+                    return;
+                }
+
+                document.getElementById('result').innerHTML += "<br/>Sharing message in LinkedIn...";
+
+                //Creating new LinkedInShare and set properties.
+                var contentShare = new LinkedInShare();
+                var visibility = new LinkedInVisibility();
+
+                visibility.code = "connections-only";
+                contentShare.visibility = visibility;
+
+                contentShare.comment = message;
+                  
+                //Share new message for current authorized member
+                linkedIn.SharePost(contentShare);
+                //Getting last error
+                var errorInfo = linkedIn.GetLastError();
+                //Check if errorInfo code does not equal noError
+                if (errorInfo.Code != manager.errorCodeNoError)
+                {
+                    document.getElementById('result').innerHTML += "<br/>Can't share message, error code: " + errorInfo.Code +
+                                      ", <br/>Reason:" + errorInfo.Description;
+                    return;
+                }
+
+                document.getElementById('result').innerHTML += "<br/>Success! The message was posted for current authorized member.";
+            }             
+        }
+
+        clearParameters = function () {
+            document.getElementById('result').innerHTML = "";
+            var windowUrl = window.location.href;
+            var newWindowUrl = windowUrl.split('?')[0];
+            window.history.pushState(null, null, newWindowUrl);
+        }
+    </script>
+</head>
+<body>
+    bNesis SDK - LinkedIn Share post API example<br />
+    <div id="inputelements">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>bNesisDeveloperId</td>
+                <td><input id="bNesisDeveloperId" type="text" name="text"></td>
+            </tr>
+            <tr>
+                <td>LinkedInClientId</td>
+                <td><input id="LinkedInClientId" type="text" name="text"></td>
+            </tr>
+            <tr>
+                <td>LinkedInClientSecret</td>
+                <td><input id="LinkedInClientSecret" type="text" name="text"></td>
+            </tr>
+        </table>
+        <br />
+        <input id ="button" type="button" onclick="clearParameters(); onclick_submit();" value="Auth" />
+    </div>
+    <div id="inputMessage">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>Message: </td>
+                <td><input id="message" type="text" name="text"></td>
+            </tr>
+        </table>
+        <br />
+        <input id="btnShare" type="button" onclick="onclick_submit()" value="Share" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>

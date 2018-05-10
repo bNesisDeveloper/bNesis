@@ -41,6 +41,16 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		}
 
 		/// <summary>
+		/// Attach to bNesis session with exists bNesis token
+		/// </summary>		
+		/// <returns>true if bNesisToken is valid</returns>	
+		public bool Auth(string bNesisToken)
+		{
+		    this.bNesisToken = bNesisToken;			
+			return ValidateToken();
+		}
+
+		/// <summary>
 		/// The method stops the authorization session with the service and clears the value of bNesisToken.
 		/// </summary>
 		/// <returns>true - if service logoff is successful</returns>
@@ -217,7 +227,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order states by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order states use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderState in PrestaShopSupplyOrderState class.</returns>
 		public Response GetSupplyOrderStatesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -246,7 +256,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply orders by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply orders use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrder in PrestaShopSupplyOrder class.</returns>
 		public Response GetSupplyOrdersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -305,7 +315,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting tags by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about tags use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about tags use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Tag in PrestaShopTag class.</returns>
 		public Response GetTagsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -364,7 +374,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting tax rule groups by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about tax rule groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about tax rule groups use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about TaxRuleGroup in PrestaShopTaxRuleGroup class.</returns>
 		public Response GetTaxRuleGroupsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -423,7 +433,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting tax rules by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about tax rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about tax rules use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about TaxRule in PrestaShopTaxRule class.</returns>
 		public Response GetTaxRulesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -482,7 +492,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting taxes by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about taxes use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about taxes use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Tax in PrestaShopTax class.</returns>
 		public Response GetTaxesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -541,7 +551,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting translated configurations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about translated configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about translated configurations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about TranslatedConfiguration in PrestaShopTranslatedConfiguration class.</returns>
 		public Response GetTranslatedConfigurationsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -570,7 +580,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting warehouse product locations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about warehouse product locations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about warehouse product locations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about WarehouseProductLocation in PrestaShopWarehouseProductLocation class.</returns>
 		public Response GetWarehouseProductLocationsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -629,7 +639,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting weight ranges by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about weight ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about weight ranges use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about WeightRange in PrestaShopWeightRange class.</returns>
 		public Response GetWeightRangesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -688,7 +698,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting zones by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about zones use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about zones use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Zone in PrestaShopZone class.</returns>
 		public Response GetZonesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -717,7 +727,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting shop groups by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about shop groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about shop groups use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ShopGroup in PrestaShopShopGroup class.</returns>
 		public Response GetShopGroupsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -776,7 +786,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting shop urls by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about shop urls use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about shop urls use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ShopUrl in PrestaShopShopUrl class.</returns>
 		public Response GetShopUrlsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -835,7 +845,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting shops by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about shops use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about shops use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Shop in PrestaShopShop class.</returns>
 		public Response GetShopsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -894,7 +904,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting specific price rules by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about specific price rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about specific price rules use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SpecificPriceRule in PrestaShopSpecificPriceRule class.</returns>
 		public Response GetSpecificPriceRulesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -953,7 +963,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting specific prices by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about specific prices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about specific prices use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SpecificPrice in PrestaShopSpecificPrice class.</returns>
 		public Response GetSpecificPricesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -982,7 +992,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting states by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about states use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about State in PrestaShopState class.</returns>
 		public Response GetStatesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1041,7 +1051,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stock movement reasons by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stock movement reasons use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stock movement reasons use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about StockMovementReason in PrestaShopStockMovementReason class.</returns>
 		public Response GetStockMovementReasonsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1070,7 +1080,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stock movements by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stock movements use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stock movements use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about StockMovement in PrestaShopStockMovement class.</returns>
 		public Response GetStockMovementsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1099,7 +1109,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stocks by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stocks use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stocks use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Stock in PrestaShopStock class.</returns>
 		public Response GetStocksByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1158,7 +1168,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stores by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stores use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stores use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Store in PrestaShopStore class.</returns>
 		public Response GetStoresByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1217,7 +1227,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting suppliers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about suppliers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Supplier in PrestaShopSupplier class.</returns>
 		public Response GetSuppliersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1246,7 +1256,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order details by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order details use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderDetail in PrestaShopSupplyOrderDetail class.</returns>
 		public Response GetSupplyOrderDetailsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1275,7 +1285,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order histories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order histories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderHistory in PrestaShopSupplyOrderHistory class.</returns>
 		public Response GetSupplyOrderHistoriesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1304,7 +1314,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order receipt histories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order receipt histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order receipt histories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderReceiptHistory in PrestaShopSupplyOrderReceiptHistory class.</returns>
 		public Response GetSupplyOrderReceiptHistoriesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1324,7 +1334,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order payments by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order payments use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order payments use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderPayment in PrestaShopOrderPayment class.</returns>
 		public Response GetOrderPaymentsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1383,7 +1393,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order slip by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order slip use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order slip use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderSlip in PrestaShopOrderSlip class.</returns>
 		public Response GetOrderSlipByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1412,7 +1422,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order states by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order states use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderState in PrestaShopOrderState class.</returns>
 		public Response GetOrderStatesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1441,7 +1451,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting orders by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about orders use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Order in PrestaShopOrder class.</returns>
 		public Response GetOrdersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1500,7 +1510,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting price ranges by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about price ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about price ranges use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about PriceRange in PrestaShopPriceRange class.</returns>
 		public Response GetPriceRangesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1559,7 +1569,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product customization fields by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product customization fields use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product customization fields use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductCustomizationField in PrestaShopProductCustomizationField class.</returns>
 		public Response GetProductCustomizationFieldsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1618,7 +1628,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product feature values by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product feature values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product feature values use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductFeatureValue in PrestaShopProductFeatureValue class.</returns>
 		public Response GetProductFeatureValuesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1677,7 +1687,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product features by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product features use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product features use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductFeature in PrestaShopProductFeature class.</returns>
 		public Response GetProductFeaturesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1736,7 +1746,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product option values by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product option values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product option values use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductOptionValue in PrestaShopProductOptionValue class.</returns>
 		public Response GetProductOptionValuesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1795,7 +1805,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product options by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product options use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product options use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductOption in PrestaShopProductOption class.</returns>
 		public Response GetProductOptionsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1854,7 +1864,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product suppliers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product suppliers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductSupplier in PrestaShopProductSupplier class.</returns>
 		public Response GetProductSuppliersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1913,7 +1923,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting products by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about products use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about products use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Product in PrestaShopProduct class.</returns>
 		public Response GetProductsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -1992,7 +2002,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting groups by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about groups use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Group in PrestaShopGroup class.</returns>
 		public Response GetGroupsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2051,7 +2061,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting guests by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about guests use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about guests use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Guest in PrestaShopGuest class.</returns>
 		public Response GetGuestsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2110,7 +2120,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting image types by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about image types use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about image types use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ImageType in PrestaShopImageType class.</returns>
 		public Response GetImageTypesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2169,7 +2179,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting images by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about images use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about images use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Image in PrestaShopImage class.</returns>
 		public Response GetImagesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2228,7 +2238,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting languages by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about languages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about languages use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Language in PrestaShopLanguage class.</returns>
 		public Response GetLanguagesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2287,7 +2297,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting manufacturers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about manufacturers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about manufacturers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Manufacturer in PrestaShopManufacturer class.</returns>
 		public Response GetManufacturersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2346,7 +2356,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting messages by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about messages use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Message in PrestaShopMessage class.</returns>
 		public Response GetMessagesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2405,7 +2415,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order carriers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order carriers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderCarrier in PrestaShopOrderCarrier class.</returns>
 		public Response GetOrderCarriersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2434,7 +2444,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order details by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order details use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderDetail in PrestaShopOrderDetail class.</returns>
 		public Response GetOrderDetailsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2463,7 +2473,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order histories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order histories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderHistory in PrestaShopOrderHistory class.</returns>
 		public Response GetOrderHistoriesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2522,7 +2532,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order invoices by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order invoices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order invoices use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderInvoice in PrestaShopOrderInvoice class.</returns>
 		public Response GetOrderInvoicesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2600,7 +2610,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting configurations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about configurations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Configuration in PrestaShopConfiguration class.</returns>
 		public Response GetConfigurationsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2659,7 +2669,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting contacts by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about contacts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about contacts use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Contact in PrestaShopContact class.</returns>
 		public Response GetContactsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2718,7 +2728,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting content management system by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about content management system use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about content management system use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ContentManagementSystem in PrestaShopContentManagementSystem class.</returns>
 		public Response GetContentManagementSystemByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2777,7 +2787,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting countries by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about countries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about countries use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Country in PrestaShopCountry class.</returns>
 		public Response GetCountriesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2836,7 +2846,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting currencies by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about currencies use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about currencies use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Currency in PrestaShopCurrency class.</returns>
 		public Response GetCurrenciesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2895,7 +2905,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customer messages by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customer messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customer messages use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about CustomerMessage in PrestaShopCustomerMessage class.</returns>
 		public Response GetCustomerMessagesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -2954,7 +2964,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customer threads by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customer threads use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customer threads use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about CustomerThread in PrestaShopCustomerThread class.</returns>
 		public Response GetCustomerThreadsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3013,7 +3023,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Customer in PrestaShopCustomer class.</returns>
 		public Response GetCustomersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3072,7 +3082,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customizations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customizations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customizations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Customization in PrestaShopCustomization class.</returns>
 		public Response GetCustomizationsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3131,7 +3141,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting deliveries by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about deliveries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about deliveries use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Delivery in PrestaShopDelivery class.</returns>
 		public Response GetDeliveriesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3190,7 +3200,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting employees by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about employees use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about employees use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Employee in PrestaShopEmployee class.</returns>
 		public Response GetEmployeesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3230,7 +3240,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting taxes by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about taxes use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about taxes use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Tax in PrestaShopTax class.</returns>
 		public PrestaShopTax[] GetTaxesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3289,7 +3299,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting translated configurations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about translated configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about translated configurations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about TranslatedConfiguration in PrestaShopTranslatedConfiguration class.</returns>
 		public PrestaShopTranslatedConfiguration[] GetTranslatedConfigurationsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3318,7 +3328,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting warehouse product locations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about warehouse product locations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about warehouse product locations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about WarehouseProductLocation in PrestaShopWarehouseProductLocation class.</returns>
 		public PrestaShopWarehouseProductLocation[] GetWarehouseProductLocationsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3377,7 +3387,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting weight ranges by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about weight ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about weight ranges use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about WeightRange in PrestaShopWeightRange class.</returns>
 		public PrestaShopWeightRange[] GetWeightRangesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3436,7 +3446,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting zones by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about zones use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about zones use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Zone in PrestaShopZone class.</returns>
 		public PrestaShopZone[] GetZonesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3504,7 +3514,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting addresses by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about addresses use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about addresses use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Address in PrestaShopAddress class.</returns>
 		public Response GetAddressesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3563,7 +3573,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting carriers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about carriers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Carrier in PrestaShopCarrier class.</returns>
 		public Response GetCarriersByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3622,7 +3632,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting cart rules by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about cart rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about cart rules use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about CartRule in PrestaShopCartRule class.</returns>
 		public Response GetCartRulesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3681,7 +3691,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting carts by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about carts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about carts use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Cart in PrestaShopCart class.</returns>
 		public Response GetCartsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3740,7 +3750,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting categories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about categories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about categories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Category in PrestaShopCategory class.</returns>
 		public Response GetCategoriesByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3799,7 +3809,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting combinations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about combinations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about combinations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Combination in PrestaShopCombination class.</returns>
 		public Response GetCombinationsByRenderingOptionsRaw(Object renderingOptions)
 		{
@@ -3839,7 +3849,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting specific prices by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about specific prices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about specific prices use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SpecificPrice in PrestaShopSpecificPrice class.</returns>
 		public PrestaShopSpecificPrice[] GetSpecificPricesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3868,7 +3878,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting states by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about states use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about State in PrestaShopState class.</returns>
 		public PrestaShopState[] GetStatesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3927,7 +3937,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stock movement reasons by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stock movement reasons use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stock movement reasons use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about StockMovementReason in PrestaShopStockMovementReason class.</returns>
 		public PrestaShopStockMovementReason[] GetStockMovementReasonsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3956,7 +3966,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stock movements by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stock movements use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stock movements use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about StockMovement in PrestaShopStockMovement class.</returns>
 		public PrestaShopStockMovement[] GetStockMovementsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -3985,7 +3995,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stocks by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stocks use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stocks use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Stock in PrestaShopStock class.</returns>
 		public PrestaShopStock[] GetStocksByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4044,7 +4054,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting stores by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about stores use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about stores use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Store in PrestaShopStore class.</returns>
 		public PrestaShopStore[] GetStoresByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4103,7 +4113,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting suppliers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about suppliers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Supplier in PrestaShopSupplier class.</returns>
 		public PrestaShopSupplier[] GetSuppliersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4132,7 +4142,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order details by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order details use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderDetail in PrestaShopSupplyOrderDetail class.</returns>
 		public PrestaShopSupplyOrderDetail[] GetSupplyOrderDetailsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4161,7 +4171,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order histories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order histories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderHistory in PrestaShopSupplyOrderHistory class.</returns>
 		public PrestaShopSupplyOrderHistory[] GetSupplyOrderHistoriesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4190,7 +4200,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order receipt histories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order receipt histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order receipt histories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderReceiptHistory in PrestaShopSupplyOrderReceiptHistory class.</returns>
 		public PrestaShopSupplyOrderReceiptHistory[] GetSupplyOrderReceiptHistoriesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4219,7 +4229,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply order states by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply order states use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrderState in PrestaShopSupplyOrderState class.</returns>
 		public PrestaShopSupplyOrderState[] GetSupplyOrderStatesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4248,7 +4258,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting supply orders by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about supply orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about supply orders use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SupplyOrder in PrestaShopSupplyOrder class.</returns>
 		public PrestaShopSupplyOrder[] GetSupplyOrdersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4307,7 +4317,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting tags by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about tags use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about tags use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Tag in PrestaShopTag class.</returns>
 		public PrestaShopTag[] GetTagsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4366,7 +4376,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting tax rule groups by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about tax rule groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about tax rule groups use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about TaxRuleGroup in PrestaShopTaxRuleGroup class.</returns>
 		public PrestaShopTaxRuleGroup[] GetTaxRuleGroupsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4425,7 +4435,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting tax rules by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about tax rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about tax rules use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about TaxRule in PrestaShopTaxRule class.</returns>
 		public PrestaShopTaxRule[] GetTaxRulesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4504,7 +4514,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product feature values by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product feature values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product feature values use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductFeatureValue in PrestaShopProductFeatureValue class.</returns>
 		public PrestaShopProductFeatureValue[] GetProductFeatureValuesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4563,7 +4573,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product features by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product features use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product features use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductFeature in PrestaShopProductFeature class.</returns>
 		public PrestaShopProductFeature[] GetProductFeaturesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4622,7 +4632,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product option values by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product option values use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product option values use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductOptionValue in PrestaShopProductOptionValue class.</returns>
 		public PrestaShopProductOptionValue[] GetProductOptionValuesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4681,7 +4691,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product options by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product options use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product options use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductOption in PrestaShopProductOption class.</returns>
 		public PrestaShopProductOption[] GetProductOptionsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4740,7 +4750,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product suppliers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product suppliers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product suppliers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductSupplier in PrestaShopProductSupplier class.</returns>
 		public PrestaShopProductSupplier[] GetProductSuppliersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4799,7 +4809,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting products by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about products use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about products use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Product in PrestaShopProduct class.</returns>
 		public PrestaShopProduct[] GetProductsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4858,7 +4868,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting shop groups by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about shop groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about shop groups use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ShopGroup in PrestaShopShopGroup class.</returns>
 		public PrestaShopShopGroup[] GetShopGroupsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4917,7 +4927,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting shop urls by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about shop urls use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about shop urls use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ShopUrl in PrestaShopShopUrl class.</returns>
 		public PrestaShopShopUrl[] GetShopUrlsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -4976,7 +4986,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting shops by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about shops use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about shops use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Shop in PrestaShopShop class.</returns>
 		public PrestaShopShop[] GetShopsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5035,7 +5045,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting specific price rules by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about specific price rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about specific price rules use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about SpecificPriceRule in PrestaShopSpecificPriceRule class.</returns>
 		public PrestaShopSpecificPriceRule[] GetSpecificPriceRulesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5114,7 +5124,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting languages by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about languages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about languages use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Language in PrestaShopLanguage class.</returns>
 		public PrestaShopLanguage[] GetLanguagesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5173,7 +5183,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting manufacturers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about manufacturers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about manufacturers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Manufacturer in PrestaShopManufacturer class.</returns>
 		public PrestaShopManufacturer[] GetManufacturersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5232,7 +5242,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting messages by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about messages use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Message in PrestaShopMessage class.</returns>
 		public PrestaShopMessage[] GetMessagesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5291,7 +5301,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order carriers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order carriers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderCarrier in PrestaShopOrderCarrier class.</returns>
 		public PrestaShopOrderCarrier[] GetOrderCarriersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5320,7 +5330,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order details by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order details use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order details use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderDetail in PrestaShopOrderDetail class.</returns>
 		public PrestaShopOrderDetail[] GetOrderDetailsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5349,7 +5359,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order histories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order histories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order histories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderHistory in PrestaShopOrderHistory class.</returns>
 		public PrestaShopOrderHistory[] GetOrderHistoriesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5408,7 +5418,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order invoices by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order invoices use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order invoices use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderInvoice in PrestaShopOrderInvoice class.</returns>
 		public PrestaShopOrderInvoice[] GetOrderInvoicesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5467,7 +5477,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order payments by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order payments use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order payments use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderPayment in PrestaShopOrderPayment class.</returns>
 		public PrestaShopOrderPayment[] GetOrderPaymentsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5526,7 +5536,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order slip by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order slip use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order slip use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderSlip in PrestaShopOrderSlip class.</returns>
 		public PrestaShopOrderSlip[] GetOrderSlipByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5555,7 +5565,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting order states by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about order states use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about order states use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about OrderState in PrestaShopOrderState class.</returns>
 		public PrestaShopOrderState[] GetOrderStatesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5584,7 +5594,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting orders by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about orders use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about orders use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Order in PrestaShopOrder class.</returns>
 		public PrestaShopOrder[] GetOrdersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5643,7 +5653,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting price ranges by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about price ranges use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about price ranges use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about PriceRange in PrestaShopPriceRange class.</returns>
 		public PrestaShopPriceRange[] GetPriceRangesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5702,7 +5712,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting product customization fields by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about product customization fields use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about product customization fields use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ProductCustomizationField in PrestaShopProductCustomizationField class.</returns>
 		public PrestaShopProductCustomizationField[] GetProductCustomizationFieldsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5721,7 +5731,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting currencies by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about currencies use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about currencies use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Currency in PrestaShopCurrency class.</returns>
 		public PrestaShopCurrency[] GetCurrenciesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5780,7 +5790,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customer messages by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customer messages use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customer messages use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about CustomerMessage in PrestaShopCustomerMessage class.</returns>
 		public PrestaShopCustomerMessage[] GetCustomerMessagesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5839,7 +5849,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customer threads by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customer threads use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customer threads use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about CustomerThread in PrestaShopCustomerThread class.</returns>
 		public PrestaShopCustomerThread[] GetCustomerThreadsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5898,7 +5908,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Customer in PrestaShopCustomer class.</returns>
 		public PrestaShopCustomer[] GetCustomersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -5957,7 +5967,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting customizations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about customizations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about customizations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Customization in PrestaShopCustomization class.</returns>
 		public PrestaShopCustomization[] GetCustomizationsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6016,7 +6026,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting deliveries by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about deliveries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about deliveries use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Delivery in PrestaShopDelivery class.</returns>
 		public PrestaShopDelivery[] GetDeliveriesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6075,7 +6085,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting employees by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about employees use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about employees use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Employee in PrestaShopEmployee class.</returns>
 		public PrestaShopEmployee[] GetEmployeesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6134,7 +6144,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting groups by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about groups use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about groups use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Group in PrestaShopGroup class.</returns>
 		public PrestaShopGroup[] GetGroupsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6193,7 +6203,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting guests by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about guests use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about guests use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Guest in PrestaShopGuest class.</returns>
 		public PrestaShopGuest[] GetGuestsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6252,7 +6262,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting image types by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about image types use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about image types use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ImageType in PrestaShopImageType class.</returns>
 		public PrestaShopImageType[] GetImageTypesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6311,7 +6321,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting images by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about images use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about images use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Image in PrestaShopImage class.</returns>
 		public PrestaShopImage[] GetImagesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6390,7 +6400,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting addresses by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about addresses use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about addresses use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Address in PrestaShopAddress class.</returns>
 		public PrestaShopAddress[] GetAddressesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6449,7 +6459,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting carriers by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about carriers use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about carriers use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Carrier in PrestaShopCarrier class.</returns>
 		public PrestaShopCarrier[] GetCarriersByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6508,7 +6518,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting cart rules by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about cart rules use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about cart rules use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about CartRule in PrestaShopCartRule class.</returns>
 		public PrestaShopCartRule[] GetCartRulesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6567,7 +6577,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting carts by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about carts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about carts use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Cart in PrestaShopCart class.</returns>
 		public PrestaShopCart[] GetCartsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6626,7 +6636,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting categories by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about categories use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about categories use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Category in PrestaShopCategory class.</returns>
 		public PrestaShopCategory[] GetCategoriesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6685,7 +6695,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting combinations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about combinations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about combinations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Combination in PrestaShopCombination class.</returns>
 		public PrestaShopCombination[] GetCombinationsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6744,7 +6754,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting configurations by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about configurations use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about configurations use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Configuration in PrestaShopConfiguration class.</returns>
 		public PrestaShopConfiguration[] GetConfigurationsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6803,7 +6813,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting contacts by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about contacts use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about contacts use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Contact in PrestaShopContact class.</returns>
 		public PrestaShopContact[] GetContactsByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6862,7 +6872,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting content management system by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about content management system use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about content management system use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about ContentManagementSystem in PrestaShopContentManagementSystem class.</returns>
 		public PrestaShopContentManagementSystem[] GetContentManagementSystemByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{
@@ -6921,7 +6931,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		///<summary>
 		/// Getting countries by rendering options. 
 		/// </summary>
-		/// <param name="renderingOptions">For request specified information about countries use: display and filter or sort. Example:display=[firstname,birthday], display=[birthday]&filter[firstname]=[John], display=[id,lastname,firstname]&filter[id]=[1,10],display=full&sort=[lastname_ASC].</param>
+		/// <param name="renderingOptions">For request specified information about countries use: display and filter or sort.</param>
 		/// <returns>Returns only certain information about Country in PrestaShopCountry class.</returns>
 		public PrestaShopCountry[] GetCountriesByRenderingOptions(PrestaShopRenderingOptions renderingOptions)
 		{

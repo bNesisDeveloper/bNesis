@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK JS -  Dropbox authentication example</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.FileStorages.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.FileStorages.Dropbox.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var bNesisToken = getUrlParameter('token');
+            if (bNesisToken !== null && bNesisToken.length > 0) {
+                document.getElementById("inputelements").style.display = "none";
+                onclick_submit();
+            }
+        });
+        function onclick_submit() {
+            /**
+             * To use the bNesis SDK js in your applications, you must have the bNesis Developer ID - the key that signs your copy of the bNesis SDK. 
+             * To study bNesis SDK, tests and demonstrations, you can get the key from https://api.bnesis.com site, free of charge.
+             * Please, put your bNesis Developer ID here
+             */
+            var bNesisDeveloperId = document.getElementById("bNesisDeveloperId").value; 
+
+            /**
+             * Dropbox  application key 
+             */
+            var DropboxAppKey = document.getElementById("DropboxAppKey").value;
+
+            /**
+             * Dropbox  application secret
+             */
+            var DropboxAppSecret = document.getElementById("DropboxAppSecret").value;
+
+            /**
+             * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+             * https://server2.bnesis.com/
+             * https://bnesisserver1.azurewebsites.net/
+             * https://bnesisserver2.azurewebsites.net/
+             * https://bnesisserver3.azurewebsites.net/
+             */
+            var bNesisAPIEndPoint = "https://server2.bnesis.com/";
+
+            /*
+             * The client will be redirected to the specified address after the authentication operation is performed.
+             */
+            var redirectUrl = window.location.origin + window.location.pathname;
+
+            var bNesisToken = getUrlParameter('token');
+
+            //Initialize bNesisSDK
+            var manager = new ServiceManager();
+
+            if ((bNesisToken === "") || (bNesisToken === null)) {
+
+                //Check bNesisDeveloperID
+                if (bNesisDeveloperId === null || bNesisDeveloperId.length === 0) {
+                    document.getElementById('result').innerHTML += "<br/><span>For using this example, you need bNesis Developer Id. You can get it from <a href='https://api.bnesis.com' target= '_blank'>https://api.bnesis.com</a> site - free of charge</span>";
+                    return;
+                }
+
+                //Check Dropbox application key and secret
+                if (DropboxAppKey === null || DropboxAppKey.length === 0 || DropboxAppSecret === null || DropboxAppSecret.length === 0) {
+                    document.getElementById('result').innerHTML += "<br/>For using this example you need Dropbox authentication key and secret, please contact the Dropbox developers (https://www.dropbox.com/developers) to get the keys";
+                    return;
+                }
+            }
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            document.getElementById('result').innerHTML += "<br/>Initialize Thin mode.";
+            //If success initialize return zero code(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", \nerror message:" + manager.GetLastError();
+                return;
+            }
+
+            if ((bNesisToken === "") || (bNesisToken === null)) {
+
+                //Succes Initiliaze 
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization status: Success<br/>";
+
+                var badAuth = getUrlParameter('badAuth');
+                //If authorization failed, the badAuth will be set to 'true'.
+
+                if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
+                    document.getElementById('result').innerHTML += "<br/>Authorize at Dropbox service, please wait...";
+                    // this method authorize at Dropbox, return instance.
+                    var dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, redirectUrl, DropboxAppKey, DropboxAppSecret);
+
+                }
+                else {
+                    //if badAuth is true - get additionalInfo to get auth error description
+                    var lastErrorMessage = getUrlParameter('additionalInfo');
+                    if (lastErrorMessage !== null && lastErrorMessage.length > 0)
+                        document.getElementById('result').innerHTML += "<br/>Authorize problem: " + lastErrorMessage;
+                    else
+                        document.getElementById('result').innerHTML += "<br/>Authorize problem, please check parameters.<br/>";
+                    return;
+                }
+            }
+            else 
+            {
+                //Authorization at Dropbox Success
+                //Now you can use Dropbox API
+                document.getElementById('result').innerHTML += "<br/>Authorization success! Dropbox instance created.";
+            }             
+        } 
+    </script>
+</head>
+<body>
+    bNesis SDK - Dropbox authentication example<br />
+    <div id="inputelements">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>bNesisDeveloperId</td>
+                <td><input id="bNesisDeveloperId" type="text" name="text"></td>
+            </tr>
+            <tr>
+                <td>DropboxAppKey</td>
+                <td><input id="DropboxAppKey" type="text" name="text"></td>
+            </tr>
+            <tr>
+                <td>DropboxAppSecret</td>
+                <td><input id="DropboxAppSecret" type="text" name="text"></td>
+            </tr>
+        </table>
+        <br />
+        <input id ="button" type="button" onclick="onclick_submit()" value="Auth" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>
