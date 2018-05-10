@@ -62,7 +62,11 @@ Planing of using cloud services in .NET applications system designer determines 
 
 Current version of bNesis SDK for C# (.NET) is 1.7.
  
+## **bNesis SDK solution** 
 
+This solution allows to create library bNesis.SDK.dll from source cs files. Before build the solution you have to add reference to bNesis.Api.Desktop.dll. 
+To do it use NuGet manager and add bNesis.Sdk.ThinClient version 1.7.10.  There will appease the reference to bNesis.Sdk.dll too. This reference has to be deleted.
+ 
 ## **Installation (for .NET)** 
 
 **Solution 1.** Install 'bNesis SDK for C# (.NET)' from 'Nuget Package Manager':
