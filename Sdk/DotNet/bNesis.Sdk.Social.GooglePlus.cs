@@ -34,9 +34,9 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string data,string[] scopes)
+		public string Auth(string bNesisDevId,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("Google", data,bNesisDevId, redirectUrl,clientId,clientSecret,scopes,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("Google", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 
@@ -159,9 +159,9 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// <param name="maxResults">The maximum number of people returned on response. Acceptable, values are 1 to 50.</param>
 		/// <param name="pageToken">The continion token to next page. (Possible can be getted in response then can it use here)</param>
 		/// <returns>Return in GooglePlusItemCollection.</returns>
-		public GooglePlusItemCollection FindProfile(string query, string language, Int32 maxResults, string pageToken)
+		public GooglePlusProfileCollection FindProfile(string query, string language, Int32 maxResults, string pageToken)
 		{
-			return bNesisApi.Call<GooglePlusItemCollection>("GooglePlus", bNesisToken, "FindProfile", query, language, maxResults, pageToken);
+			return bNesisApi.Call<GooglePlusProfileCollection>("GooglePlus", bNesisToken, "FindProfile", query, language, maxResults, pageToken);
 		}
 
 		///<summary>
@@ -175,9 +175,9 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// <param name="maxResults">The maximum people included in response. Acceptable values are 1 to 100.</param>
 		/// <param name="pageToken">The continued token to next page. (Possible can be getted in response then can it use here)</param>
 		/// <returns>Return in GooglePlusItemCollection.</returns>
-		public GooglePlusItemCollection GetListPeopleByActivity(string id, string collection, Int32 maxResults, string pageToken)
+		public GooglePlusProfileCollection GetListPeopleByActivity(string id, string collection, Int32 maxResults, string pageToken)
 		{
-			return bNesisApi.Call<GooglePlusItemCollection>("GooglePlus", bNesisToken, "GetListPeopleByActivity", id, collection, maxResults, pageToken);
+			return bNesisApi.Call<GooglePlusProfileCollection>("GooglePlus", bNesisToken, "GetListPeopleByActivity", id, collection, maxResults, pageToken);
 		}
 
 		///<summary>
@@ -195,9 +195,9 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// <param name="maxResults">The maximum people included in response. Acceptable values are 1 to 100</param>
 		/// <param name="pageToken">The continued token to next page. (Possible can be getted in response then can it use here)</param>
 		/// <returns>Return in GooglePlusItemCollection.</returns>
-		public GooglePlusItemCollection GetListPeople(string id, string collection, string orderBy, Int32 maxResults, string pageToken)
+		public GooglePlusProfileCollection GetListPeople(string id, string collection, string orderBy, Int32 maxResults, string pageToken)
 		{
-			return bNesisApi.Call<GooglePlusItemCollection>("GooglePlus", bNesisToken, "GetListPeople", id, collection, orderBy, maxResults, pageToken);
+			return bNesisApi.Call<GooglePlusProfileCollection>("GooglePlus", bNesisToken, "GetListPeople", id, collection, orderBy, maxResults, pageToken);
 		}
 
 		///<summary>
@@ -210,17 +210,17 @@ namespace bNesis.Sdk.Social.GooglePlus
 		///  Acceptable values are:
 		///  ascending - Sort oldest comments first. (default)
 		///  descending - Sort newest comments first.</param>
-		/// <returns>Return in response.</returns>
-		public GooglePlusItemCollection GetListOfComment(string activityId, Int32 maxResults, string pageToken, string sortOrder)
+		/// <returns>Return in GooglePlusItemCollection.</returns>
+		public GooglePlusCommentCollection GetListOfComment(string activityId, Int32 maxResults, string pageToken, string sortOrder)
 		{
-			return bNesisApi.Call<GooglePlusItemCollection>("GooglePlus", bNesisToken, "GetListOfComment", activityId, maxResults, pageToken, sortOrder);
+			return bNesisApi.Call<GooglePlusCommentCollection>("GooglePlus", bNesisToken, "GetListOfComment", activityId, maxResults, pageToken, sortOrder);
 		}
 
 		///<summary>
 		/// Gets a comment by identifier. 
 		/// </summary>
 		/// <param name="commentId">The comment identifier.</param>
-		/// <returns>Return in response.</returns>
+		/// <returns>Return in GooglePlusComment.</returns>
 		public GooglePlusComment GetComment(string commentId)
 		{
 			return bNesisApi.Call<GooglePlusComment>("GooglePlus", bNesisToken, "GetComment", commentId);
@@ -233,21 +233,21 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// </summary>
 		/// <param name="userId">The identifier of user. If identifier 'me' see .</param>
 		/// <param name="collection">The collection of activities to list.
-		///  Acceptable values are:
-		///  public - All public activities created by the specified user.</param>
+		///      Acceptable values are:
+		///      public - All public activities created by the specified user.</param>
 		/// <param name="maxResults">The maximum activities in response. Acceptable values are 1 to 100.</param>
 		/// <param name="pageToken">The continued token to next page. (Possible can be getted in response then can it use here)</param>
-		/// <returns>Return in response.</returns>
-		public GooglePlusItemCollection GetListOfActivity(string userId, string collection, Int32 maxResults, string pageToken)
+		/// <returns>Return in GooglePlusItemCollection.</returns>
+		public GooglePlusActivityCollection GetListOfActivity(string userId, string collection, Int32 maxResults, string pageToken)
 		{
-			return bNesisApi.Call<GooglePlusItemCollection>("GooglePlus", bNesisToken, "GetListOfActivity", userId, collection, maxResults, pageToken);
+			return bNesisApi.Call<GooglePlusActivityCollection>("GooglePlus", bNesisToken, "GetListOfActivity", userId, collection, maxResults, pageToken);
 		}
 
 		///<summary>
 		/// Gets activity by identifier. 
 		/// </summary>
 		/// <param name="activityId">The activity identifier.</param>
-		/// <returns>Return in response.</returns>
+		/// <returns>Return in GooglePlusActivity.</returns>
 		public GooglePlusActivity GetActivity(string activityId)
 		{
 			return bNesisApi.Call<GooglePlusActivity>("GooglePlus", bNesisToken, "GetActivity", activityId);
@@ -260,14 +260,14 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// <param name="language">Specify the preferred language to search with. All code languages see: https://developers.google.com/+/web/api/rest/search#available-languages</param>
 		/// <param name="maxResults">The maximum activities in response. Acceptable values are 1 to 20.</param>
 		/// <param name="orderType">Specifies how to order search results. 
-		///  Acceptable values are:
-		///  best - Sort activities by relevance to the user, most relevant first.
-		///  recent - Sort activities by published date, most recent first. (default)</param>
+		///      Acceptable values are:
+		///      best - Sort activities by relevance to the user, most relevant first.
+		///      recent - Sort activities by published date, most recent first. (default)</param>
 		/// <param name="pageToken">The continued token to next page. (Possible can be getted in response then can it use here)</param>
-		/// <returns></returns>
-		public GooglePlusItemCollection FindActivities(string query, string language, Int32 maxResults, string orderType, string pageToken)
+		/// <returns>Return in GooglePlusItemCollection.</returns>
+		public GooglePlusActivityCollection FindActivities(string query, string language, Int32 maxResults, string orderType, string pageToken)
 		{
-			return bNesisApi.Call<GooglePlusItemCollection>("GooglePlus", bNesisToken, "FindActivities", query, language, maxResults, orderType, pageToken);
+			return bNesisApi.Call<GooglePlusActivityCollection>("GooglePlus", bNesisToken, "FindActivities", query, language, maxResults, orderType, pageToken);
 		}
 
 		///<summary>
@@ -404,7 +404,7 @@ namespace bNesis.Sdk.Social.GooglePlus
 		///  best - Sort activities by relevance to the user, most relevant first.
 		///  recent - Sort activities by published date, most recent first. (default)</param>
 		/// <param name="pageToken">The continued token to next page. (Possible can be getted in response then can it use here)</param>
-		/// <returns></returns>
+		/// <returns>Return in response.</returns>
 		public Response FindActivitiesRaw(string query, string language, Int32 maxResults, string orderType, string pageToken)
 		{
 			return bNesisApi.Call<Response>("GooglePlus", bNesisToken, "FindActivitiesRaw", query, language, maxResults, orderType, pageToken);
@@ -845,17 +845,12 @@ namespace bNesis.Sdk.Social.GooglePlus
 	}
 
 	///<summary>
-	/// Implementation class of GooglePlusItemCollection. 
+	/// Implementation class of GooglePlusProfileCollection. 
 	/// </summary>
-	public class GooglePlusItemCollection
+	public class GooglePlusProfileCollection
 	{
 		/// <summary>
-		/// Identifier the resource.
-		/// Possible values are:
-		/// plus#commentFeed - comments 
-		/// plus#activityFeed - activity.
-		/// plus#peopleFeed - people.
-		/// plus#acl - access 
+		/// Identifier the resource. 
 		/// </summary>
 		public string kind { get; set; }
 
@@ -870,11 +865,6 @@ namespace bNesis.Sdk.Social.GooglePlus
 		public string selfLink { get; set; }
 
 		/// <summary>
-		/// Link to next page. 
-		/// </summary>
-		public string nextLink { get; set; }
-
-		/// <summary>
 		/// The title of collection. 
 		/// </summary>
 		public string title { get; set; }
@@ -885,31 +875,14 @@ namespace bNesis.Sdk.Social.GooglePlus
 		public string nextPageToken { get; set; }
 
 		/// <summary>
-		/// The total items. (This property can be unspecified) 
+		/// The total items. 
 		/// </summary>
-		public Nullable<Int32> totalItems { get; set; }
+		public Int32 totalItems { get; set; }
 
 		/// <summary>
-		/// When updated (Only for kind: plus#commentFeed, plus#activityFeed) 
+		/// The array of GooglePlusProfile. 
 		/// </summary>
-		public string updated { get; set; }
-
-		/// <summary>
-		/// The identifier of collection. (This property can be unspecified) 
-		/// </summary>
-		public string id { get; set; }
-
-		/// <summary>
-		/// Some description. 
-		/// </summary>
-		public string description { get; set; }
-
-		/// <summary>
-		/// The array of item.
-		///  Can contain one of types:
-		///  GooglePlusProfile, GooglePlusComment, GooglePlusActivity, GooglePlusAccess. 
-		/// </summary>
-		public Object items { get; set; }
+		public GooglePlusProfile[] items { get; set; }
 
 	}
 
@@ -1064,6 +1037,58 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// People who +1'd this comment ''. 
 		/// </summary>
 		public GooglePlusAboutItem plusoners { get; set; }
+
+	}
+
+	///<summary>
+	/// Implementation class of GooglePlusCommentCollection. 
+	/// </summary>
+	public class GooglePlusCommentCollection
+	{
+		/// <summary>
+		/// Identifier the resource. 
+		/// </summary>
+		public string kind { get; set; }
+
+		/// <summary>
+		/// ETag of this response for caching purposes. 
+		/// </summary>
+		public string etag { get; set; }
+
+		/// <summary>
+		/// Link to next page. 
+		/// </summary>
+		public string nextLink { get; set; }
+
+		/// <summary>
+		/// The title of collection. 
+		/// </summary>
+		public string title { get; set; }
+
+		/// <summary>
+		/// The next page token to collection. 
+		/// </summary>
+		public string nextPageToken { get; set; }
+
+		/// <summary>
+		/// When updated. 
+		/// </summary>
+		public string updated { get; set; }
+
+		/// <summary>
+		/// The identifier of collection. 
+		/// </summary>
+		public string id { get; set; }
+
+		/// <summary>
+		/// Some description. 
+		/// </summary>
+		public string description { get; set; }
+
+		/// <summary>
+		/// The array of GooglePlusComment. 
+		/// </summary>
+		public GooglePlusComment[] items { get; set; }
 
 	}
 
@@ -1436,6 +1461,58 @@ namespace bNesis.Sdk.Social.GooglePlus
 		/// The location where this activity occurred. 
 		/// </summary>
 		public GooglePlusLocation location { get; set; }
+
+	}
+
+	///<summary>
+	/// Implementation class of GooglePlusActivityCollection. 
+	/// </summary>
+	public class GooglePlusActivityCollection
+	{
+		/// <summary>
+		/// Identifier the resource. 
+		/// </summary>
+		public string kind { get; set; }
+
+		/// <summary>
+		/// ETag of this response for caching purposes. 
+		/// </summary>
+		public string etag { get; set; }
+
+		/// <summary>
+		/// Link to this resource. 
+		/// </summary>
+		public string selfLink { get; set; }
+
+		/// <summary>
+		/// Link to next page. 
+		/// </summary>
+		public string nextLink { get; set; }
+
+		/// <summary>
+		/// The title of collection. 
+		/// </summary>
+		public string title { get; set; }
+
+		/// <summary>
+		/// The next page token to collection. 
+		/// </summary>
+		public string nextPageToken { get; set; }
+
+		/// <summary>
+		/// When update 
+		/// </summary>
+		public string updated { get; set; }
+
+		/// <summary>
+		/// The identifier of collection. 
+		/// </summary>
+		public string id { get; set; }
+
+		/// <summary>
+		/// The array of GooglePlusActivity. 
+		/// </summary>
+		public GooglePlusActivity[] items { get; set; }
 
 	}
 

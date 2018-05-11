@@ -7,6 +7,8 @@ using bNesis.Api.Desktop;
 using bNesis.Sdk.Analytics.GoogleAnalytics;
 using bNesis.Sdk.Other.IISSEO;
 using bNesis.Sdk.Delivery.UkrPoshta;
+using bNesis.Sdk.Demo.DemoService;
+using bNesis.Sdk.eCommerce.Allegro;
 using bNesis.Sdk.eCommerce.Amazon;
 using bNesis.Sdk.eCommerce.BigCommerce;
 using bNesis.Sdk.eCommerce.OpenCart;
@@ -411,13 +413,13 @@ namespace bNesis.Sdk
 		///  Create new instance of GoogleAnalytics
 		/// </summary>
 		/// <returns>Return new GoogleAnalytics instance</returns>
-		public GoogleAnalytics CreateInstanceGoogleAnalytics(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes)
+		public GoogleAnalytics CreateInstanceGoogleAnalytics(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			GoogleAnalytics resultService = CreateInstanceGoogleAnalytics();
 			try
               {
-			    resultService.Auth(bNesisDevId,redirectUrl,clientId,clientSecret,scopes);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -440,13 +442,13 @@ namespace bNesis.Sdk
 		///  Create new instance of IISSEO
 		/// </summary>
 		/// <returns>Return new IISSEO instance</returns>
-		public IISSEO CreateInstanceIISSEO(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public IISSEO CreateInstanceIISSEO(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			IISSEO resultService = CreateInstanceIISSEO();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -469,13 +471,13 @@ namespace bNesis.Sdk
 		///  Create new instance of UkrPoshta
 		/// </summary>
 		/// <returns>Return new UkrPoshta instance</returns>
-		public UkrPoshta CreateInstanceUkrPoshta(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,bool isSandbox)
+		public UkrPoshta CreateInstanceUkrPoshta(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			UkrPoshta resultService = CreateInstanceUkrPoshta();
 			try
               {
-			    resultService.Auth(bNesisDevId,redirectUrl,clientId,clientSecret,isSandbox);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -495,16 +497,74 @@ namespace bNesis.Sdk
 		}
 
 	    ///<summary>
+		///  Create new instance of DemoService
+		/// </summary>
+		/// <returns>Return new DemoService instance</returns>
+		public DemoService CreateInstanceDemoService(string bNesisDevId,string redirectUrl)
+		{
+		    lastSystemErrorMessage = string.Empty;
+			DemoService resultService = CreateInstanceDemoService();
+			try
+              {
+			    resultService.Auth(bNesisDevId,redirectUrl);
+			  } 
+            catch (Exception e)
+              {
+                lastSystemErrorMessage = e.Message;
+             }
+			return resultService;
+		}
+
+		///<summary>
+		///  Create new instance of DemoService
+		/// </summary>
+		/// <returns>Return new DemoService instance</returns>
+		public DemoService CreateInstanceDemoService()
+		{
+			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("DemoService")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
+			return new DemoService(bNesisApi);
+		}
+
+	    ///<summary>
+		///  Create new instance of Allegro
+		/// </summary>
+		/// <returns>Return new Allegro instance</returns>
+		public Allegro CreateInstanceAllegro(string bNesisDevId,string redirectUrl)
+		{
+		    lastSystemErrorMessage = string.Empty;
+			Allegro resultService = CreateInstanceAllegro();
+			try
+              {
+			    resultService.Auth(bNesisDevId,redirectUrl);
+			  } 
+            catch (Exception e)
+              {
+                lastSystemErrorMessage = e.Message;
+             }
+			return resultService;
+		}
+
+		///<summary>
+		///  Create new instance of Allegro
+		/// </summary>
+		/// <returns>Return new Allegro instance</returns>
+		public Allegro CreateInstanceAllegro()
+		{
+			if (!bNesisApi.SessionsManager.ClientsManager.ClientExists("Allegro")) throw new Exception(ServiceManager.errorCodeServiceDoesNotExistDescription);
+			return new Allegro(bNesisApi);
+		}
+
+	    ///<summary>
 		///  Create new instance of Amazon
 		/// </summary>
 		/// <returns>Return new Amazon instance</returns>
-		public Amazon CreateInstanceAmazon(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Amazon CreateInstanceAmazon(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Amazon resultService = CreateInstanceAmazon();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -527,13 +587,13 @@ namespace bNesis.Sdk
 		///  Create new instance of BigCommerce
 		/// </summary>
 		/// <returns>Return new BigCommerce instance</returns>
-		public BigCommerce CreateInstanceBigCommerce(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public BigCommerce CreateInstanceBigCommerce(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			BigCommerce resultService = CreateInstanceBigCommerce();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -556,13 +616,13 @@ namespace bNesis.Sdk
 		///  Create new instance of OpenCart
 		/// </summary>
 		/// <returns>Return new OpenCart instance</returns>
-		public OpenCart CreateInstanceOpenCart(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public OpenCart CreateInstanceOpenCart(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			OpenCart resultService = CreateInstanceOpenCart();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -585,13 +645,13 @@ namespace bNesis.Sdk
 		///  Create new instance of PrestaShop
 		/// </summary>
 		/// <returns>Return new PrestaShop instance</returns>
-		public PrestaShop CreateInstancePrestaShop(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public PrestaShop CreateInstancePrestaShop(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			PrestaShop resultService = CreateInstancePrestaShop();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -614,13 +674,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Shopify
 		/// </summary>
 		/// <returns>Return new Shopify instance</returns>
-		public Shopify CreateInstanceShopify(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Shopify CreateInstanceShopify(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Shopify resultService = CreateInstanceShopify();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -643,13 +703,13 @@ namespace bNesis.Sdk
 		///  Create new instance of BaiduBCS
 		/// </summary>
 		/// <returns>Return new BaiduBCS instance</returns>
-		public BaiduBCS CreateInstanceBaiduBCS(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public BaiduBCS CreateInstanceBaiduBCS(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			BaiduBCS resultService = CreateInstanceBaiduBCS();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -672,13 +732,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Box
 		/// </summary>
 		/// <returns>Return new Box instance</returns>
-		public Box CreateInstanceBox(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Box CreateInstanceBox(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Box resultService = CreateInstanceBox();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -701,13 +761,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Dropbox
 		/// </summary>
 		/// <returns>Return new Dropbox instance</returns>
-		public Dropbox CreateInstanceDropbox(string bNesisDevId,string redirectUrl,string clientId,string clientSecret)
+		public Dropbox CreateInstanceDropbox(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Dropbox resultService = CreateInstanceDropbox();
 			try
               {
-			    resultService.Auth(bNesisDevId,redirectUrl,clientId,clientSecret);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -730,13 +790,13 @@ namespace bNesis.Sdk
 		///  Create new instance of GoogleDrive
 		/// </summary>
 		/// <returns>Return new GoogleDrive instance</returns>
-		public GoogleDrive CreateInstanceGoogleDrive(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes)
+		public GoogleDrive CreateInstanceGoogleDrive(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			GoogleDrive resultService = CreateInstanceGoogleDrive();
 			try
               {
-			    resultService.Auth(bNesisDevId,redirectUrl,clientId,clientSecret,scopes);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -759,13 +819,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Mega
 		/// </summary>
 		/// <returns>Return new Mega instance</returns>
-		public Mega CreateInstanceMega(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Mega CreateInstanceMega(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Mega resultService = CreateInstanceMega();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -788,13 +848,13 @@ namespace bNesis.Sdk
 		///  Create new instance of SugarSync
 		/// </summary>
 		/// <returns>Return new SugarSync instance</returns>
-		public SugarSync CreateInstanceSugarSync(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public SugarSync CreateInstanceSugarSync(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			SugarSync resultService = CreateInstanceSugarSync();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -817,13 +877,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Prozzoro
 		/// </summary>
 		/// <returns>Return new Prozzoro instance</returns>
-		public Prozzoro CreateInstanceProzzoro(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Prozzoro CreateInstanceProzzoro(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Prozzoro resultService = CreateInstanceProzzoro();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -846,13 +906,13 @@ namespace bNesis.Sdk
 		///  Create new instance of LiqPay
 		/// </summary>
 		/// <returns>Return new LiqPay instance</returns>
-		public LiqPay CreateInstanceLiqPay(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public LiqPay CreateInstanceLiqPay(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			LiqPay resultService = CreateInstanceLiqPay();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -875,13 +935,13 @@ namespace bNesis.Sdk
 		///  Create new instance of PayPal
 		/// </summary>
 		/// <returns>Return new PayPal instance</returns>
-		public PayPal CreateInstancePayPal(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public PayPal CreateInstancePayPal(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			PayPal resultService = CreateInstancePayPal();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -904,13 +964,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Stripe
 		/// </summary>
 		/// <returns>Return new Stripe instance</returns>
-		public Stripe CreateInstanceStripe(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Stripe CreateInstanceStripe(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Stripe resultService = CreateInstanceStripe();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -933,13 +993,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Facebook
 		/// </summary>
 		/// <returns>Return new Facebook instance</returns>
-		public Facebook CreateInstanceFacebook(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public Facebook CreateInstanceFacebook(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Facebook resultService = CreateInstanceFacebook();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -962,13 +1022,13 @@ namespace bNesis.Sdk
 		///  Create new instance of GooglePlus
 		/// </summary>
 		/// <returns>Return new GooglePlus instance</returns>
-		public GooglePlus CreateInstanceGooglePlus(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string data,string[] scopes)
+		public GooglePlus CreateInstanceGooglePlus(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			GooglePlus resultService = CreateInstanceGooglePlus();
 			try
               {
-			    resultService.Auth(bNesisDevId,redirectUrl,clientId,clientSecret, data, scopes);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -991,13 +1051,13 @@ namespace bNesis.Sdk
 		///  Create new instance of LinkedIn
 		/// </summary>
 		/// <returns>Return new LinkedIn instance</returns>
-		public LinkedIn CreateInstanceLinkedIn(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public LinkedIn CreateInstanceLinkedIn(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			LinkedIn resultService = CreateInstanceLinkedIn();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -1020,13 +1080,13 @@ namespace bNesis.Sdk
 		///  Create new instance of VKontakte
 		/// </summary>
 		/// <returns>Return new VKontakte instance</returns>
-		public VKontakte CreateInstanceVKontakte(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public VKontakte CreateInstanceVKontakte(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			VKontakte resultService = CreateInstanceVKontakte();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {
@@ -1049,13 +1109,13 @@ namespace bNesis.Sdk
 		///  Create new instance of bNesisTestService
 		/// </summary>
 		/// <returns>Return new bNesisTestService instance</returns>
-		public bNesisTestService CreateInstancebNesisTestService(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public bNesisTestService CreateInstancebNesisTestService(string bNesisDevId,string redirectUrl)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			bNesisTestService resultService = CreateInstancebNesisTestService();
 			try
               {
-			    resultService.Auth(data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			    resultService.Auth(bNesisDevId,redirectUrl);
 			  } 
             catch (Exception e)
               {

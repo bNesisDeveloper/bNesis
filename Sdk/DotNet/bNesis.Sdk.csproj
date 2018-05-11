@@ -32,13 +32,8 @@
     <DocumentationFile>bin\Debug\bNesis.Sdk.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="bNesis.Api.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\bNesis.Sdk.ThinClient.1.7.10\lib\net45\bNesis.Api.Desktop.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="bNesis.Api.Desktop">
+      <HintPath>E:\bNesisSourceCodeNew\bNesisSourceCode\Api\Clients\Ui\Desktop\Wpf\bNesis.Api.Clients.Ui.Desktop.Wpf\bin\Debug\bNesis.Api.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +49,8 @@
     <Compile Include="bNesis.Sdk.Common.cs" />
     <Compile Include="bNesis.Sdk.cs" />
     <Compile Include="bNesis.Sdk.Delivery.UkrPoshta.cs" />
+    <Compile Include="bNesis.Sdk.Demo.DemoService.cs" />
+    <Compile Include="bNesis.Sdk.eCommerce.Allegro.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.Amazon.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.BigCommerce.cs" />
     <Compile Include="bNesis.Sdk.eCommerce.OpenCart.cs" />
@@ -77,9 +74,6 @@
     <Compile Include="bNesis.Sdk.Social.VKontakte.cs" />
     <Compile Include="bNesis.Sdk.Test.bNesisTestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

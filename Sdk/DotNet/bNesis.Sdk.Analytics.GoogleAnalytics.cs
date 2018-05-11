@@ -34,9 +34,9 @@ namespace bNesis.Sdk.Analytics.GoogleAnalytics
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes)
+		public string Auth(string bNesisDevId,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("Google", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("Google", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 
@@ -104,10 +104,10 @@ namespace bNesis.Sdk.Analytics.GoogleAnalytics
 		}
 
 		///<summary>
-		///  
+		/// Gets analytics data. 
 		/// </summary>
-		/// <param name="reportRequest"></param>
-		/// <returns></returns>
+		/// <param name="reportRequest">The report request.</param>
+		/// <returns>Return in response.</returns>
 		public Response GetReportsBatchRaw(string reportRequest)
 		{
 			return bNesisApi.Call<Response>("GoogleAnalytics", bNesisToken, "GetReportsBatchRaw", reportRequest);

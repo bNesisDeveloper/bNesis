@@ -165,16 +165,6 @@ namespace bNesis.Sdk.Common
 		/// </summary>
 		public string Phone { get; set; }
 
-		/// <summary>
-		/// additional information 
-		/// </summary>
-		public string About { get; set; }
-
-		/// <summary>
-		/// for dynamic response 
-		/// </summary>
-		public string FieldsDynamic { get; set; }
-
 	}
 
 	///<summary>

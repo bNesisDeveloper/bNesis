@@ -34,9 +34,9 @@ namespace bNesis.Sdk.Delivery.UkrPoshta
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl,string clientId,string clientSecret,bool isSandbox)
+		public string Auth(string bNesisDevId,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("UkrPoshta", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,null,string.Empty,string.Empty,isSandbox,string.Empty);
+			bNesisToken = bNesisApi.Auth("UkrPoshta", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 

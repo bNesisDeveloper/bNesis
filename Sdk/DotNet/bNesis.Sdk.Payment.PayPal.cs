@@ -34,9 +34,9 @@ namespace bNesis.Sdk.Payment.PayPal
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public string Auth(string bNesisDevId,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("PayPal", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			bNesisToken = bNesisApi.Auth("PayPal", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 

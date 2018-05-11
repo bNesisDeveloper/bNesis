@@ -34,9 +34,9 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string data,string bNesisDevId,string redirectUrl,string clientId,string clientSecret,string[] scopes,string login,string password,bool isSandbox,string serviceUrl)
+		public string Auth(string bNesisDevId,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("PrestaShop", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			bNesisToken = bNesisApi.Auth("PrestaShop", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 
@@ -10685,7 +10685,7 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 	}
 
 	///<summary>
-	/// Implementation class for PrestaShop 'category'. Used when need get information about category. 
+	/// Implementation class for PrestaShop 'category'. 
 	/// </summary>
 	public class PrestaShopCategory
 	{
@@ -10950,30 +10950,63 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 	/// </summary>
 	public class PrestaShopConfigurationIn
 	{
+		/// <summary>
+		/// The value. 
+		/// </summary>
 		public string value { get; set; }
 
+		/// <summary>
+		/// The name of configuration. 
+		/// </summary>
 		public string name { get; set; }
 
+		/// <summary>
+		/// The identifier of shop group 
+		/// </summary>
 		public Int32 id_shop_group { get; set; }
 
+		/// <summary>
+		/// The identifier of shop. 
+		/// </summary>
 		public Int32 id_shop { get; set; }
 
 	}
 
+	///<summary>
+	/// Implemention class for PrestaShop 'configuration'. 
+	/// </summary>
 	public class PrestaShopConfiguration
 	{
 		public Int32 id { get; set; }
 
+		/// <summary>
+		/// The value. 
+		/// </summary>
 		public string value { get; set; }
 
+		/// <summary>
+		/// The name of configuration. 
+		/// </summary>
 		public string name { get; set; }
 
+		/// <summary>
+		/// The identifier of shop group 
+		/// </summary>
 		public Int32 id_shop_group { get; set; }
 
+		/// <summary>
+		/// The identifier of shop. 
+		/// </summary>
 		public Int32 id_shop { get; set; }
 
+		/// <summary>
+		/// When added. 
+		/// </summary>
 		public string date_add { get; set; }
 
+		/// <summary>
+		/// When updated. 
+		/// </summary>
 		public string date_upd { get; set; }
 
 	}
