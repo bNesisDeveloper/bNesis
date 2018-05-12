@@ -35,9 +35,9 @@ namespace bNesis.Sdk.FileStorages.SugarSync
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl)
+		public string Auth(string bNesisDevId,string clientId,string clientSecret,string redirectUrl,string login,string password,string data)
 		{
-			bNesisToken = bNesisApi.Auth("SugarSync", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("SugarSync", data,bNesisDevId,redirectUrl,clientId,clientSecret,null,login,password,false,string.Empty);
 			return bNesisToken;
 		}
 

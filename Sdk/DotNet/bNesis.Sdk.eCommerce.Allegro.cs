@@ -34,9 +34,9 @@ namespace bNesis.Sdk.eCommerce.Allegro
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl)
+		public string Auth(string bNesisDevId,string clientId,string clientSecret,string redirectUrl,string[] scopes,bool isSandbox,string data)
 		{
-			bNesisToken = bNesisApi.Auth("Allegro", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("Allegro", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,string.Empty,string.Empty,isSandbox,string.Empty);
 			return bNesisToken;
 		}
 

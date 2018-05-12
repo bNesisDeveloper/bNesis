@@ -35,9 +35,9 @@ namespace bNesis.Sdk.FileStorages.BaiduBCS
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl)
+		public string Auth(string bNesisDevId,string clientId,string clientSecret,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("BaiduBCS", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("BaiduBCS", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 

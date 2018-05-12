@@ -34,9 +34,9 @@ namespace bNesis.Sdk.Social.VKontakte
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl)
+		public string Auth(string bNesisDevId,string clientId,string clientSecret,string redirectUrl)
 		{
-			bNesisToken = bNesisApi.Auth("VKontakte", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("VKontakte", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,null,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 
@@ -168,9 +168,9 @@ namespace bNesis.Sdk.Social.VKontakte
 		/// https://vk.com/dev/friends.get 
 		/// </summary>
 		/// <returns>Returns a list of user IDs or detailed information about a user's friends.</returns>
-		public VKontakteFriendsGet GetFriends()
+		public VKontakteResponse2 GetFriends()
 		{
-			return bNesisApi.Call<VKontakteFriendsGet>("VKontakte", bNesisToken, "GetFriends");
+			return bNesisApi.Call<VKontakteResponse2>("VKontakte", bNesisToken, "GetFriends");
 		}
 
 		///<summary>
@@ -354,6 +354,128 @@ namespace bNesis.Sdk.Social.VKontakte
 		public Response GetServiceTokenRaw()
 		{
 			return bNesisApi.Call<Response>("VKontakte", bNesisToken, "GetServiceTokenRaw");
+		}
+
+		///<summary>
+		/// Returns detailed information on current user.
+		/// https://vk.com/dev/users.get 
+		/// </summary>
+		/// <returns>Returns a list of user objects.</returns>
+		public VKontakteResponse GetUserFullData()
+		{
+			return bNesisApi.Call<VKontakteResponse>("VKontakte", bNesisToken, "GetUserFullData");
+		}
+
+		///<summary>
+		/// Returns detailed information on users.
+		/// https://vk.com/dev/users.get 
+		/// </summary>
+		/// <param name="user_ids">User IDs or screen names (screen_name). 
+		/// By default, current user ID. list of comma-separated words, the maximum number of elements allowed is 1000</param>
+		/// <param name="fields">Profile fields to return. 
+		/// Sample values: nickname, screen_name, sex, bdate (birthdate), city, country, timezone, photo, photo_medium, photo_big, has_mobile, contacts, education, online, counters, relation, last_seen, activity, can_write_private_message, can_see_all_posts, can_post, universities 
+		/// Click here for the full list of supported parameters.
+		/// list of comma-separated words</param>
+		/// <param name="name_case">Case for declension of user name and surname: 
+		/// nom — nominative(default)
+		/// gen — genitive
+		/// dat — dative
+		/// acc — accusative
+		/// ins — instrumental
+		/// abl — prepositional</param>
+		/// <returns>Returns a list of user objects.</returns>
+		public VKontakteResponse GetUsers(string user_ids, string fields, string name_case)
+		{
+			return bNesisApi.Call<VKontakteResponse>("VKontakte", bNesisToken, "GetUsers", user_ids, fields, name_case);
+		}
+
+		///<summary>
+		/// Returns a list of IDs of followers of the user in question, sorted by date added, most recent first.
+		/// This method can be called by a service token.Only public data is returned.
+		/// This method can be called with a user token.
+		/// https://vk.com/dev/users.getFollowers 
+		/// </summary>
+		/// <param name="user_id">User ID. positive number, current user id is used by default</param>
+		/// <param name="offset">Offset needed to return a specific subset of followers. 
+		/// positive number</param>
+		/// <param name="count">Number of followers to return. 
+		/// positive number, default 100, maximum value 1000</param>
+		/// <param name="fields">Profile fields to return. Sample values: nickname, screen_name, sex, bdate (birthdate), city, country, timezone, photo, photo_medium, photo_big, has_mobile, rate, contacts, education, online. 
+		/// Click here for the full list of supported parameters.
+		/// list of comma-separated words</param>
+		/// <param name="name_case">Case for declension of user name and surname: 
+		/// nom — nominative(default)
+		/// gen — genitive
+		/// dat — dative
+		/// acc — accusative
+		/// ins — instrumental
+		/// abl — prepositional
+		/// string</param>
+		/// <returns>Returns a list of user objects.</returns>
+		public VKontakteResponse2 GetFollowersUsers(Int32 user_id, Int32 offset, Int32 count, string fields, string name_case)
+		{
+			return bNesisApi.Call<VKontakteResponse2>("VKontakte", bNesisToken, "GetFollowersUsers", user_id, offset, count, fields, name_case);
+		}
+
+		///<summary>
+		/// Returns detailed information on current user.
+		/// https://vk.com/dev/users.get 
+		/// </summary>
+		/// <returns>Returns a list of user objects.</returns>
+		public Response GetUserFullDataRaw()
+		{
+			return bNesisApi.Call<Response>("VKontakte", bNesisToken, "GetUserFullDataRaw");
+		}
+
+		///<summary>
+		/// Returns detailed information on users.
+		/// https://vk.com/dev/users.get 
+		/// </summary>
+		/// <param name="user_ids">User IDs or screen names (screen_name). 
+		/// By default, current user ID. list of comma-separated words, the maximum number of elements allowed is 1000</param>
+		/// <param name="fields">Profile fields to return. 
+		/// Sample values: nickname, screen_name, sex, bdate (birthdate), city, country, timezone, photo, photo_medium, photo_big, has_mobile, contacts, education, online, counters, relation, last_seen, activity, can_write_private_message, can_see_all_posts, can_post, universities 
+		/// Click here for the full list of supported parameters.
+		/// list of comma-separated words</param>
+		/// <param name="name_case">Case for declension of user name and surname: 
+		/// nom — nominative(default)
+		/// gen — genitive
+		/// dat — dative
+		/// acc — accusative
+		/// ins — instrumental
+		/// abl — prepositional</param>
+		/// <returns>Returns a list of user objects.</returns>
+		public Response GetUsersRaw(string user_ids, string fields, string name_case)
+		{
+			return bNesisApi.Call<Response>("VKontakte", bNesisToken, "GetUsersRaw", user_ids, fields, name_case);
+		}
+
+		///<summary>
+		/// Returns a list of IDs of followers of the user in question, sorted by date added, most recent first.
+		/// This method can be called by a service token.Only public data is returned.
+		/// This method can be called with a user token.
+		/// https://vk.com/dev/users.getFollowers 
+		/// </summary>
+		/// <param name="user_id">User ID. positive number, current user id is used by default</param>
+		/// <param name="offset">Offset needed to return a specific subset of followers. 
+		/// positive number</param>
+		/// <param name="count">Number of followers to return. 
+		/// positive number, default 100, maximum value 1000</param>
+		/// <param name="fields">Profile fields to return. Sample values: nickname, screen_name, sex, bdate (birthdate), city, country, timezone, photo, photo_medium, photo_big, has_mobile, rate, contacts, education, online. 
+		/// Click here for the full list of supported parameters.
+		/// list of comma-separated words</param>
+		/// <param name="name_case">Case for declension of user name and surname: 
+		/// nom — nominative(default)
+		/// gen — genitive
+		/// dat — dative
+		/// acc — accusative
+		/// ins — instrumental
+		/// abl — prepositional
+		/// string</param>
+		/// <returns>Returns a list of user objects.</returns>
+		public Response GetFollowersUsersRaw(Int32 user_id, Int32 offset, Int32 count, string fields, string name_case)
+		{
+			return bNesisApi.Call<Response>("VKontakte", bNesisToken, "GetFollowersUsersRaw", user_id, offset, count, fields, name_case);
 		}
 }
 	///<summary>
@@ -1490,7 +1612,7 @@ namespace bNesis.Sdk.Social.VKontakte
 	///<summary>
 	/// The response 
 	/// </summary>
-	public class VKontakteFriendsGetResponse
+	public class VKontakteResponse3
 	{
 		/// <summary>
 		/// array of objects describing users
@@ -1507,16 +1629,28 @@ namespace bNesis.Sdk.Social.VKontakte
 	}
 
 	///<summary>
-	/// a list of user objects
-	///      https://vk.com/dev/friends.get
-	///      Returns a list of user IDs or detailed information about a user's friends. 
+	/// Response. 
 	/// </summary>
-	public class VKontakteFriendsGet
+	public class VKontakteResponse2
 	{
 		/// <summary>
 		/// the response. 
 		/// </summary>
-		public VKontakteFriendsGetResponse response { get; set; }
+		public VKontakteResponse3 response { get; set; }
+
+	}
+
+	///<summary>
+	/// Response 
+	/// </summary>
+	public class VKontakteResponse
+	{
+		/// <summary>
+		/// object describes a user profile
+		/// https://vk.com/dev/objects/user
+		/// Object contains information about users. Fields set may vary depending on called method and passed parameters. 
+		/// </summary>
+		public VKontakteUser[] response { get; set; }
 
 	}
 

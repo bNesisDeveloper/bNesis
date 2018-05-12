@@ -34,9 +34,9 @@ namespace bNesis.Sdk.eCommerce.PrestaShop
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string redirectUrl)
+		public string Auth(string bNesisDevId,string redirectUrl,string login,string serviceUrl)
 		{
-			bNesisToken = bNesisApi.Auth("PrestaShop", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("PrestaShop", string.Empty,bNesisDevId,redirectUrl,string.Empty,string.Empty,null,login,string.Empty,false,serviceUrl);
 			return bNesisToken;
 		}
 
