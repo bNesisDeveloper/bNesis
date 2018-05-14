@@ -89,7 +89,7 @@ function bNesisApi()
                 methodParameters = new Array(arguments.length -3);
                 for(i = 3; i < arguments.length; i++)
                     methodParameters[i-3]= arguments[i];
-                    }
+             }
         var serviceClient = this.SessionsManager.GetSessionClient(bNesisToken, serviceId);
         var result = serviceClient.Call(methodName, methodParameters);
         return result;
@@ -373,8 +373,9 @@ RemoteApiServiceClient.prototype.Call = function (methodName, methodParameters)
                     var parameterValue = null;
                     var contentType = null;
                     if (parameter instanceof File) {
-                        parameterValue = parameter;
-                        //contentType = "application/octet-stream";
+                        //parameterValue = parameter;
+                        contentType = "application/octet-stream";
+                        parameterValue = parameter.slice(0, parameter.size, contentType);
                     }
                     else {
                         //parameterValue = JSON.stringify(methodParameter);

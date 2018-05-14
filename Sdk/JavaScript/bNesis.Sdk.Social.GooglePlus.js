@@ -7,9 +7,9 @@ GooglePlus = function (bNesisApi) {
 	 * or Attach to bNesis session with exists bNesis token
      * @return {string} bNesisToken value | true if bNesisToken is valid
 	 */
-    this.Auth = function (bNesisDevId,redirectUrl,clientId,clientSecret,scopes) {
+    this.Auth = function (bNesisDevId,clientId,clientSecret,redirectUrl,scopes,data) {
 		if(arguments.length !== 1){
-			var bNesisToken = _bNesisApi.Auth("Google", "",bNesisDevId,redirectUrl,clientId,clientSecret,scopes,"","",false,"");
+			var bNesisToken = _bNesisApi.Auth("Google", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,"","",false,"");
 			return bNesisToken;
 		}
 		else{
@@ -123,7 +123,7 @@ GooglePlus = function (bNesisApi) {
 	 * @param language Specify the preferred language to search with. All code languages see: https://developers.google.com/+/web/api/rest/search#available-languages
 	 * @param maxResults The maximum number of people returned on response. Acceptable, values are 1 to 50.
 	 * @param pageToken The continion token to next page. (Possible can be getted in response then can it use here)
-	 * @return {GooglePlusItemCollection} Return in GooglePlusItemCollection.
+	 * @return {GooglePlusProfileCollection} Return in GooglePlusItemCollection.
 	 */
     this.FindProfile = function (query, language, maxResults, pageToken) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "FindProfile", query, language, maxResults, pageToken);
@@ -139,7 +139,7 @@ GooglePlus = function (bNesisApi) {
 	 *  resharers - List all people who have reshared this activity.
 	 * @param maxResults The maximum people included in response. Acceptable values are 1 to 100.
 	 * @param pageToken The continued token to next page. (Possible can be getted in response then can it use here)
-	 * @return {GooglePlusItemCollection} Return in GooglePlusItemCollection.
+	 * @return {GooglePlusProfileCollection} Return in GooglePlusItemCollection.
 	 */
     this.GetListPeopleByActivity = function (id, collection, maxResults, pageToken) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "GetListPeopleByActivity", id, collection, maxResults, pageToken);
@@ -159,7 +159,7 @@ GooglePlus = function (bNesisApi) {
 	 *  best - Order people based on the relevence to the viewer.
 	 * @param maxResults The maximum people included in response. Acceptable values are 1 to 100
 	 * @param pageToken The continued token to next page. (Possible can be getted in response then can it use here)
-	 * @return {GooglePlusItemCollection} Return in GooglePlusItemCollection.
+	 * @return {GooglePlusProfileCollection} Return in GooglePlusItemCollection.
 	 */
     this.GetListPeople = function (id, collection, orderBy, maxResults, pageToken) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "GetListPeople", id, collection, orderBy, maxResults, pageToken);
@@ -175,7 +175,7 @@ GooglePlus = function (bNesisApi) {
 	 *  Acceptable values are:
 	 *  ascending - Sort oldest comments first. (default)
 	 *  descending - Sort newest comments first.
-	 * @return {GooglePlusItemCollection} Return in response.
+	 * @return {GooglePlusCommentCollection} Return in GooglePlusItemCollection.
 	 */
     this.GetListOfComment = function (activityId, maxResults, pageToken, sortOrder) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "GetListOfComment", activityId, maxResults, pageToken, sortOrder);
@@ -185,7 +185,7 @@ GooglePlus = function (bNesisApi) {
 	/**
 	 *  Gets a comment by identifier. 	
 	 * @param commentId The comment identifier.
-	 * @return {GooglePlusComment} Return in response.
+	 * @return {GooglePlusComment} Return in GooglePlusComment.
 	 */
     this.GetComment = function (commentId) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "GetComment", commentId);
@@ -198,11 +198,11 @@ GooglePlus = function (bNesisApi) {
 	 * or https://www.googleapis.com/auth/plus.me if used userId - 'me'. 	
 	 * @param userId The identifier of user. If identifier 'me' see .
 	 * @param collection The collection of activities to list.
-	 *  Acceptable values are:
-	 *  public - All public activities created by the specified user.
+	 *      Acceptable values are:
+	 *      public - All public activities created by the specified user.
 	 * @param maxResults The maximum activities in response. Acceptable values are 1 to 100.
 	 * @param pageToken The continued token to next page. (Possible can be getted in response then can it use here)
-	 * @return {GooglePlusItemCollection} Return in response.
+	 * @return {GooglePlusActivityCollection} Return in GooglePlusItemCollection.
 	 */
     this.GetListOfActivity = function (userId, collection, maxResults, pageToken) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "GetListOfActivity", userId, collection, maxResults, pageToken);
@@ -212,7 +212,7 @@ GooglePlus = function (bNesisApi) {
 	/**
 	 *  Gets activity by identifier. 	
 	 * @param activityId The activity identifier.
-	 * @return {GooglePlusActivity} Return in response.
+	 * @return {GooglePlusActivity} Return in GooglePlusActivity.
 	 */
     this.GetActivity = function (activityId) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "GetActivity", activityId);
@@ -225,11 +225,11 @@ GooglePlus = function (bNesisApi) {
 	 * @param language Specify the preferred language to search with. All code languages see: https://developers.google.com/+/web/api/rest/search#available-languages
 	 * @param maxResults The maximum activities in response. Acceptable values are 1 to 20.
 	 * @param orderType Specifies how to order search results. 
-	 *  Acceptable values are:
-	 *  best - Sort activities by relevance to the user, most relevant first.
-	 *  recent - Sort activities by published date, most recent first. (default)
+	 *      Acceptable values are:
+	 *      best - Sort activities by relevance to the user, most relevant first.
+	 *      recent - Sort activities by published date, most recent first. (default)
 	 * @param pageToken The continued token to next page. (Possible can be getted in response then can it use here)
-	 * @return {GooglePlusItemCollection} 
+	 * @return {GooglePlusActivityCollection} Return in GooglePlusItemCollection.
 	 */
     this.FindActivities = function (query, language, maxResults, orderType, pageToken) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "FindActivities", query, language, maxResults, orderType, pageToken);
@@ -369,7 +369,7 @@ GooglePlus = function (bNesisApi) {
 	 *  best - Sort activities by relevance to the user, most relevant first.
 	 *  recent - Sort activities by published date, most recent first. (default)
 	 * @param pageToken The continued token to next page. (Possible can be getted in response then can it use here)
-	 * @return {Response} 
+	 * @return {Response} Return in response.
 	 */
     this.FindActivitiesRaw = function (query, language, maxResults, orderType, pageToken) {
         var result = _bNesisApi.Call("GooglePlus", this.bNesisToken, "FindActivitiesRaw", query, language, maxResults, orderType, pageToken);
@@ -876,17 +876,12 @@ GooglePlus = function (bNesisApi) {
 }
 
 /**
- * Implementation class of GooglePlusItemCollection. 
- * @typedef {Object} GooglePlusItemCollection
+ * Implementation class of GooglePlusProfileCollection. 
+ * @typedef {Object} GooglePlusProfileCollection
  */
- GooglePlusItemCollection = function () { 
+ GooglePlusProfileCollection = function () { 
 	/**
 	 * Identifier the resource.
-	 * Possible values are:
-	 * plus#commentFeed - comments 
-	 * plus#activityFeed - activity.
-	 * plus#peopleFeed - people.
-	 * plus#acl - access
 	 * @type {string}
 	 */
 	this.kind = "";
@@ -904,12 +899,6 @@ GooglePlus = function (bNesisApi) {
 	this.selfLink = "";
 
 	/**
-	 * Link to next page.
-	 * @type {string}
-	 */
-	this.nextLink = "";
-
-	/**
 	 * The title of collection.
 	 * @type {string}
 	 */
@@ -922,36 +911,16 @@ GooglePlus = function (bNesisApi) {
 	this.nextPageToken = "";
 
 	/**
-	 * The total items. (This property can be unspecified)
-	 * @type {Nullable<Int32>}
+	 * The total items.
+	 * @type {Int32}
 	 */
 	this.totalItems = 0;
 
 	/**
-	 * When updated (Only for kind: plus#commentFeed, plus#activityFeed)
-	 * @type {string}
+	 * The array of GooglePlusProfile.
+	 * @type {GooglePlusProfile[]}
 	 */
-	this.updated = "";
-
-	/**
-	 * The identifier of collection. (This property can be unspecified)
-	 * @type {string}
-	 */
-	this.id = "";
-
-	/**
-	 * Some description.
-	 * @type {string}
-	 */
-	this.description = "";
-
-	/**
-	 * The array of item.
-	 *  Can contain one of types:
-	 *  GooglePlusProfile, GooglePlusComment, GooglePlusActivity, GooglePlusAccess.
-	 * @type {Object}
-	 */
-	this.items = new Object();
+	this.items = new Array();
 
 }
 
@@ -1129,6 +1098,67 @@ GooglePlus = function (bNesisApi) {
 	 * @type {GooglePlusAboutItem}
 	 */
 	this.plusoners = new GooglePlusAboutItem();
+
+}
+
+/**
+ * Implementation class of GooglePlusCommentCollection. 
+ * @typedef {Object} GooglePlusCommentCollection
+ */
+ GooglePlusCommentCollection = function () { 
+	/**
+	 * Identifier the resource.
+	 * @type {string}
+	 */
+	this.kind = "";
+
+	/**
+	 * ETag of this response for caching purposes.
+	 * @type {string}
+	 */
+	this.etag = "";
+
+	/**
+	 * Link to next page.
+	 * @type {string}
+	 */
+	this.nextLink = "";
+
+	/**
+	 * The title of collection.
+	 * @type {string}
+	 */
+	this.title = "";
+
+	/**
+	 * The next page token to collection.
+	 * @type {string}
+	 */
+	this.nextPageToken = "";
+
+	/**
+	 * When updated.
+	 * @type {string}
+	 */
+	this.updated = "";
+
+	/**
+	 * The identifier of collection.
+	 * @type {string}
+	 */
+	this.id = "";
+
+	/**
+	 * Some description.
+	 * @type {string}
+	 */
+	this.description = "";
+
+	/**
+	 * The array of GooglePlusComment.
+	 * @type {GooglePlusComment[]}
+	 */
+	this.items = new Array();
 
 }
 
@@ -1557,6 +1587,67 @@ GooglePlus = function (bNesisApi) {
 	 * @type {GooglePlusLocation}
 	 */
 	this.location = new GooglePlusLocation();
+
+}
+
+/**
+ * Implementation class of GooglePlusActivityCollection. 
+ * @typedef {Object} GooglePlusActivityCollection
+ */
+ GooglePlusActivityCollection = function () { 
+	/**
+	 * Identifier the resource.
+	 * @type {string}
+	 */
+	this.kind = "";
+
+	/**
+	 * ETag of this response for caching purposes.
+	 * @type {string}
+	 */
+	this.etag = "";
+
+	/**
+	 * Link to this resource.
+	 * @type {string}
+	 */
+	this.selfLink = "";
+
+	/**
+	 * Link to next page.
+	 * @type {string}
+	 */
+	this.nextLink = "";
+
+	/**
+	 * The title of collection.
+	 * @type {string}
+	 */
+	this.title = "";
+
+	/**
+	 * The next page token to collection.
+	 * @type {string}
+	 */
+	this.nextPageToken = "";
+
+	/**
+	 * When update
+	 * @type {string}
+	 */
+	this.updated = "";
+
+	/**
+	 * The identifier of collection.
+	 * @type {string}
+	 */
+	this.id = "";
+
+	/**
+	 * The array of GooglePlusActivity.
+	 * @type {GooglePlusActivity[]}
+	 */
+	this.items = new Array();
 
 }
 

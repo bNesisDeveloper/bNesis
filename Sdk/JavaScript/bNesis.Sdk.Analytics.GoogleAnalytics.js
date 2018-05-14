@@ -7,7 +7,7 @@ GoogleAnalytics = function (bNesisApi) {
 	 * or Attach to bNesis session with exists bNesis token
      * @return {string} bNesisToken value | true if bNesisToken is valid
 	 */
-    this.Auth = function (bNesisDevId,redirectUrl,clientId,clientSecret,scopes) {
+    this.Auth = function (bNesisDevId,clientId,clientSecret,redirectUrl,scopes) {
 		if(arguments.length !== 1){
 			var bNesisToken = _bNesisApi.Auth("Google", "",bNesisDevId,redirectUrl,clientId,clientSecret,scopes,"","",false,"");
 			return bNesisToken;
@@ -70,9 +70,9 @@ GoogleAnalytics = function (bNesisApi) {
     }
 
 	/**
-	 *   	
-	 * @param reportRequest 
-	 * @return {Response} 
+	 *  Gets analytics data. 	
+	 * @param reportRequest The report request.
+	 * @return {Response} Return in response.
 	 */
     this.GetReportsBatchRaw = function (reportRequest) {
         var result = _bNesisApi.Call("GoogleAnalytics", this.bNesisToken, "GetReportsBatchRaw", reportRequest);

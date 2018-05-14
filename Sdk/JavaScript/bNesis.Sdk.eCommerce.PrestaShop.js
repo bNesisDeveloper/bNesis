@@ -7,9 +7,9 @@ PrestaShop = function (bNesisApi) {
 	 * or Attach to bNesis session with exists bNesis token
      * @return {string} bNesisToken value | true if bNesisToken is valid
 	 */
-    this.Auth = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+    this.Auth = function (bNesisDevId,redirectUrl,login,serviceUrl) {
 		if(arguments.length !== 1){
-			var bNesisToken = _bNesisApi.Auth("PrestaShop", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			var bNesisToken = _bNesisApi.Auth("PrestaShop", "",bNesisDevId,redirectUrl,"","",null,login,"",false,serviceUrl);
 			return bNesisToken;
 		}
 		else{
@@ -10776,7 +10776,7 @@ PrestaShop = function (bNesisApi) {
 }
 
 /**
- * Implementation class for PrestaShop 'category'. Used when need get information about category. 
+ * Implementation class for PrestaShop 'category'. 
  * @typedef {Object} PrestaShopCategory
  */
  PrestaShopCategory = function () { 
@@ -11089,29 +11089,73 @@ PrestaShop = function (bNesisApi) {
  * @typedef {Object} PrestaShopConfigurationIn
  */
  PrestaShopConfigurationIn = function () { 
+	/**
+	 * The value.
+	 * @type {string}
+	 */
 	this.value = "";
 
+	/**
+	 * The name of configuration.
+	 * @type {string}
+	 */
 	this.name = "";
 
+	/**
+	 * The identifier of shop group
+	 * @type {Int32}
+	 */
 	this.id_shop_group = 0;
 
+	/**
+	 * The identifier of shop.
+	 * @type {Int32}
+	 */
 	this.id_shop = 0;
 
 }
 
+/**
+ * Implemention class for PrestaShop 'configuration'. 
+ * @typedef {Object} PrestaShopConfiguration
+ */
  PrestaShopConfiguration = function () { 
 	this.id = 0;
 
+	/**
+	 * The value.
+	 * @type {string}
+	 */
 	this.value = "";
 
+	/**
+	 * The name of configuration.
+	 * @type {string}
+	 */
 	this.name = "";
 
+	/**
+	 * The identifier of shop group
+	 * @type {Int32}
+	 */
 	this.id_shop_group = 0;
 
+	/**
+	 * The identifier of shop.
+	 * @type {Int32}
+	 */
 	this.id_shop = 0;
 
+	/**
+	 * When added.
+	 * @type {string}
+	 */
 	this.date_add = "";
 
+	/**
+	 * When updated.
+	 * @type {string}
+	 */
 	this.date_upd = "";
 
 }

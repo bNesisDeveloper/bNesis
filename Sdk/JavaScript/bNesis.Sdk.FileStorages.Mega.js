@@ -7,9 +7,9 @@ Mega = function (bNesisApi) {
 	 * or Attach to bNesis session with exists bNesis token
      * @return {string} bNesisToken value | true if bNesisToken is valid
 	 */
-    this.Auth = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+    this.Auth = function (bNesisDevId,clientSecret,redirectUrl,login,password) {
 		if(arguments.length !== 1){
-			var bNesisToken = _bNesisApi.Auth("Mega", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			var bNesisToken = _bNesisApi.Auth("Mega", "",bNesisDevId,redirectUrl,"",clientSecret,null,login,password,false,"");
 			return bNesisToken;
 		}
 		else{

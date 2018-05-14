@@ -7,9 +7,9 @@ Shopify = function (bNesisApi) {
 	 * or Attach to bNesis session with exists bNesis token
      * @return {string} bNesisToken value | true if bNesisToken is valid
 	 */
-    this.Auth = function (data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl) {
+    this.Auth = function (bNesisDevId,clientId,clientSecret,redirectUrl,scopes) {
 		if(arguments.length !== 1){
-			var bNesisToken = _bNesisApi.Auth("Shopify", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,login,password,isSandbox,serviceUrl);
+			var bNesisToken = _bNesisApi.Auth("Shopify", "",bNesisDevId,redirectUrl,clientId,clientSecret,scopes,"","",false,"");
 			return bNesisToken;
 		}
 		else{
