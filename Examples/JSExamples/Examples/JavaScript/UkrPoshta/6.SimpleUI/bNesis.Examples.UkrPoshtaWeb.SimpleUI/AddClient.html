@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK UkrPoshta SimpleUI Example - Get Address</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Delivery.UkrPoshta.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.bNesisAPIEndPoint.value = window.opener.bNesisAPIEndPoint.value;
+            window.bNesisToken.value = window.opener.bNesisToken.value;
+        });
+
+        onclick_ok = function () {
+
+            /**\\
+             * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+             * https://server2.bnesis.com/
+             * https://bnesisserver1.azurewebsites.net/
+             * https://bnesisserver2.azurewebsites.net/
+             * https://bnesisserver3.azurewebsites.net/
+             */
+            var bNesisAPIEndPoint = document.getElementById("bNesisAPIEndPoint").value;
+
+            //Initialize bNesisSDK
+            var manager = new ServiceManager();
+
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            //Check if initialize result not equal zero(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", \nerror message:" + manager.GetLastError();
+                return;
+            }
+
+            var bNesisToken = document.getElementById("bNesisToken").value;
+
+            // validate bNesisToken 
+            if ((bNesisToken !== null) && (bNesisToken.length > 0)) {
+
+                //Authorization at UkrPoshta Success
+                var ukrPoshta = manager.CreateInstanceUkrPoshta();
+
+                ukrPoshta.bNesisToken = bNesisToken;
+
+                var customerIn = new CustomerIn();
+
+                /**
+                 * name of customer.
+                 */
+                customerIn.name = document.getElementById("name").value;
+
+                /**
+                 * first name of customer.
+                 */
+                customerIn.firstName = document.getElementById("firstName").value;
+
+                /**
+                 * middle name of customer.
+                 */
+                customerIn.middleName = document.getElementById("middleName").value;
+
+                /**
+                 * last name of customer.
+                 */
+                customerIn.lastName = document.getElementById("lastName").value;
+
+                /**
+                 * external id for customer.
+                 */
+                customerIn.externalId = document.getElementById("externalId").value;
+
+                /**
+                 * unique registration number of customer.
+                 */
+                customerIn.uniqueRegistrationNumber = document.getElementById("uniqueRegistrationNumber").value;
+
+                /**
+                 * address id of customer.
+                 */
+                customerIn.addressId = document.getElementById("addressId").value;
+
+                /**
+                 * phone number of customer.
+                 */
+                customerIn.phoneNumber = document.getElementById("phoneNumber").value;
+
+                /**
+                 * email of customer.
+                 */
+                customerIn.email = document.getElementById("email").value;
+
+                /**
+                 * individual for customer.
+                 */
+                customerIn.individual = document.getElementById("individual").value;
+
+                /**
+                 * edrpou of customer.
+                 */
+                customerIn.edrpou = document.getElementById("edrpou").value;
+
+                /**
+                 * bankCode of customer.
+                 */
+                customerIn.bankCode = document.getElementById("bankCode").value;
+
+                /**
+                 * bank account of customer.
+                 */
+                customerIn.bankAccount = document.getElementById("bankAccount").value;
+
+                /**
+                 * tin for customer.
+                 */
+                customerIn.tin = document.getElementById("tin").value;
+
+                /**
+                 * name of contact person for customer.
+                 */
+                customerIn.contactPersonName = document.getElementById("contactPersonName").value;
+
+                /**
+                 * resident for customer.
+                 */
+                customerIn.resident = document.getElementById("resident").value;
+
+                // add client
+                var customerOut = ukrPoshta.AddClient(customerIn);
+
+                //Getting last error
+                var errorInfo = ukrPoshta.GetLastError();
+
+                //Check if errorInfo code not equal noError
+                if (errorInfo.Code !== manager.errorCodeNoError) {
+                    //Show error message
+                    document.getElementById('result').innerHTML += "Failed customer adding, error code:" + errorInfo.Code +
+                                      ",\nReason:" + errorInfo.Description;
+                    return;
+                }
+
+                //Show success message
+                document.getElementById('result').innerHTML += "Success. Customer external id:" + customerOut.externalId;
+            }
+            close();
+        };
+
+        onclick_cancel = function () {
+            close();
+        };
+    </script>
+</head>
+<body>
+    <div id="authelements" align="center" style="display:none">
+        <input id="bNesisAPIEndPoint" type="text" name="bNesisAPIEndPoint">
+        <input id="bNesisToken" type="text" name="bNesisToken">
+    </div>
+    <div align="center">Fill out customer properties:</div>
+    <div id="inputelements" align="center">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="200">name: </td>
+                <td><input id="name" type="text" name="text" size="15"></td>
+            </tr>
+            <tr>
+                <td width="200">firstName</td>
+                <td><input id="firstName" type="text" name="text" size="45"></td>
+            </tr>
+            <tr>
+                <td width="200">middleName</td>
+                <td><input id="middleName" type="text" name="text" size="45"></td>
+            </tr>
+            <tr>
+                <td width="200">lastName</td>
+                <td><input id="lastName" type="text" name="text" size="45"></td>
+            </tr>
+            <tr>
+                <td width="200">externalId</td>
+                <td><input id="externalId" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">uniqueRegistrationNumber</td>
+                <td><input id="uniqueRegistrationNumber" type="text" name="text" size="15"></td>
+            </tr>
+            <tr>
+                <td width="200">addressId</td>
+                <td><input id="addressId" type="text" name="text" size="15"></td>
+            </tr>
+            <tr>
+                <td width="200">phoneNumber</td>
+                <td><input id="phoneNumber" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">email</td>
+                <td><input id="email" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">individual</td>
+                <td><input id="individual" type="text" name="text" size="5" value="false"></td>
+            </tr>
+            <tr>
+                <td width="200">edrpou</td>
+                <td><input id="edrpou" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">bankCode</td>
+                <td><input id="bankCode" type="text" name="text" size="3"></td>
+            </tr>
+            <tr>
+                <td width="200">bankAccount</td>
+                <td><input id="bankAccount" type="text" name="text" size="3"></td>
+            </tr>
+            <tr>
+                <td width="200">tin</td>
+                <td><input id="tin" type="text" name="text" size="3"></td>
+            </tr>
+            <tr>
+                <td width="200">contactPersonName</td>
+                <td><input id="contactPersonName" type="text" name="text" size="3"></td>
+            </tr>
+            <tr>
+                <td width="200">resident</td>
+                <td><input id="resident" type="text" name="text" size="3" value="false"></td>
+            </tr>
+        </table>
+        <br />
+        <input id="btnOk" type="button" onclick="onclick_ok()" value="OK" />
+        <input id="btnCancel" type="button" onclick="onclick_cancel()" value="Cancel" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>

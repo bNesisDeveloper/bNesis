@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK UkrPoshta SimpleUI Example - Postal invoice</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Delivery.UkrPoshta.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.bNesisAPIEndPoint.value = window.opener.bNesisAPIEndPoint.value;
+            window.bNesisToken.value = window.opener.bNesisToken.value;
+        });
+
+        onclick_getpdf = function () {
+
+            /**\\
+             * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+             * https://server2.bnesis.com/
+             * https://bnesisserver1.azurewebsites.net/
+             * https://bnesisserver2.azurewebsites.net/
+             * https://bnesisserver3.azurewebsites.net/
+             */
+            var bNesisAPIEndPoint = document.getElementById("bNesisAPIEndPoint").value;
+
+            //Initialize bNesisSDK
+            var manager = new ServiceManager();
+
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            //Check if initialize result not equal zero(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", \nerror message:" + manager.GetLastError();
+                return;
+            }
+
+            var bNesisToken = document.getElementById("bNesisToken").value;
+
+            // validate bNesisToken 
+            if ((bNesisToken !== null) && (bNesisToken.length > 0)) {
+
+                //Authorization at UkrPoshta Success
+                var ukrPoshta = manager.CreateInstanceUkrPoshta();
+
+                ukrPoshta.bNesisToken = bNesisToken;
+
+                var uuid = document.getElementById("uuid").value;
+
+                var stream = null;
+                var filePath = null;
+
+                var shipmentType = document.getElementById("shipmenttype").value;
+
+                var checkStiker = document.getElementById("checkboxsticker").checked;
+
+                if (checkStiker) {
+                    if (shipmentType === "Shipment") {
+                        //Getting shipment label by uuid.
+                        stream = ukrPoshta.GetShipmentLabel(uuid, 0);
+                        //Set file name
+                        fileName = "Shipment=" + uuid + "=Sticker.pdf";
+                    }
+                    else {
+                        //Getting shipment group label by uuid.
+                        stream = ukrPoshta.GetShipmentGroupLabel(uuid);
+                        //Set file name
+                        fileName = "ShipmentGroup=" + uuid + "=Sticker.pdf";
+                    }
+                    if (fileName && fileName !== null) {
+                        var file = new File([stream], fileName, { type: 'application/pdf' });
+
+                        document.getElementById('result').innerHTML +=
+                            '<br><a href="' + URL.createObjectURL(file) + '" download="' + file.name + '">Download ' + file.name + '</a><br>';
+                        ///URL.in
+                    }
+                }
+                var checkLabel = document.getElementById("checkboxlabel").checked;
+
+                if (checkLabel) {
+                    if (shipmentType === "Shipment") {
+                        //Getting shipment label by uuid.
+                        stream = ukrPoshta.GetShipmentLabel(uuid, 0);
+                        //Set file name
+                        fileName = "Shipment=" + uuid + "=Label.pdf";
+                    }
+                    else {
+                        //Getting shipment group label by uuid.
+                        stream = ukrPoshta.GetShipmentGroupLabel(uuid);
+                        //Set file name
+                        fileName = "ShipmentGroup=" + uuid + "=Label.pdf";
+                    }
+                    if (fileName && fileName !== null) {
+                        var file = new File([stream], fileName, { type: 'application/pdf' });
+
+                        document.getElementById('result').innerHTML +=
+                            '<br><a href="' + URL.createObjectURL(file) + '" download="' + file.name + '">Download ' + file.name + '</a><br>';
+                        ///URL.in
+                    }
+                }
+                var form103aChecked = document.getElementById("checkboxlabel").checked && shipmentType === "Shipment-Group";
+                //Check if form103aChecked is true.
+                if (form103aChecked) {
+                    //Getting shipment group form103 by uuid.
+                    stream = ukrPoshta.GetShipmentGroupForm103a(uuid);
+
+                    fileName = "ShipmentGroup=" + uuid + "=Form103a.pdf";
+
+                    if (fileName && fileName !== null) {
+                        var file = new File([stream], fileName, { type: 'application/pdf' });
+
+                        document.getElementById('result').innerHTML +=
+                            '<br><a href="' + URL.createObjectURL(file) + '" download="' + file.name + '">Download ' + file.name + '</a><br>';
+                    }
+                }
+
+
+                //Getting last error
+                var errorInfo = ukrPoshta.GetLastError();
+
+                //Check if errorInfo code not equal noError
+                if (errorInfo.Code !== manager.errorCodeNoError) {
+                    //Show error message
+                    document.getElementById('result').innerHTML += "Failed customer adding, error code:" + errorInfo.Code +
+                                      ",\nReason:" + errorInfo.Description;
+                    return;
+                }
+
+                //Show success message
+                document.getElementById('result').innerHTML += "Success. Address id:" + addressOut.id;
+            }
+            close();
+        };
+
+        onclick_cancel = function () {
+            close();
+        };
+
+        onchange_shipment = function () {
+            var selectedValue = document.getElementById("shipmenttype").value;
+            if (selectedValue === "Shipment") {
+                document.getElementById("shipmentuuid").style.display = "block";
+                document.getElementById("shipmentgroupuuid").style.display = "none";
+            }
+            else
+                if (selectedValue === "Shipment-Group") {
+                    document.getElementById("shipmentuuid").style.display = "none";
+                    document.getElementById("shipmentgroupuuid").style.display = "block";
+                }
+        };
+    </script>
+</head>
+<body>
+    <div id="authelements" align="center" style="display:none">
+        <input id="bNesisAPIEndPoint" type="text" name="bNesisAPIEndPoint">
+        <input id="bNesisToken" type="text" name="bNesisToken">
+    </div>
+    <div id="inputelements" align="center">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="200">Get from: </td>
+                <td>
+                    <select id="shipmenttype" onchange="onchange_shipment();">
+                        <option value="Shipment" selected>Shipment</option>
+                        <option value="Shipment-Group">Shipment-Group</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td width="200"><div id="shipmentuuid">ShipmentUUID </div><div id="shipmentgroupuuid" style="display:none">ShipmentGroupUUID </div></td>
+                <td><input id="uuid" type="text" name="text" size="15"></td>
+            </tr>
+        </table>
+        <input type="checkbox" id="checkboxsticker" name="interest" value="Sticker"> Sticker
+        <input type="checkbox" id="checkboxlabel" name="interest" value="Label"> Label
+        <input type="checkbox" id="checkboxform103a" name="interest" value="form103a"> form103a
+        <br />
+        <input id="btnGetPdf" type="button" onclick="onclick_getpdf()" value="Get PDF" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+﻿
+<script>
+    var servicesConfig = {
+        "adminUrl": "http://admin.bnesis.com",
+        "Services": {
+            "LinkedIn": {
+                "instanceId": "45c48cce2e2d7fbdea1afc51c7c6ad26"
+            },
+            "Facebook": {
+                "instanceId": "c9f0f895fb98ab9159f51fd0297e236d"
+            },
+            "GoogleDrive": {
+                "instanceId": "1679091c5a880faf6fb5e6087eb1b2dc"
+            },
+            "Box": {
+                "instanceId": "c20ad4d76fe97759aa27a0c99bff6710"
+            },
+            "VKontakte": {
+                "instanceId": "d3d9446802a44259755d38e6d163e820"
+            },
+            "Dropbox": {
+                "instanceId": "e4da3b7fbbce2345d7772b0674a318d5"
+            },
+            "Stripe": {
+                "instanceId": "c51ce410c124a10e0db5e4b97fc2af39"
+            },
+            "PayPal": {
+                "instanceId": "9bf31c7ff062936a96d3c8bd1f8f2ff3"
+            },
+            "Shopify": {
+                "instanceId": "98f13708210194c475687be6106a3b84"
+            },
+            "BaiduBCS": {
+                "instanceId": "6512bd43d9caa6e02c990b0a82652dca"
+            },
+            "SugarSync": {
+                "instanceId": "6f4922f45568161a8cdf4ad2299f6d23"
+            },
+            "LiqPay": {
+                "instanceId": "aab3238922bcc25a6f606eb525ffdc56"
+            },
+            "GoogleAnalytics": {
+                "instanceId": ""
+            },
+            "UkrPoshta": {
+                "instanceId": "a87ff679a2f3e71d9181a67b7542122c"
+            },
+            "Amazon": {
+                "instanceId": ""
+            },
+            "PrestaShop": {
+                "instanceId": "70efdf2ec9b086079795c442636b55fb"
+            },
+            "GooglePlus": {
+                "instanceId": "1f0e3dad99908345f7439f8ffabdffc4"
+            }
+        }
+    }
+
+    function getAuthCall(serviceName) {
+        var response = '';
+        var serviceObj = servicesConfig.Services[serviceName];
+        
+        if (!serviceObj) {
+            document.getElementById('result').innerHTML += "<br/> " + serviceName + " service not available.";
+            return 0;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: servicesConfig.adminUrl + '/Instance/' + serviceObj.instanceId + '/Auth',
+            async: false,
+            success: function (text) {
+                response = text;
+            }
+        });
+        
+        response = replaceUrlParam(response, 'redirectUrl', window.location.origin + '/Popup/' + serviceName);
+
+        return response;
+    }
+
+    function serviceAuth(serviceName) {
+
+        var badAuth = getUrlParameter('badAuth');
+
+        if (badAuth) {
+            document.getElementById('result').innerHTML += "<br/>Authorize at @ViewBag.Message service, please wait...";
+            var redirectUrl = window.location.origin + '/Popup/@ViewBag.Message';
+        }
+        
+        var authUrl = getAuthCall('@ViewBag.Message');    
+        
+        if (authUrl) {
+            window.location = authUrl;
+        }
+    }
+
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
+    function replaceUrlParam(url, paramName, paramValue) {
+        if (paramValue == null) {
+            paramValue = '';
+        }
+        var pattern = new RegExp('\\b(' + paramName + '=).*?(&|$)');
+        if (url.search(pattern) >= 0) {
+            return url.replace(pattern, '$1' + paramValue + '$2');
+        }
+        url = url.replace(/\?$/, '');
+        return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
+    }
+
+    $(document).ready(function () {
+        var service = getUrlParameter('service');
+        var result = getUrlParameter('result');
+
+        if (service && service !== null && service.length > 0 && result && result !== null && result.length > 0) {
+            opener.setActive(service, result);
+            window.close();
+        }
+        serviceAuth('@ViewBag.Message');
+    });
+</script>
+
+

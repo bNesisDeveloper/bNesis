@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK UkrPoshta SimpleUI Example - Get Shipment</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Delivery.UkrPoshta.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.bNesisAPIEndPoint.value = window.opener.bNesisAPIEndPoint.value;
+            window.bNesisToken.value = window.opener.bNesisToken.value;
+        });
+
+        onclick_ok = function () {
+
+            /**\\
+             * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+             * https://server2.bnesis.com/
+             * https://bnesisserver1.azurewebsites.net/
+             * https://bnesisserver2.azurewebsites.net/
+             * https://bnesisserver3.azurewebsites.net/
+             */
+            var bNesisAPIEndPoint = document.getElementById("bNesisAPIEndPoint").value;
+
+            //Initialize bNesisSDK
+            var manager = new ServiceManager();
+
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            //Check if initialize result not equal zero(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", \nerror message:" + manager.GetLastError();
+                return;
+            }
+
+            var bNesisToken = document.getElementById("bNesisToken").value;
+
+            // validate bNesisToken 
+            if ((bNesisToken !== null) && (bNesisToken.length > 0)) {
+
+                //Authorization at UkrPoshta Success
+                var ukrPoshta = manager.CreateInstanceUkrPoshta();
+
+                ukrPoshta.bNesisToken = bNesisToken;
+
+                /**
+                 * shipment uuid.
+                 */
+                var shipmentUuid = document.getElementById("shipmentUuid").value;
+
+                //If GetShipment success return UkrPoshtaShipmentOut
+                var shipmentOut = ukrPoshta.GetShipment(shipmentUuid);
+
+                //Getting last error
+                var errorInfo = ukrPoshta.GetLastError();
+
+                //Check if errorInfo code not equal noError
+                if (errorInfo.Code !== manager.errorCodeNoError) {
+                    //Show error message
+                    document.getElementById('result').innerHTML += "Failed customer adding, error code:" + errorInfo.Code +
+                                      ",\nReason:" + errorInfo.Description;
+                    return;
+                }
+
+                //Show success message
+                document.getElementById('result').innerHTML += "Success. Address id:" + shipmentOut.id;
+            }
+            close();
+        };
+
+        onclick_cancel = function () {
+            close();
+        };
+
+    </script>
+</head>
+<body>
+    <div id="authelements" align="center" style="display:none">
+        <input id="bNesisAPIEndPoint" type="text" name="bNesisAPIEndPoint">
+        <input id="bNesisToken" type="text" name="bNesisToken">
+    </div>
+    <div id="inputelements" align="center">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="200">ShipmentUUID: </td>
+                <td><input id="shipmentUuid" type="text" name="text" size="15"></td>
+            </tr>
+        </table>
+        <br />
+        <input id="btnOk" type="button" onclick="onclick_ok()" value="OK" />
+        <input id="btnCancel" type="button" onclick="onclick_cancel()" value="Cancel" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>

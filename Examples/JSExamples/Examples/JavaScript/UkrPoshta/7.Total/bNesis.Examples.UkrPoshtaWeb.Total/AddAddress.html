@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK UkrPoshta SimpleUI Example - Add Address</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Delivery.UkrPoshta.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.bNesisAPIEndPoint.value = window.opener.bNesisAPIEndPoint.value;
+            window.bNesisToken.value = window.opener.bNesisToken.value;
+        });
+
+        onclick_ok = function () {
+
+            /**\\
+             * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+             * https://server2.bnesis.com/
+             * https://bnesisserver1.azurewebsites.net/
+             * https://bnesisserver2.azurewebsites.net/
+             * https://bnesisserver3.azurewebsites.net/
+             */
+            var bNesisAPIEndPoint = document.getElementById("bNesisAPIEndPoint").value;
+
+            //Initialize bNesisSDK
+            var manager = new ServiceManager();
+
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            //If success initialize return zero code(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", \nerror message:" + manager.GetLastError();
+                return;
+            }
+
+            var bNesisToken = document.getElementById("bNesisToken").value;
+
+            // validate bNesisToken 
+            if ((bNesisToken !== null) && (bNesisToken.length > 0)) {
+
+                //Authorization at UkrPoshta Success
+                var ukrPoshta = manager.CreateInstanceUkrPoshta();
+
+                ukrPoshta.bNesisToken = bNesisToken;
+
+                var addressIn = new AddressIn();
+
+                /**
+                 * Post code for address.
+                 */
+                addressIn.postcode = document.getElementById("postcode").value;
+
+                /**
+                 * Region name for address.
+                 */
+                addressIn.region = document.getElementById("region").value;
+
+                /**
+                 * District for address.
+                 */
+                addressIn.district = document.getElementById("district").value;
+
+                /**
+                 * City name for address. 
+                 */
+                addressIn.city = document.getElementById("city").value;
+
+                /**
+                 * Street name for address.
+                 */
+                addressIn.street = document.getElementById("street").value;
+
+                /**
+                 * House number for address.
+                 */
+                addressIn.houseNumber = document.getElementById("houseNumber").value;
+
+                /**
+                 * Apartment number for address.
+                 */
+                addressIn.apartmentNumber = document.getElementById("apartmentNumber").value;
+
+                /**
+                 * Description for address.
+                 */
+                addressIn.description = document.getElementById("description").value;
+
+                /**
+                 * countryside for address.
+                 */
+                addressIn.countryside = document.getElementById("countryside").value;
+
+                /**
+                 * detailedinfo for address.
+                 */
+                addressIn.detailedInfo = document.getElementById("detailedInfo").value;
+
+                /**
+                 * Country name for address. (Example: UA)
+                 */
+                addressIn.country = document.getElementById("country").value;
+
+                // Add adddress
+                var addressOut = ukrPoshta.AddAddress(addressIn);
+
+                //Getting last error
+                var errorInfo = ukrPoshta.GetLastError();
+
+                //Check if errorInfo code not equal noError
+                if (errorInfo.Code !== manager.errorCodeNoError) {
+                    //Show error message
+                    document.getElementById('result').innerHTML += "Failed customer adding, error code:" + errorInfo.Code +
+                                      ",\nReason:" + errorInfo.Description;
+                    return;
+                }
+
+                //Show success message
+                document.getElementById('result').innerHTML += "Success. Address id:" + addressOut.id;
+            }
+            close();
+        };
+
+        onclick_cancel = function () {
+            close();
+        };
+        
+    </script>
+</head>
+<body>
+    <div id="authelements" align="center" style="display:none">
+        <input id="bNesisAPIEndPoint" type="text" name="bNesisAPIEndPoint">
+        <input id="bNesisToken" type="text" name="bNesisToken">
+    </div>
+    <div align="center">Fill out address properties:</div>
+    <div id="inputelements" align="center">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="200">postcode: </td>
+                <td><input id="postcode" type="text" name="text" size="15"></td>
+            </tr>
+            <tr>
+                <td width="200">region</td>
+                <td><input id="region" type="text" name="text" size="45"></td>
+            </tr>
+            <tr>
+                <td width="200">district</td>
+                <td><input id="district" type="text" name="text" size="45"></td>
+            </tr>
+            <tr>
+                <td width="200">city</td>
+                <td><input id="city" type="text" name="text" size="45"></td>
+            </tr>
+            <tr>
+                <td width="200">street</td>
+                <td><input id="street" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">houseNumber</td>
+                <td><input id="houseNumber" type="text" name="text" size="15"></td>
+            </tr>
+            <tr>
+                <td width="200">apartmentNumber</td>
+                <td><input id="apartmentNumber" type="text" name="text" size="15"></td>
+            </tr>
+            <tr>
+                <td width="200">description</td>
+                <td><input id="description" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">countryside</td>
+                <td><input id="countryside" type="text" name="text" size="5" value="false"></td>
+            </tr>
+            <tr>
+                <td width="200">detailedinfo</td>
+                <td><input id="detailedinfo" type="text" name="text" size="255"></td>
+            </tr>
+            <tr>
+                <td width="200">country</td>
+                <td><input id="country" type="text" name="text" size="3"></td>
+            </tr>
+        </table>
+        <br />
+        <input id="btnOk" type="button" onclick="onclick_ok()" value="OK" />
+        <input id="btnCancel" type="button" onclick="onclick_cancel()" value="Cancel" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>bNesis SDK - UkrPoshta customer API using example</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bNesisServiceClient.js"></script>
+    <script type="text/javascript" src="bNesisHTTPClient.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Common.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.Delivery.UkrPoshta.js"></script>
+    <script type="text/javascript" src="bNesis.Sdk.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.bNesisAPIEndPoint.value = window.opener.bNesisAPIEndPoint;
+            window.bNesisToken.value = window.opener.bNesisToken;
+        });
+
+        onclick_addaddress = function () {
+            //var addaddresswindow = window.open("AddAddress.html", "_blank", "menubar=no,toolbar=no,location=no,width=200,height=300");
+            var addaddresswindow = window.open("AddAddress.html", "_blank", "");
+        };
+
+        onclick_getaddress = function () {
+            var getaddresswindow = window.open("GetAddress.html", "_blank", "");
+        };
+
+        onclick_addclient = function () {
+            var addclientwindow = window.open("AddClient.html", "_blank", "");
+        };
+
+        onclick_getclient = function () {
+            var getclientwindow = window.open("GetClient.html", "_blank", "");
+        };
+
+        onclick_addshipment = function () {
+            var addshipmentwindow = window.open("AddShipment.html", "_blank", "");
+        };
+
+        onclick_getshipment = function () {
+            var getshipmentwindow = window.open("GetShipment.html", "_blank", "");
+        };
+
+        onclick_postalinvoice = function () {
+            var postalinvoicewindow = window.open("PostalInvoice.html", "_blank", "");
+        };
+
+        onclick_logoff = function () {
+            /**
+             * Initialize bNesisSDK
+             */
+            var manager = new ServiceManager();
+
+            var bNesisToken = window.bNesisToken.value; // document.getElementById("bNesisToken").value;
+
+            if (bNesisToken === null || bNesisToken === "") {
+
+            }
+            //Initilize result code
+            var SDKInitializeResult = null;
+
+            //document.getElementById('result').innerHTML += "<br/>Initialize Thin mode.";
+            var bNesisAPIEndPoint = window.bNesisAPIEndPoint.value; //document.getElementById("bNesisAPIEndPoint").value;
+            //If success initialize return zero code(noError)
+            SDKInitializeResult = manager.InitializeThin(bNesisAPIEndPoint);
+
+            //Check if initialize result not equal zero(noError)
+            if (SDKInitializeResult !== manager.errorCodeNoError) {
+                //Show error message
+                //document.getElementById('result').innerHTML += "<br/>bNesis SDK initialization problem, code: " + SDKInitializeResult + ", \nerror message:" + manager.GetLastError();
+                return;
+            }
+
+            if ((bNesisToken === "") || (bNesisToken === null)) {
+            }
+            else {
+                //Authorization at UkrPoshta Success
+                var ukrPoshta = manager.CreateInstanceUkrPoshta();
+
+                ukrPoshta.bNesisToken = bNesisToken;
+
+                ukrPoshta.LogoffService();
+            }
+        };        
+    </script>
+</head>
+<body>
+    bNesis SDK - UkrPoshta customer API using example<br />
+    <div id="authelements" align="center" style="display:none">
+        <input id="bNesisAPIEndPoint" type="text" name="bNesisAPIEndPoint">
+        <input id="bNesisToken" type="text" name="text">
+    </div>
+    <div>
+        <input id="btnAddAddress" type="button" onclick="onclick_addaddress();" value="Add Address" />
+        <input id="btnGetAddress" type="button" onclick="onclick_getaddress();" value="Get Address" />
+        <input id="btnAddClient" type="button" onclick="onclick_addclient();" value="Add Client" />
+        <input id="btnGetClient" type="button" onclick="onclick_getclient();" value="Get Client" />
+        <input id="btnAddShipment" type="button" onclick="onclick_addshipment();" value="Add Shipment..." />
+        <input id="btnGetShipment" type="button" onclick="onclick_getshipment();" value="Get Shipment..." />
+        <input id="btnPostInvoice" type="button" onclick="onclick_postalinvoice();" value="Postal Invoice..." />
+        <input id="btnLogoff" type="button" onclick="onclick_logoff();" value="Logoff" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>
