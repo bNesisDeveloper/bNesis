@@ -215,10 +215,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Auth", "1.Auth", "{D54818
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bNesis.Examples.VKontakteApp.Auth", "Examples\CSharp\VKontakte\1.Auth\bNesis.Examples.VKontakteApp.Auth\bNesis.Examples.VKontakteApp.Auth.csproj", "{594FA003-69AA-4F59-A3B7-B06EAA4A8B21}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.GetUserInfo in XML", "2.GetUserInfo in XML", "{2D63A575-0155-4C06-9528-F7BE243522CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bNesis.Examples.VKontakteApp.GetUserInfoInXML", "Examples\CSharp\VKontakte\2.GetUserInfo in XML\bNesis.Examples.VKontakteApp.GetUserInfoInXML\bNesis.Examples.VKontakteApp.GetUserInfoInXML.csproj", "{A08E60DE-BF40-45FC-93E6-9EB61143CB23}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -417,10 +413,6 @@ Global
 		{594FA003-69AA-4F59-A3B7-B06EAA4A8B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{594FA003-69AA-4F59-A3B7-B06EAA4A8B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{594FA003-69AA-4F59-A3B7-B06EAA4A8B21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A08E60DE-BF40-45FC-93E6-9EB61143CB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A08E60DE-BF40-45FC-93E6-9EB61143CB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A08E60DE-BF40-45FC-93E6-9EB61143CB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A08E60DE-BF40-45FC-93E6-9EB61143CB23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -531,7 +523,5 @@ Global
 		{52DE2CA0-1C4A-4C17-BBF2-06B8256DC9EE} = {57B58372-32DF-49B2-A6A3-3E7B74C7EE4C}
 		{D54818A7-AFAB-4407-A437-C2422F2E042F} = {52DE2CA0-1C4A-4C17-BBF2-06B8256DC9EE}
 		{594FA003-69AA-4F59-A3B7-B06EAA4A8B21} = {D54818A7-AFAB-4407-A437-C2422F2E042F}
-		{2D63A575-0155-4C06-9528-F7BE243522CC} = {52DE2CA0-1C4A-4C17-BBF2-06B8256DC9EE}
-		{A08E60DE-BF40-45FC-93E6-9EB61143CB23} = {2D63A575-0155-4C06-9528-F7BE243522CC}
 	EndGlobalSection
 EndGlobal
