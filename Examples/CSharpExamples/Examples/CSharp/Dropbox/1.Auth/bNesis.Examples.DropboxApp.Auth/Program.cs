@@ -1,8 +1,6 @@
 ﻿using System;
 using bNesis.Sdk;
 
-
-
 namespace bNesis.Examples.DropboxApp.Auth
 {
     /// <summary>
@@ -153,7 +151,7 @@ namespace bNesis.Examples.DropboxApp.Auth
                 try
                 {                    
                     Console.WriteLine("Authorization at the Dropbox service, please wait...");
-                    Sdk.FileStorages.Dropbox.Dropbox dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, redirectUrl, appKey, appSecret);
+                    Sdk.FileStorages.Dropbox.Dropbox dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, appKey, appSecret, redirectUrl);
                     
 
                     //If the authorization is failed, the bNesisToken will be empty/null.

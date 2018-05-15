@@ -76,7 +76,7 @@ namespace bNesis.Examples.DropboxApp.DownloadUpload
         // <summary>
         /// If you use the Thin Client mode, you need an access to the bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
-        private static string bNesisAPIEndPoint = "https://bnesisserver3.azurewebsites.net";
+        private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
         /// <summary>
         /// The client will be redirected to the specified address after the authentication operation is performed.
@@ -161,7 +161,7 @@ namespace bNesis.Examples.DropboxApp.DownloadUpload
                     Console.WriteLine("Authorization at the Dropbox service, please wait...");
 
                     //Create an instance of the dropbox service
-                    Sdk.FileStorages.Dropbox.Dropbox dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, redirectUrl, appKey, appSecret);
+                    Sdk.FileStorages.Dropbox.Dropbox dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, appKey, appSecret, redirectUrl);
 
                     //If authorization is failed, the access_token will be empty/null.
                     if (string.IsNullOrEmpty(dropbox.bNesisToken))

@@ -48,7 +48,7 @@ bNesis SDK for JS is delivered as a scripts library and works with cloud service
  
 ## **Versions** 
 
-   Current version of bNesis SDK for JS is 1.7.
+   Current version of bNesis SDK for JS is 1.8.
    
 ## **JSExamples solution** 
 

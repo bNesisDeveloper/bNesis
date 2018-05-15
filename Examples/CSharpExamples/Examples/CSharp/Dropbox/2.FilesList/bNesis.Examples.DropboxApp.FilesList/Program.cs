@@ -57,7 +57,7 @@ namespace bNesis.Examples.DropboxApp.FilesList
         /// (To know default bNesis Rich client redirect host and port, see redirectUrl property)
         /// (if you change the redirectUrl property at this example app, change RedirectURIs at a Dropbox developers console
         /// </summary>
-        private static string bNesisAPIEndPoint = "https://bnesisserver3.azurewebsites.net/";
+        private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
 
         /// <summary>
         /// The client will be redirected to the specified address after the authentication operation is performed.
@@ -141,7 +141,7 @@ namespace bNesis.Examples.DropboxApp.FilesList
                     Console.WriteLine("Authorization at the Dropbox service, please wait...");
 
                     //Create an instance of the dropbox service
-                    Sdk.FileStorages.Dropbox.Dropbox dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, redirectUrl, appKey, appSecret);
+                    Sdk.FileStorages.Dropbox.Dropbox dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, appKey, appSecret, redirectUrl);
 
                     //If an authorization is failed, the access_token will be empty/null.
                     if (string.IsNullOrEmpty(dropbox.bNesisToken))
