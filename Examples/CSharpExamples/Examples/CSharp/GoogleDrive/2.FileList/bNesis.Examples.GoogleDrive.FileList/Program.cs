@@ -169,7 +169,7 @@ namespace bNesis.Examples.GoogleDriveApp.FileList
                 {
                     Console.WriteLine("Authorization at the GoogleDrive service, please wait...");
                     GoogleDrive googleDrive =
-                        manager.CreateInstanceGoogleDrive(bNesisDeveloperId, redirectUrl, clientId, clientSecret, scopes);
+                        manager.CreateInstanceGoogleDrive(bNesisDeveloperId, clientId, clientSecret, redirectUrl, scopes);
 
 
                     //If the authorization is failed, the bNesisToken will be empty/null.
