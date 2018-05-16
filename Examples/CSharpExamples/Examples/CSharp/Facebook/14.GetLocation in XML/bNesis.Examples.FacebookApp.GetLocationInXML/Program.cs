@@ -171,9 +171,7 @@ namespace bNesis.Examples.FacebookApp.GetLocationInXML
                 {
                     Console.WriteLine("Facebook service Authorization, please wait...");
                     // this method authorizes Facebook service, returns instance.
-                    Facebook facebook = manager.CreateInstanceFacebook(
-                        null, bNesisDeveloperId, redirectUrl, FacebookClientId, FacebookClientSecret, Scope, null, null,
-                        false, null);
+                    Facebook facebook = manager.CreateInstanceFacebook(bNesisDeveloperId, FacebookClientId, FacebookClientSecret, redirectUrl, Scope);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(facebook.bNesisToken))
                     {

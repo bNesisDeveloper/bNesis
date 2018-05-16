@@ -39,7 +39,7 @@ namespace bNesis.Examples.FacebookApp.GetFriends
         /// <summary>
         /// Your application requests a Delimited list of member permissions on behalf of the user.
         /// </summary>
-        private static string[] Scope = new string[] {"user_friends"};
+        private static string[] Scope = new string[] {  "user_friends"};
 
         /// <summary>
         /// If you use the Thin Client mode, you need an access to the bNesis API Server. Address of the demo bNesis API server:
@@ -67,7 +67,7 @@ namespace bNesis.Examples.FacebookApp.GetFriends
         /// <summary>
         /// If you use a Thin Client mode, you need an access to the bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
-        private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
+        private static string bNesisAPIEndPoint = "https://server2.bnesis.com/";
       
         /// <summary>
         /// The client will be redirected to the specified address after performing of the authentication operation.
@@ -156,8 +156,7 @@ namespace bNesis.Examples.FacebookApp.GetFriends
                 {
                     Console.WriteLine("Facebook service Authorization, please wait...");
                     // this method authorizes Facebook service, returns instance.
-                    Facebook facebook = manager.CreateInstanceFacebook(
-                        null, bNesisDeveloperId, redirectUrl, FacebookClientId, FacebookClientSecret, Scope, null, null, false, null);
+                    Facebook facebook = manager.CreateInstanceFacebook(bNesisDeveloperId, FacebookClientId, FacebookClientSecret, redirectUrl, Scope);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(facebook.bNesisToken))
                     {

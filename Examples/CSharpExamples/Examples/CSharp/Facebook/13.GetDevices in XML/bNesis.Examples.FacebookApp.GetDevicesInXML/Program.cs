@@ -44,7 +44,7 @@ namespace bNesis.Examples.FacebookApp.GetDevicesInXML
         /// <summary>
         /// Your application requests a delimited list of member permissions on behalf of the user.
         /// </summary>
-        private static string[] Scope = new string[] { };
+        private static string[] Scope = new string[] {""};
 
         /// <summary>
         /// If you use a Thin Client mode, you need an access to a bNesis API Server. Addresses of the demo bNesis API servers:
@@ -171,9 +171,7 @@ namespace bNesis.Examples.FacebookApp.GetDevicesInXML
                 {
                     Console.WriteLine("Facebook service Authorization, please wait...");
                     // this method authorizes Facebook service, returns instance.
-                    Facebook facebook = manager.CreateInstanceFacebook(
-                        null, bNesisDeveloperId, redirectUrl, FacebookClientId, FacebookClientSecret, Scope, null, null,
-                        false, null);
+                    Facebook facebook = manager.CreateInstanceFacebook(bNesisDeveloperId, FacebookClientId, FacebookClientSecret, redirectUrl, Scope);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(facebook.bNesisToken))
                     {

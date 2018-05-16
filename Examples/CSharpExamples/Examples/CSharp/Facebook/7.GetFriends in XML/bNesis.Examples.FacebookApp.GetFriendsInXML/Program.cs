@@ -46,12 +46,7 @@ namespace bNesis.Examples.FacebookApp.GetFriendsInXML
         /// <summary>
         /// Your application requests a delimited list of member permissions on behalf of the user.
         /// </summary>
-        //private static string[] Scope = new string[] {"email", "user_hometown", "user_religion_politics", "publish_actions",
-        //    "user_likes", "user_status", "user_about_me", "user_location", "user_tagged_places", "user_birthday", "user_photos",
-        //    "user_videos", "user_education_history", "user_posts", "user_website", "user_friends", "user_relationship_details",
-        //    "user_work_history", "user_games_activity", "user_relationships", "manage_pages", "pages_show_list", "ads_management",
-        //    "business_management", "user_events", "read_custom_friendlists"};
-
+        
         private static string[] Scope = new string[] {"user_friends"};
 
         /// <summary>
@@ -172,8 +167,7 @@ namespace bNesis.Examples.FacebookApp.GetFriendsInXML
                 {
                     Console.WriteLine("Facebook service Authorization, please wait...");
                     // this method authorizes Facebook service, returns instance.
-                    Facebook facebook = manager.CreateInstanceFacebook(
-                        null, bNesisDeveloperId, redirectUrl, FacebookClientId, FacebookClientSecret, Scope, null, null, false, null);
+                    Facebook facebook = manager.CreateInstanceFacebook(bNesisDeveloperId, FacebookClientId, FacebookClientSecret, redirectUrl, Scope);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(facebook.bNesisToken))
                     {

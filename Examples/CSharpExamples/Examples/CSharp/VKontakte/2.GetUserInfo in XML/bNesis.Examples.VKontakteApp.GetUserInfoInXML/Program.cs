@@ -75,8 +75,7 @@ namespace bNesis.Examples.VKontakteApp.GetUserInfoInXML
         /// <summary>
         /// If you use a Thin Client mode, you need an access to a bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
-        //private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
-        private static string bNesisAPIEndPoint = "http://localhost";
+        private static string bNesisAPIEndPoint = "http://localhost/";
 
         /// <summary>
         /// A client will be redirected to the specified address after performing of the authentication operation.
@@ -176,7 +175,7 @@ namespace bNesis.Examples.VKontakteApp.GetUserInfoInXML
                     Console.WriteLine("Authorization is successful! VKontakte instance is created.\n");
 
                     //Get info about current user  
-                    Response userInfo = vkontakte.GetUserRaw();
+                    Response userInfo = vkontakte.GetUserFullDataRaw();
 
 
                     //Getting a last error

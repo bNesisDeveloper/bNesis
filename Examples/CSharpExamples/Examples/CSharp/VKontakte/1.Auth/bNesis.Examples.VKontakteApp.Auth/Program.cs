@@ -62,8 +62,7 @@ namespace bNesis.Examples.VKontakteApp.Auth
         /// <summary>
         /// If you use a Thin Client mode, you need an access to the bNesis API Server. Address of the available demo bNesis API Servers see above
         /// </summary>
-        //private static string bNesisAPIEndPoint = "https://bnesisserver1.azurewebsites.net";
-        private static string bNesisAPIEndPoint = "http://localhost";
+        private static string bNesisAPIEndPoint = "https://server2.bnesis.com";
         
         /// <summary>
         /// A client will be redirected to the specified address after performing of the authentication operation.
@@ -146,8 +145,7 @@ namespace bNesis.Examples.VKontakteApp.Auth
                 {
                     Console.WriteLine("VKontakte service Authorization, please wait...");
                     // this method authorizes a VKontakte service, returns an instance.
-                    VKontakte vkontakte = manager.CreateInstanceVKontakte(
-                        null, bNesisDeveloperId, redirectUrl, VKontakteClientId, VKontakteClientSecret, null, null, null, false, null);
+                    VKontakte vkontakte = manager.CreateInstanceVKontakte(bNesisDeveloperId, VKontakteClientId, VKontakteClientSecret, redirectUrl);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(vkontakte.bNesisToken))
                     {
