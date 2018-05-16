@@ -111,7 +111,7 @@ namespace bNesis.Examples.GooglePlusApp.Simple
             bNesisDeveloperId = manager.GetKey("exampleDeveloperId", bNesisDeveloperId);
             clientId = manager.GetKey("exampleGoogleClientId", clientId);
             clientSecret = manager.GetKey("exampleGoogleClientSecret", clientSecret);
-            additionalData = manager.GetKey("exampleAdditionalDataGoogle", additionalData);
+            
 #endif
 
             //Check bNesisDeveloperID
@@ -124,7 +124,7 @@ namespace bNesis.Examples.GooglePlusApp.Simple
             }
 
             //Check GooglePlus authentication keys
-            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret) || string.IsNullOrEmpty(additionalData))
+            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret))
             {
                 Console.WriteLine("For using this example you need Google authentication keys, please setup your Google Developer account and create OAuth credentials in https://console.developers.google.com/apis/credentials \n");
                 Console.WriteLine("Press any key to exit...");
@@ -171,7 +171,7 @@ namespace bNesis.Examples.GooglePlusApp.Simple
                 {
                     Console.WriteLine("GooglePlus service Authorization, please wait...");
                     // this method authorizes GooglePlus service, returns instance.
-                    GooglePlus googlePlus = manager.CreateInstanceGooglePlus(bNesisDeveloperId, redirectUrl, clientId, clientSecret, string.Empty, scopes);
+                    GooglePlus googlePlus = manager.CreateInstanceGooglePlus(bNesisDeveloperId, clientId, clientSecret, redirectUrl, scopes, string.Empty);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(googlePlus.bNesisToken))
                     {

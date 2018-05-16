@@ -122,7 +122,7 @@ namespace bNesis.Examples.GooglePlusApp.Auth
             }
 
             //Check Google credential OAuth keys
-            if (string.IsNullOrEmpty(clientSecret) || string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(additionalData))
+            if (string.IsNullOrEmpty(clientSecret) || string.IsNullOrEmpty(clientId)  )
             {
                 Console.WriteLine(
                     "For using this example you need Google authentication keys, please setup your Google Developer account and create OAuth credentials at https://console.developers.google.com/apis/credentials \n");
@@ -172,7 +172,7 @@ namespace bNesis.Examples.GooglePlusApp.Auth
                 {
                     Console.WriteLine("Authorization at the GooglePlus service, please wait...");
                     GooglePlus googlePlus =
-                        manager.CreateInstanceGooglePlus(bNesisDeveloperId, redirectUrl, clientId, clientSecret, additionalData, scopes);
+                        manager.CreateInstanceGooglePlus(bNesisDeveloperId, clientId, clientSecret, redirectUrl, scopes, additionalData );
 
                     //If the authorization is failed, the bNesisToken will be empty/null.
                     if (string.IsNullOrEmpty(googlePlus.bNesisToken))
