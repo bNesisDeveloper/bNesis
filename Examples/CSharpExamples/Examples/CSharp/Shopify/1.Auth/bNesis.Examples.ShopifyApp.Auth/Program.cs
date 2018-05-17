@@ -75,7 +75,7 @@ namespace bNesis.Examples.ShopifyApp.Auth
         // <summary>
         /// If you use a Thin Client mode, you need an access to a bNesis API Server. Addresses of the available demo bNesis API Servers see above
         /// </summary>
-        private static string bNesisAPIEndPoint = "https://bnesisserver3.azurewebsites.net";
+        private static string bNesisAPIEndPoint = "https://server2.bnesis.com/";
 
         /// <summary>
         /// The client will be redirected to the specified address after the authentication operation is performed.
@@ -158,7 +158,7 @@ namespace bNesis.Examples.ShopifyApp.Auth
                 try
                 {
                     Console.WriteLine("Authorization at the Shopify service, please wait...");
-                    Sdk.eCommerce.Shopify.Shopify shopify = manager.CreateInstanceShopify("bnesisteststore", bNesisDeveloperId, redirectUrl, appKey, appSecret, Scope, null, null, false , null);
+                    Sdk.eCommerce.Shopify.Shopify shopify = manager.CreateInstanceShopify(bNesisDeveloperId, appKey, appSecret, redirectUrl, Scope, "bnesisshopapp");
                     
 
                     //If the authorization is failed, the bNesisToken will be empty/null.

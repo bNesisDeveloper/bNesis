@@ -117,7 +117,7 @@ namespace bNesis.Examples.ProzzoroApp.Simple
                 {
                     Console.WriteLine("Prozzoro service Authorization, please wait...");
                     // this method authorizes Prozzoro service, returns instance.
-                    Prozzoro prozzoro = manager.CreateInstanceProzzoro(null,bNesisDeveloperId, redirectUrl, null,null,null,null,null,false,null);
+                    Prozzoro prozzoro = manager.CreateInstanceProzzoro(bNesisDeveloperId, redirectUrl);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(prozzoro.bNesisToken))
                     {
