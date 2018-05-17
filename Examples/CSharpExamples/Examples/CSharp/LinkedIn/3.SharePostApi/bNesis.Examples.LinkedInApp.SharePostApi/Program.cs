@@ -153,8 +153,7 @@ namespace bNesis.Examples.LinkedInApp.SharePostApi
                 {
                     Console.WriteLine("LinkedIn service Authorization, please wait...");
                     // this method authorizes LinkedIn service, returns instance.
-                    LinkedIn linkedIn = manager.CreateInstanceLinkedIn(null, bNesisDeveloperId, redirectUrl,
-                        LinkedInClientId, LinkedInClientSecret, Scope, null, null, false, null);
+                    LinkedIn linkedIn = manager.CreateInstanceLinkedIn(bNesisDeveloperId, LinkedInClientId, LinkedInClientSecret, redirectUrl, Scope);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(linkedIn.bNesisToken))
                     {
