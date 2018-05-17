@@ -135,7 +135,8 @@ namespace bNesis.Examples.UkrPoshtaApp.Auth
                 {
                     Console.WriteLine("UkrPoshta service Authorization, please wait...");
                     // this method authorizes UkrPoshta service, returns instance.
-                    UkrPoshta ukrPoshta = manager.CreateInstanceUkrPoshta(bNesisDeveloperId, redirectUrl, UkrPoshtaBearer, UkrPoshtaCounterPartyToken, true);
+                    UkrPoshta ukrPoshta = manager.CreateInstanceUkrPoshta(bNesisDeveloperId, UkrPoshtaBearer,
+                        UkrPoshtaCounterPartyToken, redirectUrl);
                     //If authorization has failed, the bNesisToken is empty/null.
                     if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                     {

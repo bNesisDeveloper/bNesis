@@ -95,7 +95,8 @@ namespace bNesis.Examples.UkrPoshtaApp.SimpleUI
                     try
                     {
                         // this method authorize at UkrPoshta, return instance. 
-                        UkrPoshta ukrPoshta = manager.CreateInstanceUkrPoshta(developerIdTextBox.Text, sdkAddrRedirectTextBox.Text, clientIdTextBox.Text, clientSecretTextBox.Text, true);
+                        UkrPoshta ukrPoshta = manager.CreateInstanceUkrPoshta(developerIdTextBox.Text, clientIdTextBox.Text,
+                            clientSecretTextBox.Text, sdkAddrRedirectTextBox.Text);
                         //If authorization failed, the bNesisToken be empty/null.
                         if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                         {

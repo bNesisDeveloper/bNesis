@@ -97,9 +97,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
             //Creating empty string
             string errorMessage = string.Empty;
             
-            //Asynchronous processing.
-            await Task.Run(() =>
-            {
+             
                 //Initialize result code.
                 int SDKInitializeResult;
 
@@ -126,8 +124,8 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
                     try
                     {
                         // this method authorize at UkrPoshta, return instance. 
-                        ukrPoshta = manager.CreateInstanceUkrPoshta(developerID, redirectUrl, UkrPoshtaBearer,
-                            UkrPoshtaCounterPartyToken, true);
+                        ukrPoshta = manager.CreateInstanceUkrPoshta(developerIdTextBox.Text, clientIdTextBox.Text,
+                            clientSecretTextBox.Text, sdkAddrRedirectTextBox.Text);
                         //If authorization failed, the bNesisToken be empty/null.
                         if (string.IsNullOrEmpty(ukrPoshta.bNesisToken))
                         {
@@ -144,7 +142,7 @@ namespace bNesis.Examples.UkrPoshtaApp.Total
                         errorMessage = "Connection status: " + ex.Message;
                     }
                 }
-            });
+          
 
             //Set waiting for response to false
             waitingForResponse = false;
