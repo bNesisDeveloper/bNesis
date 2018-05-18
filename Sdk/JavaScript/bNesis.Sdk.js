@@ -495,14 +495,14 @@ function ServiceManager(client, apiLocation) {
 	 * Create new instance of Shopify 
 	 * @return {Shopify} Return new Shopify instance
 	*/
-	this.CreateInstanceShopify = function (bNesisDevId,clientId,clientSecret,redirectUrl,scopes) {
+	this.CreateInstanceShopify = function (bNesisDevId,clientId,clientSecret,redirectUrl,scopes,data) {
 		if (!_bNesisApi.SessionsManager.ClientsManager.ClientExists("Shopify"))
 			 throw this.errorCodeServiceDoesNotExistDescription;
 		lastSystemErrorMessage = "";
 		var resultService = new Shopify(_bNesisApi);
 		if (arguments.length > 0)
 			try {
-				resultService.Auth(bNesisDevId,clientId,clientSecret,redirectUrl,scopes);
+				resultService.Auth(bNesisDevId,clientId,clientSecret,redirectUrl,scopes,data);
 			}
 			catch (e) {
 				lastSystemErrorMessage = e.Message;

@@ -60,7 +60,7 @@ Planing of using cloud services in .NET applications system designer determines 
  
 ## **Versions** 
 
-Current version of bNesis SDK for C# (.NET) is 1.8.
+Current version of bNesis SDK for C# (.NET) is 1.8
  
 ## **bNesis SDK solution** 
 

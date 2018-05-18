@@ -562,110 +562,110 @@ bNesisTestService = function (bNesisApi) {
         return result;
     }
 
-	///<summary>
-	/// All B methods returns void 
-	/// </summary>
-		/// <returns></returns>
+	/**
+	 *  All B methods returns void 	
+	 
+	 */
     this.testB3 = function () {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isNULL 
-		/// <returns></returns>
+	 
+	 */
     this.testB4 = function (isNULL) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isString 
-		/// <returns></returns>
+	 
+	 */
     this.testB5 = function (isString) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isSimple 
-		/// <returns></returns>
+	 
+	 */
     this.testB6 = function (isSimple) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isObject 
-		/// <returns></returns>
+	 
+	 */
     this.testB7 = function (isObject) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isFormalized 
-		/// <returns></returns>
+	 
+	 */
     this.testB8 = function (isFormalized) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isArrayOfString 
-		/// <returns></returns>
+	 
+	 */
     this.testB9 = function (isArrayOfString) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isArrayOfSimple 
-		/// <returns></returns>
+	 
+	 */
     this.testB10 = function (isArrayOfSimple) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isArrayOfObject 
-		/// <returns></returns>
+	 
+	 */
     this.testB11 = function (isArrayOfObject) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isArrayOfFormalized 
-		/// <returns></returns>
+	 
+	 */
     this.testB12 = function (isArrayOfFormalized) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 
     }
 
-	///<summary>
-	///  
-	/// </summary>
+	/**
+	 *   	
 	 * @param isArrayOfNulls 
-		/// <returns></returns>
+	 
+	 */
     this.testB13 = function (isArrayOfNulls) {
 			//bNesisApi.Call Can't be used with VOID return type, please connect with this API developer to fix this
 			return; 

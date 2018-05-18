@@ -674,13 +674,13 @@ namespace bNesis.Sdk
 		///  Create new instance of Shopify
 		/// </summary>
 		/// <returns>Return new Shopify instance</returns>
-		public Shopify CreateInstanceShopify(string bNesisDevId,string clientId,string clientSecret,string redirectUrl,string[] scopes)
+		public Shopify CreateInstanceShopify(string bNesisDevId,string clientId,string clientSecret,string redirectUrl,string[] scopes,string data)
 		{
 		    lastSystemErrorMessage = string.Empty;
 			Shopify resultService = CreateInstanceShopify();
 			try
               {
-			    resultService.Auth(bNesisDevId,clientId,clientSecret,redirectUrl,scopes);
+			    resultService.Auth(bNesisDevId,clientId,clientSecret,redirectUrl,scopes,data);
 			  } 
             catch (Exception e)
               {

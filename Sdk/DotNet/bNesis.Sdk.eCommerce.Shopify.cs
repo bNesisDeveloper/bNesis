@@ -34,9 +34,9 @@ namespace bNesis.Sdk.eCommerce.Shopify
 		/// The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
 		/// </summary>
 		/// <returns>bNesisToken value</returns>	
-		public string Auth(string bNesisDevId,string clientId,string clientSecret,string redirectUrl,string[] scopes)
+		public string Auth(string bNesisDevId,string clientId,string clientSecret,string redirectUrl,string[] scopes,string data)
 		{
-			bNesisToken = bNesisApi.Auth("Shopify", string.Empty,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,string.Empty,string.Empty,false,string.Empty);
+			bNesisToken = bNesisApi.Auth("Shopify", data,bNesisDevId,redirectUrl,clientId,clientSecret,scopes,string.Empty,string.Empty,false,string.Empty);
 			return bNesisToken;
 		}
 
