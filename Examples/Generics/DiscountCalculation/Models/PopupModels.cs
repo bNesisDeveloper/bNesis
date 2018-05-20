@@ -345,7 +345,7 @@ namespace bNesis.Examples.DiscountCalculationApp.Models
                 try
                 {
                     //Gets user profile 
-                    Response userProfile = vKontakte.AccountGetProfileInfoRaw();
+                    Response userProfile = vKontakte.GetUserFullDataRaw();
                     //Getting last error
                     ErrorInfo errorInfo = vKontakte.GetLastError();
                     //Stop authorization session with service and clears the value bNesis token.
