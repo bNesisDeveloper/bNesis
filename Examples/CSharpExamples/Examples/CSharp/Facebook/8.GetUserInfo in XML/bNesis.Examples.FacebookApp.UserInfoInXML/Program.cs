@@ -46,7 +46,11 @@ namespace bNesis.Examples.FacebookApp.UserInfoInXML
         /// <summary>
         /// Your application requests a delimited list of member permissions on behalf of the user.
         /// </summary>
-        private static string[] Scope = new string[] { "user_posts" };
+        private static string[] Scope = new string[] { "email", "user_age_range", "user_birthday", "user_friends", "user_gender",
+            "user_hometown", "user_link", "user_location",  "user_likes", "user_photos", "user_posts",
+            "user_tagged_places", "user_videos", "groups_access_member_info", "user_events", "user_managed_groups",
+            "publish_to_groups", "publish_actions", "user_status", "user_tagged_places", "manage_pages",
+            "pages_show_list", "ads_management", "business_management", "user_events", "user_managed_groups" };
 
         /// <summary>
         /// If you use a Thin Client mode, you need an access to one of a bNesis API Servers. Addresses of the demo bNesis API servers:

@@ -121,8 +121,8 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at Facebook service, please wait...";
                     // // this method authorizes a Facebook service, returns an instance.
-                    var facebook = manager.CreateInstanceFacebook(
-                        null, bNesisDeveloperId, redirectUrl, FacebookClientId, FacebookClientSecret, Scope, null, null, false, null);
+                    var facebook = manager.CreateInstanceFacebook(bNesisDeveloperId, FacebookClientId, FacebookClientSecret, redirectUrl, Scope);
+
 
                 }
                 else {

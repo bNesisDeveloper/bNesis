@@ -2,9 +2,30 @@ Dropbox = function (bNesisApi) {
     this.bNesisToken = null;
     var _bNesisApi = bNesisApi;
 
-    this.Auth = function (bNesisDevId,redirectUrl,clientId,clientSecret) {
-        var bNesisToken = _bNesisApi.Auth("Dropbox", "",bNesisDevId,redirectUrl,clientId,clientSecret,null,"","",false,"");
-        return bNesisToken;
+    /**
+     * The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+	 * or Attach to bNesis session with exists bNesis token
+     * @return {string} bNesisToken value | true if bNesisToken is valid
+	 */
+    this.Auth = function (bNesisDevId,clientId,clientSecret,redirectUrl) {
+		if(arguments.length !== 1){
+			var bNesisToken = _bNesisApi.Auth("Dropbox", "",bNesisDevId,redirectUrl,clientId,clientSecret,null,"","",false,"");
+			return bNesisToken;
+		}
+		else{
+		    this.bNesisToken = arguments[0];			
+			return ValidateToken();		
+		}		
+    }
+
+    /**
+     * The method stops the authorization session with the service and clears the value of bNesisToken.
+     * @return {Boolean} true - if service logoff is successful
+	 */
+    this.LogoffService = function () {
+		var result = _bNesisApi.LogoffService("Dropbox", this.bNesisToken);
+		if (result) this.bNesisToken = "";
+		return result;             
     }
 	
 	/**
@@ -46,7 +67,7 @@ Dropbox = function (bNesisApi) {
 
 	/**
 	 *  Normalizes folder and file paths using current file storage rules. 	
-	 * @param path The path to folder or file.
+	 * @param {string} path The path to folder or file.
 	 * @return {string} String with normalized path.
 	 */
     this.NormalizePath = function (path) {

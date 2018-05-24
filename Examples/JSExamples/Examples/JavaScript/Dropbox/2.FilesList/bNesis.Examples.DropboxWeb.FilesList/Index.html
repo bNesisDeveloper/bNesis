@@ -55,7 +55,7 @@
              * https://bnesisserver2.azurewebsites.net/
              * https://bnesisserver3.azurewebsites.net/
              */
-            var bNesisAPIEndPoint = "https://bnesisserver3.azurewebsites.net/";   
+            var bNesisAPIEndPoint = "https://server2.bnesis.com/";
 
             /*
              * The client will be redirected to the specified address after the authentication operation is performed.
@@ -112,7 +112,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at Dropbox service, please wait...";
                     // this method authorize at Dropbox, return instance.
-                    var dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, redirectUrl, DropboxAppKey, DropboxAppSecret);
+                    var dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, DropboxAppKey, DropboxAppSecret, redirectUrl);
 
                 }
                 else {

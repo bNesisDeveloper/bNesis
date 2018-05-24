@@ -98,7 +98,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at Dropbox service, please wait...";
                     // this method authorize at Dropbox, return instance.
-                    var dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, redirectUrl, DropboxAppKey, DropboxAppSecret);
+                    var dropbox = manager.CreateInstanceDropbox(bNesisDeveloperId, DropboxAppKey, DropboxAppSecret, redirectUrl);
 
                 }
                 else {
