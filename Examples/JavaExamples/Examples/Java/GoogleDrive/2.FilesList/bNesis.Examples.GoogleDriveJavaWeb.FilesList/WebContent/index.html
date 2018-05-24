@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>bNesis SDK java GoogleDrive file list example</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1];
+        }
+    }
+    return ""; //no undefined just empty string
+}
+
+window.onload =function () {
+    var bNesisToken = getUrlParameter('token');
+    if (bNesisToken !== null && bNesisToken.length > 0) {
+        document.getElementById("inputelements").style.display = "none";
+        onclick_submit();
+    }
+    else {
+        var badAuth = getUrlParameter('badAuth');
+        if (badAuth !== null && badAuth === 'true') {
+            onclick_submit();
+        }
+    }
+};
+
+
+onclick_submit = function()
+{
+    /**
+     * If you use Thin Client mode, you need access to bNesis API Server. Address of the demo bNesis API servers:
+     * https://server2.bnesis.com/
+     * https://bnesisserver1.azurewebsites.net/
+     * https://bnesisserver2.azurewebsites.net/
+     * https://bnesisserver3.azurewebsites.net/
+     */	
+	var bNesisAPIEndPoint = "https://server2.bnesis.com/";
+    
+    /**
+     * To use the bNesis SDK js in your applications, you must have the bNesis Developer ID - the key that signs your copy of the bNesis SDK. 
+     * To study bNesis SDK, tests and demonstrations, you can get the key from https://api.bnesis.com site, free of charge.
+     * Please, put your bNesis Developer ID here
+     */	
+	var bNesisDeveloperId = document.getElementById("bNesisDeveloperId").value; 
+	
+    /**
+     * GoogleDrive ClientId
+     */    
+	var GoogleDriveClientId = document.getElementById("GoogleDriveClientId").value;
+	
+    /**
+     * GoogleDrive ClienSecret
+     */    
+	var GoogleDriveClientSecret = document.getElementById("GoogleDriveClientSecret").value;
+
+    /*
+     * The client will be redirected to the specified address after the authentication operation is performed.
+     */    
+	var redirectUrl = window.location.origin + window.location.pathname;
+	
+	var linkurl = "auth?";
+	var bNesisToken = getUrlParameter('token');
+	var bNesisService = getUrlParameter('service');
+	
+	if((bNesisToken === "") || (bNesisToken === null)){
+		linkurl += "bNesisDevId=" + encodeURIComponent(bNesisDeveloperId);
+		linkurl += "&ClientId=" + encodeURIComponent(GoogleDriveClientId);
+		linkurl += "&ClientSecret=" + encodeURIComponent(GoogleDriveClientSecret);
+		linkurl += "&redirectUrl=" + encodeURIComponent(redirectUrl);
+	}
+	else{
+		linkurl += "token=" + encodeURIComponent(bNesisToken);
+		linkurl += "&service=" + encodeURIComponent(bNesisService);		
+	}
+	linkurl += "&bNesisApiUrl=" + encodeURIComponent(bNesisAPIEndPoint);	
+
+    /*
+     * Redirect to servlet
+     */    	
+	window.location.replace( linkurl );
+};
+
+</script>
+</head>
+<body>
+    <div id="inputelements">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>bNesisDeveloperId</td>
+                <td><input id="bNesisDeveloperId" type="text" name="text" value=""></td>
+            </tr>
+            <tr>
+                <td>GoogleDriveClientId</td>
+                <td><input id="GoogleDriveClientId" type="text" name="text" ></td>
+            </tr>
+            <tr>
+                <td>GoogleDriveClientSecret</td>
+                <td><input id="GoogleDriveClientSecret" type="text" name="text" ></td>
+            </tr>
+        </table>
+        <br />
+        <input id="button" type="button" onclick="javascript:onclick_submit();" value="Auth" />
+    </div>
+    <div id="result">
+    </div>
+</body>
+</html>
