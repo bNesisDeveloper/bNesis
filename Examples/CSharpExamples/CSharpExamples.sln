@@ -69,7 +69,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "22.GetCover in XML", "22.Ge
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "23.GetFavoriteAthletes in XML", "23.GetFavoriteAthletes in XML", "{369D42DE-8DAA-41FC-A648-5E719B4C57B4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "24.FGetFavoriteTeams in XML", "24.FGetFavoriteTeams in XML", "{F0AA8C52-85ED-4AE3-AF76-39431856CED6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "24.GetFavoriteTeams in XML", "24.GetFavoriteTeams in XML", "{F0AA8C52-85ED-4AE3-AF76-39431856CED6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bNesis.Examples.FacebookApp.UserInfo", "Examples\CSharp\Facebook\2.GetUserInfo\bNesis.Examples.FacebookApp.UserInfo\bNesis.Examples.FacebookApp.UserInfo.csproj", "{322366AD-7410-4927-A5AB-C7EE02790525}"
 EndProject

@@ -122,7 +122,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at GoogleDrive service, please wait...";
                     // this method authorize at GoogleDrive, return instance.
-                    var googleDrive = manager.CreateInstanceGoogleDrive(bNesisDeveloperId, redirectUrl, GoogleClientId, GoogleClientSecret, scopes);
+                    var googleDrive = manager.CreateInstanceGoogleDrive(bNesisDeveloperId, GoogleClientId, GoogleClientSecret, redirectUrl, scopes);
 
                 }
                 else {
