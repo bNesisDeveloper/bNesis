@@ -7,9 +7,9 @@ UkrPoshta = function (bNesisApi) {
 	 * or Attach to bNesis session with exists bNesis token
      * @return {string} bNesisToken value | true if bNesisToken is valid
 	 */
-    this.Auth = function (bNesisDevId,redirectUrl,clientId,clientSecret,isSandbox) {
+    this.Auth = function (bNesisDevId,clientId,clientSecret,redirectUrl) {
 		if(arguments.length !== 1){
-			var bNesisToken = _bNesisApi.Auth("UkrPoshta", "",bNesisDevId,redirectUrl,clientId,clientSecret,null,"","",isSandbox,"");
+			var bNesisToken = _bNesisApi.Auth("UkrPoshta", "",bNesisDevId,redirectUrl,clientId,clientSecret,null,"","",false,"");
 			return bNesisToken;
 		}
 		else{

@@ -2,9 +2,20 @@ UkrPoshta = function (bNesisApi) {
     this.bNesisToken = null;
     var _bNesisApi = bNesisApi;
 
-    this.Auth = function (bNesisDevId,redirectUrl,clientId,clientSecret,isSandbox) {
-        var bNesisToken = _bNesisApi.Auth("UkrPoshta", "",bNesisDevId,redirectUrl,clientId,clientSecret,null,"","",isSandbox,"");
-        return bNesisToken;
+    /**
+     * The method authorizes the user in the service and if the authorize result is successful assigns the value bNesisToken.
+	 * or Attach to bNesis session with exists bNesis token
+     * @return {string} bNesisToken value | true if bNesisToken is valid
+	 */
+    this.Auth = function (bNesisDevId,clientId,clientSecret,redirectUrl) {
+		if(arguments.length !== 1){
+			var bNesisToken = _bNesisApi.Auth("UkrPoshta", "",bNesisDevId,redirectUrl,clientId,clientSecret,null,"","",false,"");
+			return bNesisToken;
+		}
+		else{
+		    this.bNesisToken = arguments[0];			
+			return ValidateToken();		
+		}		
     }
 
     /**

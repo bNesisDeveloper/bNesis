@@ -131,7 +131,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at UkrPoshta service, please wait...";
                     // this method authorize at UkrPoshta, return instance.
-                    var ukrPoshta = manager.CreateInstanceUkrPoshta(bNesisDeveloperId, redirectUrl, UkrPoshtaBearer, UkrPoshtaCounterpartyToken, true);
+                    var ukrPoshta = manager.CreateInstanceUkrPoshta(bNesisDeveloperId, UkrPoshtaBearer, UkrPoshtaCounterpartyToken, redirectUrl);
 
                 }
                 else {

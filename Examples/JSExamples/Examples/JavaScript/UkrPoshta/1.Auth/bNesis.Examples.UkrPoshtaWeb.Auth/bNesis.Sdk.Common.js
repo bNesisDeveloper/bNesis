@@ -51,7 +51,7 @@
 	 * @type {string}
 	 */
 	this.Headers = "";
-      
+
 	/**
 	 * message with error information
 	 * @type {string}
@@ -181,18 +181,6 @@
 	 * @type {string}
 	 */
 	this.Phone = "";
-
-	/**
-	 * additional information
-	 * @type {string}
-	 */
-	this.About = "";
-
-	/**
-	 * for dynamic response
-	 * @type {string}
-	 */
-	this.FieldsDynamic = "";
 
 }
 
