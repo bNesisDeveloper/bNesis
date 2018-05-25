@@ -95,7 +95,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at Prozzoro service, please wait...";
                     // this method authorize at Prozzoro, return instance.
-                    var prozzoro = manager.CreateInstanceProzzoro(null,bNesisDeveloperId, redirectUrl, null,null,null,null,null,false,null);
+                    var prozzoro = manager.CreateInstanceProzzoro(bNesisDeveloperId, redirectUrl);
 
                 }
                 else {
