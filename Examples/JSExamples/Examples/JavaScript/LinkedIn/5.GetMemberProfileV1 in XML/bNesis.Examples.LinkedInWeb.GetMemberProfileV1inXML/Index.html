@@ -118,7 +118,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at LinkedIn service, please wait...";
                     // this method authorize at LinkedIn, return instance.
-                    var linkedIn = manager.CreateInstanceLinkedIn(null, bNesisDeveloperId, redirectUrl, LinkedInClientId, LinkedInClientSecret, Scope, null, null, false, null);
+                    var linkedIn = manager.CreateInstanceLinkedIn(bNesisDeveloperId, LinkedInClientId, LinkedInClientSecret, redirectUrl, Scope);
 
                 }
                 else {
