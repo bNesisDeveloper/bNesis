@@ -121,7 +121,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at GooglePlus service, please wait...";
                     // this method authorize at GooglePlus, return instance.
-                    var googlePlus = manager.CreateInstanceGooglePlus(bNesisDeveloperId, redirectUrl, GoogleClientId, GoogleClientSecret, scopes);
+                    var googlePlus = manager.CreateInstanceGooglePlus(bNesisDeveloperId, GoogleClientId, GoogleClientSecret, redirectUrl, scopes);
 
                 }
                 else {
