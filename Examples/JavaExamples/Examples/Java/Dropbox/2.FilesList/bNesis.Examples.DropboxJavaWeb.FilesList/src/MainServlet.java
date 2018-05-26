@@ -1,26 +1,17 @@
 
-//import java.io.ByteArrayInputStream;
-//import java.io.ByteArrayOutputStream;
-//import java.io.FileOutputStream;
+
 import java.io.IOException;
-//import java.io.InputStream;
-//import java.io.OutputStream;
+
 import java.io.PrintWriter;
-//import java.net.URI;
-//import java.net.URL;
-//import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import org.apache.http.HttpResponse;
-
-//import bNesis.Api.bNesisApi;
 import bNesis.Sdk.ServiceManager;
 import bNesis.Sdk.FileStorages.Common.FileStorageItem;
-//import bNesis.Sdk.FileStorages.Common.FileStorageItem;
+
 import bNesis.Sdk.FileStorages.Dropbox.Dropbox;
 
 public class MainServlet extends HttpServlet {
@@ -71,12 +62,6 @@ public class MainServlet extends HttpServlet {
 	    	{
 		    	Dropbox dropbox = manager.CreateInstanceDropbox();
 	        	dropbox.bNesisToken = bNesisToken;
-
-	        	//ByteArrayOutputStream stream = (ByteArrayOutputStream)dropbox.DownloadFile("Getting Started.pdf");
-	        	//FileOutputStream fStream = new FileOutputStream("d:\\Getting Started.pdf");
-	        	//fStream.write(stream.toByteArray());
-	        	//fStream.flush();
-	        	//fStream.close();
 	        	
 	            response.setContentType("text/html");
 	            // Writing the message on the web page      

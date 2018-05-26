@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import bNesis.Api.bNesisApi;
 import bNesis.Sdk.ServiceManager;
 import bNesis.Sdk.FileStorages.Common.FileStorageItem;
-//import bNesis.Sdk.FileStorages.Common.FileStorageItem;
 import bNesis.Sdk.FileStorages.GoogleDrive.GoogleDrive;
 
 public class MainServlet extends HttpServlet {

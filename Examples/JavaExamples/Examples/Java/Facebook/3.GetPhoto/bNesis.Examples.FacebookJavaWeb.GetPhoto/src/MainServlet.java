@@ -11,8 +11,6 @@ import bNesis.Sdk.ServiceManager;
 import bNesis.Sdk.Common.ErrorInfo;
 import bNesis.Sdk.Social.Facebook.Facebook;
 import bNesis.Sdk.Social.Facebook.FacebookUserPhotos;
-//import bNesis.Sdk.Social.Facebook.FacebookUser;
-//import bNesis.Sdk.Social.Facebook.FacebookUserFriends;
 
 public class MainServlet extends HttpServlet {
 	static final long serialVersionUID = 1L;
