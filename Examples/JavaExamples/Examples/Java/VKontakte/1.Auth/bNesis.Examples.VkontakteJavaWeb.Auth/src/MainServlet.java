@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bNesis.Sdk.ServiceManager;
-//import bNesis.Sdk.Social.VKontakte.VKontakte;
 
 public class MainServlet extends HttpServlet {
 	static final long serialVersionUID = 1L;

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import bNesis.Api.bNesisApi;
 import bNesis.Sdk.ServiceManager;
 
 public class MainServlet extends HttpServlet {
