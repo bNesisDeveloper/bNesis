@@ -111,8 +111,7 @@
                 if (badAuth === null || badAuth.length === 0 || badAuth !== "true") {
                     document.getElementById('result').innerHTML += "<br/>Authorize at VKontakte service, please wait...";
                     // // this method authorizes a VKontakte service, returns an instance.
-                    var vkontakte = manager.CreateInstanceVKontakte(
-                        null, bNesisDeveloperId, redirectUrl, VKontakteClientId, VKontakteClientSecret, null, null, null, false, null);
+                    var vkontakte = manager.CreateInstanceVKontakte(bNesisDeveloperId, VKontakteClientId, VKontakteClientSecret, redirectUrl);
 
                 }
                 else {
