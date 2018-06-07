@@ -34,4 +34,4 @@ bNesis SDK for PHP| Thin client|Web| PHP
 **bNesis SDK** is a cross-platform client server solution that allows developers to make coding  process  of  web, mobile and desktop applications with integration of different services simpler and more intuitive.  It is easy to switch from using the Rich to Thin clients and vice versa. So you get your own bNesis API Server to implement all of your ideas associated with different services. bNesis is constantly increasing the amount of support different services and the unified API make it possible to expand the functionality of your applications without updating them.
 
 The code written for one platform can be easily transferred to another one, and at the same time the sense and API functionality remains the same when switching between platforms, programming languages and architecture.
-  
+ 
