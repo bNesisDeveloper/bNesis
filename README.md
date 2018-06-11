@@ -27,7 +27,7 @@ bNesis SDK|Providing architecture|Supported platform|Programing language
 --|---------|------------------|------------------------------
 [bNesis SDK for C# (.NET)](https://github.com/bNesisDeveloper/bNesis/tree/master/Sdk/DotNet)|Rich and Thin clients|.NET |C#
 [bNesis SDK for JS](https://github.com/bNesisDeveloper/bNesis/tree/master/Sdk/JavaScript)|Thin client|Web| JavaScript
-bNesis SDK for PHP| Thin client|Web| PHP
+bNesis SDK for Java| Thin client | Java
 
 **Table 1.**  bNesis SDK with supporting architecture, platforms and programing languages
 
