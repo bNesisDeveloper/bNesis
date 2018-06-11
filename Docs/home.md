@@ -1,10 +1,10 @@
- **bNesis** allows developers easily use cloud services authorization and API at Web, mobile and desktop applications.
+#**bNesis** allows developers easily use cloud services authorization and API at Web, mobile and desktop applications.#
 
-### **Comfortable service programming with bNesis**
+## **Comfortable service programming with bNesis**
  
 The authorization is most common challenge of cloud services programing because complexity of OAuth 2.0 protocol and OpenID identity layer. Also network  programing required havening wide range of tech knowledge. The bNesis SDK represented all of it as simple well-known program elements and it makes coding process easier and more intuitive. Code examples demonstrated how to use the bNesis SDK for C# (.NET) for connection of cloud services in .NET applications and relevant guides are also provided. Any changes and updates of cloud services APIs are handled by versions of bNesis SDK for C# (.NET).  bNesis SDK for C# (.NET) significantly reduces coding time and project expenses. 
 
-### **bNesis API layers**
+## **bNesis API layers**
 
 bNesis SDK APIs provide an wrappers over the "low-level" of services APIs - also known as bNesis SDK API layers. There are three layers:
   
@@ -15,7 +15,7 @@ bNesis SDK APIs provide an wrappers over the "low-level" of services APIs - also
 
 * **Raw API**. By using this layer of bNesis SDK APIs, developer obtain full response from service including all fields and status codes which is provided by service owners. There are two reasons for supporting API of raw layer. The first is then there is code working properly with connected service and developer want to start using of bNesis SDK. In this case developer can save his code of service responses processing i.e adopting of exiting code to bNesis SDK does not need global changes.  The second is a complete correspondence of the original documentation to the service. It is not usual and not informative but there can can be and vice versa. By the way, often responses with errors contain detailed descriptions which is useful for debug mode.   
  
-### **Providing Rich and Thin clients architecture** 
+## **Providing Rich and Thin clients architecture** 
   
 Planing of using cloud services in .NET applications system designer determines optimal architecture depending on whether lengthy computations must be accomplished by the client or the server. bNesis SDK for C# (.NET) provides an opportunity to realize these two modes - Rich client mode and Thin client mode. At the API level, functional of Thin client mode is fully compatible with Rich client mode, the only difference is that in the case of Thin client, the OAUTH authorization takes place on the side and in the context of bNesis API Server.  
     
@@ -50,21 +50,22 @@ Planing of using cloud services in .NET applications system designer determines 
 Current version of bNesis SDK for C# is 1.8
  
  
--------------------------------------------------------
+--------------------------------------------------------------------------------
 
-#### **First step**
+## **First step**
 A tool that visualizes the work with servicesAPI Caller
 
 Specially developed online software that represents work with services in the form of a graphical userinterface (UI). All APIs of all services supported by bNesis are available for use. There is no need to immediately start programming using the bNesis SDK in order to learn its capabilities. Or if you follow the goal to explore the capabilities of the services - what data the service calls and what parameters are required for this, does not need to investigate the service documentation or is engaged in programming.
 
-#### Try the bNesis API Caller right now
+## Try the bNesis API Caller right now
 
 We have developed a special demonstration service that explains the work of bNesis step by step. This service is completely free and includes learning examples, from the simplest, to the more complex ones. For example, you can find out the weather in London or get NASA information - using calls to relevant services  
   
 [Try API Caller demonstration right now](~/Api/Caller?instanceId=8f14e45fceea167a5a36dedd4bea2543&Service=DemoService)
 
-bNesis accountPersonal Area
----------------------------
+--------------------------------------------------------------------------------
+
+## **bNesis accountPersonal Area**
 
 #### Create your own account
 
@@ -75,16 +76,15 @@ We suggest you create your own account to manage the services you need. This acc
 Services APIs helpdocumentation about all supported services APIs and data types
 --------------------------------------------------------------------------------
 
-#### API help
+#### **bNesis API help**
 
 Includes a full description of all supported services and their APIs. The information is presented in sections. Also, bNesis implements so-called unified APIs, in this case several services can use the same API.  
   
 [APIs help](~/Help)
 
-bNesis SDKwith examples of use
-------------------------------
+--------------------------------------------------------------------------------
 
-#### bNesis SDK
+#### **bNesis SDK**
 
 bNesis offers an SDK for all supporded services and all APIs for multiple platforms and programming languages.  
   
