@@ -1,1 +1,1 @@
-> Here you can get help by all the methods and types of the service that are used in this API
+> Here you can get help information about all the APIs and data types supported by bNesis SDK
