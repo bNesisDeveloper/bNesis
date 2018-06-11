@@ -1,4 +1,4 @@
-﻿# bNesis SDK and code examples
+#### bNesis SDK and code examples
 
 **bNesis SDK** is a unified API libraries, relevant documentation, [code examples](https://github.com/bNesisDeveloper/bNesis/tree/master/Examples) and guides that allow developers easily use different cloud services such as social networks, files storage, e-commerce and payment platform, banks, delivery services in mobile, desktop, web and servers applications.  bNesis SDK APIs provide an object-oriented abstraction over the "low-level" APIs of cloud services and  make  coding  process comfortable and more intuitive.
 
