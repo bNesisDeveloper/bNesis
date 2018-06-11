@@ -1,4 +1,6 @@
-#**bNesis** allows developers easily use cloud services authorization and API at Web, mobile and desktop applications.
+<div style="text-align: right">
+**bNesis** allows developers easily use cloud services authorization and API at Web, mobile and desktop applications.
+</div>
 
 ## **Comfortable service programming with bNesis**
  
@@ -39,16 +41,14 @@ Planing of using cloud services in .NET applications system designer determines 
 **bNesis API Server** is full-featured server with RESTful API interface to place on customer side. It can be used in the most convenient way for you  -  as a local office server or placed in the cloud, or on a dedicated site in the Internet.  For test use of Thin Client, you can access the bNesis Demo Server with address https://server2.bnesis.com which is fully functional analogue of bNesis API Server. So you can see the work and the benefits of a server solution, develop several test applications and only after that make a decision about purchasing bNesis API Server.
 
 **Advantages:** *traffic control - number of connections and your servers load, safe and easy to control the sources of access and the amount of data transmitted*.
-	
+
+--------------------------------------------------------------------------------
+
 ## **Before start** 
 **bNesis Developer ID**. To use the bNesis SDK in your applications, you have to obtain the bNesis Developer ID - the key that signs your copy of the bNesis SDK. To study bNesis SDK, tests and demonstrations, you can get the key after registration, free of charge.
 	  
 **Cloud services setup**. It is required to register your application in all cloud services you are planing to use. Such parameters as clientId, clientSecret, and redirectUri will be obtained from service after registration. Exact set of parameters depends of each cloud service. 
 	
- ## **Versions** 
-
-Current version of bNesis SDK for C# is 1.8
- 
  --------------------------------------------------------------------------------
 
 ## **First step**
@@ -83,3 +83,8 @@ Services APIs helpdocumentation about all supported services APIs and data types
 bNesis offers an SDK for all supporded services and all APIs for multiple platforms and programming languages.  
   
 **[To learn more](~/Documentation/Examples) [GitHub](https://github.com/bNesisDeveloper/bNesis)**
+
+**Versions** :
+
+bNesis SDK is 1.7 [AGAVA] Core 
+bNesis SDK is 1.8 [BELLADONNA] Core
