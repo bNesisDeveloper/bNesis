@@ -1,6 +1,7 @@
-<div style="text-align: right">
+
 **bNesis** allows developers easily use cloud services authorization and API at Web, mobile and desktop applications.
-</div>
+
+ --------------------------------------------------------------------------------
 
 ## **Comfortable service programming with bNesis**
  
