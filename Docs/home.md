@@ -21,7 +21,7 @@ bNesis SDK APIs provide an wrappers over the "low-level" of services APIs - also
   
 Planing of using cloud services in your applications system designer determines optimal architecture depending on whether lengthy computations must be accomplished by the client or the server. bNesis SDK provides an opportunity to realize these two modes - Rich client mode and Thin client mode. At the API level, functional of Thin client mode is fully compatible with Rich client mode, the only difference is that in the case of Thin client, the OAUTH authorization takes place on the side and in the context of bNesis API Server.  
     
-**Rich client mode**. In this case, bNesis SDK is delivered as a library for .NET and all the accesses to cloud services are direct:
+**Rich client mode**. In this case, bNesis SDK is delivered as a library and all the accesses to cloud services are direct:
 * Middleware server is not used.
 * OAUTH authentication is performed on the side of your application; 
 * Multiple applications can use one installed bNesis SDK library.
@@ -30,7 +30,7 @@ Planing of using cloud services in your applications system designer determines 
      
 **Advantages:** *ability to use multiple applications, independence from intermediate servers*.
 
-**Thin client mode**. In this case, bNesis SDK is delivered as a library for .NET and works with cloud services through **bNesis API Server** provided as the server software: 
+**Thin client mode**. In this case, bNesis SDK is delivered as a libraryand works with cloud services through **bNesis API Server** provided as the server software: 
 * At the API level, functional of Thin client is fully compatible with Rich client, the only difference is that in the case of Thin client, the OAUTH authorization takes place on the side and in the context of bNesis API Server. In particular, it allows you to distribute OAUTH authorization for a single account across multiple workstations.
 * NuGet install packages and version control support is provided.
 * In the case of changes in the cloud services API, you don't need to update your application.
