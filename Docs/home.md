@@ -88,6 +88,7 @@ bNesis offers an SDK for all supporded services and all APIs for multiple platfo
 **Versions**:
 
 bNesis SDK is 1.7 [AGAVA] Core 
+
 bNesis SDK is 1.8 [BELLADONNA] Core
 
 
