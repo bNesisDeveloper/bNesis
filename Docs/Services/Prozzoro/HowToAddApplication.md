@@ -1,1 +1,1 @@
-> The document that describe process of making of the service application.
+Service Prozzoro does not need any registration.

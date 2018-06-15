@@ -1,1 +1,1 @@
-> The document that describe process of making of the service application.
+BNesisTestService does not need any registration.

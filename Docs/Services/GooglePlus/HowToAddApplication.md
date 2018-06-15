@@ -1,4 +1,4 @@
-# Google Plus
+# Google Plus registration
 
 Added May 05, 2018.
 

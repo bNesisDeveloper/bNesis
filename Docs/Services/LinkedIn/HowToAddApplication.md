@@ -1,31 +1,31 @@
-# LinkedIn
+# LinkedIn registration
 
 To register your application on LinkedIn, follow this instruction.
 
 1. Go to the LinkedIn Developer Console from the link: (https://developer.linkedin.com/).  
 Select the item "My applications".
 
-!(image001.png)
+![image001](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image001.png)
 
 2. Click the button "Create an application".
 
-!(image002.png)
+![image002](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image002.png)
 
 3. Create an Application.
 
 3.1. Fill in the required fields.
 
-!(image003.png)
+![image003](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image003.png)
 
 **Note:** The height and width of the logo must be the same.
 
 3.2. Put a tick in front of the inscription "I have read and accept the terms of use of the LinkedIn API".
 
-!(image004.png)
+![image004](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image004.png)
 
 3.3. Click on the button "Confirm".
 
-!(image005.png)
+![image005](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image005.png)
 
 **Note.** After the Confirmation, you will be redirected to the application page.
 
@@ -33,21 +33,21 @@ Select the item "My applications".
 
 4.1. After the application is registered, you need to add a return address to which LinkedIn will return an access key (token) after authorization. 
 
-!(image006.png)
+![image006](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image006.png)
 
 For example, in an empty field we write: (https://server2.bnesis.com/signin-linkedin).
 
-!(image007.png)
+![image007](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image007.png)
 
 4.2. Click on the "Add" button.
 
-!(image008.png)
+![image008](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image008.png)
 
 4.3. After adding the return address, we click on the "Update" button.
 
-!(image009.png)
+![image009](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image009.png)
 
 5. Completion.
 5.1. Copy the keys: Your Customer ID and Client Secret for the bNesis application. 
 
-!(image010.png)
+![image010](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LinkedIn/image010.png)
