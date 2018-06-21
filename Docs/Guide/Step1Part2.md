@@ -10,4 +10,6 @@ The objective of this site is to make NASA data, including imagery, eminently ac
 
 **VKontakte**  
 A universal service  for communication and finding friends and classmates, who are daily used by tens of millions of people.  
-[VKontakte home](https://vk.com/)
+[VKontakte home](https://vk.com/)  
+
+-----------------------------------------------------------------------------------------
