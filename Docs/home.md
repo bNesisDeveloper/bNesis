@@ -58,7 +58,7 @@ Specially developed online software that represents work with services in the fo
 
 We have developed a special demonstration service that explains the work of bNesis step by step. This service is completely free and includes learning examples, from the simplest, to the more complex ones. For example, you can find out the weather in London or get NASA information - using calls to relevant services  
   
-**[Try API Caller demonstration right now](~/Api/Caller?instanceId=8f14e45fceea167a5a36dedd4bea2543&Service=DemoService)**
+**[Try API Caller demonstration right now](/Api/Caller?instanceId=8f14e45fceea167a5a36dedd4bea2543&Service=DemoService)**
 
 --------------------------------------------------------------------------------
 
