@@ -1,7 +1,7 @@
 We selected the most accessible public services for demonstrating APIs:
 
 **OpenWeatherMap**   
-Current weather and forecasts in your city.
+Current weather and forecasts in your city.  
 <a href="https://openweathermap.org/">OpenWeatherMap home</a>  
 
 **NASA APIs**  
