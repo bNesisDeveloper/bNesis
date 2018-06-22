@@ -10,7 +10,7 @@ A special feature is the method of storing and processing data. If all data proc
 
 **Cloud services** - are hardware and software, provided to the users, like Internet services, to realize their goals, tasks, projects.
 
-**bNesis** allows developers easily use cloud services authorization and API at Web, mobile and desktop applications.
+**bNesis** allows developers easily use cloud services authorization and APIs at Web, mobile and desktop applications.
 
 ## **How are cloud services available to users?**   
 
@@ -18,7 +18,7 @@ Usually, the owners of cloud services offer Web sites related to their services.
 
 ## **How are cloud services available for developers?**  
 
-All cloud services provide APIs available to developers. Using the API of cloud services, developers can make software that uses the capabilities of the service. Often, all operations that the user can do with the service through the Web site are available through APIs.
+All cloud services provide APIs available to developers. Using the APIs of cloud services, developers can make software that uses the capabilities of the service. Often, all operations that the user can do with the service through the Web site are available through APIs.
 
 There is an opportunity to add the power and performance of cloud services to your new or existing applications with using **bNesis SDK**.
 
