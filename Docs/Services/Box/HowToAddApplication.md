@@ -4,19 +4,19 @@ Added April 29, 2018.
 
 1. To create an account, click on the link
  (https://www.box.com/en-gb/home) 
-and click on the button “Get Started”.
+and click on the button â€œGet Startedâ€.
 
-![image001](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image001.png)
+![image001](image001.png)
 
-2. Choose an individual plan and click on the button “Sign Up”.
+2. Choose an individual plan and click on the button â€œSign Upâ€.
 
 ![image002](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image002.png)
 
-3. Fill in all the necessary information for registration in the form and click on the button “Continue”.
+3. Fill in all the necessary information for registration in the form and click on the button â€œContinueâ€.
 
 ![image003](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image003.png)
 
-4. In the next window make the necessary settings and click on the button “Submit”.
+4. In the next window make the necessary settings and click on the button â€œSubmitâ€.
 
 ![image004](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image004.png)
 
@@ -37,7 +37,7 @@ and click on the button “Get Started”.
 
 ![image009](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image009.png)
 
-9. In the next window you can click on the link “Skip this and go straight to Box”.
+9. In the next window you can click on the link â€œSkip this and go straight to Boxâ€.
 
 ![image010](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image010.png)
 
@@ -46,23 +46,23 @@ and click on the button “Get Started”.
 ![image011](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image011.png)
 
 11. To register the application, follow the link (https://developer.box.com/) 
-and click on the button “Get Started”.
+and click on the button â€œGet Startedâ€.
 
 ![image012](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image012.png)
 
-12. Click on the button “Log in”.
+12. Click on the button â€œLog inâ€.
 
 ![image013](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image013.png)
 
-13. When the window Developer Console opens, click on the button “Create new app”.
+13. When the window Developer Console opens, click on the button â€œCreate new appâ€.
 
 ![image014](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image014.png)
 
-14. Select an application type “Partner integration” and click on the button “Next”.
+14. Select an application type â€œPartner integrationâ€ and click on the button â€œNextâ€.
 
 ![image015](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image015.png)
 
-15. Enter the application name. Click on the button “Create app”.
+15. Enter the application name. Click on the button â€œCreate appâ€.
 
 ![image016](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image016.png)
 
@@ -70,6 +70,6 @@ and click on the button “Get Started”.
 
 ![image017](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image017.png)
 
-17. In the "Configuration" section, get the "Client ID" and "Client Secret" keys, enter “Redirect URL” and Click on the button “Save changes”.
+17. In the "Configuration" section, get the "Client ID" and "Client Secret" keys, enter â€œRedirect URLâ€ and Click on the button â€œSave changesâ€.
 
 ![image018](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image018.png)
