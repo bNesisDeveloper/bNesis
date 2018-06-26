@@ -10,11 +10,11 @@ and click on the button “Get Started”.
 
 2. Choose an individual plan and click on the button “Sign Up”.
 
-![image002](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image002.png)
+![image002](image002.png)
 
 3. Fill in all the necessary information for registration in the form and click on the button “Continue”.
 
-![image003](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image003.png)
+![image003](image003.png)
 
 4. In the next window make the necessary settings and click on the button “Submit”.
 
