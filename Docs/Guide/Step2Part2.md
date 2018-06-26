@@ -10,6 +10,6 @@ At this step you will have to choose the most suitable example for you:
 
 - [Java example of using cloud services APIs with **bNesis SDK**](https://github.com/bNesisDeveloper/bNesis/tree/master/Examples/JavaExamples)
 - [JavaScript example of using cloud services APIs with **bNesis SDK**](https://github.com/bNesisDeveloper/bNesis/tree/master/Examples/JSExamples)
-- [.NET C# example of using cloud services APIs with **bNesis SDK**](https://github.com/bNesisDeveloper/bNesis/tree/master/Examples/CSharpExamples)
+- [.NET C# example of using cloud services APIs with **bNesis SDK**](https://github.com/bNesisDeveloper/bNesis/tree/master/Examples/CSharpExamples/Examples/CSharp/DemoService/1.Simple/bNesis.Examples.DS.Simple)
 
 Sign example source code with your **bNesis Developer Id** and run it.
