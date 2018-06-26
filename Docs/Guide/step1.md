@@ -12,3 +12,4 @@ A special feature is the method of storing and processing data. If all data proc
 
 **bNesis** allows developers easily use cloud services authorization and APIs at Web, mobile and desktop applications.
 
+-------------------------------------------------------------------------------------  
