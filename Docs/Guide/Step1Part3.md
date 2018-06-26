@@ -12,3 +12,5 @@ There is an opportunity to add the power and performance of cloud services to yo
 
 In order to make it possible to get acquainted with the API of cloud services, we have made a special tool **API Caller**. With using **API Caller**, you can explore the cloud service APIs before proceed to programming using **bNesis SDK**.
 We offer to start with simple services, and see how you can get data about weather forecasts or exchange rates from various cloud services
+-------------------------------------------------------------------------------------  
+
