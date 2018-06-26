@@ -6,15 +6,15 @@ Added April 29, 2018.
  (https://www.box.com/en-gb/home) 
 and click on the button “Get Started”.
 
-![image001](image001.png)
+![image001](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image001.png)
 
 2. Choose an individual plan and click on the button “Sign Up”.
 
-![image002](image002.png)
+![image002](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image002.png)
 
 3. Fill in all the necessary information for registration in the form and click on the button “Continue”.
 
-![image003](image003.png)
+![image003](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image003.png)
 
 4. In the next window make the necessary settings and click on the button “Submit”.
 
