@@ -22,7 +22,7 @@ All cloud services provide APIs available to developers. Using the APIs of cloud
 
 There is an opportunity to add the power and performance of cloud services to your new or existing applications with using **bNesis SDK**.
 
-![step1Image](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Guide/Step1.png)
+![step1Image](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Guide/GuideStep1.png)
 
 ## **How to start development using bNesis SDK and cloud services APIs?**  
 
