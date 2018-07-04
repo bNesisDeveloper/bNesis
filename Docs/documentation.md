@@ -13,19 +13,14 @@ Authorization in the cloud service is the most difficult part of programing the 
 ## **bNesis API layers**
 
 
-bNesis SDK APIs provide a wrapper over the "low-level" of cloud services APIs - also are known as bNesis SDK API layers. There are three layers:
-  
+bNesis SDK APIs provide a wrapper over the "low-level" of cloud services APIs - also are known as bNesis SDK API layers. There are three layers:  
 
 * **Raw API**. By using this layer of bNesis SDK APIs, developer obtains a full response from the service including all fields and status codes which is provided by service owners. There are two reasons for supporting APIs of raw layer.  
 The first reason is used when there is a code working properly with connected cloud service and developer wants to start using of bNesis SDK. In this case developer can save his code created for service responses processing. Adopting of existing code to the bNesis SDK does not need global changes.  
 The second reason is used when there is not a complete correspondence of the original documentation and service working. It is not usual and informative way but it is possible. By the way, responses with errors often contain detailed descriptions which is useful for debug mode.  
 
-* **Formalized API**. At this layer bNesis SDK APIs return to developer the response as a complete data structure with fields corresponding to the original service response fields. Developer operates with data structures in the programming language. Of course, formalized API is very effective when complex data structure is waited as a response. 
-
-
+* **Formalized API**. At this layer bNesis SDK APIs return to developer the response as a complete data structure with fields corresponding to the original service response fields. Developer operates with data structures in the programming language. Of course, formalized API is very effective when complex data structure is waited as a response.  
 * **Unified API**. At this layer bNesis SDK APIs return to developer the response as complete data structure with fields corresponding to the original service response fields. Developer operates with data structures in the programming language. Universal data structures for similar API groups are used for similar services.  Unified API is used by developers for implementing cross-service solutions, when the same part of a program code, has to work with different services without changes,.
-	
-
 
 ## **Providing Rich and Thin client architecture**  
   
