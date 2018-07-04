@@ -1,3 +1,3 @@
-> Here you can create your own instances of service's applications and manage them. 
-> Also you have the opportunity to see the public instances of other users. 
-> For each instances available to you, you can access the service and try to call the available API methods using the Api Caller
+> Here you can create and manage your own instances for services. 
+> Also you have the opportunity to see public instances of other users. 
+> With each available instance you can have access to the one service and can try to call its available API methods using the API Caller.
