@@ -86,7 +86,7 @@ Specially developed online software that represents a work with services in the 
 We have developed a special demonstrative service that explains the work with bNesis step by step. This service is completely free and includes learning examples, from the simplest, to the more complex ones. For example, you can find out the weather in London or get NASA information, using calls to relevant services.  
   
 
-**[Try API Caller demonstrative service right now](~/Api/Caller?instanceId=8f14e45fceea167a5a36dedd4bea2543&Service=DemoService)**
+**[Try API Caller demonstrative service right now](/Api/Caller?instanceId=8f14e45fceea167a5a36dedd4bea2543&Service=DemoService)**
 
 --------------------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ Create your own account.
 We suggest you to create your own account to manage the services you need. This account is purely demonstrative and helps you to explore the capabilities of the bNesis SDK and bNesis API Servers. bNesis account allows you to get bNesis developer ID and to use bNesis SDK (Rich and Thin variants), absolutely free of charge in the introductory order.  
   
 
-**[Create bNesis account](~/Account/Login#signup)**
+**[Create bNesis account](/Account/Login#signup)**
 
 --------------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ We suggest you to create your own account to manage the services you need. This 
 Services' APIs' help documentation about all supported services APIs and data types includes a full description of all supported services and their APIs. The information is presented in sections. Also, bNesis implements joint called unified APIs. In this case several services can be used by the same bNesis API.  
   
 
-**[APIs help](~/Help)**
+**[APIs help](/Help)**
 
 --------------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ Services' APIs' help documentation about all supported services APIs and data ty
 bNesis offers any SDK for any multiple platforms and programming languages to work with all supported services and all their APIs.  
   
 
-**[To learn more](~/Documentation/Examples) [GitHub](https://github.com/bNesisDeveloper/bNesis)**
+**[To learn more](/Documentation/Examples) [GitHub](https://github.com/bNesisDeveloper/bNesis)**
 
 
 **Versions**:
