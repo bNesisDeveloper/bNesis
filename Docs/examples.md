@@ -9,7 +9,6 @@ Below we offer you a table it will help you to choose the right type of applicat
 
 | Type                 |  Web application    | Android                | Xamarin                | .NET                  | Win32                   |
 | -------------------- | ------------------- | ---------------------- | ---------------------- | --------------------- | ----------------------- |
-
 | Rich client          |          -         | [Yes](#AndroidRich)   | [Yes](#AndroidRich)   | [Yes](#NETRich)      | [Yes](#WinRich)        |
 | Thin client          | [Yes](#WebThin)    | [Yes](#AndroidThin)   | [Yes](#AndroidThin)   | [Yes](#NETThin)      | [Yes](#WinThin)        |
 
@@ -22,7 +21,7 @@ Below we offer you a table it will help you to choose the right type of applicat
 
 **bNesis SDK** examples for Web applications:  
 
-In this case, we also provide bNesis Server for placement on your site:
+*   In this case, we also provide bNesis Server for placement on your site.
 
 
 *   [bNesis Server](/Documentation/About)
@@ -64,7 +63,7 @@ In this case, we also provide bNesis Server for placement on your site:
 
 **bNesis SDK** Android Thin client examples:  
 
-In this case, we also provide bNesis Server for placement on your site. More information can be found here.
+*   In this case, we also provide bNesis Server for placement on your site. More information can be found here.
 
 
 *   [bNesis Server](/Documentation/About)
@@ -103,9 +102,9 @@ In this case, we also provide bNesis Server for placement on your site. More inf
 #### .NET Thin client examples
 
 
-**bNesis SDK** examples for .NET (Thin client).  
+**bNesis SDK** examples for .NET (Thin client):  
 
-In this case, bNesis SDK desktop library works with cloud services through the bNesis Server, we provide it to you as the server software to be placed on your sites. More information can be found here: [bNesis Server](/Documentation/About)
+*   In this case, bNesis SDK desktop library works with cloud services through the bNesis Server, we provide it to you as the server software to be placed on your sites. More information can be found here: [bNesis Server](/Documentation/About)
 
 
 *   At the API level of **bNesis SDK** functionality Thin client is fully compatible with the Rich client. The difference is that in the case of Thin client, the OAUTH authorization takes place on the side and in the context of the bNesis Server. In a special case it allows you to distribute OAUTH authorization for a single account across multiple workstations.
@@ -129,7 +128,6 @@ In this case, bNesis SDK desktop library works with cloud services through the b
 *   OAUTH authentication is performed on the side of your application. In a special case it allows to add a support for social networks in your application.
 
 *   Multiple applications can use one installed **bNesis SDK** library.
-
 
 *   Handlers for cloud services are stored in separate libraries. So you can control the size of **bNesis SDK** package, depending on the number of services your application uses.
 
