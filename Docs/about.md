@@ -43,14 +43,15 @@ For test use of Thin Client, you can access the bNesis Demo Server with the addr
 
 
 
+**Table 1.**  bNesis SDK with supporting architecture, platforms and programing languages
+
+
+
 bNesis SDK|Providing architecture|Supported platform|Programing language
 --|---------|------------------|------------------------------
-
 [bNesis SDK for C# (.NET)](https://github.com/bNesisDeveloper/bNesis/tree/master/Sdk/DotNet)|Rich and Thin clients|.NET |C#
 [bNesis SDK for JS](https://github.com/bNesisDeveloper/bNesis/tree/master/Sdk/JavaScript)|Thin client|Web| JavaScript
 bNesis SDK for PHP| Thin client|Web| PHP
-
-**Table 1.**  bNesis SDK with supporting architecture, platforms and programing languages
 
 
 **bNesis SDK** is a cross-platform client server solution that allows developers to make coding  process  of  web, mobile and desktop applications with integration of different services simpler and more intuitive.  It is easy to switch from Rich client mode to Thin client mode and vice versa. So you get your own bNesis API Server to implement all of your ideas associated with different services. bNesis is constantly increasing the amount of support different services and the unified API make it possible to expand the functionality of your applications without updating them.
