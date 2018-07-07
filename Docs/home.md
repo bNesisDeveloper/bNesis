@@ -32,7 +32,7 @@ Planing of using cloud services in your applications system, designer determines
 
 * Middleware server is not used.
 
-* OAUTH authentication is performed on the side of your application; 
+* OAUTH authentication is performed on the side of your application. 
 
 * Multiple applications can use one installed bNesis SDK library.
 
