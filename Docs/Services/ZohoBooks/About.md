@@ -1,0 +1,4 @@
+Zoho Books is an easy-to-use, online accounting software designed for small businesses to manage their finances and stay on top of their cash flow.
+Zoho Corporation is a multi-national business software development company. Zoho Corp's offerings focus on web-based business tools and information technology solutions, including an office tools suite, internet of things management platform, and a suite of IT management software. The company was founded in 1996 by Sridhar Vembu and Tony Thomas in Pleasanton, California, and now has offices in seven countries with its global headquarters in Chennai.  
+[https://en.wikipedia.org/wiki/Zoho_Corporation#mw-head](https://en.wikipedia.org/wiki/Zoho_Corporation#mw-head)  
+[www.zohocorp.com](www.zohocorp.com)

@@ -1,0 +1,3 @@
+Expensify is a software company that develops a travel and expense web and mobile application for personal and business use. Its namesake application allows users to manage expense transactions, upload receipts, generate receipts from online sales and automatically create expense reports as well as allows finance teams to approve and export reports. The company and its application have been discussed  in numerous publications including Inc., the Business Insider, The Wall Street Journal, Forbes, and Fox Business among others. Expensify also operates a venture funding arm known as Expensify Ventures.  
+[www.expensify.com](www.expensify.com)  
+[https://en.wikipedia.org/wiki/Expensify](https://en.wikipedia.org/wiki/Expensify)

@@ -1,1 +1,2 @@
-> The service description should be located here.
+Google Analytics is a freemium web analytics service offered by Google that tracks and reports website traffic. Google launched the service in November 2005 after acquiring Urchin. Google Analytics is now the most widely used web analytics service on the Internet. Google Analytics is offered also in two additional versions: the subscription-based Google Analytics 360, previously Google Analytics Premium, targeted at enterprise users, and Google Analytics for Mobile Apps, an SDK that allows gathering usage data from iOS and Android Apps.
+[https://en.wikipedia.org/wiki/Google_Analytics](https://en.wikipedia.org/wiki/Google_Analytics)

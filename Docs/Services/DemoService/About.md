@@ -1,1 +1,1 @@
-> The service description should be located here.
+DemoService will help you quickly and easily understand how cloud services work through their APIs.The simplest DemoService methods do not require either authorization or parameter input.More complex DemoService methods require authorization in their Services and input of additional information via parameters.

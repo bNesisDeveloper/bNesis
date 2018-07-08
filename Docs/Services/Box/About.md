@@ -1,1 +1,3 @@
-> The service description should be located here.
+Box (formerly Box.net), based in Redwood City, California, is a cloud content management and file sharing service for businesses. The company uses a freemium business model to provide cloud storage and file hosting for personal accounts and businesses. Official clients and apps are available for Windows, macOS, and several mobile platforms. Box was founded in 2005.  
+[box.com](box.com)  
+[https://en.wikipedia.org/wiki/Box_(company)](https://en.wikipedia.org/wiki/Box_(company))

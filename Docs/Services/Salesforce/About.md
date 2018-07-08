@@ -1,0 +1,3 @@
+Salesforce.com, Inc is a US cloud computing company headquartered in San Francisco, California. Though its revenue comes from a customer relationship management(CRM) product, Salesforce also sells commercial applications of social networking through acquisition and internal development.  
+[https://en.wikipedia.org/wiki/Salesforce.com](https://en.wikipedia.org/wiki/Salesforce.com)  
+[salesforce.com](salesforce.com)

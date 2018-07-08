@@ -1,1 +1,3 @@
-> The service description should be located here.
+Allegro is a Polish online e-commerce platform.It is managed by Allegro.pl Sp. z o.o. (former: Allegro Group Sp.z o.o. ) which was formed in 1999 and subsequently purchased by online auction site QXL Ricardo plc in March 2000. QXL Ricardo plc changed its name to Tradus plc in 2007, and was acquired by Naspers in 2008. In October 2016, Naspers sold the Allegro Group to an alliance of investor funds: Cinven, Permira and Mid Europa Partners.Immensely popular in Poland, Allegro was ranked 251st among the world's most used online websites by Alexa Internet, and was ranked 5th within Poland (as of January 2017).In 2011, Allegro claimed to have over 11 million users. In 2017, Allegro claimed to have over 16 million users and more than 20 million accounts.  
+[allegro.pl](allegro.pl)  
+[https://en.wikipedia.org/wiki/Allegro_(website)](https://en.wikipedia.org/wiki/Allegro_(website))

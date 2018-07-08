@@ -1,1 +1,3 @@
-> The service description should be located here.
+Shopify is a Canadian e-commerce company headquartered in Ottawa, Ontario. It is also the name of its proprietary e-commerce platform for online stores and retail point-of-sale systems.The company reported that it had more than 600,000 merchants using its platform as of August 2017, with total gross merchandise volume exceeding $55 billion.  
+]shopify.com](shopify.com)  
+[https://en.wikipedia.org/wiki/Shopify](https://en.wikipedia.org/wiki/Shopify)

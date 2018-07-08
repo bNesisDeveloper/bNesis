@@ -1,1 +1,1 @@
-> The service description should be located here.
+bNesisTestService is a specially selected set of methods for testing the bNesis kernel. The methods are sorted by the types of input parameters and the types of data returned.

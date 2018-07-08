@@ -1,1 +1,3 @@
-> The service description should be located here.
+Google Plus (stylized as Google+) is an Internet-based social network that is owned and operated by Google.The service, Google's fourth foray into social networking, experienced strong growth in its initial years, although usage statistics have varied, depending on how the service is defined. Three Google executives have overseen the service, which has undergone substantial changes leading to a redesign in November 2015.  
+[plus.google.com](plus.google.com)  
+[https://en.wikipedia.org/wiki/Google%2B](https://en.wikipedia.org/wiki/Google%2B)

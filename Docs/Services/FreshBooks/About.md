@@ -1,0 +1,3 @@
+2ndsite, Inc., doing business as Freshbooks, Inc., provides cloud-based accounting solutions for small business owners. It is designed for owners of the types of small client-service businesses that send invoices to clients and get paid for their time and expertise. It was founded by Mike McDerment and Joe Sawada out of McDerment's previous Internet marketing consulting business Anicon. The company was founded in 2002 and is based in Toronto, Canada.  
+[freshbooks.com](freshbooks.com)  
+[https://en.wikipedia.org/wiki/FreshBooks](https://en.wikipedia.org/wiki/FreshBooks)

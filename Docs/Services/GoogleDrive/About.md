@@ -1,1 +1,1 @@
-> The service description should be located here.
+Google Drive is a file storage and synchronization service developed by Google. Google Drive allows users to store files in the cloud, synchronize files across devices, and share files.

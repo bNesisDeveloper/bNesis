@@ -1,1 +1,1 @@
-> The service description should be located here.
+BigCommerce is an e-commerce platform that helps small to enterprise level businesses sell more online.

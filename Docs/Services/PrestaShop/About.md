@@ -1,1 +1,1 @@
-> The service description should be located here.
+PrestaShop is a free, open source e-commerce solution. The software is published under the Open Software License (OSL). It is written in the PHP programming language with support for the MySQL database management system.

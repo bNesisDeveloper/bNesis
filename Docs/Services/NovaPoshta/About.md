@@ -1,1 +1,1 @@
-> The service description should be located here.
+Nova poshta is a Ukrainian company, founded in 2001, which provides express delivery of documents, goods and parcels for individuals and businesses.

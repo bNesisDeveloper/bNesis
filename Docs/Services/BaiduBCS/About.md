@@ -1,1 +1,3 @@
-> The service description should be located here.
+Baidu, Inc. (BY-doo), incorporated on 18 January 2000, is a Chinese multinational technology company specializing in Internet-related services and products, and artificial intelligence, headquartered at the Baidu Campus in Beijing's Haidian District. It is one of the largest AI and internet companies in the world. The holding company of the group was incorporated in the Cayman Islands. Baidu was established in 2000 by Robin Li and Eric Xu. Baidu is currently ranked 4th overall in the Alexa Internet rankings.  
+[www.baidu.com](www.baidu.com)  
+[http://www.wikiwand.com/en/Baidu](http://www.wikiwand.com/en/Baidu)

@@ -1,1 +1,3 @@
-> The service description should be located here.
+LinkedIn is a business and employment-oriented service that operates via websites and mobile apps. Founded on December 28, 2002, and launched on May 5, 2003, it is mainly used for professional networking, including employers posting jobs and job seekers posting their CVs. As of 2015, most of the company's revenue came from selling access to information about its members to recruiters and sales professionals. As of April 2017, LinkedIn had 500 million members in 200 countries, out of which more than 106 million members are active.  
+[https://www.linkedin.com/](https://www.linkedin.com/)  
+[https://en.wikipedia.org/wiki/LinkedIn](https://en.wikipedia.org/wiki/LinkedIn)

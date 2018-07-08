@@ -1,1 +1,3 @@
-> The service description should be located here.
+VK (VKontakte; meaning InContact) is a Russian online social media and social networking service. It is available in several languages but it is especially popular among Russian-speaking users. VK allows users to message each other publicly or privately, to create groups, public pages and events, share and tag images, audio and video, and to play browser-based games. It is based in Saint Petersburg, Russia.As of March 2018, VK had at least 477 million accounts. VK is ranked 14 (as of March 2018)[6] in Alexa's global Top 500 sites. It is the most popular website in Russia. According to SimilarWeb, VK is the 9th most popular website in the world. As of March 2018, VK also ranked as the most popular social networking website in Belarus, Ukraine and Kazakhstan in addition to Russia.  
+[vk.com](vk.com)  
+[https://en.wikipedia.org/wiki/VKontakte](https://en.wikipedia.org/wiki/VKontakte)
