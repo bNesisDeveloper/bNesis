@@ -1,0 +1,226 @@
+﻿<!--
+This module implements two types of authorization:
+- with using bNesis Service Admin and the Instance mechanism.
+- without bNesis Service Admin, with special settings for bNesis API Server - hidden the service application
+  and the location of the bNesis Service Admin (for more information see the bNesis API Server web.conf configuration file)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/bootstrap-slider.min.css" rel="stylesheet" />
+    <link href="../Content/site.css" rel="stylesheet" />
+    <script src="../Scripts/modernizr-2.6.2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+        //---------------------------------------------------------------------------------------------------------------------
+        //Two types authorization at one script.
+        //---------------------------------------------------------------------------------------------------------------------
+        //if TRUE used direct callback bNesis token return method
+        //if FALSE used authorization with using bNesis Tseitlin Admin instances
+        var useAuthCallback = true;
+        //Config for bNesis Tseitlin Admin authorization mode
+        var servicesConfig = {
+            "adminUrl": "http://admin.bnesis.com", //bNesis Tseitlin Admin server location
+            "tokenReturnRedirectURL": "http://admin.bnesis.com/BusinessConstructor/TokensReciever",		
+            //Stored and setuped services application instances UIDs
+            //see bNesis Tseitlin Admin personal accaunt to setup your owned intances and get UIDs
+            "Services": {
+                "LinkedIn": {
+                    "instanceId": "45c48cce2e2d7fbdea1afc51c7c6ad26" //LinkedIn instance - the UIDs must be real runtime instances UIDs from bNesis Tseitlin Admin
+                },
+                "Facebook": {
+                    "instanceId": "c9f0f895fb98ab9159f51fd0297e236d"
+                },
+                "GoogleDrive": {
+                    "instanceId": "1679091c5a880faf6fb5e6087eb1b2dc"
+                },
+                "Box": {
+                    "instanceId": "c20ad4d76fe97759aa27a0c99bff6710"
+                },
+                "VKontakte": {
+                    "instanceId": "d3d9446802a44259755d38e6d163e820"
+                },
+                "Dropbox": {
+                    "instanceId": "e4da3b7fbbce2345d7772b0674a318d5"
+                },
+                "Stripe": {
+                    "instanceId": "c51ce410c124a10e0db5e4b97fc2af39"
+                },
+                "PayPal": {
+                    "instanceId": "9bf31c7ff062936a96d3c8bd1f8f2ff3"
+                },
+                "Shopify": {
+                    "instanceId": "98f13708210194c475687be6106a3b84"
+                },
+                "BaiduBCS": {
+                    "instanceId": "6512bd43d9caa6e02c990b0a82652dca"
+                },
+                "SugarSync": {
+                    "instanceId": "6f4922f45568161a8cdf4ad2299f6d23"
+                },
+                "LiqPay": {
+                    "instanceId": "aab3238922bcc25a6f606eb525ffdc56"
+                },
+                "GoogleAnalytics": {
+                    "instanceId": ""
+                },
+                "UkrPoshta": {
+                    "instanceId": "a87ff679a2f3e71d9181a67b7542122c"
+                },
+                "Amazon": {
+                    "instanceId": ""
+                },
+                "PrestaShop": {
+                    "instanceId": "70efdf2ec9b086079795c442636b55fb"
+                },
+                "GooglePlus": {
+                    "instanceId": "1f0e3dad99908345f7439f8ffabdffc4"
+                }
+            }
+        }
+        //Make start authorization URL for use instances (authorization mode)(useAuthCallback = false;)
+        function getAuthUrl(serviceName) {
+            //authorization url will be here
+            var response = '';
+            //get instance objhect from service config (instance with relevant UID must be present on bNesis Tseitlin Admin)
+            var serviceObj = servicesConfig.Services[serviceName];
+            //if seceted service dosn't content Service Instance record at service config, return from this method
+            if (!serviceObj) {
+                document.getElementById('result').innerHTML += "<br/> " + serviceName + " service not available.";
+                return 0;
+            }
+            //try get service application authorization string for selected service instance
+            $.ajax({
+                type: "GET",
+                url: servicesConfig.adminUrl + '/Instance/' + serviceObj.instanceId + '/Auth',
+                async: false,
+                success: function (text) {
+                    response = text;
+                }
+            });
+            //we must replace (or add) return bNesis Token redirect url at bNesis Tseitlin Admin returnet authorization string,
+            //the reason - bNesis Tseitlin Admin "dosn't know" where (host) this script runing, and where bNesis API Server
+            //must return bNesis Token, when authorization process is completed
+            //!NOTE: you can see format of the authorization string at getAuthCallbackUrl function.
+            //!NOTE: at this authorization mode location of bNesis API Server - stored at bNesis Tseitlin Admin instance.
+            // -----
+            // !NOTE: DON'T confuse RedirectURL from the parameters of this AUTH query string and the service RedirectUrl
+            // - the first is the endpoint where bNesis API Server will return bNesis Token
+            // - the second is the service endpoint where service access token will return.
+            response = replaceUrlParam(response, 'redirectUrl', tokenReturnRedirectURL);
+            //return Authorization string
+            return response;
+        }
+        //Make start authorization url for direct return bNesis Token mode (useAuthCallback = true;)
+        function getAuthCallbackUrl(serviceName) {
+            //simple format bNesis Athorization string for calling bNesis API Server Auth method
+            //we provide full keys authorization string at this example:
+            //- for second authorization way, and when service application settings is stored at
+            //  bNesis API Server web.config file you need only:
+            //  -- providerId for select service for user authorization
+            //  -- bNesis Developer ID (you cen get the ID at your bNesis Tseitlin Admin profile
+            //  -- useCallback - for enable direct bNesis Token return method
+            // - if you don't use bNesis API Server web.config - you must put your service application
+            //   auhtorization setting here, like a clientId, clientSecret and so.
+            // - Service Redirect Url - related to location bNesis API Server ([bNesisAPIServerHost]\api\AuthProvider\Sign
+            // -----
+            // !NOTE: DON'T confuse RedirectURL from the parameters of this AUTH query string and the service RedirectUrl
+            // - the first is the endpoint where bNesis API Server will return bNesis Token
+            // - the second is the service endpoint where service access token will return.
+            // 
+            // APIServerUrl - used bNesis API Server location, see Scripts/base.js 
+            return APIServerUrl + "api/AuthProvider/AuthCallback?" +
+                          "providerId=" + encodeURIComponent(serviceName) +
+                          "&data=" + // encodeURIComponent(data) +
+                          "&bNesisDevId=" + encodeURIComponent('JPwY88VIlRDqnZrxWmt5OJpA37dOI3wYmwmNW1Kqxd34apovFFi9nvemL0NqMPESuSczsP4L+vGIPno1Eq98Ug==') +
+                          "&redirectUrl=" + // encodeURIComponent(redirectUrl) + //this is bNesis Token return endpoint (empty for this mode, see bNesis API Server web.config)
+                          "&clientId=" + //encodeURIComponent(clientId) +
+                          "&clientSecret=" + //encodeURIComponent(clientSecret) +
+                          "&scopes=null" + //encodeURIComponent(scopes) +
+                          "&login=" + //encodeURIComponent(login) +
+                          "&password=" + //encodeURIComponent(password) +
+                          "&isSandbox=false" + //encodeURIComponent(isSandbox) +
+                          "&serviceUrl=" + //encodeURIComponent(serviceUrl) +
+                          "&useCallback=" + encodeURIComponent('true');
+        }
+
+        //Do service authorization process for both Instance and Direct bNesis Token return methods
+        function serviceAuth(serviceName) {
+            //if one page locate auth process and return bNesis Token process, we need first check are we at get token thread way
+            var badAuth = getUrlParameter('badAuth');
+            //reLocate self if reAuth
+            if (badAuth) {
+                document.getElementById('result').innerHTML += "<br/>Authorize at " + serviceName + " service, please wait...";
+                var redirectUrl = window.location.origin + '/Popup/serviceName';
+            }
+            //get authorization with direct bNesis token return endpoint URL
+            if (useAuthCallback) {
+                var authUrl = getAuthCallbackUrl(serviceName);
+            }
+            else { //get use instace authorization endpoint URL
+                var authUrl = getAuthUrl(serviceName);
+            }
+            //Do Auth process (application script lost control at current web browser)
+            if (authUrl) {
+                window.location = authUrl;
+            }
+        }
+
+        //when HTML document complete - we need check at what mode now the page is works:
+        //DO Authorization or recieve bNesis Token
+        $(document).ready(function () {
+            var service = getUrlParameter('service');
+            var result = getUrlParameter('result');
+
+            //if url query string contains service name and result - the authorization process is complete
+            //we can close se AuthPOPUP window and return to services select dialog
+            if (service && service !== null && service.length > 0 && result && result !== null && result.length > 0) {
+                opener.setActive(service, result);
+                window.close();
+            }
+            else { //else we need start Authorization process
+                serviceAuth(service);
+            }
+        });
+
+        //helper methods ---------------------------------------------------------------------------------------------
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+
+        function replaceUrlParam(url, paramName, paramValue) {
+            if (paramValue == null) {
+                paramValue = '';
+            }
+            var pattern = new RegExp('\\b(' + paramName + '=).*?(&|$)');
+            if (url.search(pattern) >= 0) {
+                return url.replace(pattern, '$1' + paramValue + '$2');
+            }
+            url = url.replace(/\?$/, '');
+            return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
+        }
+        //----------------------------------------------------------------------------------------------------------
+    </script>
+    <script src="../Scripts/base.js"></script>
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/respond.js"></script>
+</body>
+</html>
