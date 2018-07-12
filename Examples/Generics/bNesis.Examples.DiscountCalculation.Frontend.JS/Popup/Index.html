@@ -118,7 +118,12 @@ This module implements two types of authorization:
             return response;
         }
         //Make start authorization url for direct return bNesis Token mode (useAuthCallback = true;)
-        function getAuthCallbackUrl(serviceName) {
+        //serviceName - name of service to do authorization
+        //developerId - bNesis developer ID
+        //userId      - bank user account ID 
+        function getAuthCallbackUrl(serviceName, developerId, userId) {
+            //Prepare data structure to transfer to backend
+	    var authData = '{\"userId\":' + userId + '\"devId\":\"' + developerId + '\"}"';
             //simple format bNesis Athorization string for calling bNesis API Server Auth method
             //we provide full keys authorization string at this example:
             //- for second authorization way, and when service application settings is stored at
@@ -137,8 +142,8 @@ This module implements two types of authorization:
             // APIServerUrl - used bNesis API Server location, see Scripts/base.js 
             return APIServerUrl + "api/AuthProvider/AuthCallback?" +
                           "providerId=" + encodeURIComponent(serviceName) +
-                          "&data=" + // encodeURIComponent(data) +
-                          "&bNesisDevId=" + encodeURIComponent('JPwY88VIlRDqnZrxWmt5OJpA37dOI3wYmwmNW1Kqxd34apovFFi9nvemL0NqMPESuSczsP4L+vGIPno1Eq98Ug==') +
+                          "&data=" + encodeURIComponent(authData)+
+                          "&bNesisDevId=" + encodeURIComponent(developerId) +
                           "&redirectUrl=" + // encodeURIComponent(redirectUrl) + //this is bNesis Token return endpoint (empty for this mode, see bNesis API Server web.config)
                           "&clientId=" + //encodeURIComponent(clientId) +
                           "&clientSecret=" + //encodeURIComponent(clientSecret) +
@@ -161,7 +166,7 @@ This module implements two types of authorization:
             }
             //get authorization with direct bNesis token return endpoint URL
             if (useAuthCallback) {
-                var authUrl = getAuthCallbackUrl(serviceName);
+                var authUrl = getAuthCallbackUrl(serviceName, "JPwY88VIlRDqnZrxWmt5OJpA37dOI3wYmwmNW1Kqxd34apovFFi9nvemL0NqMPESuSczsP4L+vGIPno1Eq98Ug==", "userID12345");
             }
             else { //get use instace authorization endpoint URL
                 var authUrl = getAuthUrl(serviceName);
