@@ -113,7 +113,7 @@ This module implements two types of authorization:
             // !NOTE: DON'T confuse RedirectURL from the parameters of this AUTH query string and the service RedirectUrl
             // - the first is the endpoint where bNesis API Server will return bNesis Token
             // - the second is the service endpoint where service access token will return.
-            response = replaceUrlParam(response, 'redirectUrl', tokenReturnRedirectURL);
+            response = replaceUrlParam(response, 'redirectUrl', servicesConfig.tokenReturnRedirectURL);
             //return Authorization string
             return response;
         }
