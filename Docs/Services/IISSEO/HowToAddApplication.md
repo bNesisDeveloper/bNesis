@@ -1,1 +1,0 @@
-> The document that describe process of making of the service application.

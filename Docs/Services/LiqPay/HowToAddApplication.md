@@ -5,7 +5,7 @@ Added 08.08.2017.
 Steps.
 
 Step 1:  
-Goto www.liqpay.ua/en and click Sign Up button.
+Goto (www.liqpay.ua/en) and click Sign Up button.
 
 ![image001](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/LiqPay/image001.png)
 

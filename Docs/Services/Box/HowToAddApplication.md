@@ -1,9 +1,9 @@
-# Box registration
+﻿# Box registration
 
 Added April 29, 2018.
 
 1. To create an account, click on the link
- (https://www.box.com/en-gb/home) 
+ (https://www.box.com/en-gb/home)  
 and click on the button “Get Started”.
 
 ![image001](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Box/image001.png)

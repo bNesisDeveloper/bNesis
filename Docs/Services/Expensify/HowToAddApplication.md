@@ -3,7 +3,7 @@ Added 02.07.2018.
 
 To use the API of Expensify, you will need to generate API credentials.
 
-1. Create an Expensify account at )https://www.expensify.com/).
+1. Create an Expensify account at (https://www.expensify.com/).
 
 ![image002](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Expensify/image002.jpg)
 
