@@ -1,0 +1,3 @@
+DHL Express is a division of the German logistics company Deutsche Post DHL Express providing international courier, parcel, and express mail services. Deutsche Post DHL is the world's largest logistics company operating around the world, particularly in sea and air mail.Founded in the United States in 1969 to deliver documents between San Francisco and Honolulu, the company expanded its service throughout the world by the late 1970s. The company was primarily interested in offshore and intercontinental deliveries, but the success of FedEx prompted their own intra-US expansion starting in 1983.  
+[dhl.com/en.html](dhl.com/en.html)  
+[https://en.wikipedia.org/wiki/DHL_Express](https://en.wikipedia.org/wiki/DHL_Express)
