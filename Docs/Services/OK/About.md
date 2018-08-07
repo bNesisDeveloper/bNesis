@@ -1,0 +1,4 @@
+"Odnoklassniki" (OK.ru) is a Russian social network owned by Mail.Ru Group. At the beginning of 2018, the third most popular website in Armenia, the fourth most popular in Russia  and Azerbaijan, the fifth in Kazakhstan, the seventh in Ukraine, the 27th in the world. The project was launched on March 26, 2006.
+According to the site's own statistics, in July 2011, more than 100 million users were registered, in March 2012 more than 156 million users, and as of January 1, 2013 more than 205 million users, for 2016 more than 290 million users, for 2017, more than 330 million users. Attendance site - more than 71 million visitors per month (in January 2017).
+[https://ok.ru/](https://ok.ru/)
+[https://en.wikipedia.org/wiki/Odnoklassniki](https://en.wikipedia.org/wiki/Odnoklassniki)
