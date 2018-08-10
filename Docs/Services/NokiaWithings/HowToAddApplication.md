@@ -3,7 +3,7 @@ Made 06.08.2018.
 
 To use the API of Nokia Withings, you need to generate API credentials.
 
-1. Go to the Nokia Withings page https://account.health.nokia.com/connectionuser/account_create, enter you data and click Create.
+1. Go to the Nokia Withings page (https://account.health.nokia.com/connectionuser/account_create), enter you data and click Create.
 
 ![image002](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/NokiaWithings/image002.jpg)
 
@@ -20,7 +20,7 @@ To use the API of Nokia Withings, you need to generate API credentials.
 ![image008](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/NokiaWithings/image008.jpg)
 
 5. When you have the Nokia Within account, you can register your own App. 
-Go to the page https://account.health.nokia.com/partner/add_oauth2, enter data about your App and click Register.
+Go to the page (https://account.health.nokia.com/partner/add_oauth2), enter data about your App and click Register.
 
 ![image010](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/NokiaWithings/image010.jpg)
 

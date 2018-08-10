@@ -61,7 +61,7 @@ Press “EDIT SETTINGS” button.
 
 ![image014](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Spotify/image014.jpg)
 
-15. Copy Client ID and Client Secret to your app.
+15. Copy Client ID and Client Secret to your App.
 
 ![image015](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/Spotify/image015.jpg)
 
