@@ -1,1 +1,3 @@
 Paypal is an electronic commerce (e-commerce) company that facilitates payments between parties through online funds transfers. PayPal attempts to make online purchases safer by providing a form of payment that does not require the payor or payee to disclose credit card or bank account numbers.
+[www.paypal.com](www.paypal.com)
+[https://en.wikipedia.org/wiki/PayPal](https://en.wikipedia.org/wiki/PayPal)

@@ -2,7 +2,7 @@
 
 In order for you to view, edit and delete the data on your PrestaShop store through its web service, you first need to enable the web service feature, and then create an access key.
 
-1. Go in the PrestaShop back office (Administrative mode). 
+1. Go to the PrestaShop back office (Administrative mode). 
 
 ![image001](https://raw.githubusercontent.com/bNesisDeveloper/bNesis/master/Docs/Services/PrestaShop/image001.jpg)
 
