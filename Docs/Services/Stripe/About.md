@@ -1,1 +1,3 @@
 Stripe is a US technology company operating in over 25 countries, that allows both private individuals and businesses to accept payments over the Internet. Stripe focuses on providing the technical, fraud prevention, and banking infrastructure required to operate on-line payment systems.
+[stripe.com](stripe.com)
+[https://en.wikipedia.org/wiki/Stripe_(company)](https://en.wikipedia.org/wiki/Stripe_(company))
