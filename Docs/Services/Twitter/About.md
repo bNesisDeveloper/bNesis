@@ -1,3 +1,3 @@
 Twitter is an invisioning an SMS-based social network. Jack Dorsey, then an undergraduate student at New York University, introduced the idea of an individual using an SMS service to communicate with a small group. the Project started on March 21, 2006, when Dorsey published the first Twitter message. In 2015 the IPO filing states that "200,000,000+ monthly active users" access Twitter and "500,000,000+ tweets per day" are posted.
-(twitter.com)
-(https://en.wikipedia.org/wiki/Twitter)
+[twitter.com](twitter.com)
+[https://en.wikipedia.org/wiki/Twitter](https://en.wikipedia.org/wiki/Twitter)
