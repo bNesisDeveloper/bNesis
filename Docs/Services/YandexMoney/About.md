@@ -1,0 +1,4 @@
+Yandex.Money is Russia’s largest electronic payment service, Founded in 2002. It is an online payment service that works with two types of clients — individual users and merchants.
+The service is the joint venture of Russia's leading search engine Yandex (NASDAQ: YNDX), and Russia's largest bank Sberbank. In 2013, Sberbank, one of the largest banks in Eastern Europe, bought a major stake in Yandex.Money. Currently, Sberbank owns a 75% stake in the company, the remaining 25% plus one ruble is owned by Yandex. With new stakeholders, Yandex.Money obtained access to a broad payment infrastructure of Sberbank. Users obtained an opportunity to top up their e-wallets through the chain of Sberbank’s ATMs and terminals, and online banking.
+[https://money.yandex.ru](https://money.yandex.ru)
+[https://en.wikipedia.org/wiki/Yandex.Money](https://en.wikipedia.org/wiki/Yandex.Money)
