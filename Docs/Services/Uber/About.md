@@ -1,0 +1,3 @@
+Uber is a peer-to-peer ridesharing, taxi cab, food delivery, bicycle-sharing, and transportation network company headquartered in San Francisco, California, with operations in 785 metropolitan areas worldwide. Its platforms can be accessed via its websites and mobile apps. Uber has been prominent in the sharing economy, so much so that the changes in industries as a result of it have been referred to as Uberisation.
+[www.uber.com](www.uber.com)
+[Uber Wikipedia](https://en.wikipedia.org/wiki/Uber)
