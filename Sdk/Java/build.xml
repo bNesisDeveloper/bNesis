@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<!-- Configuration of the Ant build system to generate a Jar file --> 
-<project name="bNesis.Api" default="CreateApiJar">
-  <property name="build.dir" location="bin" />	
-  <property name="dest.dir" location="." />
-  <target name="CreateApiJar" description="Create Jar file">
-        <jar jarfile="${dest.dir}/bNesis.Api.jar" basedir="${build.dir}" includes="**/*.class" />
-  </target>
-</project>
